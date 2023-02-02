@@ -1,6 +1,6 @@
 import { ComputedRef, Ref } from 'vue'
 export type LayoutKey = string
-declare module "/Users/yunusmorkramer/Documents/Dev/inaia/inaia-signup/node_modules/nuxt/dist/pages/runtime/composables" {
+declare module "/Users/mahdinjim/Documents/workspace/inaia/client/inaia-webapp/node_modules/nuxt/dist/pages/runtime/composables" {
   interface PageMeta {
     layout?: false | LayoutKey | Ref<LayoutKey> | ComputedRef<LayoutKey>
   }
