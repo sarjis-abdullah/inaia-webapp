@@ -44,5 +44,27 @@ export class Urls{
             return this.coreBaseUrl + 'pricing';
         }
     }
+    public sendEmailCode():string{
+        return this.buildUrl(this.coreBaseUrl,'email-code');
+    }
+    public verifyEmail():string
+    {
+        return this.buildUrl(this.coreBaseUrl,'verify-email')
+    }
+    public sendSmsCode():string{
+        return this.buildUrl(this.coreBaseUrl,'send-sms');
+    }
+    public verifyPhoneNumber():string{
+        return this.buildUrl(this.coreBaseUrl,'verify-phone');
+    }
+    public termsAndConditions(country:number,conditionType:string):string{
+        return this.buildUrl(this.coreBaseUrl,`conditions?country_id=${country}&condition_type_prerequisite=${conditionType}&per_page=500`)
+    }
+    public registerCustomer():string{
+        return this.buildUrl(this.coreBaseUrl,'register');
+    }
+    private buildUrl(baseUrl:string,path:string):string{
+        return baseUrl + path;
+    }
 
 }

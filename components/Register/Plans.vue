@@ -5,11 +5,15 @@
         
         <p class="mt-5 text-xl text-gray-500 sm:text-center">Choose your plan and start saving Gold today</p>
         <div class="relative mt-6 flex self-center rounded-lg bg-gray-100 p-0.5 sm:mt-8">
-          <button type="button"
-            class="relative w-1/2 whitespace-nowrap rounded-md border-gray-200 bg-white py-2 text-sm font-medium text-gray-900 shadow-sm focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-auto sm:px-8">Monthly
+          <button type="button" @click.prevent="setPaymentPeriod(monthlyPayment)"
+            class="relative w-1/2 whitespace-nowrap rounded-md border-gray-200 bg-white py-2 text-sm font-medium  shadow-sm focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:w-auto sm:px-8" 
+            :class="selectedPaymentCycle==monthlyPayment?'bg-white text-gray-900':'text-gray-700 bg-transparent'"
+            >Monthly
             billing</button>
-          <button type="button"
-            class="relative ml-0.5 w-1/2 whitespace-nowrap rounded-md border border-transparent py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-auto sm:px-8">Yearly
+          <button type="button" @click.prevent="setPaymentPeriod(yearlyPayment)"
+            class="relative ml-0.5 w-1/2 whitespace-nowrap rounded-md border border-transparent py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:w-auto sm:px-8"
+            :class="selectedPaymentCycle==yearlyPayment?'bg-white text-gray-900':'text-gray-700 bg-transparent'"
+            >Yearly
             billing</button>
         </div>
       </div>
@@ -17,7 +21,8 @@
       <div
         class="mt-12 flex flex-row justify-center">
 
-        <PlanCard v-for="plan in plans" :key="plan.id.toString()" :plan="plan" class="mr-3" />
+        <PlanCard v-for="plan in plans" :key="plan.id.toString()" :plan="plan" class="mr-3 " :class="selectedPlan==plan.id?'ring-2 ring-blue-500':''" 
+        @selected="setPlan" :paymentPeriod="selectedPaymentCycle"/>
 
       </div>
     </div>
@@ -37,8 +42,11 @@
 import PlanCard from './PlanCard.vue';
 import Loading from '../common/Loading.vue';
 import {PlanService} from '@/lib/services/PlanService';
-import { Ref,watch } from 'vue';
+import { Ref,watch,onMounted } from 'vue';
 import { Plan } from '~~/lib/models/Plan';
+import { PaymentCycles } from '~~/lib/contants/PaymentCycles';
+import { useI18n } from 'vue-i18n';
+import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 const props = defineProps({
     countyId:{
         type:Number,
@@ -48,12 +56,35 @@ const props = defineProps({
 const plans : Ref<Array<Plan>> = ref([]);
 const error = ref(null);
 const isLoading = ref(false);
+const monthlyPayment = PaymentCycles.monthly;
+const yearlyPayment = PaymentCycles.yearly;
+const selectedPaymentCycle = ref(PaymentCycles.monthly);
+const selectedPlan = ref(1);
+const emit = defineEmits<{
+  (e: 'selected',plan:Object): void
+}>();
+
+const {locale} = useI18n();
+const setPaymentPeriod = (payment)=>{
+  selectedPaymentCycle.value= payment
+}
+onMounted(()=>{
+  const chosen = SubscriptionService.getChosenPlan();
+  if(chosen){
+    selectedPaymentCycle.value = chosen.payment_cycle;
+    selectedPlan.value = chosen.plan_id;
+  }
+})
+const setPlan=(planId:number)=>{
+  selectedPlan.value = planId;
+  emit('selected',{planId:selectedPlan.value,paymentPeriod:selectedPaymentCycle.value});
+}
 async function loadPlans(){
   if(props.countyId>-1)
 {
   try{
     isLoading.value = true;
-    plans.value = await PlanService.getPlansDetails(props.countyId);
+    plans.value = await PlanService.getPlansDetails(props.countyId,locale.value);
     
   }
   catch(err)
@@ -66,6 +97,10 @@ async function loadPlans(){
   
 }
 }
+onMounted(()=>{
+  if(props.countyId>-1)
+    loadPlans();
+})
 watch(props,(currentValue,oldValue)=>{
   loadPlans();
 })

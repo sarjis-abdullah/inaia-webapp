@@ -7,13 +7,12 @@ export class CountryService{
     private static requester = HttpRequester.httpRequester();
     private static headers = new HttpHeader();
     public static async getCountryList(all:Boolean):Promise<Array<Country>>{
-        let res = await this.requester.get(this.links.getCountries(),this.headers);
-        let json:Array<Country>= await res.json();
+        let res:Array<Country> = await this.requester.get(this.links.getCountries(),this.headers);
         if(all)
-            return json;
+            return res;
         else
         {
-            return json.filter(element=>element.allow);
+            return res.filter(element=>element.allow);
         }
     }
 }

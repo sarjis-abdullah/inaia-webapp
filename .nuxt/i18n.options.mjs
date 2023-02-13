@@ -14,12 +14,14 @@ export const resolveNuxtI18nOptions = async (context) => {
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
   "subscription_info": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enter your information"])};fn.source="Enter your information";return fn;})(),
-  "consditions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Approve our conditions"])};fn.source="Approve our conditions";return fn;})()
+  "consditions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Approve our conditions"])};fn.source="Approve our conditions";return fn;})(),
+  "accept_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wir möchten dich per E-Mail oder auf anderem Wege über Produktupdates und weitere Dienste von INAIA auf dem Laufenden halten. Setze das Häkchen und gib uns deine Zustimmung."])};fn.source="Wir möchten dich per E-Mail oder auf anderem Wege über Produktupdates und weitere Dienste von INAIA auf dem Laufenden halten. Setze das Häkchen und gib uns deine Zustimmung.";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
   "subscription_info": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enter your information"])};fn.source="Enter your information";return fn;})(),
-  "consditions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Approve our conditions"])};fn.source="Approve our conditions";return fn;})()
+  "conditions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Approve our conditions"])};fn.source="Approve our conditions";return fn;})(),
+  "accept_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We would like to keep you informed about product updates and other services from INAIA via email or other means. Check the box and give us your consent."])};fn.source="We would like to keep you informed about product updates and other services from INAIA via email or other means. Check the box and give us your consent.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]
