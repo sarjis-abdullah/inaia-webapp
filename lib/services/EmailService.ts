@@ -18,11 +18,4 @@ export class EmailService{
     public static async sendEmailCode(request:SendEmailCodeRequest):Promise<HttpResponse>{
         return this.requester.post(this.links.sendEmailCode(),this.headers,request);
     }
-    public static emailValidated(){
-        this.storage.addItem(StorageKeys.emailValidated,'validated');
-    }
-    public static isEmailValidated(){
-        let value = this.storage.getItem(StorageKeys.emailValidated);
-        return value && value == 'validated';
-    }
 }

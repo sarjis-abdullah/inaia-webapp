@@ -1,6 +1,6 @@
 <template>
   <Listbox as="div" v-model="selected">
-    <ListboxLabel class="block text-sm font-medium text-gray-700">Your country</ListboxLabel>
+    <ListboxLabel class="block text-sm font-medium text-gray-700">{{ $t('your_country') }}</ListboxLabel>
     <div class="relative mt-1" v-if="!isLoading && !error">
       <ListboxButton
         class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm">
@@ -35,7 +35,7 @@
       <Loading />
     </div>
     <div class="relative mt-1" v-if="error">
-      <p class="text-center my-3 font-medium text-lg text-red-800">We couldn't load countries, cause of server error</p>
+      <p class="text-center my-3 font-medium text-lg text-red-800">{{ $t('loading_country_error') }}</p>
     </div>
   </Listbox>
 </template>

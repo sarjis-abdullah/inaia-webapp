@@ -1,6 +1,6 @@
 <template>
     <div class="flex min-h-full flex-col mt-5 mx-6 bg-white">
-        <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-center my-10">Pricing Plans</h1>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-center my-10">{{ $t('plan_pricing') }}</h1>
         <Countries class="w-3/12 self-center" :all="false" @change="handleCountryChange" :selectedCountry="defaultCountry" :selectedCountryId="alreadySelectedCountry"/>
         <Plans v-if="selectedCountry.id > -1" :countyId="selectedCountry.id" @selected="onPlanSelected"></Plans>
     </div>

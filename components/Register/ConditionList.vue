@@ -7,7 +7,7 @@
       <div class="relative flex items-start py-4" v-for="c in conditions" :key="c.id">
         <div class="min-w-0 flex-1 text-sm" >
           <label for="comments" class="font-medium text-gray-700">{{ c.id==-1?$t(c.title):c.title }}</label>
-          <a  class="block text-gray-500" v-if="c.document" :href="c.document.link" target="_blank">Download document</a>
+          <a  class="block text-gray-500" v-if="c.document" :href="c.document.link" target="_blank">{{ $t('download_document') }}</a>
         </div>
         <div class="ml-3 flex h-5 items-center">
           <input  type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @change="(input)=>checkCondition(input.target.checked,c)"/>
@@ -19,7 +19,7 @@
   <div class="mt-10 flex justify-center">
                     <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="register"
                         :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
-                        class="w-[50%] flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Register</button>
+                        class="w-[50%] flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('register') }}</button>
                    
                 </div>
 </div>

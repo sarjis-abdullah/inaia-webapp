@@ -3,7 +3,7 @@
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form class="space-y-6" action="#" method="POST">
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700">{{ $t('email') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <EnvelopeIcon :class="(!emailValidated)?errorIconColor:iconColor" class="h-5 w-5" aria-hidden="true" />
@@ -20,7 +20,7 @@
                 </div>
 
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Password</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700">{{ $t('password') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <LockClosedIcon class="h-5 w-5" :class="(!passwordValidated)?errorIconColor:iconColor" aria-hidden="true" />
@@ -34,11 +34,11 @@
                             <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                         </div>
                     </div>
-                    <p class="mt-2 text-sm text-red-600" id="email-error" v-if="!passwordValidated">Your password must be at least 6 character long and must contains special characters
+                    <p class="mt-2 text-sm text-red-600" id="email-error" v-if="!passwordValidated">{{ $t('password_message') }}
                     </p>
                 </div>
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">{{ $t('name') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <UserIcon class="h-5 w-5" :class="(state.prename.length==0)?errorIconColor:iconColor" aria-hidden="true" />
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div>
-                    <label for="surname" class="block text-sm font-medium text-gray-700">Suranme</label>
+                    <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('surname') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <UserIcon class="h-5 w-5" aria-hidden="true" :class="(state.name.length==0)?errorIconColor:iconColor"/>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div>
-                    <label for="surname" class="block text-sm font-medium text-gray-700">Referal code</label>
+                    <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('referal_code') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <HashtagIcon class="h-5 w-5" aria-hidden="true" :class="iconColor"/>
@@ -83,7 +83,7 @@
                 </div>
                 <div>
 
-                    <label for="phone-number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <label for="phone-number" class="block text-sm font-medium text-gray-700">{{ $t('phone_number') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="absolute inset-y-0 left-0 flex items-center">
                             
@@ -98,8 +98,8 @@
                 <div>
                     <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
                         :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
-                        class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Save</button>
-                        <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">We couldn't save the information please try again later
+                        class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('save') }}</button>
+                        <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}
                     </p>
                 </div>
             </form>

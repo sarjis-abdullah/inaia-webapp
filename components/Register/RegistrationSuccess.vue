@@ -1,7 +1,6 @@
 <template>
     <div class="mt=10 flex justify-center items-center">
-        Thank you for your registration, to start using INAIA system you can download our apo for 
-        ISTORE or Google Play.
+        {{ $t('registration_success_message') }}
     </div>
 </template>
 <script lang="ts"  setup>

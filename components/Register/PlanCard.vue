@@ -5,19 +5,19 @@
             <h2 class="text-lg font-medium leading-6 text-gray-900">{{ plan.name }}</h2>
             
             <p class="mt-8" v-if="paymentPeriod==cycles.monthly">
-              <span class="text-4xl font-bold tracking-tight text-gray-900">${{ monthlFee }}</span>
+              <span class="text-4xl font-bold tracking-tight text-gray-900">€{{ monthlFee }}</span>
               {{ ' ' }}
-              <span class="text-base font-medium text-gray-500">/mo</span>
+              <span class="text-base font-medium text-gray-500">/{{ $t('monthly') }}</span>
             </p>
             <p class="mt-8" v-else-if="paymentPeriod==cycles.yearly">
-              <span class="text-4xl font-bold tracking-tight text-gray-900">${{ yearlyFee }}</span>
+              <span class="text-4xl font-bold tracking-tight text-gray-900">€{{ yearlyFee }}</span>
               {{ ' ' }}
-              <span class="text-base font-medium text-gray-500">/year</span>
+              <span class="text-base font-medium text-gray-500">/{{$t('year')}}</span>
             </p>
-            <Button  class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-800 py-2 text-center text-sm font-semibold text-white hover:bg-gray-900" @click.prevent="choosePlan">Buy {{ plan.name }}</Button>
+            <Button  class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-800 py-2 text-center text-sm font-semibold text-white hover:bg-gray-900" @click.prevent="choosePlan">{{ $t('buy') }} {{ plan.name }}</Button>
           </div>
           <div class="px-6 pt-6 pb-8">
-            <h3 class="text-sm font-medium text-gray-900">Features</h3>
+            <h3 class="text-sm font-medium text-gray-900">{{ $t('features') }}</h3>
             <ul role="list" class="mt-6 space-y-4">
               <li v-for="detail in plan.details" :key="detail?detail.id:0" class="flex space-x-3">
                 <CheckIcon class="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" v-if="detail && detail.active"/>
