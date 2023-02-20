@@ -36,6 +36,7 @@ import { d } from 'vue-bundle-renderer/dist/types-dfcc483f';
 import { Condition } from '~~/lib/models/Condition';
 import { ConditionService } from '~~/lib/services/ConditionService';
 import { SubscriptionService } from '~~/lib/services/SubscriptionService';
+import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import Loading from '../common/Loading.vue';
 const countryId = 82;
 const conditions:Ref<Array<Condition>> = ref([]);
@@ -94,7 +95,8 @@ const register = async ()=>{
             allow_marketing:allowMarketing.value,
             conditions:selectedConditions.value.join(',')
         })
-        //await SubscriptionService.registerAccount();
+        await SubscriptionService.registerAccount();
+        SubscriptionStorage.clearAll();
         emit("registred");
     }
     catch(err){

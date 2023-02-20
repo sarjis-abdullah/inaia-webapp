@@ -55,7 +55,7 @@ import { VerifyPhonelRequest } from '~~/lib/requests/VerifyPhoneRequest';
 import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import Notification from '../common/Notification.vue';
 import { NotificationTypes } from '~~/constants/NotificationTypes';
-import { isEmailVerified,saveEmailVerified,isPhoneVerified,savePhoneVerified } from '~~/helpers/RegistrationHelper';
+import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 const { t } = useI18n();
 const isVerifyingSms = ref(false);
 const isVerifyingEmail = ref(false);
@@ -69,8 +69,8 @@ onMounted(()=>{
     const accountInformation = SubscriptionService.getAccountInformation();
     email.value = accountInformation.email;
     phoneNumber.value = accountInformation.mobile;
-    smsVerified.value = isPhoneVerified();
-    emailVerified.value = isEmailVerified();
+    smsVerified.value = SubscriptionStorage.isPhoneValidated();
+    emailVerified.value = SubscriptionStorage.isEmailVerified();
     
 })
 const emit = defineEmits<{
@@ -84,7 +84,7 @@ const  verifyEmailCode= async(code:string)=>{
             code:code
         })*/
         emailVerified.value = true;
-        saveEmailVerified();
+        SubscriptionStorage.saveEmailVerified();
         if(smsVerified.value)
         {
             emit('validated');
@@ -106,7 +106,7 @@ const  verifySmsCode= async(code:string)=>{
             code:code
         })*/
         smsVerified.value = true;    
-        savePhoneVerified();
+        SubscriptionStorage.phoneValidated();
         if(emailVerified.value)
         {
             emit('validated');

@@ -13,6 +13,8 @@ import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import Plans from './Plans.vue';
 import { getCountryByLanguage } from '~~/helpers/LanguageHelper';
 import { useI18n } from 'vue-i18n';
+import { ChosenPlan } from '~~/lib/requests/ChosenPlanRequest';
+import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 const selectedCountry = reactive({id:-1});
 const alreadySelectedCountry = ref(-1);
 const plan = ref(null);
@@ -35,11 +37,13 @@ onMounted(()=>{
 const onPlanSelected = (value)=>{
   plan.value = value;
   if(plan.value){
-    SubscriptionService.saveChoosenPlan({
+    const data:ChosenPlan={
     country_id:selectedCountry.id,
     payment_cycle:plan.value.paymentPeriod,
     plan_id:plan.value.planId
-  });
+  }
+    SubscriptionService.saveChoosenPlan(data);
+    SubscriptionStorage.saveChoosenPlan(data);
   emit("selected");
   }
   

@@ -42,9 +42,10 @@ import PlanStep from '@/components/Register/PlanStep';
 import AccountInformation from './Register/AccountInformation.vue';
 import VerificationForm from './Register/VerificationForm';
 import ConditionList from './Register/ConditionList.vue';
-import { getStep,saveStep } from '~~/helpers/RegistrationHelper';
 import { useI18n } from 'vue-i18n';
 import RegistrationSuccess from './Register/RegistrationSuccess.vue';
+import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
+import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 const { t } = useI18n();
 const selectedCountry = reactive({id:-1});
 const stillRegistring = ref(true);
@@ -71,7 +72,11 @@ const goToStep=(step:number)=>
   })
 }
 onMounted(()=>{
-  currentStep.value = getStep();
+  currentStep.value = SubscriptionStorage.getStep();
+  const info = SubscriptionStorage.getAccountInformation();
+  const choosenPlan = SubscriptionStorage.getChoosenPlan();
+  SubscriptionService.saveAccountInformation(info);
+  SubscriptionService.saveChoosenPlan(choosenPlan);
   goToStep(currentStep.value);
 })
 
@@ -90,15 +95,15 @@ const navigateToStep=(step)=>{
 const selectedStep = computed(()=>steps.value.find(step=>step.status == SubscriptionSteps.current));
 const onChoosenPlan = ()=>{
   goToStep(2);
-  saveStep(2);
+  SubscriptionStorage.saveStep(2);
 }
 const onPersonalInfoSaved = ()=>{
   goToStep(3);
-  saveStep(3);
+  SubscriptionStorage.saveStep(3);
 }
 const onInformationValidated = ()=>{
   goToStep(4);
-  saveStep(4);
+  SubscriptionStorage.saveStep(4);
 }
 const onRegistrationDone = ()=>{
   stillRegistring.value =  false;

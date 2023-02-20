@@ -115,6 +115,8 @@ import {PhoneNumberService} from '@/lib/services/PhoneNumberService';
 import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
 import PhoneCodes from '@/components/Register/PhoneCodes';
 import { stat } from 'fs';
+import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
+import { AccountInformationRequest } from '~~/lib/requests/AccountInformationRequest';
 const passwordValidated = ref(false);
 const emailValidated = ref(false);
 const phoneValidated = ref(false);
@@ -148,7 +150,6 @@ const emit = defineEmits<{
 }>()
 onMounted(()=>{
     const info = SubscriptionService.getAccountInformation();
-
     if(info){
         state.email = info.email;
         state.name = info.surname;
@@ -177,6 +178,15 @@ async function save() {
     try{
         //await EmailService.sendEmailCode({email:state.email});
         //await PhoneNumberService.sendPhoneCode({phone_number:state.phoneCode+state.phone});
+        const data:AccountInformationRequest = {
+            email:state.email,
+            password:state.password,
+            mobile:state.phoneCode+state.phone,
+            prename:state.prename,
+            surname :state.name,
+            referral_code:state.referalCode
+        };
+        SubscriptionStorage.saveAccountInformation(data)
         SubscriptionService.saveAccountInformation({
             email:state.email,
             password:state.password,
