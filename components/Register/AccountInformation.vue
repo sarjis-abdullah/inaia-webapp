@@ -117,6 +117,7 @@ import PhoneCodes from '@/components/Register/PhoneCodes';
 import { stat } from 'fs';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import { AccountInformationRequest } from '~~/lib/requests/AccountInformationRequest';
+import { useRoute } from 'vue-router';
 const passwordValidated = ref(false);
 const emailValidated = ref(false);
 const phoneValidated = ref(false);
@@ -126,6 +127,7 @@ const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
 const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
+
 const shouldDisplayEmailError=()=>{
     return !emailValidated && state.email.length>0
 }
@@ -148,7 +150,9 @@ const onPhoneCodeChange = (value:string)=>{
 const emit = defineEmits<{
   (e: 'onSave'): void
 }>()
+
 onMounted(()=>{
+    const {query}= useRoute();
     const info = SubscriptionService.getAccountInformation();
     if(info){
         state.email = info.email;
@@ -157,6 +161,9 @@ onMounted(()=>{
         state.password = info.password;
         state.phone = info.mobile;
         state.referalCode =  info.referral_code;
+    }
+    if(query.referral){
+        state.referalCode = query.referral;
     }
 })
 watch(state,(currentValue)=>{
