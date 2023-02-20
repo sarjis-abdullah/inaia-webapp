@@ -39,5 +39,8 @@ export default {
     resend_phone_code:'Resend phone number code',
     email_verified:'Email verified',
     phone_number_verified:'Phone number verified',
-    next:'Next'
+    next:'Next',
+    signin:'Sign in to your account',
+    or:'Or',
+    emailAddress:'Email Address'
 }
