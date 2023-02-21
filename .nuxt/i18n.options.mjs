@@ -39,7 +39,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "plan_pricing": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Pricing Plans"])};fn.source="Pricing Plans";return fn;})(),
   "register": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Register"])};fn.source="Register";return fn;})(),
   "download_document": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Download document"])};fn.source="Download document";return fn;})(),
-  "server_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Something bad happened please try again later"])};fn.source="Something bad happened please try again later";return fn;})(),
+  "server_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Es ist ein Fehler aufgetreten: Server error on request"])};fn.source="Es ist ein Fehler aufgetreten: Server error on request";return fn;})(),
   "error_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Error"])};fn.source="Error";return fn;})(),
   "phone_number": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number"])};fn.source="Phone number";return fn;})(),
   "save": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Save"])};fn.source="Save";return fn;})(),
@@ -51,7 +51,14 @@ export const resolveNuxtI18nOptions = async (context) => {
   "resend_phone_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend phone number code"])};fn.source="Resend phone number code";return fn;})(),
   "email_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email verified"])};fn.source="Email verified";return fn;})(),
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number verified"])};fn.source="Phone number verified";return fn;})(),
-  "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})()
+  "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})(),
+  "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in to your account"])};fn.source="Sign in to your account";return fn;})(),
+  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Or"])};fn.source="Or";return fn;})(),
+  "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email Address"])};fn.source="Email Address";return fn;})(),
+  "rememberMe": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Remember me"])};fn.source="Remember me";return fn;})(),
+  "forGotPassword": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgot your password?"])};fn.source="Forgot your password?";return fn;})(),
+  "signIn": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in"])};fn.source="Sign in";return fn;})(),
+  "check_creds": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Login fehlgeschlagen. \nDie Zugangsdaten sind nicht korrekt."])};fn.source="Login fehlgeschlagen. \nDie Zugangsdaten sind nicht korrekt.";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -81,7 +88,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "plan_pricing": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Pricing Plans"])};fn.source="Pricing Plans";return fn;})(),
   "register": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Register"])};fn.source="Register";return fn;})(),
   "download_document": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Download document"])};fn.source="Download document";return fn;})(),
-  "server_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Something bad happened please try again later"])};fn.source="Something bad happened please try again later";return fn;})(),
+  "server_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["An error has occurred: server error on request."])};fn.source="An error has occurred: server error on request.";return fn;})(),
   "error_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Error"])};fn.source="Error";return fn;})(),
   "phone_number": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number"])};fn.source="Phone number";return fn;})(),
   "save": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Save"])};fn.source="Save";return fn;})(),
@@ -93,7 +100,14 @@ export const resolveNuxtI18nOptions = async (context) => {
   "resend_phone_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend phone number code"])};fn.source="Resend phone number code";return fn;})(),
   "email_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email verified"])};fn.source="Email verified";return fn;})(),
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number verified"])};fn.source="Phone number verified";return fn;})(),
-  "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})()
+  "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})(),
+  "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in to your account"])};fn.source="Sign in to your account";return fn;})(),
+  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Or"])};fn.source="Or";return fn;})(),
+  "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email Address"])};fn.source="Email Address";return fn;})(),
+  "rememberMe": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Remember me"])};fn.source="Remember me";return fn;})(),
+  "forGotPassword": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgot your password?"])};fn.source="Forgot your password?";return fn;})(),
+  "signIn": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in"])};fn.source="Sign in";return fn;})(),
+  "check_creds": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Access denied. \nInvalid credentials."])};fn.source="Access denied. \nInvalid credentials.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

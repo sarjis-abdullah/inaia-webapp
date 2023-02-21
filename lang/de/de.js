@@ -27,7 +27,7 @@ export default {
     plan_pricing:'Pricing Plans',
     register:'Register',
     download_document:'Download document',
-    server_error:"Something bad happened please try again later",
+    server_error:"Es ist ein Fehler aufgetreten: Server error on request",
     error_title:'Error',
     phone_number:'Phone number',
     save:'Save',
@@ -42,5 +42,9 @@ export default {
     next:'Next',
     signin:'Sign in to your account',
     or:'Or',
-    emailAddress:'Email Address'
+    emailAddress:'Email Address',
+    rememberMe:'Remember me',
+    forGotPassword:'Forgot your password?',
+    signIn:'Sign in',
+    check_creds:"Login fehlgeschlagen. \nDie Zugangsdaten sind nicht korrekt.",
 }

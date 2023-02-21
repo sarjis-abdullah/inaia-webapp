@@ -4,5 +4,10 @@ export enum StorageKeys{
     conditions='conditions',
     subscriptionStep='subscriptionStep',
     emailValidated='EmailValidated',
-    phoneValidated='phoneValidated'
+    phoneValidated='phoneValidated',
+    token='token',
+    expirationDate="expirationDate",
+    refreshToken="refreshToken",
+    account="account",
+    secret='secret'
 }

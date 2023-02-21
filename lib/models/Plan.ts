@@ -2,7 +2,7 @@ interface FeeDeetail{
     value:Number,
     unit:String
 }
-interface Fee{
+export interface Fee{
     monthly:FeeDeetail,
     yearly:FeeDeetail
 }

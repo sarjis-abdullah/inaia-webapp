@@ -1,8 +1,9 @@
 import libConfig from "../lib.config";
 import { Envs } from "./Envs";
+const ACCOUNT_INCLUDES = "include=person_data,account,address,channels,country,new_inbox_message_count,new_support_ticket_answer_count,products,product_specs,kyc_details";
 export class Urls{
     private static instance:Urls;
-
+    
     private coreBaseUrl:string;
     private bankBaseUrl:string;
     private goldDinarBaseUrl : string;
@@ -62,6 +63,9 @@ export class Urls{
     }
     public registerCustomer():string{
         return this.buildUrl(this.coreBaseUrl,'register');
+    }
+    public login():string{
+        return this.buildUrl(this.coreBaseUrl,'authenticate?'+ACCOUNT_INCLUDES);
     }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
