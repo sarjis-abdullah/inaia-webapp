@@ -67,6 +67,15 @@ export class Urls{
     public login():string{
         return this.buildUrl(this.coreBaseUrl,'authenticate?'+ACCOUNT_INCLUDES);
     }
+    public getProfileUrl(id:number):string{
+        return this.buildUrl(this.coreBaseUrl,`contacts/${id}?${ACCOUNT_INCLUDES}`);
+    }
+    public getAssetsUrl(accountId:number):string{
+        return this.buildUrl(this.goldDinarBaseUrl,`assets/${accountId}`);
+    }
+    public getLastTransactionUrl(page:number,per_page:number):string{
+        return this.buildUrl(this.goldDinarBaseUrl,`orders/account-activities?include=order_transactions,orders_payment_transactions&page=${page}&per_page=${per_page}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

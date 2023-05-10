@@ -69,6 +69,7 @@ import {LoginStorage } from '../storage/LoginStorage';
 import {AccountStorage} from '../storage/AccountStorage';
 import {AccountService} from '~~/lib/services/AccountService';
 import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
+import { TokenService } from '~~/lib/services/TokenService';
   const state = reactive({
     email:'',
     password:'',
@@ -91,7 +92,9 @@ import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
             username:state.email
         });
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
-        AccountStorage.saveAccount(response.account,state.keepMeSignedIn);
+        TokenService.init(response.accessToken.token,response.accessToken.expire);
+        AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
+        AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
         AccountService.setAccount(response.account);
         if(state.keepMeSignedIn){
             LoginStorage.saveRefreshToken(response.refreshToken);

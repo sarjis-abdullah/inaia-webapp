@@ -14,8 +14,10 @@ export class LoginStorage{
             console.log(expire);
             localStorage.setItem(StorageKeys.expirationDate,token.expire)
         }
-        console.log(token.token);
         Cookies.set(StorageKeys.token,token.token,{expires:expire});
+    }
+    public static getExpDate():string | null{
+        return localStorage.getItem(StorageKeys.expirationDate)
     }
     public static saveRefreshToken(token:string){
         localStorage.setItem(StorageKeys.refreshToken,token);
@@ -23,5 +25,8 @@ export class LoginStorage{
     public static saveSecret(secret?:string){
         if(secret)
         localStorage.setItem(StorageKeys.secret,secret);
+    }
+    public static getToken():string | undefined | null{
+        return Cookies.get(StorageKeys.token);
     }
 }

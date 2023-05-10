@@ -18,6 +18,13 @@ export class HttpHeader{
         let header = Object.assign({}, ...(this.headers.map(item => ({ [item.key]: item.value }) )));
         return header;
     }
+    public addAuthHeader(token:string):HttpHeader{
+        this.headers.push({
+            key:"Authorization",
+            value:"Bearer " + token
+        })
+        return this; 
+    }
     public addLocationHeader(language:string):HttpHeader{
         this.headers.push({
             key:"X-localization",

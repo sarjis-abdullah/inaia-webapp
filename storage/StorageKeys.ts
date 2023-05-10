@@ -9,5 +9,8 @@ export enum StorageKeys{
     expirationDate="expirationDate",
     refreshToken="refreshToken",
     account="account",
-    secret='secret'
+    secret='secret',
+    permanent='permanent',
+    accountId='account_id',
+    contact_id='contact_id'
 }
