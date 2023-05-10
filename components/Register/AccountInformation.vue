@@ -169,7 +169,6 @@ onMounted(()=>{
 watch(state,(currentValue)=>{
     passwordValidated.value = validatePassword(currentValue.password);
     emailValidated.value = validateEmail(currentValue.email);
-    console.log(emailValidated.value);
     phoneValidated.value = validatePhoneNumber(currentValue.phone);
     if(currentValue.name.length>0 && currentValue.prename.length>0 && passwordValidated.value && emailValidated.value && phoneValidated.value)
     {
