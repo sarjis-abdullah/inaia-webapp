@@ -42,5 +42,6 @@ export default {
     next:'Next',
     signin:'Sign in to your account',
     or:'Or',
-    emailAddress:'Email Address'
+    emailAddress:'Email Address',
+    choose_country:'Choose your country'
 }

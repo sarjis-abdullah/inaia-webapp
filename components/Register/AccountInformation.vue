@@ -3,6 +3,49 @@
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form class="space-y-6" action="#" method="POST">
                 <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">{{ $t('name') }}</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <UserIcon class="h-5 w-5" :class="(state.prename.length==0)?errorIconColor:iconColor" aria-hidden="true" />
+                        </div>
+                        <input type="text" name="name" id="name" v-model="state.prename"
+                        class="block  w-full 10 pl-10 py-2 rounded-md"
+                        :class="(state.prename.length>0)?inputStyle:inputErrorStyle"
+                            />
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.prename.length==0">
+                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('surname') }}</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <UserIcon class="h-5 w-5" aria-hidden="true" :class="(state.name.length==0)?errorIconColor:iconColor"/>
+                        </div>
+                        <input type="surname" name="surname" id="surname" v-model="state.name"
+                        class="block  w-full 10 pl-10 py-2 rounded-md"
+                        :class="(state.name.length>0)?inputStyle:inputErrorStyle"
+                            />
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.name.length==0">
+                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+<label for="phone-number" class="block text-sm font-medium text-gray-700">{{ $t('phone_number') }}</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+    <div class="absolute inset-y-0 left-0 flex items-center">
+        
+        <PhoneCodes @change="onPhoneCodeChange"/>
+    </div>
+    <input type="text" name="phone-number" id="phone-number"
+        class="block w-full rounded-md border-gray-300 pl-36 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+         v-model="state.phone" :class="(state.phone.length>0)?inputStyle:inputErrorStyle"/>
+</div>
+</div>
+                <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">{{ $t('email') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -37,36 +80,7 @@
                     <p class="mt-2 text-sm text-red-600" id="email-error" v-if="!passwordValidated">{{ $t('password_message') }}
                     </p>
                 </div>
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">{{ $t('name') }}</label>
-                    <div class="relative mt-1 rounded-md shadow-sm">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <UserIcon class="h-5 w-5" :class="(state.prename.length==0)?errorIconColor:iconColor" aria-hidden="true" />
-                        </div>
-                        <input type="text" name="name" id="name" v-model="state.prename"
-                        class="block  w-full 10 pl-10 py-2 rounded-md"
-                        :class="(state.prename.length>0)?inputStyle:inputErrorStyle"
-                            />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.prename.length==0">
-                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('surname') }}</label>
-                    <div class="relative mt-1 rounded-md shadow-sm">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <UserIcon class="h-5 w-5" aria-hidden="true" :class="(state.name.length==0)?errorIconColor:iconColor"/>
-                        </div>
-                        <input type="surname" name="surname" id="surname" v-model="state.name"
-                        class="block  w-full 10 pl-10 py-2 rounded-md"
-                        :class="(state.name.length>0)?inputStyle:inputErrorStyle"
-                            />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.name.length==0">
-                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                        </div>
-                    </div>
-                </div>
+                
                 <div>
                     <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('referal_code') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
@@ -81,19 +95,7 @@
                             
                     </div>
                 </div>
-                <div>
-
-                    <label for="phone-number" class="block text-sm font-medium text-gray-700">{{ $t('phone_number') }}</label>
-                    <div class="relative mt-1 rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 flex items-center">
-                            
-                            <PhoneCodes @change="onPhoneCodeChange"/>
-                        </div>
-                        <input type="text" name="phone-number" id="phone-number"
-                            class="block w-full rounded-md border-gray-300 pl-36 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                            :placeholder=" state.phoneCode +' 1522 3433333'" v-model="state.phone" :class="(state.phone.length>0)?inputStyle:inputErrorStyle"/>
-                    </div>
-                </div>
+               
 
                 <div>
                     <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"

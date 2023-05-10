@@ -54,7 +54,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})(),
   "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in to your account"])};fn.source="Sign in to your account";return fn;})(),
   "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Or"])};fn.source="Or";return fn;})(),
-  "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email Address"])};fn.source="Email Address";return fn;})()
+  "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email Address"])};fn.source="Email Address";return fn;})(),
+  "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your country"])};fn.source="Choose your country";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -96,7 +97,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "resend_phone_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend phone number code"])};fn.source="Resend phone number code";return fn;})(),
   "email_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email verified"])};fn.source="Email verified";return fn;})(),
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number verified"])};fn.source="Phone number verified";return fn;})(),
-  "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})()
+  "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})(),
+  "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your country"])};fn.source="Choose your country";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

@@ -50,7 +50,7 @@ const { t } = useI18n();
 const selectedCountry = reactive({id:-1});
 const stillRegistring = ref(true);
 const steps = ref([
-  { number:1,id: t('step')+' 1', name: t('plan'),  status: SubscriptionSteps.upcoming },
+  { number:1,id: t('step')+' 1', name: t('choose_country'),  status: SubscriptionSteps.upcoming },
   { number:2,id: t('step')+' 2', name: t('subscription_info'), status: SubscriptionSteps.upcoming },
   { number:3,id: t('step')+' 3', name: t('confirm_information'), status: SubscriptionSteps.upcoming },
   { number:4,id: t('step')+' 4', name: t('conditions'), status: SubscriptionSteps.upcoming },

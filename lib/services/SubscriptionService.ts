@@ -47,14 +47,14 @@ export class SubscriptionService{
             email:this.accountInformation.email,
             mobile:this.accountInformation.mobile,
             password:this.accountInformation.password,
-            plan_id : this.chosenPlan.plan_id,
+            //plan_id : this.chosenPlan.plan_id,
             country_id:this.chosenPlan.country_id,
-            payment_cycle:this.chosenPlan.payment_cycle,
+            //payment_cycle:this.chosenPlan.payment_cycle,
             conditions:this.conditions,
             allow_marketing:this.allowMarketing
         };
-        //await this.requester.post(this.links.registerCustomer(),this.headers,registrationRequest);
-        console.log(registrationRequest);
+        await this.requester.post(this.links.registerCustomer(),this.headers,registrationRequest);
+        //console.log(registrationRequest);
         return true;
     }
 }
