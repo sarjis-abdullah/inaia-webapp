@@ -65,7 +65,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "line2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Adresszusatz (optional)"])};fn.source="Adresszusatz (optional)";return fn;})(),
   "postalCode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Postleitzahl"])};fn.source="Postleitzahl";return fn;})(),
   "town": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Stadt"])};fn.source="Stadt";return fn;})(),
-  "region": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bundesland/Region"])};fn.source="Bundesland/Region";return fn;})()
+  "region": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bundesland/Region"])};fn.source="Bundesland/Region";return fn;})(),
+  "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -118,7 +119,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "privacy": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Privacy policy"])};fn.source="Privacy policy";return fn;})(),
   "term_of_use": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Terms of use"])};fn.source="Terms of use";return fn;})(),
   "imprint": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Imprint"])};fn.source="Imprint";return fn;})(),
-  "enter_address": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your address"])};fn.source="Your address";return fn;})()
+  "enter_address": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your address"])};fn.source="Your address";return fn;})(),
+  "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

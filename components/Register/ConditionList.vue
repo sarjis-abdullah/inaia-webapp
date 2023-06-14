@@ -1,5 +1,6 @@
 <template>
     <div class="mt-8 sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
+        <h2 class="text-center mb-5 text-xl">{{ $t('conditions') }}</h2>
         <div v-if="!isLoading && !isError">
         <fieldset class="border-t border-b border-gray-200" >
     <legend class="sr-only">Conditions</legend>

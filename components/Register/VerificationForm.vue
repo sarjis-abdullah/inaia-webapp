@@ -2,6 +2,7 @@
     <div class="mt-8 sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
         <Notification :type="NotificationTypes.danger" :text="errorText" :title="$t('error_title')" :show="showNotification" @close="()=>showNotification=false"/>
         <div class="flex flex-col mx-auto">
+            <h2 class="text-center mb-5 text-xl">{{ $t('confirm_information') }}</h2>
             <h3 class="text-gray-900 font-semibold">{{ $t('verify_email') }}:</h3>
             <div class="mt-3 pl-3 w-full grid grid-cols-2 gap-s">
                 <div class="flex">
