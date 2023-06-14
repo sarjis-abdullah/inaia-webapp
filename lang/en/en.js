@@ -40,7 +40,17 @@ export default {
     email_verified:'Email verified',
     phone_number_verified:'Phone number verified',
     next:'Next',
-    choose_country:'Choose your country'
-
+    choose_country:'Choose your country',
+    line1: "Street / House no.",
+    line2: "Addition to address (optional)",
+    postalCode: "Postcode",
+    town: "City",
+    region: "State",
+    general_conditions:'General conditions',
+    privacy:'Privacy policy',
+    term_of_use:'Terms of use',
+    imprint:'Imprint',
+    enter_address:'Your address',
+    registration_done:'Congratulations'
 
 }   

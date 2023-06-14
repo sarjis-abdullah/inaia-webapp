@@ -10,7 +10,8 @@
           <a  class="block text-gray-500" v-if="c.document" :href="c.document.link" target="_blank">{{ $t('download_document') }}</a>
         </div>
         <div class="ml-3 flex h-5 items-center">
-          <input  type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" @change="(input)=>checkCondition(input.target.checked,c)"/>
+            <Switch @change="(value)=>checkCondition(value,c)"/>
+         
         </div>
       </div>
     </div>
@@ -37,6 +38,7 @@ import { Condition } from '~~/lib/models/Condition';
 import { ConditionService } from '~~/lib/services/ConditionService';
 import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
+import Switch  from '../common/AppSwitch.vue'
 import Loading from '../common/Loading.vue';
 const countryId = 82;
 const conditions:Ref<Array<Condition>> = ref([]);

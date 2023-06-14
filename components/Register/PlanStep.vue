@@ -7,8 +7,8 @@
                     <button type="submit" :disabled="alreadySelectedCountry.id == -1" @click.prevent="save"
                         :class="(alreadySelectedCountry.id == -1)?'opacity-50':'opacity-100'"
                         class="flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 px-10">{{ $t('save') }}</button>
-                        <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}
-                    </p>
+                       
+                    
                 </div>
     </div>
 </template>

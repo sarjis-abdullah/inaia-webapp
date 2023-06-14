@@ -20,10 +20,11 @@ import { ref, watch } from 'vue';
 import type { Ref } from 'vue'
 import Loading from '../common/Loading.vue';
 const props = defineProps({
-    selectedCountry:{
+  phoneCode:{
         type:String,
         default:null
-    }
+    },
+    
 })
 
 const emit = defineEmits<{
@@ -38,13 +39,13 @@ try{
   isLoading.value = true;
     countries.value  = await CountryService.getCountryList(false);
     
-     if(!props.selectedCountry)
+     if(!props.phoneCode)
      {
         selected.value = countries.value[0];
         emit("change",countries.value[0].calling_code.toString());
      }
      else{
-        selected.value = countries.value.find(x=>x.alpha2_code.toLocaleLowerCase() == props.selectedCountry) || countries.value[0];
+        selected.value = countries.value.find(x=>props.phoneCode == x.calling_code) || countries.value[0];
      }
 }
 catch(err)
@@ -55,7 +56,14 @@ finally{
   isLoading.value= false;
 }
 watch(selected,(currentvalue,oldvalue)=>{
-  console.log(currentvalue);
     emit("change",currentvalue.calling_code)
+})
+watch(props,(currentvalue,oldvalue)=>{
+  if(currentvalue.phoneCode){
+    const sV = countries.value.find(x=>currentvalue.phoneCode == x.calling_code)
+    if(sV){
+      selected.value = sV;
+    }
+  }
 })
 </script>

@@ -8,5 +8,11 @@ export interface RegistrationRequest {
     country_id:number,
     plan_id?:number,
     payment_cycle?:string,
-    allow_marketing:boolean
+    allow_marketing:boolean,
+    sales_advisor_id?: number,
+    line1?: string,
+    line2?: string,
+    postal_code?: string,
+    city?: string,
+    region?: string
 }

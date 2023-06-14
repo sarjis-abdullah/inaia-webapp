@@ -68,7 +68,7 @@ const errorText = ref('');
 onMounted(()=>{
     const accountInformation = SubscriptionService.getAccountInformation();
     email.value = accountInformation.email;
-    phoneNumber.value = accountInformation.mobile;
+    phoneNumber.value = accountInformation.phone_code+accountInformation.mobile;
     smsVerified.value = SubscriptionStorage.isPhoneValidated();
     emailVerified.value = SubscriptionStorage.isEmailVerified();
     
@@ -79,10 +79,10 @@ const emit = defineEmits<{
 const  verifyEmailCode= async(code:string)=>{
     try{
         isVerifyingEmail.value = true;
-        /*await EmailService.validateEmail({
+        await EmailService.validateEmail({
             email:email.value,
             code:code
-        })*/
+        })
         emailVerified.value = true;
         SubscriptionStorage.saveEmailVerified();
         if(smsVerified.value)
@@ -101,10 +101,10 @@ const  verifyEmailCode= async(code:string)=>{
 const  verifySmsCode= async(code:string)=>{
     try{
         isVerifyingSms.value = true;
-        /*await PhoneNumberService.validatePhone({
+        await PhoneNumberService.validatePhone({
             phone_number:phoneNumber.value,
             code:code
-        })*/
+        })
         smsVerified.value = true;    
         SubscriptionStorage.phoneValidated();
         if(emailVerified.value)

@@ -55,7 +55,17 @@ export const resolveNuxtI18nOptions = async (context) => {
   "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in to your account"])};fn.source="Sign in to your account";return fn;})(),
   "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Or"])};fn.source="Or";return fn;})(),
   "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email Address"])};fn.source="Email Address";return fn;})(),
-  "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your country"])};fn.source="Choose your country";return fn;})()
+  "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your country"])};fn.source="Choose your country";return fn;})(),
+  "general_conditions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["General conditions"])};fn.source="General conditions";return fn;})(),
+  "privacy": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Privacy policy"])};fn.source="Privacy policy";return fn;})(),
+  "term_of_use": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Terms of use"])};fn.source="Terms of use";return fn;})(),
+  "imprint": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Imprint"])};fn.source="Imprint";return fn;})(),
+  "enter_address": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your address"])};fn.source="Your address";return fn;})(),
+  "line1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Straße Hausnummer"])};fn.source="Straße Hausnummer";return fn;})(),
+  "line2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Adresszusatz (optional)"])};fn.source="Adresszusatz (optional)";return fn;})(),
+  "postalCode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Postleitzahl"])};fn.source="Postleitzahl";return fn;})(),
+  "town": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Stadt"])};fn.source="Stadt";return fn;})(),
+  "region": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bundesland/Region"])};fn.source="Bundesland/Region";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -98,7 +108,17 @@ export const resolveNuxtI18nOptions = async (context) => {
   "email_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email verified"])};fn.source="Email verified";return fn;})(),
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number verified"])};fn.source="Phone number verified";return fn;})(),
   "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})(),
-  "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your country"])};fn.source="Choose your country";return fn;})()
+  "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your country"])};fn.source="Choose your country";return fn;})(),
+  "line1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Street / House no."])};fn.source="Street / House no.";return fn;})(),
+  "line2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Addition to address (optional)"])};fn.source="Addition to address (optional)";return fn;})(),
+  "postalCode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Postcode"])};fn.source="Postcode";return fn;})(),
+  "town": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["City"])};fn.source="City";return fn;})(),
+  "region": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["State"])};fn.source="State";return fn;})(),
+  "general_conditions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["General conditions"])};fn.source="General conditions";return fn;})(),
+  "privacy": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Privacy policy"])};fn.source="Privacy policy";return fn;})(),
+  "term_of_use": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Terms of use"])};fn.source="Terms of use";return fn;})(),
+  "imprint": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Imprint"])};fn.source="Imprint";return fn;})(),
+  "enter_address": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your address"])};fn.source="Your address";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

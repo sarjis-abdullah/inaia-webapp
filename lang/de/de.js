@@ -43,5 +43,17 @@ export default {
     signin:'Sign in to your account',
     or:'Or',
     emailAddress:'Email Address',
-    choose_country:'Choose your country'
+    choose_country:'Choose your country',
+    general_conditions:'General conditions',
+    privacy:'Privacy policy',
+    term_of_use:'Terms of use',
+    imprint:'Imprint',
+    enter_address:'Your address',
+    line1: "Straße Hausnummer",
+    line2: "Adresszusatz (optional)",
+    postalCode: "Postleitzahl",
+    town: "Stadt",
+    region: "Bundesland/Region",
+    registration_done:'Congratulations'
+
 }

@@ -2,6 +2,7 @@
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     'RegisterAccountInformation': typeof import("../components/Register/AccountInformation.vue")['default']
+    'RegisterAddress': typeof import("../components/Register/Address.vue")['default']
     'RegisterCodeInputs': typeof import("../components/Register/CodeInputs.vue")['default']
     'RegisterConditionList': typeof import("../components/Register/ConditionList.vue")['default']
     'RegisterCountries': typeof import("../components/Register/Countries.vue")['default']
@@ -13,6 +14,7 @@ declare module '@vue/runtime-core' {
     'RegisterVerificationForm': typeof import("../components/Register/VerificationForm.vue")['default']
     'RegisterForm': typeof import("../components/RegisterForm.vue")['default']
     'Steps': typeof import("../components/Steps.vue")['default']
+    'CommonAppSwitch': typeof import("../components/common/AppSwitch.vue")['default']
     'CommonLoading': typeof import("../components/common/Loading.vue")['default']
     'CommonNotification': typeof import("../components/common/Notification.vue")['default']
     'NuxtWelcome': typeof import("../node_modules/@nuxt/ui-templates/dist/templates/welcome.vue")['default']
@@ -34,6 +36,7 @@ declare module '@vue/runtime-core' {
     'Html': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'LazyRegisterAccountInformation': typeof import("../components/Register/AccountInformation.vue")['default']
+    'LazyRegisterAddress': typeof import("../components/Register/Address.vue")['default']
     'LazyRegisterCodeInputs': typeof import("../components/Register/CodeInputs.vue")['default']
     'LazyRegisterConditionList': typeof import("../components/Register/ConditionList.vue")['default']
     'LazyRegisterCountries': typeof import("../components/Register/Countries.vue")['default']
@@ -45,6 +48,7 @@ declare module '@vue/runtime-core' {
     'LazyRegisterVerificationForm': typeof import("../components/Register/VerificationForm.vue")['default']
     'LazyRegisterForm': typeof import("../components/RegisterForm.vue")['default']
     'LazySteps': typeof import("../components/Steps.vue")['default']
+    'LazyCommonAppSwitch': typeof import("../components/common/AppSwitch.vue")['default']
     'LazyCommonLoading': typeof import("../components/common/Loading.vue")['default']
     'LazyCommonNotification': typeof import("../components/common/Notification.vue")['default']
     'LazyNuxtWelcome': typeof import("../node_modules/@nuxt/ui-templates/dist/templates/welcome.vue")['default']
@@ -69,6 +73,7 @@ declare module '@vue/runtime-core' {
 }
 
 export const RegisterAccountInformation: typeof import("../components/Register/AccountInformation.vue")['default']
+export const RegisterAddress: typeof import("../components/Register/Address.vue")['default']
 export const RegisterCodeInputs: typeof import("../components/Register/CodeInputs.vue")['default']
 export const RegisterConditionList: typeof import("../components/Register/ConditionList.vue")['default']
 export const RegisterCountries: typeof import("../components/Register/Countries.vue")['default']
@@ -80,6 +85,7 @@ export const RegisterRegistrationSuccess: typeof import("../components/Register/
 export const RegisterVerificationForm: typeof import("../components/Register/VerificationForm.vue")['default']
 export const RegisterForm: typeof import("../components/RegisterForm.vue")['default']
 export const Steps: typeof import("../components/Steps.vue")['default']
+export const CommonAppSwitch: typeof import("../components/common/AppSwitch.vue")['default']
 export const CommonLoading: typeof import("../components/common/Loading.vue")['default']
 export const CommonNotification: typeof import("../components/common/Notification.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/@nuxt/ui-templates/dist/templates/welcome.vue")['default']
@@ -101,6 +107,7 @@ export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const LazyRegisterAccountInformation: typeof import("../components/Register/AccountInformation.vue")['default']
+export const LazyRegisterAddress: typeof import("../components/Register/Address.vue")['default']
 export const LazyRegisterCodeInputs: typeof import("../components/Register/CodeInputs.vue")['default']
 export const LazyRegisterConditionList: typeof import("../components/Register/ConditionList.vue")['default']
 export const LazyRegisterCountries: typeof import("../components/Register/Countries.vue")['default']
@@ -112,6 +119,7 @@ export const LazyRegisterRegistrationSuccess: typeof import("../components/Regis
 export const LazyRegisterVerificationForm: typeof import("../components/Register/VerificationForm.vue")['default']
 export const LazyRegisterForm: typeof import("../components/RegisterForm.vue")['default']
 export const LazySteps: typeof import("../components/Steps.vue")['default']
+export const LazyCommonAppSwitch: typeof import("../components/common/AppSwitch.vue")['default']
 export const LazyCommonLoading: typeof import("../components/common/Loading.vue")['default']
 export const LazyCommonNotification: typeof import("../components/common/Notification.vue")['default']
 export const LazyNuxtWelcome: typeof import("../node_modules/@nuxt/ui-templates/dist/templates/welcome.vue")['default']

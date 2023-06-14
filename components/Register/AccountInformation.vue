@@ -1,6 +1,8 @@
 <template>
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <img src="~/assets/img/pageicons/register.jpg" alt="personal info" class="w-32 h-auto mb-5 mx-auto"/>
+            <h2 class="text-center mb-5 text-xl">{{ $t('subscription_info') }}</h2>
             <form class="space-y-6" action="#" method="POST">
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">{{ $t('name') }}</label>
@@ -38,7 +40,7 @@
 <div class="relative mt-1 rounded-md shadow-sm">
     <div class="absolute inset-y-0 left-0 flex items-center">
         
-        <PhoneCodes @change="onPhoneCodeChange"/>
+        <PhoneCodes @change="onPhoneCodeChange" :phoneCode="state.phoneCode"/>
     </div>
     <input type="text" name="phone-number" id="phone-number"
         class="block w-full rounded-md border-gray-300 pl-36 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
@@ -82,12 +84,12 @@
                 </div>
                 
                 <div>
-                    <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('referal_code') }}</label>
+                    <label for="referral" class="block text-sm font-medium text-gray-700">{{ $t('referal_code') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <HashtagIcon class="h-5 w-5" aria-hidden="true" :class="iconColor"/>
                         </div>
-                        <input type="surname" name="surname" id="surname" v-model="state.referalCode"
+                        <input type="text" name="referral" id="referral" v-model="state.referalCode"
                         class="block  w-full 10 pl-10 py-2 rounded-md"
                         placeholder="x012000"
                         :class="inputStyle"
@@ -163,6 +165,7 @@ onMounted(()=>{
         state.password = info.password;
         state.phone = info.mobile;
         state.referalCode =  info.referral_code;
+        state.phoneCode = info.phone_code;
     }
     if(query.referral){
         state.referalCode = query.referral;
@@ -184,25 +187,21 @@ watch(state,(currentValue)=>{
 async function save() {
     isSubmitting.value = true;
     try{
-        //await EmailService.sendEmailCode({email:state.email});
-        //await PhoneNumberService.sendPhoneCode({phone_number:state.phoneCode+state.phone});
+        await EmailService.sendEmailCode({email:state.email});
+        SubscriptionStorage.saveEmailNotVerified();
+        await PhoneNumberService.sendPhoneCode({phone_number:state.phoneCode+state.phone});
+        SubscriptionStorage.phoneNotValidated();
         const data:AccountInformationRequest = {
             email:state.email,
             password:state.password,
-            mobile:state.phoneCode+state.phone,
+            mobile:state.phone,
             prename:state.prename,
             surname :state.name,
-            referral_code:state.referalCode
+            referral_code:state.referalCode,
+            phone_code:state.phoneCode
         };
         SubscriptionStorage.saveAccountInformation(data)
-        SubscriptionService.saveAccountInformation({
-            email:state.email,
-            password:state.password,
-            mobile:state.phoneCode+state.phone,
-            prename:state.prename,
-            surname :state.name,
-            referral_code:state.referalCode
-        });
+        SubscriptionService.saveAccountInformation(data);
         emit('onSave');
     }
     catch(err){

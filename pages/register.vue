@@ -1,7 +1,9 @@
 <template>
-  <div>
+   <html class="h-full bg-white">
+    <body class="h-full">
     <RegisterForm />
-  </div>
+    </body>
+    </html>
 </template>
 <script>
 import RegisterForm from "../components/RegisterForm";
