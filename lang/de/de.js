@@ -54,6 +54,8 @@ export default {
     postalCode: "Postleitzahl",
     town: "Stadt",
     region: "Bundesland/Region",
-    registration_done:'Congratulations'
+    registration_done:'Congratulations',
+    verify_phone:'Confirm your phone number',
+    verify_email:'Confirm your email'
 
 }

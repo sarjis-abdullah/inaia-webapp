@@ -45,7 +45,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "save": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Save"])};fn.source="Save";return fn;})(),
   "account_info_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We couldn't save the information please try again later"])};fn.source="We couldn't save the information please try again later";return fn;})(),
   "registration_success_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Thank you for your registration, to start using INAIA system you can download our apo for ISTORE or Google Play."])};fn.source="Thank you for your registration, to start using INAIA system you can download our apo for ISTORE or Google Play.";return fn;})(),
-  "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Verify your email"])};fn.source="Verify your email";return fn;})(),
+  "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your email"])};fn.source="Confirm your email";return fn;})(),
   "verify_phone_number": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Verify your phone number"])};fn.source="Verify your phone number";return fn;})(),
   "resend_email_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend email code"])};fn.source="Resend email code";return fn;})(),
   "resend_phone_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend phone number code"])};fn.source="Resend phone number code";return fn;})(),
@@ -66,7 +66,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "postalCode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Postleitzahl"])};fn.source="Postleitzahl";return fn;})(),
   "town": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Stadt"])};fn.source="Stadt";return fn;})(),
   "region": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bundesland/Region"])};fn.source="Bundesland/Region";return fn;})(),
-  "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})()
+  "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})(),
+  "verify_phone": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your phone number"])};fn.source="Confirm your phone number";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -102,7 +103,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "save": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Save"])};fn.source="Save";return fn;})(),
   "account_info_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We couldn't save the information please try again later"])};fn.source="We couldn't save the information please try again later";return fn;})(),
   "registration_success_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Thank you for your registration, to start using INAIA system you can download our apo for ISTORE or Google Play."])};fn.source="Thank you for your registration, to start using INAIA system you can download our apo for ISTORE or Google Play.";return fn;})(),
-  "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Verify your email"])};fn.source="Verify your email";return fn;})(),
+  "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your email"])};fn.source="Confirm your email";return fn;})(),
   "verify_phone_number": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Verify your phone number"])};fn.source="Verify your phone number";return fn;})(),
   "resend_email_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend email code"])};fn.source="Resend email code";return fn;})(),
   "resend_phone_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Resend phone number code"])};fn.source="Resend phone number code";return fn;})(),
@@ -120,7 +121,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "term_of_use": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Terms of use"])};fn.source="Terms of use";return fn;})(),
   "imprint": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Imprint"])};fn.source="Imprint";return fn;})(),
   "enter_address": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your address"])};fn.source="Your address";return fn;})(),
-  "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})()
+  "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})(),
+  "verify_phone": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your phone number"])};fn.source="Confirm your phone number";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

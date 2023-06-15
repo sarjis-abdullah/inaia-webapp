@@ -2,30 +2,13 @@
     <div class="mt-8 sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
         <Notification :type="NotificationTypes.danger" :text="errorText" :title="$t('error_title')" :show="showNotification" @close="()=>showNotification=false"/>
         <div class="flex flex-col mx-auto">
-            <h2 class="text-center mb-5 text-xl">{{ $t('confirm_information') }}</h2>
-            <h3 class="text-gray-900 font-semibold">{{ $t('verify_email') }}:</h3>
-            <div class="mt-3 pl-3 w-full grid grid-cols-2 gap-s">
+            <img src="~/assets/img/pageicons/phoneNumberIcon.png" alt="email verification" class="w-32 h-auto mb-5 mx-auto"/>
+            <h2 class="text-center mb-5 text-xl">{{ $t('verify_phone_number') }}</h2>
+            <div class="mt-3 pl-3 w-full">
                 <div class="flex">
-                   {{ email }}
+                    {{$t('phone_number')}} : {{ phoneNumber }}
                 </div>
-                <div class="flex flex-col items-end">
-                    <div class="flex flex-col items-end" v-if="!emailVerified && !isVerifyingEmail">
-                        <CodeInputs  @complete="verifyEmailCode"/>
-                        <a  class="mt-2 text-xs text-blue-600" @click.prevent="resendEmail">{{ $t('resend_email_code') }}</a>
-                    </div>
-                    <Loading v-else-if="isVerifyingEmail"/>
-                    <div class="flex" v-else-if="emailVerified">
-                        <span class="text-green-500 mr-3">{{ $t('email_verified') }}</span> <CheckCircleIcon class="h-6 w-6 text-green-500"></CheckCircleIcon>
-                    </div>
-                    
-                </div>
-            </div>
-            <h3 class="mt-10 text-gray-900 font-semibold">{{ $t('verify_phone_number') }}:</h3>
-            <div class="mt-3 pl-3 w-full grid grid-cols-2 gap-4">
-                <div class="flex">
-                    {{ phoneNumber }}
-                </div>
-                <div class="flex flex-col items-end">
+                <div class="flex flex-col items-center">
                     <div class="flex flex-col items-end" v-if="!smsVerified && !isVerifyingSms">
                         <CodeInputs  @complete="verifySmsCode" :length="4"/>
                         <a class="mt-2 text-xs text-blue-600" @click.prevent="resendSms">{{ $t('resend_phone_code') }}</a>
@@ -38,7 +21,7 @@
                     
                 </div>
             </div>
-            <div class="mt-6 pr-2 flex justify-end" v-if="emailVerified && smsVerified">
+            <div class="mt-6 pr-2 flex justify-end" v-if="smsVerified">
                 <a class=" text-lg text-blue-600" @click.prevent="emit('validated')">{{ $t('next') }} -></a>
             </div>
         </div>
@@ -68,37 +51,12 @@ const showNotification=ref(false);
 const errorText = ref('');
 onMounted(()=>{
     const accountInformation = SubscriptionService.getAccountInformation();
-    email.value = accountInformation.email;
     phoneNumber.value = accountInformation.phone_code+accountInformation.mobile;
     smsVerified.value = SubscriptionStorage.isPhoneValidated();
-    emailVerified.value = SubscriptionStorage.isEmailVerified();
-    
 })
 const emit = defineEmits<{
   (e: 'validated'): void
 }>()
-const  verifyEmailCode= async(code:string)=>{
-    try{
-        isVerifyingEmail.value = true;
-        await EmailService.validateEmail({
-            email:email.value,
-            code:code
-        })
-        emailVerified.value = true;
-        SubscriptionStorage.saveEmailVerified();
-        if(smsVerified.value)
-        {
-            emit('validated');
-        }
-    }
-    catch(err:unknown){
-        errorText.value =  t(err.getTranslationKey());
-        showNotification.value = true;
-    }
-    finally{
-        isVerifyingEmail.value = false;
-    }
-}
 const  verifySmsCode= async(code:string)=>{
     try{
         isVerifyingSms.value = true;
@@ -108,11 +66,7 @@ const  verifySmsCode= async(code:string)=>{
         })
         smsVerified.value = true;    
         SubscriptionStorage.phoneValidated();
-        if(emailVerified.value)
-        {
-            emit('validated');
-            
-        }
+        emit('validated');
     }
     catch(err:unknown){
         errorText.value =  t(err.getTranslationKey());
@@ -120,19 +74,6 @@ const  verifySmsCode= async(code:string)=>{
     }
     finally{
         isVerifyingSms.value = false;
-    }
-}
-const resendEmail = async ()=>{
-    try{
-        isVerifyingEmail.value = true;
-        await EmailService.sendEmailCode({email:email.value});
-    }
-    catch(err){
-        errorText.value =  t(err.getTranslationKey());
-        showNotification.value = true;
-    }
-    finally{
-        isVerifyingEmail.value = false;
     }
 }
 const resendSms = async ()=>{

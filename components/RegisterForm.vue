@@ -176,11 +176,12 @@
     <main class="py-10 lg:pl-72 ">
       <div class="px-4 sm:px-6 lg:px-8" v-if="stillRegistring">
         <AccountInformation v-if="selectedStep?.number ==1" @on-save="onPersonalInfoSaved"/>
-        <VerificationForm v-if="selectedStep?.number ==2" @validated="onInformationValidated"/>
-        <Address v-if="selectedStep?.number == 3" @on-save="onChoosenAddress"/>
+        <VerificationEmail v-if="selectedStep?.number ==2" @validated="onEmailValidated"/>
+        <VerificationPhone v-if="selectedStep?.number ==3" @validated="onPhoneValidated"/>
+        <Address v-if="selectedStep?.number == 4" @on-save="onChoosenAddress"/>
   
   
-  <ConditionList v-if="selectedStep?.number ==4" @registred="onRegistrationDone"/>
+  <ConditionList v-if="selectedStep?.number ==5" @registred="onRegistrationDone"/>
     
       </div>
       <div class="px-4 sm:px-6 lg:px-8" v-else>
@@ -195,7 +196,8 @@ import { SubscriptionSteps } from '@/constants';
 import { ref,reactive,computed,onMounted } from 'vue';
 import Address from '@/components/Register/Address';
 import AccountInformation from './Register/AccountInformation.vue';
-import VerificationForm from './Register/VerificationForm';
+import VerificationEmail from './Register/VerificationEmail';
+import VerificationPhone from './Register/VerificationPhone';
 import ConditionList from './Register/ConditionList.vue';
 import { useI18n } from 'vue-i18n';
 import RegistrationSuccess from './Register/RegistrationSuccess.vue';
@@ -220,9 +222,10 @@ const steps = ref([
 { number:1,id: t('step')+' 1', name: t('subscription_info'), status: SubscriptionSteps.upcoming },
   
   
-  { number:2,id: t('step')+' 2', name: t('confirm_information'), status: SubscriptionSteps.upcoming },
-  { number:3,id: t('step')+' 3', name: t('enter_address'),  status: SubscriptionSteps.upcoming },
-  { number:4,id: t('step')+' 4', name: t('conditions'), status: SubscriptionSteps.upcoming },
+  { number:2,id: t('step')+' 2', name: t('verify_email'), status: SubscriptionSteps.upcoming },
+  { number:3,id: t('step')+' 3', name: t('verify_phone_number'), status: SubscriptionSteps.upcoming },
+  { number:4,id: t('step')+' 4', name: t('enter_address'),  status: SubscriptionSteps.upcoming },
+  { number:5,id: t('step')+' 5', name: t('conditions'), status: SubscriptionSteps.upcoming },
 ]);
 const currentStep = ref(1);
 const sidebarOpen = ref(false)
@@ -266,19 +269,24 @@ const navigateToStep=(step)=>{
 }
 const selectedStep = computed(()=>steps.value.find(step=>step.status == SubscriptionSteps.current));
 const onChoosenAddress = ()=>{
-  goToStep(4);
-  SubscriptionStorage.saveStep(4);
-  currentStep.value = 4;
+  goToStep(5);
+  SubscriptionStorage.saveStep(5);
+  currentStep.value = 5;
 }
 const onPersonalInfoSaved = ()=>{
   goToStep(2);
   SubscriptionStorage.saveStep(2);
   currentStep.value = 2;
 }
-const onInformationValidated = ()=>{
+const onEmailValidated = ()=>{
   goToStep(3);
   SubscriptionStorage.saveStep(3);
   currentStep.value = 3;
+}
+const onPhoneValidated = ()=>{
+  goToStep(4);
+  SubscriptionStorage.saveStep(4);
+  currentStep.value = 4;
 }
 const onRegistrationDone = ()=>{
   stillRegistring.value =  false;

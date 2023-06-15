@@ -51,6 +51,8 @@ export default {
     term_of_use:'Terms of use',
     imprint:'Imprint',
     enter_address:'Your address',
-    registration_done:'Congratulations'
+    registration_done:'Congratulations',
+    verify_phone:'Confirm your phone number',
+    verify_email:'Confirm your email'
 
 }   
