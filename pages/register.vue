@@ -1,13 +1,19 @@
 <template>
-   <html class="h-full bg-white">
-    <body class="h-full">
     <RegisterForm />
-    </body>
-    </html>
 </template>
 <script>
 import RegisterForm from "../components/RegisterForm";
 export default {
-  components: {RegisterForm}
+  components: {RegisterForm},
+  setup () {
+    useHead({
+      htmlAttrs: {
+        class: 'h-full bg-gray-50'
+      },
+      bodyAttrs: {
+        class: 'h-full align-middle'
+      }
+    })
+  }
 }
 </script>

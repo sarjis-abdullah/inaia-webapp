@@ -1,38 +1,36 @@
 <template>
-    <div class="mt-8 sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
+    <div class="sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
         <h2 class="text-center mb-5 text-xl">{{ $t('conditions') }}</h2>
         <div v-if="!isLoading && !isError">
         <fieldset class="border-t border-b border-gray-200" >
-    <legend class="sr-only">Conditions</legend>
     <div class="divide-y divide-gray-200">
       <div class="relative flex items-start py-4" v-for="c in conditions" :key="c.id">
         <div class="min-w-0 flex-1 text-sm" >
-          <label for="comments" class="font-medium text-gray-700">{{ c.id==-1?$t(c.title):c.title }}</label>
-          <a  class="block text-gray-500" v-if="c.document" :href="c.document.link" target="_blank">{{ $t('download_document') }}</a>
+          <label for="comments" class="text-gray-700" :class="(c.title!=='accept_email')?'font-bold':''">{{ c.id==-1?$t(c.title):c.title }}</label>
+          <a class="block text-xs text-blue-600 cursor-pointer flex" v-if="c.document" :href="c.document.link" target="_blank"><ArrowDownTrayIcon class="h-4 w-4 text-blue-600 mr-1" />{{ $t('download_document') }}</a>
         </div>
         <div class="ml-3 flex h-5 items-center">
             <Switch @change="(value)=>checkCondition(value,c)"/>
-         
         </div>
       </div>
     </div>
-    
+
   </fieldset>
   <div class="mt-10 flex justify-center">
-                    <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="register"
-                        :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
-                        class="w-[50%] flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('register') }}</button>
-                   
-                </div>
+      <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="register"
+          :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
+          class="w-[50%] font-bold flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('register') }}</button>
+  </div>
 </div>
-  
+
   <Loading  v-else-if="isLoading"/>
-  <div v-else-if="isError"> 
+  <div v-else-if="isError">
     <p class="text-center color-red-500" v-if="errorkey">{{ $t(errorkey) }}</p>
   </div>
     </div>
 </template>
 <script lang="ts" setup>
+import { ArrowDownTrayIcon } from '@heroicons/vue/24/outline';
 import { ref,Ref } from 'vue';
 import { d } from 'vue-bundle-renderer/dist/types-dfcc483f';
 import { Condition } from '~~/lib/models/Condition';

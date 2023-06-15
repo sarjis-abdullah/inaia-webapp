@@ -1,18 +1,18 @@
 <template>
     <div class="grid-cols-6 gap-8">
-        <input type="text" class="outline outline-1 text-center w-8 h-8 mx-2" maxlength="1" autofocus data-index="0" v-model="state.digit1" @paste="onPaste" @keyup="(value)=>onChange(value,0)" ref="digit1Input"/>
-        <input type="text" class="outline outline-1 text-center w-8 h-8 mx-2" maxlength="1"  data-index="1" v-model="state.digit2" @keyup="(value)=>onChange(value,1)" ref="digit2Input"/>
-        <input type="text" class="outline outline-1 text-center w-8 h-8 mx-2" maxlength="1"  data-index="2" v-model="state.digit3" @keyup="(value)=>onChange(value,2)" ref="digit3Input"/>
-        <input type="text" class="outline outline-1 text-center w-8 h-8 mx-2" maxlength="1"  data-index="3" v-model="state.digit4" @keyup="(value)=>onChange(value,3)" ref="digit4Input"/>
-        <input type="text" class="outline outline-1 text-center w-8 h-8 mx-2" maxlength="1"  data-index="4" v-model="state.digit5" @keyup="(value)=>onChange(value,4)" ref="digit5Input" v-show="length>4"/>
-        <input type="text" class="outline outline-1 text-center w-8 h-8 mx-2" maxlength="1"  data-index="5" v-model="state.digit6" @keyup="(value)=>onChange(value,5)" ref="digit6Input" v-show="length>4"/>
+        <input type="text" class="border border-1 border-gray-300 rounded text-center w-10 h-14 px-2 mx-1 text-xl" maxlength="1" autofocus data-index="0" v-model="state.digit1" @paste="onPaste" @keyup="(value)=>onChange(value,0)" ref="digit1Input"/>
+        <input type="text" class="border border-1 border-gray-300 rounded text-center w-10 h-14 px-2 mx-1 text-xl" maxlength="1"  data-index="1" v-model="state.digit2" @keyup="(value)=>onChange(value,1)" ref="digit2Input"/>
+        <input type="text" class="border border-1 border-gray-300 rounded text-center w-10 h-14 px-2 mx-1 text-xl" maxlength="1"  data-index="2" v-model="state.digit3" @keyup="(value)=>onChange(value,2)" ref="digit3Input"/>
+        <input type="text" class="border border-1 border-gray-300 rounded text-center w-10 h-14 px-2 mx-1 text-xl" maxlength="1"  data-index="3" v-model="state.digit4" @keyup="(value)=>onChange(value,3)" ref="digit4Input"/>
+        <input type="text" class="border border-1 border-gray-300 rounded text-center w-10 h-14 px-2 mx-1 text-xl" maxlength="1"  data-index="4" v-model="state.digit5" @keyup="(value)=>onChange(value,4)" ref="digit5Input" v-show="length>4"/>
+        <input type="text" class="border border-1 border-gray-300 rounded text-center w-10 h-14 px-2 mx-1 text-xl" maxlength="1"  data-index="5" v-model="state.digit6" @keyup="(value)=>onChange(value,5)" ref="digit6Input" v-show="length>4"/>
     </div>
 </template>
 <script lang="ts" setup>
 import { reactive } from 'vue';
 const props = defineProps({
     length : {
-        
+
         default:6
     }
 })
@@ -65,7 +65,7 @@ const onPaste=(value)=>{
             state.digit5 = digits[4];
             state.digit6 = digits[5];
         }
-        
+
 
     }
 

@@ -1,29 +1,31 @@
 <template>
-    <div class="mt-8 sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
+    <div class="sm:mx-auto bg-white sm:w-full sm:max-w-md min-w-[50%] p-10 shadow sm:rounded-lg">
         <Notification :type="NotificationTypes.danger" :text="errorText" :title="$t('error_title')" :show="showNotification" @close="()=>showNotification=false"/>
         <div class="flex flex-col mx-auto">
             <img src="~/assets/img/pageicons/emailVerif.png" alt="email verification" class="w-32 h-auto mb-5 mx-auto"/>
-            <h2 class="text-center mb-5 text-xl">{{ $t('verify_email') }}</h2>
+            <h2 class="text-center mb-5 font-bold text-2xl">{{ $t('verify_email') }}</h2>
 
-            <div class="mt-3 pl-3 w-full">
-                <div class="flex items-center">
-                    {{$t('email')}} : {{ email }}
+            <div class="mt-3 w-full">
+                <div class="text-center">
+                    {{$t('verify_email_infotext')}}<br><br><span class="font-bold">{{ email }}</span>
                 </div>
-                <div class="flex flex-col items-center mt-6">
-                    <div class="flex flex-col items-end" v-if="!emailVerified && !isVerifyingEmail">
+                <div class="flex flex-col items-center mt-8">
+                    <div class="text-center" v-if="!emailVerified && !isVerifyingEmail">
                         <CodeInputs  @complete="verifyEmailCode"/>
-                        <a  class="mt-2 text-xs text-blue-600" @click.prevent="resendEmail">{{ $t('resend_email_code') }}</a>
+                        <div class="mt-6">
+                          <a class="text-xs text-blue-600 cursor-pointer" @click.prevent="resendEmail">{{ $t('resend_email_code') }}</a>
+                        </div>
                     </div>
                     <Loading v-else-if="isVerifyingEmail"/>
                     <div class="flex" v-else-if="emailVerified">
-                        <span class="text-green-500 mr-3">{{ $t('email_verified') }}</span> <CheckCircleIcon class="h-6 w-6 text-green-500"></CheckCircleIcon>
+                      <CheckCircleIcon class="h-6 w-6 text-green-500"></CheckCircleIcon><span class="text-green-500 ml-2">{{ $t('email_verified') }}</span>
                     </div>
-                    
+
                 </div>
             </div>
-            
-            <div class="mt-6 pr-2 flex justify-end" v-if="emailVerified">
-                <a class=" text-lg text-blue-600" @click.prevent="emit('validated')">{{ $t('next') }} -></a>
+
+            <div class="mt-8" v-if="emailVerified">
+              <a @click.prevent="emit('validated')" class="cursor-pointer flex w-full justify-center font-bold rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('next') }}</a>
             </div>
         </div>
     </div>
@@ -54,7 +56,7 @@ onMounted(()=>{
     const accountInformation = SubscriptionService.getAccountInformation();
     email.value = accountInformation.email;
     emailVerified.value = SubscriptionStorage.isEmailVerified();
-    
+
 })
 const emit = defineEmits<{
   (e: 'validated'): void

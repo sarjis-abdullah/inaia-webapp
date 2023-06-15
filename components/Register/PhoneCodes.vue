@@ -1,8 +1,7 @@
 <template>
-    <div >
-       
+    <div>
         <select id="country" name="country" autocomplete="country" v-if="!isLoading && !error"
-            class="h-full rounded-md border-transparent bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm " v-model="selected">
+            class="h-full rounded-md border-transparent bg-transparent py-0 text-gray-500 focus:border-0 focus:ring-0 sm:text-sm " v-model="selected">
             <option v-for="country in countries" :key="country.id.toString()" :value="country">{{ country.alpha2_code.toLocaleUpperCase() }} {{ country.calling_code }}</option>
         </select>
         <div class="flex flex-row justify-center relative mt-1" v-if="isLoading">
@@ -24,7 +23,7 @@ const props = defineProps({
         type:String,
         default:null
     },
-    
+
 })
 
 const emit = defineEmits<{
@@ -38,7 +37,7 @@ try{
   error.value = null;
   isLoading.value = true;
     countries.value  = await CountryService.getCountryList(false);
-    
+
      if(!props.phoneCode)
      {
         selected.value = countries.value[0];
