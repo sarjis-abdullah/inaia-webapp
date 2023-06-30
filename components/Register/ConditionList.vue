@@ -20,7 +20,9 @@
       <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="register"
           :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
           class="w-[50%] font-bold flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('register') }}</button>
+          
   </div>
+  <p class="mt-2 text-sm text-red-600 text-center" id="email-error" v-if="submittingError">{{ errorText }}</p>
 </div>
 
   <Loading  v-else-if="isLoading"/>
@@ -33,12 +35,15 @@
 import { ArrowDownTrayIcon } from '@heroicons/vue/24/outline';
 import { ref,Ref } from 'vue';
 import { d } from 'vue-bundle-renderer/dist/types-dfcc483f';
+import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
+import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
 import { Condition } from '~~/lib/models/Condition';
 import { ConditionService } from '~~/lib/services/ConditionService';
 import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import Switch  from '../common/AppSwitch.vue'
 import Loading from '../common/Loading.vue';
+const { t } = useI18n();
 const countryId = 82;
 const conditions:Ref<Array<Condition>> = ref([]);
 const isLoading = ref(false);
@@ -48,6 +53,8 @@ const isSubmitting = ref(false);
 const errorkey = ref(null);
 const selectedConditions = ref([])
 const allowMarketing = ref(false);
+const submittingError=ref(false);
+const errorText = ref('');
 const emit = defineEmits<{
   (e: 'registred'): void
 }>();
@@ -91,6 +98,8 @@ const checkCondition=(checked:boolean,c:Condition)=>{
 }
 const register = async ()=>{
     try{
+        errorText.value =  "";
+        submittingError.value = false;
         isLoading.value = true;
         SubscriptionService.saveConditions({
             allow_marketing:allowMarketing.value,
@@ -101,10 +110,22 @@ const register = async ()=>{
         emit("registred");
     }
     catch(err){
-        console.log(err);
+        handleError(err);
     }
     finally{
         isLoading.value = false;
     }
+}
+const handleError= (err:unknown)=>{
+    submittingError.value = true;
+        
+        if(err instanceof MissingInformationException){
+            errorText.value = err.getRealMessage();
+        }
+        else if(err instanceof ServerErrorException){
+            errorText.value = t(err.getTranslationKey());
+        }
+        else
+            errorText.value = t(err.getTranslationKey());
 }
 </script>

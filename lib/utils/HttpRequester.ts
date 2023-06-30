@@ -1,6 +1,7 @@
 import { HttpResponse } from './HttpResponse';
 import { HttpHeader } from "./HttpHeader";
 import { ServerErrorException } from "../exceptions/ServerErrorException";
+import { MissingInformationException } from '../exceptions/MissingInformationException';
 export class HttpRequester{
     private static instance: HttpRequester;
     public static httpRequester():HttpRequester{
@@ -39,7 +40,17 @@ export class HttpRequester{
     }
     private async handleError(response:Response):Promise<Error>{
         let status = response.status;
-        let errorJson = await response.text();
+        let error = "";
+        try{
+            let errorJson = await response.json();
+            if(errorJson.errors && errorJson.errors.message)
+                error = errorJson.errors.message;
+            else
+                error = errorJson.message;
+        }
+        catch(err){
+            error = await response.text();
+        }
         if(status == 401){
             
             
@@ -48,6 +59,10 @@ export class HttpRequester{
         {
             
         }
-        return new ServerErrorException(errorJson);
+        if(status>=400 && status<500)
+        {
+            return new MissingInformationException(error)
+        }
+        return new ServerErrorException(error);
     }
 }

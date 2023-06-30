@@ -107,7 +107,7 @@
                     <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
                         :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
                         class="flex w-full justify-center font-bold rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('next') }}</button>
-                    <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}</p>
+                    <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ submittingErrorMessage==null?$t('account_info_error'):submittingErrorMessage }}</p>
                   </div>
                 </div>
             </form>
@@ -126,6 +126,9 @@ import { stat } from 'fs';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import { AccountInformationRequest } from '~~/lib/requests/AccountInformationRequest';
 import { useRoute } from 'vue-router';
+import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
+import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
+
 const passwordValidated = ref(false);
 const emailValidated = ref(false);
 const phoneValidated = ref(false);
@@ -137,6 +140,8 @@ const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
 
 const submittingError = ref(false);
+const submittingErrorMessage = ref(null);
+const { t } = useI18n();
 const state = reactive({
     email:'',
     password:'',
@@ -186,6 +191,8 @@ watch(state,(currentValue)=>{
 })
 async function save() {
     isSubmitting.value = true;
+    submittingError.value = false;
+    submittingErrorMessage.value = null;
     try{
         await EmailService.sendEmailCode({email:state.email});
         SubscriptionStorage.saveEmailNotVerified();
@@ -205,7 +212,15 @@ async function save() {
         emit('onSave');
     }
     catch(err){
-
+        submittingError.value = true;
+        
+        if(err instanceof MissingInformationException){
+            submittingErrorMessage.value = err.getRealMessage();
+        }
+        else if(err instanceof ServerErrorException){
+            submittingErrorMessage.value = t(err.getTranslationKey());
+        }
+        submittingErrorMessage.value = t(err.getTranslationKey());
     }
     finally{
         isSubmitting.value = false;

@@ -64,11 +64,9 @@
 
                         <input type="text" name="region" id="region" v-model="state.region"
                         class="block  w-full 10 pl-3 py-2 rounded-md"
-                        :class="(state.region.length>0)?inputStyle:inputErrorStyle"
+                        :class="inputStyle"
                             />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.region.length==0">
-                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                        </div>
+                           
                     </div>
                 </div>
 
@@ -130,7 +128,7 @@ onMounted(()=>{
 })
 watch(state,(currentValue)=>{
 
-    if(state.country_id!=-1 && currentValue.line1.length>0 && currentValue.postal_code.length>0 && currentValue.town.length > 0 && currentValue.region.length > 0)
+    if(state.country_id!=-1 && currentValue.line1.length>0 && currentValue.postal_code.length>0 && currentValue.town.length > 0)
     {
         saveActivated.value = true;
     }

@@ -1,5 +1,5 @@
 
-import { defuFn } from '/Users/yunusmorkramer/Documents/Dev/inaia/inaia-webapp/node_modules/defu/dist/defu.mjs'
+import { defuFn } from '/Users/mahdinjim/Documents/workspace/inaia/client/inaia-webapp/node_modules/defu/dist/defu.mjs'
 
 const inlineConfig = {}
 
