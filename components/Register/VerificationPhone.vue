@@ -42,7 +42,7 @@ import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
 import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
-const { t } = useI18n();
+const { t,locale } = useI18n();
 const isVerifyingSms = ref(false);
 const smsVerified = ref(false);
 const phoneNumber = ref('');
@@ -61,7 +61,7 @@ const  verifySmsCode= async(code:string)=>{
     submittingError.value = false;
     try{
         isVerifyingSms.value = true;
-        await PhoneNumberService.validatePhone({
+        await PhoneNumberService.validatePhone(locale.value,{
             phone_number:phoneNumber.value,
             code:code
         })
@@ -81,7 +81,7 @@ const resendSms = async ()=>{
     submittingError.value = false;
     try{
         isVerifyingSms.value = true;
-        await PhoneNumberService.sendPhoneCode({phone_number:phoneNumber.value});
+        await PhoneNumberService.sendPhoneCode(locale.value,{phone_number:phoneNumber.value});
     }
     catch(err){
         handleError(err);

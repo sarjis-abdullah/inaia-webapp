@@ -8,10 +8,12 @@ export class PhoneNumberService{
     private static links = Urls.URLS();
     private static requester = HttpRequester.httpRequester();
     private static headers = new HttpHeader();
-    public static async  validatePhone(request:VerifyPhonelRequest):Promise<HttpResponse>{
+    public static async  validatePhone(language:string,request:VerifyPhonelRequest):Promise<HttpResponse>{
+        this.headers.addLocationHeader(language);
         return this.requester.post(this.links.verifyPhoneNumber(),this.headers,request);
     }
-    public static async sendPhoneCode(request:SendPhoneCodeRequest):Promise<HttpResponse>{
+    public static async sendPhoneCode(language:string,request:SendPhoneCodeRequest):Promise<HttpResponse>{
+        this.headers.addLocationHeader(language);
         return this.requester.post(this.links.sendSmsCode(),this.headers,request);
     }
 }

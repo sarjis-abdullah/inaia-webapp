@@ -8,7 +8,8 @@ export class ConditionService{
     private static links = Urls.URLS();
     private static requester = HttpRequester.httpRequester();
     private static headers = new HttpHeader();
-    public static async getSubscriptionConditions(request:ConditionsRequest):Promise<Array<Condition>>{
+    public static async getSubscriptionConditions(language:string,request:ConditionsRequest):Promise<Array<Condition>>{
+        this.headers.addLocationHeader(language);
         let res = await this.requester.get(this.links.termsAndConditions(request.countryId,ConditionTypes.registration),this.headers);
         let data:Array<Condition> = [];
         for (const [key, value] of Object.entries(res.data)) {

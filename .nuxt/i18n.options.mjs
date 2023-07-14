@@ -19,7 +19,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "step": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Schritt"])};fn.source="Schritt";return fn;})(),
   "email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["E-Mail"])};fn.source="E-Mail";return fn;})(),
   "password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort"])};fn.source="Passwort";return fn;})(),
-  "password_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Das Passwort muss min. aus 6 Zeichen bestehen und Sonderzeichen enthalten."])};fn.source="Das Passwort muss min. aus 6 Zeichen bestehen und Sonderzeichen enthalten.";return fn;})(),
+  "password_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Das Passwort muss min. aus 8 Zeichen bestehen und Sonderzeichen enthalten."])};fn.source="Das Passwort muss min. aus 8 Zeichen bestehen und Sonderzeichen enthalten.";return fn;})(),
   "name": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vorname"])};fn.source="Vorname";return fn;})(),
   "surname": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Name"])};fn.source="Name";return fn;})(),
   "referal_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Empfehlungscode (optional)"])};fn.source="Empfehlungscode (optional)";return fn;})(),
@@ -64,7 +64,15 @@ export const resolveNuxtI18nOptions = async (context) => {
   "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Fertig"])};fn.source="Fertig";return fn;})(),
   "verify_phone": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mobilnummer bestätigen"])};fn.source="Mobilnummer bestätigen";return fn;})(),
   "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["E-Mail Adresse bestätigen"])};fn.source="E-Mail Adresse bestätigen";return fn;})(),
-  "verify_email_infotext": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Überprüfe deine Inbox und trage hier den Code ein, den wir die per E-Mail zugeschickt haben:"])};fn.source="Überprüfe deine Inbox und trage hier den Code ein, den wir die per E-Mail zugeschickt haben:";return fn;})()
+  "verify_email_infotext": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Überprüfe deine Inbox und trage hier den Code ein, den wir die per E-Mail zugeschickt haben:"])};fn.source="Überprüfe deine Inbox und trage hier den Code ein, den wir die per E-Mail zugeschickt haben:";return fn;})(),
+  "rest_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reset your password"])};fn.source="Reset your password";return fn;})(),
+  "email_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please provide an email"])};fn.source="Please provide an email";return fn;})(),
+  "new_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New password"])};fn.source="New password";return fn;})(),
+  "password_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please provide a new password"])};fn.source="Please provide a new password";return fn;})(),
+  "confirm_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your new password"])};fn.source="Confirm your new password";return fn;})(),
+  "confirm_password_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please confirm your new password"])};fn.source="Please confirm your new password";return fn;})(),
+  "password_reset_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password was reset successfully"])};fn.source="Password was reset successfully";return fn;})(),
+  "confirm": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm"])};fn.source="Confirm";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -74,7 +82,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "step": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Step"])};fn.source="Step";return fn;})(),
   "email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email"])};fn.source="Email";return fn;})(),
   "password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password"])};fn.source="Password";return fn;})(),
-  "password_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your password must be at least 6 character long and must contains special characters"])};fn.source="Your password must be at least 6 character long and must contains special characters";return fn;})(),
+  "password_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your password must be at least 8 character long and must contains special characters"])};fn.source="Your password must be at least 8 character long and must contains special characters";return fn;})(),
   "name": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Name"])};fn.source="Name";return fn;})(),
   "surname": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Surname"])};fn.source="Surname";return fn;})(),
   "referal_code": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Referal code"])};fn.source="Referal code";return fn;})(),
@@ -114,7 +122,15 @@ export const resolveNuxtI18nOptions = async (context) => {
   "enter_address": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your address"])};fn.source="Your address";return fn;})(),
   "registration_done": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Congratulations"])};fn.source="Congratulations";return fn;})(),
   "verify_phone": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your phone number"])};fn.source="Confirm your phone number";return fn;})(),
-  "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your email"])};fn.source="Confirm your email";return fn;})()
+  "verify_email": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your email"])};fn.source="Confirm your email";return fn;})(),
+  "rest_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reset your password"])};fn.source="Reset your password";return fn;})(),
+  "email_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please provide an email"])};fn.source="Please provide an email";return fn;})(),
+  "new_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New password"])};fn.source="New password";return fn;})(),
+  "password_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please provide a new password"])};fn.source="Please provide a new password";return fn;})(),
+  "confirm_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your new password"])};fn.source="Confirm your new password";return fn;})(),
+  "confirm_password_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please confirm your new password"])};fn.source="Please confirm your new password";return fn;})(),
+  "password_reset_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password was reset successfully"])};fn.source="Password was reset successfully";return fn;})(),
+  "confirm": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm"])};fn.source="Confirm";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

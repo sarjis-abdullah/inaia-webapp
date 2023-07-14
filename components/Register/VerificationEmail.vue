@@ -40,7 +40,7 @@ import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
 import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
-const { t } = useI18n();
+const { t,locale } = useI18n();
 const isVerifyingEmail = ref(false);
 
 const emailVerified = ref(false);
@@ -62,7 +62,7 @@ const  verifyEmailCode= async(code:string)=>{
     submittingError.value = false;
     try{
         isVerifyingEmail.value = true;
-        await EmailService.validateEmail({
+        await EmailService.validateEmail(locale.value,{
             email:email.value,
             code:code
         })
@@ -82,7 +82,7 @@ const resendEmail = async ()=>{
     submittingError.value = false;
     try{
         isVerifyingEmail.value = true;
-        await EmailService.sendEmailCode({email:email.value});
+        await EmailService.sendEmailCode(locale.value,{email:email.value});
     }
     catch(err){
         handleError(err)

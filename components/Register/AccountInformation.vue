@@ -118,7 +118,7 @@
 import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon } from '@heroicons/vue/24/outline';
 import {validateEmail,validatePassword,validatePhoneNumber} from '@/lib/utils/Validators';
 import {SubscriptionService} from '@/lib/services/SubscriptionService';
-import {EmailService} from '@/lib/services/EmailService';
+    import {EmailService} from '@/lib/services/EmailService';
 import {PhoneNumberService} from '@/lib/services/PhoneNumberService';
 import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
 import PhoneCodes from '@/components/Register/PhoneCodes';
@@ -140,8 +140,8 @@ const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
 
 const submittingError = ref(false);
-const submittingErrorMessage = ref(null);
-const { t } = useI18n();
+const submittingErrorMessage = ref("");
+const { t,locale } = useI18n();
 const state = reactive({
     email:'',
     password:'',
@@ -192,11 +192,11 @@ watch(state,(currentValue)=>{
 async function save() {
     isSubmitting.value = true;
     submittingError.value = false;
-    submittingErrorMessage.value = null;
+    submittingErrorMessage.value = "";
     try{
-        await EmailService.sendEmailCode({email:state.email});
+        await EmailService.sendEmailCode(locale.value,{email:state.email});
         SubscriptionStorage.saveEmailNotVerified();
-        await PhoneNumberService.sendPhoneCode({phone_number:state.phoneCode+state.phone});
+        await PhoneNumberService.sendPhoneCode(locale.value,{phone_number:state.phoneCode+state.phone});
         SubscriptionStorage.phoneNotValidated();
         const data:AccountInformationRequest = {
             email:state.email,
@@ -220,7 +220,8 @@ async function save() {
         else if(err instanceof ServerErrorException){
             submittingErrorMessage.value = t(err.getTranslationKey());
         }
-        submittingErrorMessage.value = t(err.getTranslationKey());
+        else
+            submittingErrorMessage.value = t(err.getTranslationKey());
     }
     finally{
         isSubmitting.value = false;

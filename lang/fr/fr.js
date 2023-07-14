@@ -36,5 +36,13 @@ export default {
     resend_phone_code:'Resend phone number code',
     email_verified:'Email verified',
     phone_number_verified:'Phone number verified',
-    next:'Next'
+    next:'Next',
+    rest_password_title:'Reset your password',
+    email_is_required:'Please provide an email',
+    new_password:'New password',
+    password_is_required:'Please provide a new password',
+    confirm_password:'Confirm your new password',
+    confirm_password_is_required:'Please confirm your new password',
+    password_reset_with_success:'Password was reset successfully',
+    confirm:'Confirm',
 }

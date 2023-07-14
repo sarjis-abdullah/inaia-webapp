@@ -7,7 +7,7 @@ export default {
     step:'Step',
     email:'Email',
     password:'Password',
-    password_message:'Your password must be at least 6 character long and must contains special characters',
+    password_message:'Your password must be at least 8 character long and must contains special characters',
     name:'Name',
     surname:'Surname',
     referal_code:'Referal code',
@@ -47,6 +47,14 @@ export default {
     enter_address:'Your address',
     registration_done:'Congratulations',
     verify_phone:'Confirm your phone number',
-    verify_email:'Confirm your email'
+    verify_email:'Confirm your email',
+    rest_password_title:'Reset your password',
+    email_is_required:'Please provide an email',
+    new_password:'New password',
+    password_is_required:'Please provide a new password',
+    confirm_password:'Confirm your new password',
+    confirm_password_is_required:'Please confirm your new password',
+    password_reset_with_success:'Password was reset successfully',
+    confirm:'Confirm',
 
 }

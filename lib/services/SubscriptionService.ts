@@ -39,7 +39,7 @@ export class SubscriptionService{
         this.conditions = request.conditions;
         this.allowMarketing = request.allow_marketing;
     }
-    public  static async registerAccount():Promise<boolean>{
+    public  static async registerAccount(langauage:string):Promise<boolean>{
         if(!this.accountInformation){
            throw new MissingInformationException('Missing account information');
         }
@@ -69,6 +69,7 @@ export class SubscriptionService{
             registrationRequest.city = this.address.city;
             registrationRequest.region = this.address.region;
         }
+        this.headers.addLocationHeader(langauage);
         await this.requester.post(this.links.registerCustomer(),this.headers,registrationRequest);
         //console.log(registrationRequest);
         return true;

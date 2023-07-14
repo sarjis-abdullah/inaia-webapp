@@ -43,7 +43,7 @@ import { SubscriptionService } from '~~/lib/services/SubscriptionService';
 import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
 import Switch  from '../common/AppSwitch.vue'
 import Loading from '../common/Loading.vue';
-const { t } = useI18n();
+const { t,locale } = useI18n();
 const countryId = 82;
 const conditions:Ref<Array<Condition>> = ref([]);
 const isLoading = ref(false);
@@ -60,7 +60,7 @@ const emit = defineEmits<{
 }>();
 try{
     isLoading.value=true;
-    conditions.value = await ConditionService.getSubscriptionConditions({
+    conditions.value = await ConditionService.getSubscriptionConditions(locale.value,{
         countryId:countryId
     });
 }
@@ -105,7 +105,7 @@ const register = async ()=>{
             allow_marketing:allowMarketing.value,
             conditions:selectedConditions.value.join(',')
         })
-        await SubscriptionService.registerAccount();
+        await SubscriptionService.registerAccount(locale.value);
         SubscriptionStorage.clearAll();
         emit("registred");
     }

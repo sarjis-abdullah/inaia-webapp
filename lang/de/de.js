@@ -7,7 +7,7 @@ export default {
     step:'Schritt',
     email:'E-Mail',
     password:'Passwort',
-    password_message:'Das Passwort muss min. aus 6 Zeichen bestehen und Sonderzeichen enthalten.',
+    password_message:'Das Passwort muss min. aus 8 Zeichen bestehen und Sonderzeichen enthalten.',
     name:'Vorname',
     surname:'Name',
     referal_code:'Empfehlungscode (optional)',
@@ -52,5 +52,13 @@ export default {
     registration_done:'Fertig',
     verify_phone:'Mobilnummer bestätigen',
     verify_email:'E-Mail Adresse bestätigen',
-    verify_email_infotext:'Überprüfe deine Inbox und trage hier den Code ein, den wir die per E-Mail zugeschickt haben:'
+    verify_email_infotext:'Überprüfe deine Inbox und trage hier den Code ein, den wir die per E-Mail zugeschickt haben:',
+    rest_password_title:'Reset your password',
+    email_is_required:'Please provide an email',
+    new_password:'New password',
+    password_is_required:'Please provide a new password',
+    confirm_password:'Confirm your new password',
+    confirm_password_is_required:'Please confirm your new password',
+    password_reset_with_success:'Password was reset successfully',
+    confirm:'Confirm'
 }

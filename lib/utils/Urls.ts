@@ -63,6 +63,9 @@ export class Urls{
     public registerCustomer():string{
         return this.buildUrl(this.coreBaseUrl,'register');
     }
+    public resetPassword():string{
+        return this.buildUrl(this.coreBaseUrl,'password-reset/apply');
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }
