@@ -66,6 +66,9 @@ export class Urls{
     public resetPassword():string{
         return this.buildUrl(this.coreBaseUrl,'password-reset/apply');
     }
+    public resetPin():string{
+        return this.buildUrl(this.coreBaseUrl,'accounts/pin-reset');
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

@@ -1,0 +1,69 @@
+<template>
+    <div class="flex min-h-full flex-1 justify-center items-center flex-col p-10">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-10 w-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{{ $t('reset_pin') }}</h2>
+        <img src="~/assets/img/pageicons/pinscreen.jpg" alt="pin" class="w-32 h-auto my-10 mx-auto"/>
+      </div>
+        <div class="mt-10 text-2xl text-gray-900" v-if="loading">{{ $t('resetting_pin') }}</div>
+        <div class="mt-10 flex items-center justify-center"  v-else-if="success"><CheckCircleIcon class="h-6 w-6 text-green-500">
+
+</CheckCircleIcon>
+  <span class="text-2xl text-green-500 ml-2">{{ $t('pin_reset_successfully') }}</span>
+</div>
+        <div class="mt-10 text-2xl text-red-500" v-else-if="isError">{{ error }}</div>
+    </div>
+</template>
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+const { t,locale } = useI18n();
+import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
+import { ResetPinService } from '@/lib/services/ResetPinService';
+import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
+import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
+import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
+const loading = ref(false);
+const token = ref('');
+const email = ref('');
+const error = ref('');
+const success = ref(false);
+const isError = ref(false);
+onMounted(()=>{
+    const {query}= useRoute();
+    if(query.token){
+        token.value = query.token;
+        
+        resetThePin();
+    }
+    else{
+        isError.value = true;
+        error.value = t('error_resetting_pin_no_token');
+    }
+})
+async function resetThePin(){
+        try{
+            loading.value = true;
+            isError.value = false;
+            success.value = false;
+            await ResetPinService.resetPin(locale.value,{token:token.value});
+            success.value = true;
+        }
+        catch(err){
+            isError.value = true;
+            if(err instanceof MissingInformationException){
+                error.value = err.getRealMessage();
+            }
+            else if(err instanceof ServerErrorException){
+                error.value = t(err.getTranslationKey());
+            }
+            else{
+                error.value = t('error_resetting_pin');
+            }
+        }
+        finally{
+            success.value = false
+            loading.value = false;
+        }
+}
+
+</script>

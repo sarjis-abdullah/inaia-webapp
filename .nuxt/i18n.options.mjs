@@ -72,7 +72,12 @@ export const resolveNuxtI18nOptions = async (context) => {
   "confirm_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your new password"])};fn.source="Confirm your new password";return fn;})(),
   "confirm_password_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please confirm your new password"])};fn.source="Please confirm your new password";return fn;})(),
   "password_reset_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password was reset successfully"])};fn.source="Password was reset successfully";return fn;})(),
-  "confirm": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm"])};fn.source="Confirm";return fn;})()
+  "confirm": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm"])};fn.source="Confirm";return fn;})(),
+  "pin_reset_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Pin rest successfully, please login to the app again to set a new pin"])};fn.source="Pin rest successfully, please login to the app again to set a new pin";return fn;})(),
+  "resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We are resetting your pin, please wait and don't leave the page.."])};fn.source="We are resetting your pin, please wait and don't leave the page..";return fn;})(),
+  "error_resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Error restting your pin"])};fn.source="Error restting your pin";return fn;})(),
+  "reset_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reset your pin"])};fn.source="Reset your pin";return fn;})(),
+  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["No token or email was availabe to rest your pin"])};fn.source="No token or email was availabe to rest your pin";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -130,7 +135,12 @@ export const resolveNuxtI18nOptions = async (context) => {
   "confirm_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm your new password"])};fn.source="Confirm your new password";return fn;})(),
   "confirm_password_is_required": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please confirm your new password"])};fn.source="Please confirm your new password";return fn;})(),
   "password_reset_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password was reset successfully"])};fn.source="Password was reset successfully";return fn;})(),
-  "confirm": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm"])};fn.source="Confirm";return fn;})()
+  "confirm": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm"])};fn.source="Confirm";return fn;})(),
+  "pin_reset_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Pin rest successfully, please login to the app again to set a new pin"])};fn.source="Pin rest successfully, please login to the app again to set a new pin";return fn;})(),
+  "resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We are resetting your pin, please wait and don't leave the page.."])};fn.source="We are resetting your pin, please wait and don't leave the page..";return fn;})(),
+  "error_resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Error restting your pin"])};fn.source="Error restting your pin";return fn;})(),
+  "reset_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reset your pin"])};fn.source="Reset your pin";return fn;})(),
+  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["No token or email was availabe to rest your pin"])};fn.source="No token or email was availabe to rest your pin";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

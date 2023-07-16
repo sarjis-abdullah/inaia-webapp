@@ -66,7 +66,11 @@
           </div>
         </form>
         <p class="mt-2 text-center text-sm text-red-500" v-if="error!=''">{{ error }}</p>
-        <p class="mt-2 text-center text-2xl text-green-500" v-if="success!=''">{{ success }}</p>
+        <div class="mt-2 flex items-center justify-center"  v-if="success!=''"><CheckCircleIcon class="h-6 w-6 text-green-500">
+
+        </CheckCircleIcon>
+          <span class="text-2xl text-green-500 ml-2">{{ success }}</span>
+      </div>
       </div>
     </div>
   </template>
@@ -79,6 +83,7 @@ import {validateEmail,validatePassword} from '@/lib/utils/Validators';
 import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
 import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
 import {ResetPasswordService} from '@/lib/services/ResetPasswordService';
+import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
 import { I18nN } from '@nuxtjs/i18n/dist/runtime/composables';
 const inputErrorStyle = "block w-full rounded-md border-0 py-1.5 text-red-900 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6";
 const passwordValidated = ref(true);

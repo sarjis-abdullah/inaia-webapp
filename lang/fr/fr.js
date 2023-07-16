@@ -45,4 +45,9 @@ export default {
     confirm_password_is_required:'Please confirm your new password',
     password_reset_with_success:'Password was reset successfully',
     confirm:'Confirm',
+    pin_reset_successfully:"Pin rest successfully, please login to the app again to set a new pin",
+    resetting_pin:"We are resetting your pin, please wait and don't leave the page..",
+    error_resetting_pin:"Error restting your pin",
+    reset_pin:'Reset your pin',
+    error_resetting_pin_no_token:'No token was availabe to rest your pin',
 }
