@@ -22,10 +22,10 @@
 
                 </div>
             </div>
+            <p class="mt-2 text-sm text-red-600 text-center" id="email-error" v-if="submittingError">{{ errorText }}</p>
             <div class="mt-8" v-if="smsVerified">
               <a @click.prevent="emit('validated')" class="cursor-pointer flex w-full justify-center font-bold rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('next') }}</a>
             </div>
-            <p class="mt-2 text-sm text-red-600 text-center" id="email-error" v-if="submittingError">{{ errorText }}</p>
         </div>
     </div>
 </template>
@@ -92,7 +92,7 @@ const resendSms = async ()=>{
 }
 const handleError= (err:unknown)=>{
     submittingError.value = true;
-        
+
         if(err instanceof MissingInformationException){
             errorText.value = err.getRealMessage();
         }

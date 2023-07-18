@@ -66,17 +66,16 @@
                         class="block  w-full 10 pl-3 py-2 rounded-md"
                         :class="inputStyle"
                             />
-                           
+
                     </div>
                 </div>
 
-                <div>
-                  <div class="mt-10">
-                    <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
-                        :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
-                        class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('next') }}</button>
-                    <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}</p>
-                  </div>
+                <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}</p>
+
+                <div class="mt-8">
+                  <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
+                      :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
+                      class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('next') }}</button>
                 </div>
             </form>
         </div>

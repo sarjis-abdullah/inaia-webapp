@@ -68,7 +68,7 @@
               </div>
 
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">{{ $t('password') }}</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700">{{ $t('password') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <LockClosedIcon class="h-4 w-4" :class="(!passwordValidated && state.password.length>0)?errorIconColor:iconColor" />
@@ -101,13 +101,13 @@
                     </div>
                 </div>
 
+                <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ submittingErrorMessage==null?$t('account_info_error'):submittingErrorMessage }}</p>
 
                 <div>
-                  <div class="mt-10">
+                  <div class="mt-8">
                     <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
                         :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
                         class="flex w-full justify-center font-bold rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('next') }}</button>
-                    <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ submittingErrorMessage==null?$t('account_info_error'):submittingErrorMessage }}</p>
                   </div>
                 </div>
             </form>
@@ -213,7 +213,7 @@ async function save() {
     }
     catch(err){
         submittingError.value = true;
-        
+
         if(err instanceof MissingInformationException){
             submittingErrorMessage.value = err.getRealMessage();
         }
