@@ -5,6 +5,12 @@ import en from './lang/en/en';
 import de from './lang/de/de';
 import fr from './lang/fr/fr';
 export default defineNuxtConfig({
+    runtimeConfig : {
+      public:{
+        URL_ENV:process.env.URL_ENV
+      }
+      
+    },
     css: [
         '@/assets/css/tailwind.css'
     ],

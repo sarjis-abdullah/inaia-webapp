@@ -132,7 +132,7 @@
     </div>
 
     <main class="py-10 lg:pl-72 w-full">
-      <div class="px-4 sm:px-6 lg:px-8" v-if="!stillRegistring">
+      <div class="px-4 sm:px-6 lg:px-8" v-if="stillRegistring">
         <AccountInformation v-if="selectedStep?.number ==1" @on-save="onPersonalInfoSaved"/>
         <VerificationEmail v-if="selectedStep?.number ==2" @validated="onEmailValidated"/>
         <VerificationPhone v-if="selectedStep?.number ==3" @validated="onPhoneValidated"/>
