@@ -21,7 +21,7 @@ export default {
     no_plans_for_selected_country:'Malheureusement, nous ne pouvons pas encore proposer de produits dans le pays que vous avez choisi.',
     plan_loading_error:"Erreur : impossible de charger les plans.",
     plan_pricing:'Tarifs',
-    register:'S\'inscrire',
+    register:'S\'inscrire - INAIA',
     download_document:'Télécharger le document',
     server_error:"Erreur inconnue. Veuillez réessayer ultérieurement.",
     error_title:'Erreur',
