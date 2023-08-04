@@ -14,5 +14,6 @@ export interface RegistrationRequest {
     line2?: string,
     postal_code?: string,
     city?: string,
-    region?: string
+    region?: string,
+    referral_code?: string
 }

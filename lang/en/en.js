@@ -21,7 +21,7 @@ export default {
     no_plans_for_selected_country:'There is no plans for the selected country, please choose another country',
     plan_loading_error:"We couldn't load plans, cause of server error",
     plan_pricing:'Pricing Plans',
-    register:'Register',
+    register:'Account Registration - INAIA',
     download_document:'Download document',
     server_error:"Something bad happened please try again later",
     error_title:'Error',
@@ -65,5 +65,5 @@ export default {
     resetting_pin:"We are resetting your pin, please wait and don't leave the page..",
     error_resetting_pin:"Error resetting your pin",
     reset_pin:'Reset your pin',
-    error_resetting_pin_no_token:'No token was available to rest your pin',
+    error_resetting_pin_no_token:'No token was available to rest your pin'
 }

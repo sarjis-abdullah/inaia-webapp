@@ -21,7 +21,7 @@ export default {
     no_plans_for_selected_country:'Leider können wir aktuell noch keine Produkte in dem von dir gewählten Land anbieten.',
     plan_loading_error:"Fehler: Pläne konnten nicht geladen werden.",
     plan_pricing:'Preise',
-    register:'Registrieren',
+    register:'Account-Registrierung - INAIA',
     download_document:'Dokument herunterladen',
     server_error:"Unbekannter Fehler: Verusche es später noch einmal.",
     error_title:'Fehler',
