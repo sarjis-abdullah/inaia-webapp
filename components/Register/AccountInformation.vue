@@ -148,7 +148,7 @@ const state = reactive({
     prename:'',
     name:'',
     phone:'',
-    phoneCode:'',
+    phoneCode:'0049',
     referalCode:''
 });
 const onPhoneCodeChange = (value:string)=>{
@@ -163,6 +163,15 @@ const nextBtnClicked = false;
 onMounted(()=>{
     const {query}= useRoute();
     const info = SubscriptionService.getAccountInformation();
+    if(locale.value=="de"){
+        state.phoneCode = "0049";
+    }
+    if(locale.value=="fr"){
+        state.phoneCode = "0033";
+    }
+    if(locale.value=="en"){
+        state.phoneCode = "0044";
+    }
     if(info){
         state.email = info.email;
         state.name = info.surname;
@@ -175,6 +184,7 @@ onMounted(()=>{
     if(query.referral){
         state.referalCode = query.referral;
     }
+    
 })
 watch(state,(currentValue)=>{
     passwordValidated.value = validatePassword(currentValue.password);
