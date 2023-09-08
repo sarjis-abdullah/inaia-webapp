@@ -1,8 +1,15 @@
 <template>
-    <div class="flex min-h-full flex-col mt-5 mx-6 bg-white">
-        <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-center my-10">{{ $t('plan_pricing') }}</h1>
+    <div class="flex min-h-full flex-col mt-5 mx-6 bg-white py-10">
+        
         <Countries class="w-3/12 self-center" :all="false" @change="handleCountryChange" :selectedCountry="defaultCountry" :selectedCountryId="alreadySelectedCountry"/>
-        <Plans v-if="selectedCountry.id > -1" :countyId="selectedCountry.id" @selected="onPlanSelected"></Plans>
+        <!--Plans v-if="selectedCountry.id > -1" :countyId="selectedCountry.id" @selected="onPlanSelected"></Plans!-->
+        <div class="mt-5 flex items-center justify-center">
+                    <button type="submit" :disabled="alreadySelectedCountry.id == -1" @click.prevent="save"
+                        :class="(alreadySelectedCountry.id == -1)?'opacity-50':'opacity-100'"
+                        class="flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 px-10">{{ $t('save') }}</button>
+                       
+                    
+                </div>
     </div>
 </template>
 <script lang="ts" setup>
@@ -34,7 +41,7 @@ onMounted(()=>{
 
   }
 })
-const onPlanSelected = (value)=>{
+/*const onPlanSelected = (value)=>{
   plan.value = value;
   if(plan.value){
     const data:ChosenPlan={
@@ -43,10 +50,17 @@ const onPlanSelected = (value)=>{
     plan_id:plan.value.planId
   }
     SubscriptionService.saveChoosenPlan(data);
-    SubscriptionStorage.saveChoosenPlan(data);
   emit("selected");
   }
   
 
+}*/
+const save = ()=>{
+  const data:ChosenPlan={
+    country_id:selectedCountry.id
+  }
+  SubscriptionService.saveChoosenPlan(data);
+  emit("selected");
 }
+
 </script>

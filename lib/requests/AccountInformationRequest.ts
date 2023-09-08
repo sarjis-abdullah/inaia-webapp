@@ -4,6 +4,7 @@ export interface AccountInformationRequest {
     mobile:string;
     email:string;
     password:string;
-    referral_code?:string
+    referral_code?:string,
+    phone_code?:string
 
 }

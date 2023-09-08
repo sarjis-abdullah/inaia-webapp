@@ -2,21 +2,21 @@
   <nav aria-label="Progress">
     <ol role="list" class="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">
       <li v-for="(step, stepIdx) in steps" :key="step.name" class="relative md:flex md:flex-1">
-        <a v-if="step.status === 'complete'" :href="step.href" class="group flex w-full items-center">
+        <a v-if="step.status === 'complete'" :href="step.href" class="group flex w-full items-center cursor-pointer">
           <span class="flex items-center px-6 py-4 text-sm font-medium">
-            <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+            <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 group-hover:bg-blue-800">
               <CheckIcon class="h-6 w-6 text-white" aria-hidden="true" />
             </span>
             <span class="ml-4 text-sm font-medium text-gray-900">{{ step.name }}</span>
           </span>
         </a>
-        <a v-else-if="step.status === 'current'" :href="step.href" class="flex items-center px-6 py-4 text-sm font-medium" aria-current="step">
-          <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-indigo-600">
-            <span class="text-indigo-600">{{ step.id }}</span>
+        <a v-else-if="step.status === 'current'" :href="step.href" class="flex items-center px-6 py-4 text-sm font-medium cursor-pointer" aria-current="step">
+          <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-blue-600">
+            <span class="text-blue-600">{{ step.id }}</span>
           </span>
-          <span class="ml-4 text-sm font-medium text-indigo-600">{{ step.name }}</span>
+          <span class="ml-4 text-sm font-medium text-blue-600">{{ step.name }}</span>
         </a>
-        <a v-else :href="step.href" class="group flex items-center">
+        <a v-else :href="step.href" class="group flex items-center cursor-pointer">
           <span class="flex items-center px-6 py-4 text-sm font-medium">
             <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
               <span class="text-gray-500 group-hover:text-gray-900">{{ step.id }}</span>

@@ -1,3 +1,4 @@
+import { AddressRequest } from '~~/lib/requests/AddressRequest';
 import { AccountInformationRequest } from './../lib/requests/AccountInformationRequest';
 import { ChosenPlan } from './../lib/requests/ChosenPlanRequest';
 import { StorageKeys } from './StorageKeys';
@@ -18,12 +19,18 @@ export class SubscriptionStorage {
     public static saveEmailVerified(){
         sessionStorage.setItem(StorageKeys.emailValidated,verified);
     }
+    public static saveEmailNotVerified(){
+        sessionStorage.removeItem(StorageKeys.emailValidated);
+    }
     public static isEmailVerified():boolean{
         let data = sessionStorage.getItem(StorageKeys.emailValidated);
         return data==verified;
     }
     public static phoneValidated() {
         sessionStorage.setItem(StorageKeys.phoneValidated, verified)
+    }
+    public static phoneNotValidated() {
+        sessionStorage.removeItem(StorageKeys.phoneValidated)
     }
     public static isPhoneValidated():boolean {
         let value = sessionStorage.getItem(StorageKeys.phoneValidated);
@@ -49,6 +56,16 @@ export class SubscriptionStorage {
         if (rawAccountInformation != null)
             accountInformation = JSON.parse(rawAccountInformation);
         return accountInformation;
+    }
+    public static saveAddress(request: AddressRequest) {
+        sessionStorage.setItem(StorageKeys.address, JSON.stringify(request));
+    }
+    public static getAddress(): AddressRequest {
+        let address = null;
+        let rawAddress = sessionStorage.getItem(StorageKeys.address);
+        if (rawAddress != null)
+            address = JSON.parse(rawAddress);
+        return address;
     }
     public static clearAll(){
         sessionStorage.clear();

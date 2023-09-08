@@ -12,5 +12,6 @@ export enum StorageKeys{
     secret='secret',
     permanent='permanent',
     accountId='account_id',
-    contact_id='contact_id'
+    contact_id='contact_id',
+    address='address'
 }

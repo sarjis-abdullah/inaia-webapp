@@ -1,8 +1,7 @@
 <template>
-    <div >
-       
+    <div>
         <select id="country" name="country" autocomplete="country" v-if="!isLoading && !error"
-            class="h-full rounded-md border-transparent bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm " v-model="selected">
+            class="h-full rounded-md border-transparent bg-transparent py-0 text-gray-500 focus:border-0 focus:ring-0 sm:text-sm " v-model="selected">
             <option v-for="country in countries" :key="country.id.toString()" :value="country">{{ country.alpha2_code.toLocaleUpperCase() }} {{ country.calling_code }}</option>
         </select>
         <div class="flex flex-row justify-center relative mt-1" v-if="isLoading">
@@ -20,10 +19,11 @@ import { ref, watch } from 'vue';
 import type { Ref } from 'vue'
 import Loading from '../common/Loading.vue';
 const props = defineProps({
-    selectedCountry:{
+  phoneCode:{
         type:String,
         default:null
-    }
+    },
+
 })
 
 const emit = defineEmits<{
@@ -37,14 +37,14 @@ try{
   error.value = null;
   isLoading.value = true;
     countries.value  = await CountryService.getCountryList(false);
-    
-     if(!props.selectedCountry)
+
+     if(!props.phoneCode)
      {
         selected.value = countries.value[0];
         emit("change",countries.value[0].calling_code.toString());
      }
      else{
-        selected.value = countries.value.find(x=>x.alpha2_code.toLocaleLowerCase() == props.selectedCountry) || countries.value[0];
+        selected.value = countries.value.find(x=>props.phoneCode == x.calling_code) || countries.value[0];
      }
 }
 catch(err)
@@ -55,7 +55,14 @@ finally{
   isLoading.value= false;
 }
 watch(selected,(currentvalue,oldvalue)=>{
-  console.log(currentvalue);
     emit("change",currentvalue.calling_code)
+})
+watch(props,(currentvalue,oldvalue)=>{
+  if(currentvalue.phoneCode){
+    const sV = countries.value.find(x=>currentvalue.phoneCode == x.calling_code)
+    if(sV){
+      selected.value = sV;
+    }
+  }
 })
 </script>

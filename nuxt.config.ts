@@ -3,7 +3,14 @@ const appEnv  = process.env.NODE_ENV || 'development'
 import EnvKeys from './config'
 import en from './lang/en/en';
 import de from './lang/de/de';
+import fr from './lang/fr/fr';
 export default defineNuxtConfig({
+    runtimeConfig : {
+      public:{
+        URL_ENV:process.env.URL_ENV
+      }
+      
+    },
     css: [
         '@/assets/css/tailwind.css'
     ],
@@ -50,7 +57,7 @@ export default defineNuxtConfig({
         detectBrowserLanguage: {
           useCookie: true,
           cookieKey: 'i18n_redirected',
-          redirectOn: 'root', 
+          redirectOn: 'root',
         },
         vueI18n: {
           fallbackLocale:'en',
@@ -58,7 +65,8 @@ export default defineNuxtConfig({
           locale:'en',
           messages:{
             de:de,
-            en:en
+            en:en,
+            fr:fr
           }
         }
       },
