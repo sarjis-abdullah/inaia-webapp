@@ -10,8 +10,8 @@ export class Urls{
 
         return Urls.instance;
     }
-    public getCountries():string{
-        return BaseUrls.getCoreUrl() + 'countries';
+    public getCountries(isCode:Boolean):string{
+        return BaseUrls.getCoreUrl() + 'countries'+(isCode?"?order_by=alpha2_code&per_page=500":'?per_page=500');
     }
     public getPlanUrl(country_id?:Number):string{
         if(country_id)
