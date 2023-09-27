@@ -81,6 +81,7 @@ const isSubmitting = ref(false);
 const token = ref('');
 const error = ref('');
 const success = ref('')
+const router = useRouter();
 const state = reactive({
     email:'',
     password:'',
@@ -103,7 +104,7 @@ watch(state,(currentValue)=>{
 onMounted(()=>{
     const {query}= useRoute();
     if(!query.token || !query.email){
-      navigateTo('request-password');
+      router.replace('request-password')
     }
     if(query.token){
         token.value = query.token;
