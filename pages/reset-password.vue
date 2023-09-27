@@ -103,7 +103,7 @@ watch(state,(currentValue)=>{
 onMounted(()=>{
     const {query}= useRoute();
     if(!query.token || !query.email){
-      navigateTo('/request-password');
+      navigateTo('request-password');
     }
     if(query.token){
         token.value = query.token;
