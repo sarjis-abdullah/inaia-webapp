@@ -65,5 +65,7 @@ export default {
     resetting_pin:"We are resetting your pin, please wait and don't leave the page..",
     error_resetting_pin:"Error resetting your pin",
     reset_pin:'Reset your pin',
-    error_resetting_pin_no_token:'No token was available to rest your pin'
+    error_resetting_pin_no_token:'No token was available to rest your pin',
+    request_password_title:'Forgotten your password?',
+    password_request_with_success:'We have emailed you a link to reset your password.'
 }

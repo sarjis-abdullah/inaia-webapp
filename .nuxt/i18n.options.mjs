@@ -77,7 +77,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wir setzen deine PIN zurück. Bitte warte eien Moment und verlasse diese Seite nicht..."])};fn.source="Wir setzen deine PIN zurück. Bitte warte eien Moment und verlasse diese Seite nicht...";return fn;})(),
   "error_resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Fehler beim Zurücksetzen deiner PIN"])};fn.source="Fehler beim Zurücksetzen deiner PIN";return fn;})(),
   "reset_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["PIN zurücksetzen"])};fn.source="PIN zurücksetzen";return fn;})(),
-  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Fehler: Ungültiger Token"])};fn.source="Fehler: Ungültiger Token";return fn;})()
+  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Fehler: Ungültiger Token"])};fn.source="Fehler: Ungültiger Token";return fn;})(),
+  "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort vergessen?"])};fn.source="Passwort vergessen?";return fn;})(),
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst."])};fn.source="Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -145,7 +147,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We are resetting your pin, please wait and don't leave the page.."])};fn.source="We are resetting your pin, please wait and don't leave the page..";return fn;})(),
   "error_resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Error resetting your pin"])};fn.source="Error resetting your pin";return fn;})(),
   "reset_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reset your pin"])};fn.source="Reset your pin";return fn;})(),
-  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["No token was available to rest your pin"])};fn.source="No token was available to rest your pin";return fn;})()
+  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["No token was available to rest your pin"])};fn.source="No token was available to rest your pin";return fn;})(),
+  "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgotten your password?"])};fn.source="Forgotten your password?";return fn;})(),
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We have emailed you a link to reset your password."])};fn.source="We have emailed you a link to reset your password.";return fn;})()
 },"fr":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un compte"])};fn.source="Créer un compte";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre plan"])};fn.source="Choisissez votre plan";return fn;})(),
@@ -213,7 +217,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous réinitialisons votre code PIN. Veuillez patienter et ne pas quitter la page..."])};fn.source="Nous réinitialisons votre code PIN. Veuillez patienter et ne pas quitter la page...";return fn;})(),
   "error_resetting_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erreur lors de la réinitialisation de votre code PIN"])};fn.source="Erreur lors de la réinitialisation de votre code PIN";return fn;})(),
   "reset_pin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Réinitialiser votre code PIN"])};fn.source="Réinitialiser votre code PIN";return fn;})(),
-  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erreur : jeton invalide"])};fn.source="Erreur : jeton invalide";return fn;})()
+  "error_resetting_pin_no_token": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erreur : jeton invalide"])};fn.source="Erreur : jeton invalide";return fn;})(),
+  "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mot de passe oublié?"])};fn.source="Mot de passe oublié?";return fn;})(),
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous vous avons envoyé un lien pour réinitialiser votre mot de passe."])};fn.source="Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

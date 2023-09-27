@@ -102,13 +102,16 @@ watch(state,(currentValue)=>{
 })
 onMounted(()=>{
     const {query}= useRoute();
-    console.log(locale.value);
+    if(!query.token || !query.email){
+      navigateTo('/request-password');
+    }
     if(query.token){
         token.value = query.token;
     }
     if(query.email){
         state.email = query.email;
     }
+
 })
 async function commit() {
     isSubmitting.value = true;
