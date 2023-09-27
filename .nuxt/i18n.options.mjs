@@ -267,7 +267,14 @@ export const resolveNuxtI18nOptions = async (context) => {
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Recent transactions"])};fn.source="Recent transactions";return fn;})(),
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})(),
   "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgotten your password?"])};fn.source="Forgotten your password?";return fn;})(),
-  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We have emailed you a link to reset your password."])};fn.source="We have emailed you a link to reset your password.";return fn;})()
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We have emailed you a link to reset your password."])};fn.source="We have emailed you a link to reset your password.";return fn;})(),
+  "silver_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver price"])};fn.source="Silver price";return fn;})(),
+  "gold_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold price"])};fn.source="Gold price";return fn;})(),
+  "gold_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold gram price"])};fn.source="Gold gram price";return fn;})(),
+  "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver gram price"])};fn.source="Silver gram price";return fn;})(),
+  "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Month"])};fn.source="Month";return fn;})(),
+  "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
+  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Year"])};fn.source="Year";return fn;})()
 },"fr":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un compte"])};fn.source="Créer un compte";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre plan"])};fn.source="Choisissez votre plan";return fn;})(),
@@ -365,7 +372,14 @@ export const resolveNuxtI18nOptions = async (context) => {
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Transactions récentes"])};fn.source="Transactions récentes";return fn;})(),
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépôts"])};fn.source="Dépôts";return fn;})(),
   "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mot de passe oublié?"])};fn.source="Mot de passe oublié?";return fn;})(),
-  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous vous avons envoyé un lien pour réinitialiser votre mot de passe."])};fn.source="Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.";return fn;})()
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous vous avons envoyé un lien pour réinitialiser votre mot de passe."])};fn.source="Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.";return fn;})(),
+  "silver_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver price"])};fn.source="Silver price";return fn;})(),
+  "gold_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold price"])};fn.source="Gold price";return fn;})(),
+  "gold_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold gram price"])};fn.source="Gold gram price";return fn;})(),
+  "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver gram price"])};fn.source="Silver gram price";return fn;})(),
+  "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Month"])};fn.source="Month";return fn;})(),
+  "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
+  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Year"])};fn.source="Year";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

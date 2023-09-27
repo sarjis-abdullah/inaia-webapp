@@ -126,5 +126,12 @@ export default {
     latest_transactions:'Recent transactions',
     depots:'Depots',
     request_password_title:'Forgotten your password?',
-    password_request_with_success:'We have emailed you a link to reset your password.'
+    password_request_with_success:'We have emailed you a link to reset your password.',
+    silver_price:'Silver price',
+    gold_price:'Gold price',
+    gold_gram_price:'Gold gram price',
+    silver_gram_price:"Silver gram price",
+    month:"Month",
+    max:'Max',
+    year:'Year'
 }

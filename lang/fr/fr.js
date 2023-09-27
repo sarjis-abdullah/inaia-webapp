@@ -95,5 +95,12 @@ export default {
     latest_transactions:'Transactions récentes',
     depots:'Dépôts',
     request_password_title:'Mot de passe oublié?',
-    password_request_with_success:'Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.'
+    password_request_with_success:'Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.',
+    silver_price:'Prix argent',
+    gold_price:'Prix or',
+    gold_gram_price:"Prix de gram d'or",
+    silver_gram_price:"Prix de gram d'argent ",
+    month:"Mois",
+    max:'Max',
+    year:'Année'
 }

@@ -152,5 +152,12 @@ export default {
     latest_transactions:'Letzte Transaktionen',
     depots:'Depots',
     request_password_title:'Passwort vergessen?',
-    password_request_with_success:'Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.'
+    password_request_with_success:'Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.',
+    silver_price:'Silberpreis',
+    gold_price:'Goldpreis',
+    gold_gram_price:"Goldpreis in Gramm",
+    silver_gram_price:"Silberpreis in Gramm",
+    month:"Monat",
+    max:'Max',
+    year:'Jahr'
 }

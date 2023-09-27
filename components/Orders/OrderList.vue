@@ -7,7 +7,7 @@
             <table class="min-w-full divide-y divide-gray-300" v-if="!props.loadingError && !props.isLoading">
               <thead>
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">{{ $t('type') }}</th>
+                  <th scope="col" class="py-3.5 pl-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">{{ $t('type') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('depot_name') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('status') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('amount_euro') }}</th>
@@ -36,6 +36,7 @@
                     <span class="text-gray-900">{{ order.depotName }}</span>
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                   
                    <OrderStatus :order="order"/>
                     
                   </td>
@@ -69,9 +70,10 @@
 import ListLoader from '@/components/common/ListLoader';
 import ListLoadingError from '@/components/common/ListLoadingError';
 import OrderStatus from '@/components/Orders/OrderStatus';
-import {Ref,ref,onMounted,PropType} from 'vue'
+import {Ref,ref,onMounted,PropType,computed} from 'vue'
 import { Order } from '@/lib/models';
 import { OrderService,CurrencyService } from '@/lib/services';
+import { OrderStatuses } from '~~/lib/contants';
 const props = defineProps ({
     orders : {
         type: Object as PropType<Array<Order>>
@@ -85,7 +87,6 @@ const props = defineProps ({
       default:false
     },
 })
-
 const currency = CurrencyService.getCurrencySymbol();
 const getExecutionDate = (order:Order)=>{
 
