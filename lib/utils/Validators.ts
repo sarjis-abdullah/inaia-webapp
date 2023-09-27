@@ -13,3 +13,10 @@ export function validatePassword(password:string):boolean{
     var regularExpression = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?§&+-=_.://()])[A-Za-z\d@$!%*#?§&+-=_.://()]{8,}$/;
     return validLength && regularExpression.test(password);
 }
+export const sanitizeEmail = (email:string) => {
+    if(email && email.replace)
+        return email. replace(/\s/g, '' );
+    else{
+        return '';
+    }
+}

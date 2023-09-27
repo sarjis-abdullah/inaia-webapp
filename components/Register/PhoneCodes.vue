@@ -36,7 +36,7 @@ const error = ref(null);
 try{
   error.value = null;
   isLoading.value = true;
-    countries.value  = await CountryService.getCountryList(false);
+    countries.value  = await CountryService.getCountryList(false,true);
 
      if(!props.phoneCode)
      {

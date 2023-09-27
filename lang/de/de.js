@@ -151,4 +151,6 @@ export default {
     type:"Type",
     latest_transactions:'Letzte Transaktionen',
     depots:'Depots',
+    request_password_title:'Passwort vergessen?',
+    password_request_with_success:'Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.'
 }

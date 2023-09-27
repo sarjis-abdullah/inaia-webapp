@@ -139,7 +139,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "order_status_payment_inprogress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ausstehend"])};fn.source="Ausstehend";return fn;})(),
   "type": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Type"])};fn.source="Type";return fn;})(),
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Letzte Transaktionen"])};fn.source="Letzte Transaktionen";return fn;})(),
-  "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})()
+  "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})(),
+  "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort vergessen?"])};fn.source="Passwort vergessen?";return fn;})(),
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst."])};fn.source="Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -263,7 +265,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "order_status_payment_inprogress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["pending"])};fn.source="pending";return fn;})(),
   "type": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Type"])};fn.source="Type";return fn;})(),
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Recent transactions"])};fn.source="Recent transactions";return fn;})(),
-  "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})()
+  "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})(),
+  "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgotten your password?"])};fn.source="Forgotten your password?";return fn;})(),
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We have emailed you a link to reset your password."])};fn.source="We have emailed you a link to reset your password.";return fn;})()
 },"fr":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un compte"])};fn.source="Créer un compte";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre plan"])};fn.source="Choisissez votre plan";return fn;})(),
@@ -359,7 +363,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "order_status_payment_inprogress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["en attente"])};fn.source="en attente";return fn;})(),
   "type": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Type"])};fn.source="Type";return fn;})(),
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Transactions récentes"])};fn.source="Transactions récentes";return fn;})(),
-  "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépôts"])};fn.source="Dépôts";return fn;})()
+  "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépôts"])};fn.source="Dépôts";return fn;})(),
+  "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mot de passe oublié?"])};fn.source="Mot de passe oublié?";return fn;})(),
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous vous avons envoyé un lien pour réinitialiser votre mot de passe."])};fn.source="Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

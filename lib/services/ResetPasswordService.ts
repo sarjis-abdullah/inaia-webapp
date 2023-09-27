@@ -13,4 +13,8 @@ export class ResetPasswordService{
         this.headers.addLocationHeader(language);
         return this.requester.post(this.links.resetPassword(),this.headers,request);
     }
+    public static async requestNewPassword(language:string,email:string):Promise<HttpResponse>{
+        this.headers.addLocationHeader(language);
+        return this.requester.post(this.links.requestPassword(),this.headers,{email:email});
+    }
 }

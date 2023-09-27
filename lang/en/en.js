@@ -125,4 +125,6 @@ export default {
     type:"Type",
     latest_transactions:'Recent transactions',
     depots:'Depots',
+    request_password_title:'Forgotten your password?',
+    password_request_with_success:'We have emailed you a link to reset your password.'
 }

@@ -94,4 +94,6 @@ export default {
     type:"Type",
     latest_transactions:'Transactions récentes',
     depots:'Dépôts',
+    request_password_title:'Mot de passe oublié?',
+    password_request_with_success:'Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.'
 }
