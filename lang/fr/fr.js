@@ -65,5 +65,7 @@ export default {
     resetting_pin: 'Nous réinitialisons votre code PIN. Veuillez patienter et ne pas quitter la page...',
     error_resetting_pin: 'Erreur lors de la réinitialisation de votre code PIN',
     reset_pin: 'Réinitialiser votre code PIN',
-    error_resetting_pin_no_token: 'Erreur : jeton invalide'
+    error_resetting_pin_no_token: 'Erreur : jeton invalide',
+    request_password_title:'Mot de passe oublié?',
+    password_request_with_success:'Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.'
 }

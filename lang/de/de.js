@@ -65,5 +65,7 @@ export default {
     resetting_pin: 'Wir setzen deine PIN zurück. Bitte warte eien Moment und verlasse diese Seite nicht...',
     error_resetting_pin: 'Fehler beim Zurücksetzen deiner PIN',
     reset_pin: 'PIN zurücksetzen',
-    error_resetting_pin_no_token: 'Fehler: Ungültiger Token'
+    error_resetting_pin_no_token: 'Fehler: Ungültiger Token',
+    request_password_title:'Passwort vergessen?',
+    password_request_with_success:'Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.'
 }
