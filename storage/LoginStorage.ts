@@ -11,9 +11,9 @@ export class LoginStorage{
             const now = moment();
             const expirationDate = moment(token.expire);
             expire = expirationDate.diff(now,'days');
-            console.log(expire);
-            localStorage.setItem(StorageKeys.expirationDate,token.expire)
+            
         }
+        localStorage.setItem(StorageKeys.expirationDate,token.expire)
         Cookies.set(StorageKeys.token,token.token,{expires:expire});
     }
     public static getExpDate():string | null{
@@ -28,5 +28,10 @@ export class LoginStorage{
     }
     public static getToken():string | undefined | null{
         return Cookies.get(StorageKeys.token);
+    }
+    public static clearStorage(){
+        window.localStorage.removeItem(StorageKeys.expirationDate);
+        Cookies.remove(StorageKeys.token);
+        window.localStorage.removeItem(StorageKeys.refreshToken);
     }
 }

@@ -34,13 +34,10 @@
 <script lang="ts" setup>
 import { ArrowDownTrayIcon } from '@heroicons/vue/24/outline';
 import { ref,Ref } from 'vue';
-import { d } from 'vue-bundle-renderer/dist/types-dfcc483f';
-import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
-import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
-import { Condition } from '~~/lib/models/Condition';
-import { ConditionService } from '~~/lib/services/ConditionService';
-import { SubscriptionService } from '~~/lib/services/SubscriptionService';
-import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
+import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
+import { Condition } from '@/lib/models';
+import { ConditionService,SubscriptionService } from '@/lib/services';
+import { SubscriptionStorage } from '@/storage';
 import Switch  from '../common/AppSwitch.vue'
 import Loading from '../common/Loading.vue';
 const { t,locale } = useI18n();

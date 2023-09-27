@@ -1,79 +1,70 @@
 <template>
-    <a class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
-        <div class="flex flex-1 flex-col p-8">
-            <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" :src="imgUrl"/>
-            <div class="flex flex-row items-end mx-auto mt-3">
-                <span class="font-semibold text-xl align-end">{{ symbole }}</span>
-                <span class="ml-1 text-gray-500">{{ name }}</span>
-            </div>
-            <span class="font-semibold text-xl">{{ balance }} €</span>
+    <div v-if="!isLoadingAssets">
+      <div class="text-center text-sm text-gray-500">Total amount</div>
+      <h1 class="text-center text-4xl">{{ $n(balance) }} €</h1>
+       
+        <div  class="flex flex-row mt-10">
+          <div v-for="asset in assets" :key="asset.name" class="flex-1 mx-3">
+          <AssetItem   :item="asset"/>
+          <PriceHistory :type="asset.name" class="mt-6"/>
+          </div>
         </div>
-    </a>
+      </div>
+      <div v-else>
+        <ContentLoader viewBox="0 0 250 50">
+          <rect x="110" y="0" rx="3" ry="3" width="30" height="3" />
+          <rect x="100" y="6" rx="3" ry="3" width="50" height="5" />
+          <rect x="0" y="20" rx="3" ry="3" width="120" height="25" >
+            
+          </rect>
+          <rect x="130" y="20" rx="3" ry="3" width="120" height="25" >
+            
+          </rect>
+        </ContentLoader>
+      </div>
 </template>
 <script lang="ts" setup>
-import {AssetTypes} from '@/lib/contants/AssetTypes';
-import { PropType,computed } from 'vue';
-import { Asset } from '@/lib/models/Asset';
-const props = defineProps({
-    item:{
-        type: Object as PropType<Asset>
-    }
-});
-const imgUrl = computed(()=>{
-    if(props.item)
-    {
-        if(props.item.name == AssetTypes.gold){
-            return new URL('~/assets/img/icons/goldBars.png',import.meta.url).href;
-        }
-        if(props.item.name == AssetTypes.silver){
-            return new URL('~/assets/img/icons/silverBars.png',import.meta.url).href;
-        }
-        if(props.item.name == AssetTypes.euro){
-            return new URL('~/assets/img/icons/money.png',import.meta.url).href;
-        }
-    }
+import AssetItem from '@/components/Assets/AssetItem';
+import PriceHistory from '@/components/Assets/PriceHistory';
+import {Asset} from '@/lib/models';
+import { AssetsService } from '@/lib/services';
+import { AccountStorage } from '@/storage';
+import { onMounted,Ref,ref } from 'vue';
+import {
+  ContentLoader,
+} from 'vue-content-loader';
+import { AssetTypes } from '~~/lib/contants';
+const assets:Ref<Array<Asset>>=ref([]);
+const isLoadingAssets = ref(true);
+onMounted(async ()=>{
+
+  const accountId = AccountStorage.getAccountId();
+      
+  try{
+    isLoadingAssets.value = true;
+    assets.value = await AssetsService.getAssets(accountId);
+  }
+  catch(err){
     
+  }
+  finally{
+    isLoadingAssets.value = false;
+  }
+  
 })
-const symbole = computed(()=>{
-    if(props.item)
-    {
-        if(props.item.name == AssetTypes.euro){
-            return 'EUR'
-        }
-    }
-    return "XAU"
-    
-})
-const name = computed(()=>{
-    if(props.item)
-    {
-        if(props.item.name == AssetTypes.gold){
-            return 'Gold'
-        }
-        if(props.item.name == AssetTypes.silver){
-            return 'Silver'
-        }
-        if(props.item.name == AssetTypes.euro){
-            return 'Euro'
-        }
-    }
-    
-}) 
 const balance = computed(()=>{
-    let balance = 0;
-    if(props.item)
-    {
-        if(props.item.name == AssetTypes.gold){
-            balance= props.item.gold_in_euro;
-        }
-        if(props.item.name == AssetTypes.silver){
-            balance= props.item.silver_in_euro;
-        }
-        if(props.item.name == AssetTypes.euro){
-            balance= props.item.amount;
-        }
-        return balance;
+  let sum = 0;
+  assets.value.forEach(asset =>{
+    if(asset.name == AssetTypes.gold){
+      sum+=asset.gold_in_euro;
     }
-    
-}) 
+    if(asset.name == AssetTypes.silver){
+      sum+=asset.silver_in_euro;
+    }
+    if(asset.name == AssetTypes.euro){
+      sum+=asset.amount;
+    }
+  })
+  return sum;
+})
 </script>

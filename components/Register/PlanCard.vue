@@ -32,7 +32,7 @@
 import { ref, watch,computed } from 'vue';
 import type { Ref } from 'vue';
 import { CheckIcon,XMarkIcon } from '@heroicons/vue/20/solid';
-import { PaymentCycles } from '~~/lib/contants/PaymentCycles';
+import { PaymentCycles } from '@/lib/contants';
 const emit = defineEmits<{
   (e: 'selected',planId:number): void
 }>()

@@ -117,17 +117,13 @@
 <script lang="ts" setup>
 import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon } from '@heroicons/vue/24/outline';
 import {validateEmail,validatePassword,validatePhoneNumber} from '@/lib/utils/Validators';
-import {SubscriptionService} from '@/lib/services/SubscriptionService';
-    import {EmailService} from '@/lib/services/EmailService';
-import {PhoneNumberService} from '@/lib/services/PhoneNumberService';
+import {SubscriptionService,EmailService,PhoneNumberService} from '@/lib/services';
 import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
 import PhoneCodes from '@/components/Register/PhoneCodes';
-import { stat } from 'fs';
-import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
-import { AccountInformationRequest } from '~~/lib/requests/AccountInformationRequest';
+import { SubscriptionStorage } from '~~/storage';
+import { AccountInformationRequest } from '@/lib/requests';
 import { useRoute } from 'vue-router';
-import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
-import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
+import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
 
 const passwordValidated = ref(false);
 const emailValidated = ref(false);

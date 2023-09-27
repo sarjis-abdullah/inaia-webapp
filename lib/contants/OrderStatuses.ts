@@ -7,5 +7,5 @@ export enum OrderStatuses {
     paymentFailed="order_status_payment_failed",
     refunded="order_status_refunded",
     canceled="order_status_canceled",
-    
+    inProgress = "order_status_payment_inprogress"
 }

@@ -61,15 +61,12 @@
   import { LockClosedIcon } from '@heroicons/vue/20/solid';
 import { stat } from 'fs';
   import { ref,reactive,watch } from 'vue';
-import { BadInputException } from '~~/lib/exceptions/BadInputException';
-import { UnauthenticatedException } from '~~/lib/exceptions/UnauthenticatedException';
-import { LoginService } from '~~/lib/services/LoginService';
-import { validateEmail } from '~~/lib/utils/Validators';
-import {LoginStorage } from '../storage/LoginStorage';
-import {AccountStorage} from '../storage/AccountStorage';
-import {AccountService} from '~~/lib/services/AccountService';
-import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
-import { TokenService } from '~~/lib/services/TokenService';
+import { BadInputException,UnauthenticatedException } from '@/lib/exceptions';
+import { validateEmail } from '@/lib/utils/Validators';
+import {LoginStorage,AccountStorage } from '@/storage';
+import {AccountService,TokenService,LoginService} from '@/lib/services';
+import { ServerErrorException } from '@/lib/exceptions';
+
   const state = reactive({
     email:'',
     password:'',
@@ -100,8 +97,9 @@ import { TokenService } from '~~/lib/services/TokenService';
             LoginStorage.saveRefreshToken(response.refreshToken);
             LoginStorage.saveSecret(response.secret);
         }
-        router.replace('/dashboard');
-
+        const link = router.resolve('/dashboard');
+        const url = "http://"+window.location.host+link.fullPath;
+        window.open(url,'_self');
     }
     catch(err){
        

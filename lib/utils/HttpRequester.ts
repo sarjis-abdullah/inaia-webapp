@@ -5,6 +5,7 @@ import { HttpHeader } from "./HttpHeader";
 import { ServerErrorException } from "../exceptions/ServerErrorException";
 import { UnauthorizedException } from '../exceptions/UnauthorizedException';
 import { MissingInformationException } from '../exceptions/MissingInformationException';
+import { UnauthenticatedEvent } from '../events';
 export class HttpRequester{
     private static instance: HttpRequester;
     public static httpRequester():HttpRequester{
@@ -55,14 +56,16 @@ export class HttpRequester{
             error = await response.text();
         }
         if(status == 401){
-            return new UnauthenticatedException(errorJson);
+            const event = new UnauthenticatedEvent();
+            
+            return new UnauthenticatedException(error);
         }
         if(status == 403)
         {
-            return new UnauthorizedException(errorJson);
+            return new UnauthorizedException(error);
         }
         if(status == 422){
-            return new BadInputException(errorJson);
+            return new BadInputException(error);
         }
         if(status>=400 && status<500)
         {

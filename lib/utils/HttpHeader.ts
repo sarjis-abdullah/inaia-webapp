@@ -19,6 +19,10 @@ export class HttpHeader{
         return header;
     }
     public addAuthHeader(token:string):HttpHeader{
+        const doExists = this.headers.findIndex(header=>header.key == "Authorization");
+        if(doExists > -1){
+            this.headers.splice(doExists,1)
+        }
         this.headers.push({
             key:"Authorization",
             value:"Bearer " + token
@@ -26,6 +30,10 @@ export class HttpHeader{
         return this; 
     }
     public addLocationHeader(language:string):HttpHeader{
+        const doExists = this.headers.findIndex(header=>header.key == "X-localization");
+        if(doExists > -1){
+            this.headers.splice(doExists,1)
+        }
         this.headers.push({
             key:"X-localization",
             value:language

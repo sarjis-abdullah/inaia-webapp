@@ -14,17 +14,13 @@
 </template>
 <script lang="ts" setup>
 import Countries from '@/components/Register/Countries';
-import { SubscriptionSteps } from '@/constants';
 import { ref,reactive,computed } from 'vue';
-import { SubscriptionService } from '~~/lib/services/SubscriptionService';
-import Plans from './Plans.vue';
-import { getCountryByLanguage } from '~~/helpers/LanguageHelper';
+import { SubscriptionService } from '@/lib/services';
+import { getCountryByLanguage } from '@/helpers/LanguageHelper';
 import { useI18n } from 'vue-i18n';
-import { ChosenPlan } from '~~/lib/requests/ChosenPlanRequest';
-import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
+import { ChosenPlan } from '@/lib/requests';
 const selectedCountry = reactive({id:-1});
 const alreadySelectedCountry = ref(-1);
-const plan = ref(null);
 
 const {locale} = useI18n();
 const defaultCountry = getCountryByLanguage(locale.value);

@@ -41,8 +41,8 @@
 </template>
 <script lang="ts" setup>
 
-import { CountryService } from '@/lib/services/CountryService';
-import { Country } from '@/lib/models/Country';
+import { CountryService } from '@/lib/services';
+import { Country } from '@/lib/models';
 import { ref, watch, onMounted } from 'vue';
 import type { Ref } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'

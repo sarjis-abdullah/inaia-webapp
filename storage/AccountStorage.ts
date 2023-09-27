@@ -28,6 +28,11 @@ export class AccountStorage{
         let id = Cookies.get(StorageKeys.contact_id);
         return parseInt(id);
     }
+    public static clearStorage(){
+        window.sessionStorage.removeItem(StorageKeys.account);
+        Cookies.remove(StorageKeys.accountId);
+        Cookies.remove(StorageKeys.contact_id);
+    }
     private static saveInCookie(key:string,data:string,expDate:string){
         const now = moment();
         const expirationDate = moment(expDate);

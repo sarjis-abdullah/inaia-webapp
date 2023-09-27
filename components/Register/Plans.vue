@@ -39,12 +39,12 @@
 <script lang="ts" setup>
 import PlanCard from './PlanCard.vue';
 import Loading from '../common/Loading.vue';
-import {PlanService} from '@/lib/services/PlanService';
+import {PlanService,SubscriptionService} from '@/lib/services';
 import { Ref,watch,onMounted } from 'vue';
-import { Plan } from '~~/lib/models/Plan';
-import { PaymentCycles } from '~~/lib/contants/PaymentCycles';
+import { Plan } from '@/lib/models';
+import { PaymentCycles } from '@/lib/contants';
 import { useI18n } from 'vue-i18n';
-import { SubscriptionService } from '~~/lib/services/SubscriptionService';
+
 const props = defineProps({
     countyId:{
         type:Number,

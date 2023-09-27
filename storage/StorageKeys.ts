@@ -13,5 +13,8 @@ export enum StorageKeys{
     permanent='permanent',
     accountId='account_id',
     contact_id='contact_id',
-    address='address'
+    address='address',
+    goldPrice='goldprice',
+    silverPrice='silverprice',
+    depotTypes = 'depottypes',
 }
