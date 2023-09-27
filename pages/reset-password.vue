@@ -104,7 +104,9 @@ watch(state,(currentValue)=>{
 onMounted(()=>{
     const {query}= useRoute();
     if(!query.token || !query.email){
-      router.replace('request-password')
+      let path = router.resolve('request-password');
+      console.log(path);
+      router.replace(path);
     }
     if(query.token){
         token.value = query.token;
