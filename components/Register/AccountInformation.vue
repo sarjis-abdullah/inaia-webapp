@@ -9,13 +9,14 @@
                     <label for="name" class="block text-sm font-medium text-gray-700">{{ $t('name') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <UserIcon class="h-4 w-4" :class="(state.prename.length==0)?errorIconColor:iconColor" />
+                            <UserIcon class="h-4 w-4" :class="(prenameChanged && state.prename.length==0)?errorIconColor:iconColor" />
                         </div>
                         <input type="text" name="name" id="name" v-model="state.prename" required
                         class="block  w-full 10 pl-10 py-2 rounded-md"
-                        :class="(state.prename.length==0)?inputErrorStyle:inputStyle"
+                        :class="(prenameChanged && state.prename.length==0)?inputErrorStyle:inputStyle"
+                        @change="onPrenameChanged"
                             />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.prename.length==0">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="prenameChanged && state.prename.length==0">
                             <ExclamationCircleIcon class="h-4 w-4 text-red-500" />
                         </div>
                     </div>
@@ -24,13 +25,14 @@
                     <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('surname') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <UserIcon class="h-4 w-4" :class="(state.name.length==0)?errorIconColor:iconColor"/>
+                            <UserIcon class="h-4 w-4" :class="(nameChanged && state.name.length==0)?errorIconColor:iconColor"/>
                         </div>
                         <input type="text" name="surname" id="surname" v-model="state.name" required
                         class="block  w-full 10 pl-10 py-2 rounded-md"
-                        :class="(state.name.length>0)?inputStyle:inputErrorStyle"
+                        :class="(!nameChanged || state.name.length>0)?inputStyle:inputErrorStyle"
+                        @change="onNameChanged"
                             />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.name.length==0">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="nameChanged && state.name.length==0">
                             <ExclamationCircleIcon class="h-4 w-4 text-red-500" />
                         </div>
                     </div>
@@ -46,7 +48,7 @@
                       </div>
                       <input type="text" name="phone-number" id="phone-number" required
                           class="block w-full rounded-md border-gray-300 pl-28 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                           v-model="state.phone" :class="(state.phone.length>0)?inputStyle:inputErrorStyle"/>
+                           v-model="state.phone" :class="(!phoneChanged || state.phone.length>0)?inputStyle:inputErrorStyle" @change="onPhoneChanged"/>
                   </div>
                 </div>
                 <div>
@@ -85,7 +87,6 @@
                     <p class="mt-2 text-sm text-red-600" id="email-error" v-if="!passwordValidated && state.password.length>0">{{ $t('password_message') }}
                     </p>
                 </div>
-
                 <div>
                     <label for="referral" class="block text-sm font-medium text-gray-700">{{ $t('referal_code') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
@@ -124,12 +125,15 @@ import { SubscriptionStorage } from '~~/storage';
 import { AccountInformationRequest } from '@/lib/requests';
 import { useRoute } from 'vue-router';
 import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
-
+import { AddressRequest } from '~~/lib/requests/AddressRequest';
 const passwordValidated = ref(false);
 const emailValidated = ref(false);
 const phoneValidated = ref(false);
 const saveActivated = ref(false);
 const isSubmitting = ref(false);
+const prenameChanged = ref(false);
+const nameChanged = ref(false);
+const phoneChanged = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
 const errorIconColor = 'text-red-900';
@@ -145,15 +149,25 @@ const state = reactive({
     name:'',
     phone:'',
     phoneCode:'0049',
-    referalCode:''
+    referalCode:'',
+    country_id:-1
 });
-const onPhoneCodeChange = (value:string)=>{
+const onPhoneCodeChange = (value:string,id:Number)=>{
     state.phoneCode = value;
+    state.country_id = id;
+}
+const onPhoneChanged =()=>{
+    phoneChanged.value = true;
 }
 const emit = defineEmits<{
   (e: 'onSave'): void
 }>()
-
+const onNameChanged=()=>{
+    nameChanged.value = true;
+}
+const onPrenameChanged=()=>{
+    prenameChanged.value = true;
+}
 const nextBtnClicked = false;
 
 onMounted(()=>{
@@ -177,6 +191,10 @@ onMounted(()=>{
         state.referalCode =  info.referral_code;
         state.phoneCode = info.phone_code;
     }
+    const address = SubscriptionStorage.getAddress();
+    if(address){
+        state.country_id= address.country_id;
+    }
     if(query.referral){
         state.referalCode = query.referral;
     }
@@ -195,6 +213,9 @@ watch(state,(currentValue)=>{
     }
 
 })
+const handleCountryChange = (value:number)=>{
+    state.country_id = value;
+}
 async function save() {
     isSubmitting.value = true;
     submittingError.value = false;
@@ -215,6 +236,11 @@ async function save() {
         };
         SubscriptionStorage.saveAccountInformation(data)
         SubscriptionService.saveAccountInformation(data);
+        let addressData: AddressRequest = {
+            country_id:state.country_id
+        }
+        await SubscriptionStorage.saveAddress(addressData);
+        SubscriptionService.saveAddress(addressData)
         emit('onSave');
     }
     catch(err){

@@ -147,7 +147,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "gold_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Goldpreis in Gramm"])};fn.source="Goldpreis in Gramm";return fn;})(),
   "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silberpreis in Gramm"])};fn.source="Silberpreis in Gramm";return fn;})(),
   "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Monat"])};fn.source="Monat";return fn;})(),
-  "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})()
+  "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
+  "depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot"])};fn.source="Depot";return fn;})(),
+  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mehr"])};fn.source="Mehr";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -280,7 +282,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver gram price"])};fn.source="Silver gram price";return fn;})(),
   "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Month"])};fn.source="Month";return fn;})(),
   "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
-  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Year"])};fn.source="Year";return fn;})()
+  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Year"])};fn.source="Year";return fn;})(),
+  "depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot"])};fn.source="Depot";return fn;})(),
+  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["See more"])};fn.source="See more";return fn;})()
 },"fr":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un compte"])};fn.source="Créer un compte";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre plan"])};fn.source="Choisissez votre plan";return fn;})(),
@@ -385,7 +389,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Prix de gram d'argent "])};fn.source="Prix de gram d'argent ";return fn;})(),
   "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mois"])};fn.source="Mois";return fn;})(),
   "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
-  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Année"])};fn.source="Année";return fn;})()
+  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Année"])};fn.source="Année";return fn;})(),
+  "depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépot"])};fn.source="Dépot";return fn;})(),
+  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Plus d'infos"])};fn.source="Plus d'infos";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]
