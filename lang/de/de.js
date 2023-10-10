@@ -159,5 +159,7 @@ export default {
     silver_gram_price:"Silberpreis in Gramm",
     month:"Monat",
     max:'Max',
-    year:'Jahr'
+    year:'Jahr',
+    depot:'Depot',
+    see_more:"Mehr"
 }

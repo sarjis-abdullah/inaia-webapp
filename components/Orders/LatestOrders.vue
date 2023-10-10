@@ -2,7 +2,7 @@
    <div>
         
         <OrderList :isLoading="loading" :loadingError="loadingError" :orders="transactions"/>
-
+       
     </div>
 </template>
 <script lang="ts" setup>
@@ -10,6 +10,7 @@ import {Ref,ref,onMounted} from 'vue';
 import { Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
 import OrderList from '@/components/Orders/OrderList';
+
 const transactions:Ref<Array<Order>>= ref([]);
 const loading = ref(true);
 const loadingError = ref(false)

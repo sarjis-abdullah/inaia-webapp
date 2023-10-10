@@ -133,5 +133,7 @@ export default {
     silver_gram_price:"Silver gram price",
     month:"Month",
     max:'Max',
-    year:'Year'
+    year:'Year',
+    depot:'Depot',
+    see_more:"See more"
 }

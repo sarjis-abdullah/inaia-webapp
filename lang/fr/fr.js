@@ -102,5 +102,7 @@ export default {
     silver_gram_price:"Prix de gram d'argent ",
     month:"Mois",
     max:'Max',
-    year:'Année'
+    year:'Année',
+    depot:'Dépot',
+    see_more:"Plus d'infos"
 }

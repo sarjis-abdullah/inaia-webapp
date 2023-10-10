@@ -27,7 +27,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "loading_country_error": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Fehler: Länder konnten nicht geladen werden."])};fn.source="Fehler: Länder konnten nicht geladen werden.";return fn;})(),
   "features": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Features"])};fn.source="Features";return fn;})(),
   "monthly": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["monatlich"])};fn.source="monatlich";return fn;})(),
-  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["year"])};fn.source="year";return fn;})(),
+  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Jahr"])};fn.source="Jahr";return fn;})(),
   "buy": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Jetzt kaufen"])};fn.source="Jetzt kaufen";return fn;})(),
   "choose_your_plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle einen Plan aus"])};fn.source="Wähle einen Plan aus";return fn;})(),
   "monthly_billing": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Monthly billing"])};fn.source="Monthly billing";return fn;})(),
@@ -141,7 +141,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Letzte Transaktionen"])};fn.source="Letzte Transaktionen";return fn;})(),
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})(),
   "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort vergessen?"])};fn.source="Passwort vergessen?";return fn;})(),
-  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst."])};fn.source="Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.";return fn;})()
+  "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst."])};fn.source="Wir haben dir einen Link geschickt, mit dem du dein Passwort zurücksetzen kannst.";return fn;})(),
+  "silver_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silberpreis"])};fn.source="Silberpreis";return fn;})(),
+  "gold_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Goldpreis"])};fn.source="Goldpreis";return fn;})(),
+  "gold_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Goldpreis in Gramm"])};fn.source="Goldpreis in Gramm";return fn;})(),
+  "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silberpreis in Gramm"])};fn.source="Silberpreis in Gramm";return fn;})(),
+  "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Monat"])};fn.source="Monat";return fn;})(),
+  "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -373,13 +379,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépôts"])};fn.source="Dépôts";return fn;})(),
   "request_password_title": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mot de passe oublié?"])};fn.source="Mot de passe oublié?";return fn;})(),
   "password_request_with_success": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous vous avons envoyé un lien pour réinitialiser votre mot de passe."])};fn.source="Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.";return fn;})(),
-  "silver_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver price"])};fn.source="Silver price";return fn;})(),
-  "gold_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold price"])};fn.source="Gold price";return fn;})(),
-  "gold_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold gram price"])};fn.source="Gold gram price";return fn;})(),
-  "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Silver gram price"])};fn.source="Silver gram price";return fn;})(),
-  "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Month"])};fn.source="Month";return fn;})(),
+  "silver_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Prix argent"])};fn.source="Prix argent";return fn;})(),
+  "gold_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Prix or"])};fn.source="Prix or";return fn;})(),
+  "gold_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Prix de gram d'or"])};fn.source="Prix de gram d'or";return fn;})(),
+  "silver_gram_price": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Prix de gram d'argent "])};fn.source="Prix de gram d'argent ";return fn;})(),
+  "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mois"])};fn.source="Mois";return fn;})(),
   "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
-  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Year"])};fn.source="Year";return fn;})()
+  "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Année"])};fn.source="Année";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

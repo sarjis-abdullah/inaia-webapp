@@ -8,7 +8,7 @@
               <thead>
                 <tr>
                   <th scope="col" class="py-3.5 pl-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">{{ $t('type') }}</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('depot_name') }}</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('depot') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('status') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('amount_euro') }}</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">{{ $t('amount_gram') }}</th>
@@ -47,7 +47,7 @@
                     <div class="text-gray-900">{{ $n(getAmountGram(order)/1000) }} g</div>
                   </td>
                   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                    <a @click="()=>showTheDetails(order)" class="text-indigo-600 hover:text-indigo-900"
                       >{{ $t('details') }}<span class="sr-only">, {{ order.id }}</span></a
                     >
                   </td>
@@ -63,6 +63,7 @@
           </div>
         </div>
       </div>
+      <OrderDetails :showDetails="showDetails" :order="selectedOrder" @onClose="closeDetails"/>
     </div>
 
 </template>
@@ -74,6 +75,7 @@ import {Ref,ref,onMounted,PropType,computed} from 'vue'
 import { Order } from '@/lib/models';
 import { OrderService,CurrencyService } from '@/lib/services';
 import { OrderStatuses } from '~~/lib/contants';
+import OrderDetails from '@/components/Orders/OrderDetails';
 const props = defineProps ({
     orders : {
         type: Object as PropType<Array<Order>>
@@ -88,6 +90,17 @@ const props = defineProps ({
     },
 })
 const currency = CurrencyService.getCurrencySymbol();
+const showDetails = ref(false);
+const selectedOrder: Ref<Order | null> = ref(null);
+const showTheDetails = (order:Order)=>{
+
+  selectedOrder.value = order;
+  showDetails.value = true;
+}
+const closeDetails = () =>{
+  selectedOrder.value = null;
+  showDetails.value = false;
+}
 const getExecutionDate = (order:Order)=>{
 
   return OrderService.getExecutionDate(order);
