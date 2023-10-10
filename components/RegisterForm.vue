@@ -136,8 +136,8 @@
         <AccountInformation v-if="selectedStep?.number ==1" @on-save="onPersonalInfoSaved"/>
         <VerificationEmail v-if="selectedStep?.number ==2" @validated="onEmailValidated"/>
         <VerificationPhone v-if="selectedStep?.number ==3" @validated="onPhoneValidated"/>
-        <Address v-if="selectedStep?.number == 4" @on-save="onChoosenAddress"/>
-        <ConditionList v-if="selectedStep?.number ==5" @registred="onRegistrationDone"/>
+        <Address v-if="selectedStep?.number == -1" @on-save="onChoosenAddress"/>
+        <ConditionList v-if="selectedStep?.number ==4" @registred="onRegistrationDone"/>
       </div>
       <div class="px-4 sm:px-6 lg:px-8" v-else>
         <RegistrationSuccess/>
@@ -180,8 +180,7 @@ const steps = ref([
 
   { number:2,id: t('step')+' 2', name: t('verify_email'), status: SubscriptionSteps.upcoming },
   { number:3,id: t('step')+' 3', name: t('verify_phone'), status: SubscriptionSteps.upcoming },
-  { number:4,id: t('step')+' 4', name: t('enter_address'),  status: SubscriptionSteps.upcoming },
-  { number:5,id: t('step')+' 5', name: t('conditions'), status: SubscriptionSteps.upcoming },
+  { number:4,id: t('step')+' 4', name: t('conditions'), status: SubscriptionSteps.upcoming },
 ]);
 const currentStep = ref(1);
 const sidebarOpen = ref(false)
