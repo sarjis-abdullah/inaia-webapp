@@ -27,7 +27,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'change', callingCode: String): void
+  (e: 'change', callingCode: String,country_id:Number): void
 }>()
 const countries : Ref<Array<Country>> = ref([]);
 const selected : Ref<Country> = ref(countries.value[0]);
@@ -41,10 +41,12 @@ try{
      if(!props.phoneCode)
      {
         selected.value = countries.value[0];
-        emit("change",countries.value[0].calling_code.toString());
+        emit("change",countries.value[0].calling_code.toString(),countries.value[0].id);
      }
      else{
         selected.value = countries.value.find(x=>props.phoneCode == x.calling_code) || countries.value[0];
+        if(selected.value)
+          emit("change",selected.value.calling_code.toString(),selected.value.id);
      }
 }
 catch(err)
@@ -55,7 +57,7 @@ finally{
   isLoading.value= false;
 }
 watch(selected,(currentvalue,oldvalue)=>{
-    emit("change",currentvalue.calling_code)
+    emit("change",currentvalue.calling_code,currentvalue.id)
 })
 watch(props,(currentvalue,oldvalue)=>{
   if(currentvalue.phoneCode){
