@@ -149,7 +149,12 @@ export const resolveNuxtI18nOptions = async (context) => {
   "month": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Monat"])};fn.source="Monat";return fn;})(),
   "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
   "depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot"])};fn.source="Depot";return fn;})(),
-  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mehr"])};fn.source="Mehr";return fn;})()
+  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mehr"])};fn.source="Mehr";return fn;})(),
+  "date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Datum"])};fn.source="Datum";return fn;})(),
+  "course": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Kurs"])};fn.source="Kurs";return fn;})(),
+  "purchase_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Kaufbetrag"])};fn.source="Kaufbetrag";return fn;})(),
+  "agio": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Abschlussentgelt"])};fn.source="Abschlussentgelt";return fn;})(),
+  "gold_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Menge"])};fn.source="Menge";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -284,7 +289,12 @@ export const resolveNuxtI18nOptions = async (context) => {
   "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
   "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Year"])};fn.source="Year";return fn;})(),
   "depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot"])};fn.source="Depot";return fn;})(),
-  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["See more"])};fn.source="See more";return fn;})()
+  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["See more"])};fn.source="See more";return fn;})(),
+  "date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date"])};fn.source="Date";return fn;})(),
+  "course": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Course"])};fn.source="Course";return fn;})(),
+  "purchase_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Purchase amount"])};fn.source="Purchase amount";return fn;})(),
+  "agio": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Transaction fee (agio)"])};fn.source="Transaction fee (agio)";return fn;})(),
+  "gold_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold amount"])};fn.source="Gold amount";return fn;})()
 },"fr":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un compte"])};fn.source="Créer un compte";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre plan"])};fn.source="Choisissez votre plan";return fn;})(),
@@ -391,7 +401,12 @@ export const resolveNuxtI18nOptions = async (context) => {
   "max": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Max"])};fn.source="Max";return fn;})(),
   "year": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Année"])};fn.source="Année";return fn;})(),
   "depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépot"])};fn.source="Dépot";return fn;})(),
-  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Plus d'infos"])};fn.source="Plus d'infos";return fn;})()
+  "see_more": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Plus d'infos"])};fn.source="Plus d'infos";return fn;})(),
+  "date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date"])};fn.source="Date";return fn;})(),
+  "course": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Taux"])};fn.source="Taux";return fn;})(),
+  "purchase_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant de l'achat"])};fn.source="Montant de l'achat";return fn;})(),
+  "agio": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Frais d'inscription"])};fn.source="Frais d'inscription";return fn;})(),
+  "goldAmount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant de l'actif"])};fn.source="Montant de l'actif";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

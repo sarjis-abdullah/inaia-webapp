@@ -61,38 +61,84 @@ export class OrderService{
             }
             return null;
     }
-    public static getMoneyAmountOfAnOrder(order:Order):number | null{
-        if(order.order_status?.name_translation_key == OrderStatuses.completed){
-            if(
-                order.order_type.name_translation_key == OrderTypes.gold_purchase ||
-                order.order_type.name_translation_key == OrderTypes.silver_purchase
-                
-                ){
-                    return order.purchase_amount;
-                }
-                else{
-                    const lastTrans = this.getTheRightTransaction(order);
-                    if(lastTrans){
-                        return lastTrans.money_amount;
+    public static getMoneyAmountOfAnOrder(order?:Order):number | null | undefined{
+        if(order){
+            if(order.order_status?.name_translation_key == OrderStatuses.completed){
+                if(
+                    order.order_type.name_translation_key == OrderTypes.gold_purchase_interval ||
+                    order.order_type.name_translation_key == OrderTypes.silver_purchase_interval
+                    
+                    ){
+                        return order.purchase_amount;
                     }
-                }
-        }
-        else{
-            if(
-                order.order_type.name_translation_key == OrderTypes.gold_purchase ||
-                order.order_type.name_translation_key == OrderTypes.silver_purchase ||
-                order.order_type.name_translation_key == OrderTypes.silver_purchase_interval ||
-                order.order_type.name_translation_key == OrderTypes.gold_purchase_interval
-                
-                ){
-                    return order.amount
-                }
-                else
-                return null;
+                    else{
+                        const lastTrans = this.getTheRightTransaction(order);
+                        if(lastTrans){
+                            return lastTrans.money_amount;
+                        }
+                    }
+            }
+            else{
+                if(
+                    order.order_type.name_translation_key == OrderTypes.gold_purchase ||
+                    order.order_type.name_translation_key == OrderTypes.silver_purchase ||
+                    order.order_type.name_translation_key == OrderTypes.silver_purchase_interval ||
+                    order.order_type.name_translation_key == OrderTypes.gold_purchase_interval
+                    
+                    ){
+                        return order.amount
+                    }
+                    else
+                    return null;
+            }
         }
         return null;
     }
-    private static getTheRightTransaction(order:Order):OrderTransaction | null{
+    public static getTheOrderTransactionCourse(order?:Order):number | undefined {
+        const transaction = this.getTheRightTransaction(order);
+        if(transaction){
+            return transaction.gram_price_trading;
+        }
+        else
+        {
+            return undefined;
+        }
+    }
+    public static getTransactionFee(order?:Order):number | undefined | null{
+        if(order){
+            if(
+                order.order_status && 
+                order.order_type.name_translation_key.includes('interval') && 
+                order.order_status.name_translation_key == OrderStatuses.completed &&
+                order.agio_amount > 0
+                )
+            {
+                return order.agio_amount;
+            }
+            const lastTrans = this.getTheRightTransaction(order);
+            if(lastTrans){
+                return lastTrans.fee;
+            }
+            
+        }
+        return null;
+    }
+    public static getStorageFee(order?:Order):number | undefined | null{
+        if(order){
+            if(
+                order.order_status && 
+                order.order_type.name_translation_key.includes('interval') && 
+                order.order_status.name_translation_key == OrderStatuses.completed &&
+                order.storage_fee > 0
+                )
+            {
+                return order.storage_fee;
+            }
+            
+        }
+        return null;
+    }
+    private static getTheRightTransaction(order?:Order):OrderTransaction | null{
         if(order && order.transactions && order.transactions.length > 0){
            if(order.order_status?.name_translation_key  == OrderStatuses.refunded && order.transactions.length >=2){
             return order.transactions[1]

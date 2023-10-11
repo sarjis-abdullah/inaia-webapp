@@ -161,5 +161,11 @@ export default {
     max:'Max',
     year:'Jahr',
     depot:'Depot',
-    see_more:"Mehr"
+    see_more:"Mehr",
+    date:'Datum',
+    course:'Kurs',
+    purchase_amount:'Kaufbetrag',
+    agio:'Abschlussentgelt',
+    gold_amount:'Menge',
+    amount: 'Betrag',
 }

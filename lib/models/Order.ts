@@ -26,6 +26,7 @@ export interface Order{
     orders_payment_transactions:Array<OrderPaymentTransaction>,
     plan_id:number,
     purchase_amount?:number,
+    storage_fee?:number,
     amount:number,
     transactions:Array<OrderTransaction>,
     unit:string,

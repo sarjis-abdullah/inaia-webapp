@@ -104,5 +104,11 @@ export default {
     max:'Max',
     year:'Année',
     depot:'Dépot',
-    see_more:"Plus d'infos"
+    see_more:"Plus d'infos",
+    date:'Date',
+    course:'Taux',
+    purchase_amount:"Montant de l'achat",
+    agio:"Frais d'inscription",
+    goldAmount:"Montant de l'actif",
+    amount: 'Montant',
 }

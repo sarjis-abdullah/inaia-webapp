@@ -135,5 +135,11 @@ export default {
     max:'Max',
     year:'Year',
     depot:'Depot',
-    see_more:"See more"
+    see_more:"See more",
+    date:'Date',
+    course:'Course',
+    purchase_amount:'Purchase amount',
+    agio:'Transaction fee (agio)',
+    gold_amount:'Gold amount',
+    amount: 'Amount',
 }
