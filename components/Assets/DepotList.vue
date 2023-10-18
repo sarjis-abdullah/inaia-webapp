@@ -1,8 +1,11 @@
 <template>
+    <div class="rounded-lg bg-white shadow p-3" >
+      
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <div class="text-gray-900 mb-3  text-xl">{{ $t('depots') }}</div>
             <table class="min-w-full divide-y divide-gray-300" v-if="!loadingError && !isLoading">
               <thead>
                 <tr>
@@ -46,8 +49,8 @@
                     <div class="text-gray-900">{{ $n(depot.gram_amount/1000) }} g</div>
                   </td>
                   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                      >{{ $t('details') }}<span class="sr-only">, {{ depot.name }}</span></a
+                    <NuxtLink :to="'depot/detail/'+depot.id" class="text-indigo-600 hover:text-indigo-900"
+                      >{{ $t('details') }}<span class="sr-only">, {{ depot.name }}</span></NuxtLink
                     >
                   </td>
                 </tr>
@@ -63,6 +66,7 @@
         </div>
       </div>
     </div>
+  </div>
   </template>
   <script  lang="ts" setup>
   import { PropType,computed,onMounted,ref,Ref } from 'vue';
@@ -126,10 +130,11 @@ onMounted(async ()=>{
    
       const response : PaginationResponse<Depot> = await AssetsService.getTheDepotsOfTheClient({
         page:page.value,
-        perPage:5,
+        perPage:100,
         depot_type_id :props.type?props.type.id:undefined
       });
-      depots.value = response.data;
+
+      depots.value = response.data.sort((a:Depot,b:Depot)=>(a.depot_type?.name_translation_key >= b.depot_type?.name_translation_key)?1:-1);
       if(response.currentPage)
           page.value = response.currentPage;
     

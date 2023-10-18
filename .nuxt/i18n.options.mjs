@@ -137,6 +137,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "order_status_refunded": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erstattung"])};fn.source="Erstattung";return fn;})(),
   "order_status_payment_outstanding": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ausstehend"])};fn.source="Ausstehend";return fn;})(),
   "order_status_payment_inprogress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ausstehend"])};fn.source="Ausstehend";return fn;})(),
+  "order_status_reverted": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reverted"])};fn.source="Reverted";return fn;})(),
   "type": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Type"])};fn.source="Type";return fn;})(),
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Letzte Transaktionen"])};fn.source="Letzte Transaktionen";return fn;})(),
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})(),
@@ -154,7 +155,16 @@ export const resolveNuxtI18nOptions = async (context) => {
   "course": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Kurs"])};fn.source="Kurs";return fn;})(),
   "purchase_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Kaufbetrag"])};fn.source="Kaufbetrag";return fn;})(),
   "agio": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Abschlussentgelt"])};fn.source="Abschlussentgelt";return fn;})(),
-  "gold_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Menge"])};fn.source="Menge";return fn;})()
+  "gold_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Menge"])};fn.source="Menge";return fn;})(),
+  "amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Betrag"])};fn.source="Betrag";return fn;})(),
+  "bank_transfer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Überweisung"])};fn.source="Überweisung";return fn;})(),
+  "bank_account": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bankverbindung"])};fn.source="Bankverbindung";return fn;})(),
+  "payment_method": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Zahlungsmethode"])};fn.source="Zahlungsmethode";return fn;})(),
+  "cant_load_orders_list": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We are not able to load the orders list"])};fn.source="We are not able to load the orders list";return fn;})(),
+  "depot_detail": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot details"])};fn.source="Depot details";return fn;})(),
+  "dashboard": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dashboard"])};fn.source="Dashboard";return fn;})(),
+  "min": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Min"])};fn.source="Min";return fn;})(),
+  "depot_value": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot value"])};fn.source="Depot value";return fn;})()
 },"en":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create your account"])};fn.source="Create your account";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose your plan"])};fn.source="Choose your plan";return fn;})(),
@@ -276,6 +286,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "order_status_refunded": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["refunded"])};fn.source="refunded";return fn;})(),
   "order_status_payment_outstanding": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Paiment outstanding"])};fn.source="Paiment outstanding";return fn;})(),
   "order_status_payment_inprogress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["pending"])};fn.source="pending";return fn;})(),
+  "order_status_reverted": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reverted"])};fn.source="Reverted";return fn;})(),
   "type": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Type"])};fn.source="Type";return fn;})(),
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Recent transactions"])};fn.source="Recent transactions";return fn;})(),
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depots"])};fn.source="Depots";return fn;})(),
@@ -294,7 +305,17 @@ export const resolveNuxtI18nOptions = async (context) => {
   "course": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Course"])};fn.source="Course";return fn;})(),
   "purchase_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Purchase amount"])};fn.source="Purchase amount";return fn;})(),
   "agio": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Transaction fee (agio)"])};fn.source="Transaction fee (agio)";return fn;})(),
-  "gold_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold amount"])};fn.source="Gold amount";return fn;})()
+  "gold_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gold amount"])};fn.source="Gold amount";return fn;})(),
+  "amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Amount"])};fn.source="Amount";return fn;})(),
+  "bank_transfer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bank transfer"])};fn.source="Bank transfer";return fn;})(),
+  "bank_account": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bank account"])};fn.source="Bank account";return fn;})(),
+  "payment_method": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Payment method"])};fn.source="Payment method";return fn;})(),
+  "cant_load_orders_list": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We are not able to load the orders list"])};fn.source="We are not able to load the orders list";return fn;})(),
+  "depot_detail": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot details"])};fn.source="Depot details";return fn;})(),
+  "dashboard": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dashboard"])};fn.source="Dashboard";return fn;})(),
+  "min": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Min"])};fn.source="Min";return fn;})(),
+  "depot_value": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot value"])};fn.source="Depot value";return fn;})(),
+  "performance": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Performance"])};fn.source="Performance";return fn;})()
 },"fr":{
   "createAccount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un compte"])};fn.source="Créer un compte";return fn;})(),
   "plan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre plan"])};fn.source="Choisissez votre plan";return fn;})(),
@@ -388,6 +409,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "order_status_refunded": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["remboursée"])};fn.source="remboursée";return fn;})(),
   "order_status_payment_outstanding": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Paiement en attente"])};fn.source="Paiement en attente";return fn;})(),
   "order_status_payment_inprogress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["en attente"])};fn.source="en attente";return fn;})(),
+  "order_status_reverted": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Reverted"])};fn.source="Reverted";return fn;})(),
   "type": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Type"])};fn.source="Type";return fn;})(),
   "latest_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Transactions récentes"])};fn.source="Transactions récentes";return fn;})(),
   "depots": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dépôts"])};fn.source="Dépôts";return fn;})(),
@@ -406,7 +428,17 @@ export const resolveNuxtI18nOptions = async (context) => {
   "course": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Taux"])};fn.source="Taux";return fn;})(),
   "purchase_amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant de l'achat"])};fn.source="Montant de l'achat";return fn;})(),
   "agio": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Frais d'inscription"])};fn.source="Frais d'inscription";return fn;})(),
-  "goldAmount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant de l'actif"])};fn.source="Montant de l'actif";return fn;})()
+  "goldAmount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant de l'actif"])};fn.source="Montant de l'actif";return fn;})(),
+  "amount": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant"])};fn.source="Montant";return fn;})(),
+  "bank_transfer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Virement bancaire"])};fn.source="Virement bancaire";return fn;})(),
+  "bank_account": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Compte bancaire"])};fn.source="Compte bancaire";return fn;})(),
+  "payment_method": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Paiement"])};fn.source="Paiement";return fn;})(),
+  "cant_load_orders_list": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nous ne parvenons pas à charger la liste des commandes"])};fn.source="Nous ne parvenons pas à charger la liste des commandes";return fn;})(),
+  "depot_detail": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot details"])};fn.source="Depot details";return fn;})(),
+  "dashboard": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tableau de bord"])};fn.source="Tableau de bord";return fn;})(),
+  "min": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Min"])};fn.source="Min";return fn;})(),
+  "depot_value": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Valeur du dépôt"])};fn.source="Valeur du dépôt";return fn;})(),
+  "performance": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Performance"])};fn.source="Performance";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

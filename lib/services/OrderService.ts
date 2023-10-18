@@ -24,6 +24,18 @@ export class OrderService{
         };
         return response;
     }
+    public static async getDepotOrders(depot_id:number,request:PageRequest):Promise<PaginationResponse<Order>>{
+        const url = this.links.getDepotOrders(depot_id,request.page,request.perPage);
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        let json = await this.requester.get(url,this.headers);
+        let response:PaginationResponse<Order> = {
+            data:json.data,
+            currentPage:json.current_page,
+            lastPage:json.last_page
+        };
+        return response;
+    }
     public static getExecutionDate(order:Order):Date{
         if(order && order.transactions && order.transactions.length > 0){
             const lastTrans = order.transactions[order.transactions.length-1];
@@ -55,7 +67,14 @@ export class OrderService{
                 order.order_type.name_translation_key == OrderTypes.gold_delivery ||
                 order.order_type.name_translation_key == OrderTypes.silver_sell ||
                 order.order_type.name_translation_key == OrderTypes.silver_gift ||
-                order.order_type.name_translation_key == OrderTypes.silver_delivery
+                order.order_type.name_translation_key == OrderTypes.silver_delivery ||
+                order.order_type.name_translation_key == OrderTypes.gold_transfer_in ||
+                order.order_type.name_translation_key == OrderTypes.gold_transfer_out ||
+                order.order_type.name_translation_key == OrderTypes.silver_transfer_in ||
+                order.order_type.name_translation_key == OrderTypes.silver_transfer_out ||
+                order.order_type.name_translation_key == OrderTypes.gold_withdrawal ||
+                order.order_type.name_translation_key == OrderTypes.silver_withdrawal
+
             ){
                 return order.amount;
             }
@@ -135,6 +154,17 @@ export class OrderService{
                 return order.storage_fee;
             }
             
+        }
+        return null;
+    }
+    public static getPaymentMethodName(order?:Order):string | null | undefined {
+        if(order){
+            if(order.orders_payment_transactions && order.orders_payment_transactions.length > 0){
+                const paymentTransaction = order.orders_payment_transactions[order.orders_payment_transactions.length-1];
+                if(paymentTransaction){
+                    return paymentTransaction.payment_method;
+                }
+            }
         }
         return null;
     }

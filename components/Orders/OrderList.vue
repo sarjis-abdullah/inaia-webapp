@@ -4,6 +4,7 @@
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <div class="text-gray-900 mb-3  text-xl">{{ title }}</div>
             <table class="min-w-full divide-y divide-gray-300" v-if="!props.loadingError && !props.isLoading">
               <thead>
                 <tr>
@@ -41,10 +42,10 @@
                     
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                    <div class="text-gray-900">{{ $n(getAmountMoney(order)/100) }} {{ currency }}</div>
+                    <div class="text-gray-900">{{ getAmountMoney(order) > 0 ? $n(getAmountMoney(order)/100) +  ' '+currency:'-' }}</div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                    <div class="text-gray-900">{{ $n(getAmountGram(order)/1000) }} g</div>
+                    <div class="text-gray-900">{{ getAmountGram(order) > 0 ? $n(getAmountGram(order)/1000) +' g' : '-'}}</div>
                   </td>
                   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <a @click="()=>showTheDetails(order)" class="text-indigo-600 hover:text-indigo-900"
@@ -65,7 +66,6 @@
       </div>
       <OrderDetails :showDetails="showDetails" :order="selectedOrder" @onClose="closeDetails"/>
     </div>
-
 </template>
 <script lang="ts" setup>
 import ListLoader from '@/components/common/ListLoader';
@@ -88,6 +88,10 @@ const props = defineProps ({
       type: Boolean,
       default:false
     },
+    title:{
+      type:String,
+      default:''
+    }
 })
 const currency = CurrencyService.getCurrencySymbol();
 const showDetails = ref(false);

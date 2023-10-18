@@ -87,6 +87,15 @@ export class Urls{
     public requestPassword():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'password-reset/request');
     }
+    public depotDetail(id:number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${id}?include=depot_status`);
+    }
+    public depotHistoryValue(depot_id:number,period:string):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/history?period=${period}`);
+    }
+    public getDepotOrders(depot_id:number,page:number = 1,perPage:number = 100):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&per_page=${perPage}&page=${page}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

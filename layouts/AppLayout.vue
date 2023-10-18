@@ -128,7 +128,7 @@
   
       <header class="bg-white shadow-sm">
         <div class="mx-auto max-w-7xl py-4 px-4 sm:px-6 lg:px-8">
-          <h1 class="text-lg font-semibold leading-6 text-gray-900">Dashboard</h1>
+          <h1 class="text-lg font-semibold leading-6 text-gray-900">{{ $t(pageName) }}</h1>
         </div>
       </header>
       <main>
@@ -157,10 +157,25 @@ import TradingModal from '@/components/TradingModal';
 import LogoutHelper from '~~/helpers/LogoutHelper';
 const user:Ref<Account>= ref(null);
 const router = useRouter();
+useHead({
+      htmlAttrs: {
+        class: 'h-full bg-gray-50'
+      },
+      bodyAttrs: {
+        class: 'h-full align-middle'
+      }
+    })
 onMounted(async ()=>{
     const contactId = AccountStorage.getContactId();
     user.value = await AccountService.getAccount(parseInt(contactId));
 })
+  const route = router.currentRoute.value.name?.toString();
+  const pageName  = computed(()=>{
+    if(route?.includes('depot-detail')){
+      return 'depot_detail'
+    }
+    return 'dashboard'
+  })
   const showTrading = ref(false);
   const openTrading = ()=>{
     showTrading.value = true;
@@ -197,9 +212,7 @@ onMounted(async ()=>{
     return name;
  })
   const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Depots', href: '#', current: false },
-    { name: 'Banking', href: '#', current: false }
+    { name: 'Dashboard', href: '#', current: false },
   ]
   const userNavigation = [
     { name: 'Your Profile', action: '#' },

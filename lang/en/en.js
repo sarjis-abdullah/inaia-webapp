@@ -122,6 +122,7 @@ export default {
     order_status_refunded:'refunded',
     order_status_payment_outstanding:'Paiment outstanding',
     order_status_payment_inprogress:'pending',
+    order_status_reverted:'Reverted',
     type:"Type",
     latest_transactions:'Recent transactions',
     depots:'Depots',
@@ -142,4 +143,13 @@ export default {
     agio:'Transaction fee (agio)',
     gold_amount:'Gold amount',
     amount: 'Amount',
+    bank_transfer:"Bank transfer",
+    bank_account:'Bank account',
+    payment_method: 'Payment method',
+    cant_load_orders_list:"We are not able to load the orders list",
+    depot_detail:'Depot details',
+    dashboard:'Dashboard',
+    min:'Min',
+    depot_value:'Depot value',
+    performance:'Performance'
 }

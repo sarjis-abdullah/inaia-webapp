@@ -31,5 +31,6 @@ export interface Order{
     transactions:Array<OrderTransaction>,
     unit:string,
     updated_at?:string,
-    updated_by?:number
+    updated_by?:number,
+    reason_text?:string
 }

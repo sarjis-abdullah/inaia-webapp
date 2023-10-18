@@ -91,6 +91,7 @@ export default {
     order_status_refunded:'remboursée',
     order_status_payment_outstanding:'Paiement en attente',
     order_status_payment_inprogress:'en attente',
+    order_status_reverted:'Reverted',
     type:"Type",
     latest_transactions:'Transactions récentes',
     depots:'Dépôts',
@@ -111,4 +112,13 @@ export default {
     agio:"Frais d'inscription",
     goldAmount:"Montant de l'actif",
     amount: 'Montant',
+    bank_transfer:"Virement bancaire",
+    bank_account:'Compte bancaire',
+    payment_method:"Paiement",
+    cant_load_orders_list:"Nous ne parvenons pas à charger la liste des commandes",
+    depot_detail:'Depot details',
+    dashboard:'Tableau de bord',
+    min:'Min',
+    depot_value:'Valeur du dépôt',
+    performance:'Performance'
 }

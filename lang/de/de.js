@@ -148,6 +148,7 @@ export default {
     order_status_refunded:'Erstattung',
     order_status_payment_outstanding:'Ausstehend',
     order_status_payment_inprogress:'Ausstehend',
+    order_status_reverted:'Reverted',
     type:"Type",
     latest_transactions:'Letzte Transaktionen',
     depots:'Depots',
@@ -168,4 +169,13 @@ export default {
     agio:'Abschlussentgelt',
     gold_amount:'Menge',
     amount: 'Betrag',
+    bank_transfer:"Überweisung",
+    bank_account:'Bankverbindung',
+    payment_method: 'Zahlungsmethode',
+    cant_load_orders_list:"We are not able to load the orders list",
+    depot_detail:'Depot details',
+    dashboard:'Dashboard',
+    min:'Min',
+    depot_value:'Depot value',
+    performance:'Performance'
 }

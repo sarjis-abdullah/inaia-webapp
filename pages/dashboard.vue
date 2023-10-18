@@ -2,13 +2,10 @@
   
     <div >
         <AssetSummary/>
-        <div class="text-gray-900 mt-6  text-xl">{{ $t('depots') }}</div>
-        <DepotList/>
-        <div class="mt-6 flex justify-center">
-        <div class="text-gray-900  text-xl flex-1">{{ $t('latest_transactions') }}</div>
         
-      </div>
-        <LatestOrders/>
+        <DepotList class="mt-6"/>
+       
+        <LatestOrders class="mt-6"/>
        
     </div>
     

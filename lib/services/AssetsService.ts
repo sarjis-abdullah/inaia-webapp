@@ -9,6 +9,9 @@ import { TokenService } from './TokenService';
 import { CurrencyService } from './CurrencyService';
 import { PriceResponse } from '../responses/PriceResponse';
 import { DepotType } from '../models';
+import { DepotHistoryValuesRequest } from '../requests';
+import { DepotHistoryValue } from '../models';
+import moment from 'moment';
 export class AssetsService{
     private static links = Urls.URLS();
     private static requester = HttpRequester.httpRequester();
@@ -60,5 +63,41 @@ export class AssetsService{
         this.headers.addAuthHeader(token);
         let json = await this.requester.get(url,this.headers);
         return json.data;
+    }
+    public static async getDepotDetails(id:number):Promise<Depot>{
+        const url = this.links.depotDetail(id);
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        let json = await this.requester.get(url,this.headers);
+        return json.data;
+    }
+    public static async getDepotHistoryValues(request:DepotHistoryValuesRequest):Promise<DepotHistoryValue[]>{
+        const url = this.links.depotHistoryValue(request.depot_id,request.period);
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        let json = await this.requester.get(url,this.headers);
+        let data:DepotHistoryValue[] = [];
+        for (const [key, value] of Object.entries(json)) {
+            let date = moment.unix(parseInt(key)).toString();
+            let item = data.find(x=>x.date==date);
+            if(item)
+            {
+                item.money_value = value.EUR;
+                item.gram_value=value.gold;
+            }
+            else
+            {
+                data.push({date:date,money_value:value.EUR,gram_value:value.gram});
+            }
+        }
+        if(data.length==1)
+        {
+            data.push({
+                date:moment().toString(),
+                money_value:data[0].money_value,
+                gram_value:data[0].gram_value
+            })
+        }
+        return data;
     }
 }

@@ -1,7 +1,6 @@
 <template>
-   <div>
-        
-        <OrderList :isLoading="loading" :loadingError="loadingError" :orders="transactions"/>
+   <div class="rounded-lg bg-white shadow p-3" >
+        <OrderList :isLoading="loading" :loadingError="loadingError" :orders="transactions" :title="$t('latest_transactions')"/>
         <div class="text-blue-500 text-sm text-center mt-3" v-if="moreToCome">
             <a v-if="!loadMore" @click.prevent="loadMoreTransaction">{{ $t('see_more') }}</a>
             <span v-else><Loading></Loading></span>

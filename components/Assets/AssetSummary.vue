@@ -3,8 +3,8 @@
       <div class="text-center text-sm text-gray-500">Total amount</div>
       <h1 class="text-center text-4xl">{{ $n(balance) }} €</h1>
        
-        <div  class="flex flex-row mt-10">
-          <div v-for="asset in assets" :key="asset.name" class="flex-1 mx-3">
+        <div  class="grid grid-cols-2 gap-10 mt-10">
+          <div v-for="asset in assets" :key="asset.name">
           <AssetItem   :item="asset"/>
           <PriceHistory :type="asset.name" class="mt-6"/>
           </div>
