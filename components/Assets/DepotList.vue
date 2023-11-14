@@ -5,7 +5,32 @@
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div class="text-gray-900 mb-3  text-xl">{{ $t('depots') }}</div>
+            <div class="flex flex-column mb-3">
+                <div class="text-gray-900   text-xl flex-1">{{ $t('depots') }}</div>
+                <div class="inline-flex rounded-md shadow-sm">
+    <button type="button" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">{{ $t('new_depot') }}</button>
+    <Menu as="div" class="relative -ml-px block">
+      <MenuButton class="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+        <span class="sr-only">Open options</span>
+        <ChevronDownIcon class="h-5 w-5" aria-hidden="true" />
+      </MenuButton>
+      <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+        <MenuItems class="absolute right-0 z-10 -mr-1 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div class="py-1">
+            <MenuItem v-slot="{ active }">
+              <a :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']" @click="()=>newDepot(AssetTypes.gold)">{{ $t('new_gold_depot') }}</a>
+             
+            </MenuItem>
+            <MenuItem v-slot="{ active }">
+              <a :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']" @click="()=>newDepot(AssetTypes.silver)">{{ $t('new_silver_depot') }}</a>
+             
+            </MenuItem>
+          </div>
+        </MenuItems>
+      </transition>
+    </Menu>
+  </div>
+              </div>
             <table class="min-w-full divide-y divide-gray-300" v-if="!loadingError && !isLoading">
               <thead>
                 <tr>
@@ -78,6 +103,8 @@ import DepotStatus from '@/components/Assets/DepotStatus';
 import { PaginationResponse } from '~~/lib/responses';
 import ListLoader from '@/components/common/ListLoader';
 import ListLoadingError from '@/components/common/ListLoadingError';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
   const props = defineProps({
     type:{
         type: Object as PropType<DepotType>
@@ -90,6 +117,10 @@ const goldPrice : Ref<number> = ref(0);
 const loadingError = ref(false);
 const isLoading = ref(true);
 const currency = CurrencyService.getCurrencySymbol();
+const router = useRouter();
+const newDepot= (type)=>{
+  router.push('/depot/new/'+type);
+}
 const price = computed(()=>{
   if(props.type){
     if(props.type.name_translation_key.toLocaleUpperCase() == AssetTypes.gold.toLocaleUpperCase()){

@@ -13,7 +13,8 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/plugins/i18n").default> &
   InjectionType<typeof import("../../plugins/appexChart.client").default> &
   InjectionType<typeof import("../../plugins/loader.client").default> &
-  InjectionType<typeof import("../../plugins/modal.client").default>
+  InjectionType<typeof import("../../plugins/modal.client").default> &
+  InjectionType<typeof import("../../plugins/slider.client").default>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }

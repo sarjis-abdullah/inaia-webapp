@@ -1,3 +1,4 @@
+
 import { ResetPinService } from './ResetPinService';
 import { AccountService } from "./AccountService";
 import { AssetsService } from "./AssetsService";
@@ -13,7 +14,8 @@ import { SubscriptionService } from './SubscriptionService';
 import { TokenService } from './TokenService';
 import { OrderService } from './OrderService';
 import { PricesHistoryService } from './PricesHistoryService';
-
+import { SavingPlanService } from './SavingPlanService';
+import { AddDepotService } from './AddDepotService';
 export { ResetPinService };
 export { AccountService };
 export { AssetsService };
@@ -29,3 +31,5 @@ export { SubscriptionService };
 export { TokenService };
 export { OrderService };
 export { PricesHistoryService };
+export { SavingPlanService };
+export { AddDepotService };

@@ -1,4 +1,4 @@
-export enum ConditionTypes {
+export enum TermAndConditionTypes {
     registration='registration',
     silverOrder='silver_one_time',
     goldOrder='gold_one_time',

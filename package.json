@@ -25,6 +25,7 @@
     "vue-content-loader": "^2.0.1",
     "vue-country-flag-next": "^2.3.2",
     "vue3-apexcharts": "^1.4.4",
+    "vue3-slider": "^1.9.0",
     "vuex": "^4.0.2"
   }
 }

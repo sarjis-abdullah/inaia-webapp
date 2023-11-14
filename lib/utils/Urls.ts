@@ -38,8 +38,15 @@ export class Urls{
     public verifyPhoneNumber():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'verify-phone');
     }
-    public termsAndConditions(country:number,conditionType:string):string{
-        return this.buildUrl(BaseUrls.getCoreUrl(),`conditions?country_id=${country}&condition_type_prerequisite=${conditionType}&per_page=500`)
+    public termsAndConditions(conditionType:string,country?:number):string{
+        let path = '';
+        if(country){
+            path = `conditions?country_id=${country}&condition_type_prerequisite=${conditionType}&per_page=500`;
+        }
+        else{
+            path = `conditions?condition_type_prerequisite=${conditionType}&per_page=500`
+        }
+        return this.buildUrl(BaseUrls.getCoreUrl(),path)
     }
     public registerCustomer():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'register');
@@ -95,6 +102,15 @@ export class Urls{
     }
     public getDepotOrders(depot_id:number,page:number = 1,perPage:number = 100):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&per_page=${perPage}&page=${page}`);
+    }
+    public getSavingPlanTarget():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),'target-types');
+    }
+    public addDepot():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),'depots');
+    }
+    public accountPorductDetails(id:number):string{
+        return this.buildUrl(BaseUrls.getCoreUrl(),`accounts/${id}/product-fees`);
     }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;

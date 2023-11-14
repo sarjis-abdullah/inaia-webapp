@@ -122,18 +122,10 @@ const options = {
       enabled: false,
     },
     events: {
-      mouseMove: function(event, chartContext, config) {
-        console.log(event);
-        console.log(chartContext);
-        console.log(config);
-      },
-      click: function(event, chartContext, config) {
-        debugger;
-        console.log(event);
-        console.log(chartContext);
-        console.log(config);
+          mouseMove: (e, chartContext, config) => {
+            followChartValues(config)
+          }
       }
-    }
 
   },
   colors: [ '#0065D3'],
@@ -249,6 +241,9 @@ const getPrice = computed( ()=>{
     }
   }
 })
+const followChartValues = (config) =>{
+  console.log(config)
+}
 onMounted(async ()=>{
     if(props.depot)
     {

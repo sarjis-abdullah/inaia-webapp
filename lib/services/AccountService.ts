@@ -3,6 +3,7 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
+import { ProductFee } from '../models';
 export class AccountService{
     private static account:Account;
     private static links = Urls.URLS();
@@ -32,5 +33,16 @@ export class AccountService{
             return this.loadAccount(id);
         }
         
+    }
+    public static async getAccountProductDetails(account_id:number):Promise<ProductFee[]>{
+        try{
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            let json = await this.requester.get(this.links.accountPorductDetails(account_id),this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
     }
 }
