@@ -8,8 +8,8 @@
             <div class="flex flex-column mb-3">
                 <div class="text-gray-900   text-xl flex-1">{{ $t('depots') }}</div>
                 <div class="inline-flex rounded-md shadow-sm">
-    <button type="button" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">{{ $t('new_depot') }}</button>
-    <Menu as="div" class="relative -ml-px block">
+    <button  v-if="isVerified" type="button" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">{{ $t('new_depot') }}</button>
+    <Menu as="div" class="relative -ml-px block" v-if="isVerified">
       <MenuButton class="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
         <span class="sr-only">Open options</span>
         <ChevronDownIcon class="h-5 w-5" aria-hidden="true" />
@@ -75,7 +75,7 @@
                   </td>
                   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <NuxtLink :to="'depot/detail/'+depot.id" class="text-indigo-600 hover:text-indigo-900"
-                      >{{ $t('details') }}<span class="sr-only">, {{ depot.name }}</span></NuxtLink
+                      v-if="isVerified">{{ $t('details') }}<span class="sr-only">, {{ depot.name }}</span></NuxtLink
                     >
                   </td>
                 </tr>
@@ -108,6 +108,10 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
   const props = defineProps({
     type:{
         type: Object as PropType<DepotType>
+    },
+    isVerified:{
+      type:Boolean,
+      default:false
     }
 });
 const depots : Ref<Array<Depot>>=ref([])
@@ -118,8 +122,9 @@ const loadingError = ref(false);
 const isLoading = ref(true);
 const currency = CurrencyService.getCurrencySymbol();
 const router = useRouter();
+const { locale } = useI18n();
 const newDepot= (type)=>{
-  router.push('/depot/new/'+type);
+  router.push('/'+locale.value+'/depot/new/'+type);
 }
 const price = computed(()=>{
   if(props.type){

@@ -126,11 +126,7 @@
         </DisclosurePanel>
       </Disclosure>
   
-      <header class="bg-white shadow-sm">
-        <div class="mx-auto max-w-7xl py-4 px-4 sm:px-6 lg:px-8">
-          <h1 class="text-lg font-semibold leading-6 text-gray-900">{{ $t(pageName) }}</h1>
-        </div>
-      </header>
+     
       <main>
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <!-- Replace with your content -->
@@ -156,6 +152,7 @@ import { AccountStorage } from '~~/storage/AccountStorage';
 import TradingModal from '@/components/TradingModal';
 import LogoutHelper from '~~/helpers/LogoutHelper';
 const user:Ref<Account>= ref(null);
+const {t,locale} = useI18n();
 const router = useRouter();
 useHead({
       htmlAttrs: {
@@ -212,12 +209,13 @@ onMounted(async ()=>{
     return name;
  })
   const navigation = [
-    { name: 'Dashboard', href: '#', current: false },
+    { name: t('dashboard'), href: '#', current: false },
   ]
   const userNavigation = [
-    { name: 'Your Profile', action: '#' },
-    { name: 'Settings', action: '#' },
-    { name: 'Sign out', action: ()=>{
+    { name: t('your_profile'), action: ()=>{
+      router.push("/"+locale.value+'/profile')
+    } },
+    { name: t('sign_out'), action: ()=>{
       LogoutHelper(router);
     } },
   ]

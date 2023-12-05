@@ -20,7 +20,8 @@ export class OrderService{
         let response:PaginationResponse<Order> = {
             data:json.data,
             currentPage:json.current_page,
-            lastPage:json.last_page
+            lastPage:json.last_page,
+            total:json.total
         };
         return response;
     }
@@ -31,8 +32,9 @@ export class OrderService{
         let json = await this.requester.get(url,this.headers);
         let response:PaginationResponse<Order> = {
             data:json.data,
-            currentPage:json.current_page,
-            lastPage:json.last_page
+            currentPage:json.meta.current_page,
+            lastPage:json.meta.last_page,
+            total:json.meta.total
         };
         return response;
     }

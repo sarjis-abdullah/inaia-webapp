@@ -2,7 +2,7 @@
     <div v-if="!isLoadingAssets">
       <div class="text-center text-sm text-gray-500">Total amount</div>
       <h1 class="text-center text-4xl">{{ $n(balance) }} €</h1>
-       
+      <Alert v-if="!isVerified" :kycDetails="kycDetails" class="my-3"/>
         <div  class="grid grid-cols-2 gap-10 mt-10">
           <div v-for="asset in assets" :key="asset.name">
           <AssetItem   :item="asset"/>
@@ -26,16 +26,25 @@
 <script lang="ts" setup>
 import AssetItem from '@/components/Assets/AssetItem';
 import PriceHistory from '@/components/Assets/PriceHistory';
-import {Asset} from '@/lib/models';
+import {Asset, KycDetail} from '@/lib/models';
 import { AssetsService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
-import { onMounted,Ref,ref } from 'vue';
+import { onMounted,Ref,ref,PropType } from 'vue';
 import {
   ContentLoader,
 } from 'vue-content-loader';
 import { AssetTypes } from '~~/lib/contants';
 const assets:Ref<Array<Asset>>=ref([]);
+  import  Alert  from '@/components/Kyc/Alert.vue';
 const isLoadingAssets = ref(true);
+const props = defineProps({
+    kycDetails:{
+        type : Object as PropType<KycDetail>
+    },
+    isVerified:{
+      type:Boolean
+    }
+  })
 onMounted(async ()=>{
 
   const accountId = AccountStorage.getAccountId();

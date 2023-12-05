@@ -23,7 +23,7 @@ export class ConditionService{
     }
     public static async getDepotAndSavingPlanCondition(request:ConditionsRequest):Promise<Array<Condition>>{
         
-        let res = await this.requester.get(this.links.termsAndConditions(request.type,null),this.headers);
+        let res = await this.requester.get(this.links.termsAndConditions(request.type.join(','),null),this.headers);
         let data:Array<Condition> = [];
         for (const [key, value] of Object.entries(res.data)) {
             data = data.concat(value);

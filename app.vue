@@ -35,8 +35,8 @@ const router = useRouter();
       const expDate = LoginStorage.getExpDate()
       LoginService.setIsLoggedIn(true);
       TokenService.init(token,expDate);
-      await AccountService.loadAccount(contactId);
-
+      let account = await AccountService.loadAccount(contactId);
+      AccountStorage.saveAccount(account);
       
       
     }

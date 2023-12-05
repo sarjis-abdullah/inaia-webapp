@@ -5,7 +5,8 @@
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div class="text-gray-900 mb-3  text-xl">{{ title }}</div>
-            <table class="min-w-full divide-y divide-gray-300" v-if="!props.loadingError && !props.isLoading">
+            <div v-if="!props.loadingError && !props.isLoading">
+            <table class="min-w-full divide-y divide-gray-300" >
               <thead>
                 <tr>
                   <th scope="col" class="py-3.5 pl-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">{{ $t('type') }}</th>
@@ -55,6 +56,8 @@
                 </tr>
               </tbody>
             </table>
+            
+          </div>
             <div v-if="!props.loadingError && props.isLoading">
              <ListLoader/>
             </div>
@@ -76,6 +79,7 @@ import { Order } from '@/lib/models';
 import { OrderService,CurrencyService } from '@/lib/services';
 import { OrderStatuses } from '~~/lib/contants';
 import OrderDetails from '@/components/Orders/OrderDetails';
+
 const props = defineProps ({
     orders : {
         type: Object as PropType<Array<Order>>

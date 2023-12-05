@@ -136,10 +136,11 @@
           <Welcome v-if="currentStep == 0" :type="type" @start="startAdding"/>
           <DepotTargets v-if="currentStep == 1" @choose="setTarget"/>
           <DepotName v-if="currentStep == 2 && selectedDepotTarget" :target="selectedDepotTarget" @onNameSet="onNameSet"/>
-          <ConfirmCreateDepot v-if="currentStep == 3 && !isConfirmingDepotConditions" :type="type" @onDepotCreated="onDepotCreation"/>
+          <ConfirmCreateDepot v-if="currentStep == 3 && !isConfirmingDepotConditions" :type="type" @onDepotCreated="onDepotCreation" @onSavingPlanSetup="setupSavingPlan"/>
           <ConfirmDepotConditions v-if="currentStep == 3 && isConfirmingDepotConditions" :type="type" :target="selectedDepotTarget" :depotName="depotName" @onConditionsAccepted="saveDepot"/>
-          <SetupSavingPlan v-if="currentStep == 4 && accountId" :accountId="accountId"/>
-       
+          <SetupSavingPlan v-if="currentStep == 4 && accountId" :accountId="accountId" :type="type" :target="selectedDepotTarget" @onContractDataSet="confirmSavingPlanContactData
+          "/>
+          <ConfirmSavingsPlanContract v-if="currentStep == 5"  :type="type" :target="selectedDepotTarget" :saveDepotRequest="saveDepotRequest" :totalAgio="totalAgio" @onConditionsAccepted="saveDepot"/>
         
       </main>
       <main class="py-10 w-full" v-else>
@@ -168,6 +169,7 @@ import ConfirmCreateDepot from '@/components/NewDepot/ConfirmCreateDepot';
 import ConfirmDepotConditions from '@/components/NewDepot/ConfirmDepotConditions';
 import SavingDepotsScreen from '@/components/NewDepot/SavingDepotsScreen';
 import SetupSavingPlan from '@/components/NewDepot/SetupSavingPlan';
+import ConfirmSavingsPlanContract from '@/components/NewDepot/ConfirmSavingsPlanContract';
 import {Ref} from 'vue'
 import { DepotTarget, DepotType } from '~~/lib/models';
 useHead({
@@ -200,11 +202,12 @@ import { AccountStorage } from '~~/storage';
 ]);
 const currentStep = ref(0);
 const sidebarOpen = ref(false)
-const year = ref(0)
+const year = ref(4)
 const reachedStep = ref(1);
 const selectedDepotType : Ref<DepotType> = ref(null);
 const selectedDepotTarget:  Ref<DepotTarget>=ref(null);
 const addDepotRequest : Ref<AddDepotRequest> = ref(null);
+  const totalAgio : Ref<number> = ref(null);
 const isConfirmingDepotConditions = ref(false);
 const depotName = ref('');
 const isSavingDepot = ref(false);
@@ -212,23 +215,27 @@ const isSubmitting = ref(false);
 const error = ref(null);
 const saveDepotRequest : Ref<AddDepotRequest> = ref({});
 const successfullyCreated = ref(false);
-const accountId = ref(null)
+const accountId = ref(null);
+const name = ref(t('welcome'));
 const startAdding = ()=>{
   currentStep.value = 1;
   reachedStep.value = 1;
+  goToStep(1)
 }
 const setTarget = (target:DepotTarget)=>{
   currentStep.value = 2;
   reachedStep.value = 2;
+  goToStep(2);
   selectedDepotTarget.value = target
   saveDepotRequest.value.target_type_id = target.id;
-  addDepotRequest.value.target_type_id = target.id;
+  
 }
 const onNameSet = (name:string)=>{
   depotName.value = name;
   saveDepotRequest.value.name = name;
   currentStep.value = 3;
   reachedStep.value = 3;
+  goToStep(3)
 }
 const navigateToStep = (step:number)=>{
   if(step<=reachedStep.value){
@@ -255,7 +262,40 @@ const saveDepot = async (conditions:string) => {
     isSubmitting.value = false;
   }
 }
-
+const setupSavingPlan = ()=>{
+  currentStep.value = 4;
+  reachedStep.value = 4;
+  goToStep(4)
+}
+const confirmSavingPlanContactData = (object:Object)=>{
+  saveDepotRequest.value.agio_payment_option = object.agio_payment_option;
+  saveDepotRequest.value.interval_amount = object.interval_amount;
+  saveDepotRequest.value.interval_day = object.interval_day;
+  saveDepotRequest.value.duration = object.duration;
+  saveDepotRequest.value.interval_startdate = object.interval_startdate;
+  saveDepotRequest.value.payment_method = object.payment_method;
+  saveDepotRequest.value.payment_account_id = object.payment_account_id;
+  totalAgio.value = object.totalAgio;
+  currentStep.value = 5;
+  reachedStep.value = 5;
+  goToStep(5)
+}
+const goToStep=(step:number)=>
+{
+  steps.value.forEach((s,index)=>{
+    if(index+1 == step){
+      s.status = SubscriptionSteps.current;
+      name.value = s.name;
+    }
+    if(index+1>step){
+      s.status = SubscriptionSteps.upcoming;
+    }
+    if(index+1 < step){
+      s.status = SubscriptionSteps.complete;
+    }
+    currentStep.value = step;
+  })
+}
 onMounted(()=>{
   accountId.value = AccountStorage.getAccountId();
   if(accountId.value){

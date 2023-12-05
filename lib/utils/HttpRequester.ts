@@ -42,6 +42,22 @@ export class HttpRequester{
         }
    
     }
+    public async put(url:string,headers:HttpHeader,data:Object):Promise<HttpResponse>{
+        
+        const response = await fetch(url,{
+            method:'PUT',
+            headers:headers.getHeaders(),
+            body:JSON.stringify(data)
+        });
+        if(response.ok)
+        {
+            return await response.json();
+        }
+        else{
+            throw await this.handleError(response);
+        }
+   
+    }
     private async handleError(response:Response):Promise<Error>{
         let status = response.status;
         let error = "";

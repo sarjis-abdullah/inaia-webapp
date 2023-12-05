@@ -57,9 +57,9 @@ const loadingConditions = ref(false);
 const error = ref(null);
 onMounted(async()=>{
     try{
-        let type = ConditionTypes.depotGold;
+        let type = [ConditionTypes.depotGold];
         if(props.type == AssetTypes.silver){
-            type = ConditionTypes.depotSilver;
+            type = [ConditionTypes.depotSilver];
         }
         loadingConditions.value = true;
         conditions.value = await ConditionService.getDepotAndSavingPlanCondition({

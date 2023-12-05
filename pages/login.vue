@@ -91,6 +91,7 @@ import { ServerErrorException } from '@/lib/exceptions';
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
         AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
+        AccountStorage.saveAccount(response.account);
         AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
         AccountService.setAccount(response.account);
         if(state.keepMeSignedIn){

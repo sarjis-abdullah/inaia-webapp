@@ -15,6 +15,13 @@ interface Plan{
     plan_fees?:Array<Fee>;
 
 }
+export interface KycDetail{
+    id:string,
+    session_token:string,
+    status:string,
+    url:string,
+    vendor_data:string
+}
 interface AccountData{
     id:number;
     contact_id:number;
@@ -35,6 +42,7 @@ interface AccountData{
     new_inbox_message_count:number;
     contact:number;
     products:Array<Product>;
+    kyc_details:KycDetail;
 }
 export interface Account{
     id:number;

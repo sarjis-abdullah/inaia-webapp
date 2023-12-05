@@ -3,7 +3,8 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
-import { ProductFee } from '../models';
+import { Address, ProductFee } from '../models';
+import { UpdateAddressRequest } from '../requests';
 export class AccountService{
     private static account:Account;
     private static links = Urls.URLS();
@@ -39,6 +40,18 @@ export class AccountService{
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             let json = await this.requester.get(this.links.accountPorductDetails(account_id),this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateAddress(address:UpdateAddressRequest):Promise<Address>{
+        try{
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            let json = await this.requester.put(this.links.updateAddress(address.id),this.headers,address);
+            this.account.address = json.data;
             return json.data;
         }
         catch(err){
