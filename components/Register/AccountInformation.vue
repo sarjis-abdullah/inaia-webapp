@@ -117,7 +117,7 @@
 </template>
 <script lang="ts" setup>
 import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon } from '@heroicons/vue/24/outline';
-import {validateEmail,validatePassword,validatePhoneNumber} from '@/lib/utils/Validators';
+import {validateEmail,validatePassword,validatePhoneNumber,sanitizePhoneNumber} from '@/lib/utils/Validators';
 import {SubscriptionService,EmailService,PhoneNumberService} from '@/lib/services';
 import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
 import PhoneCodes from '@/components/Register/PhoneCodes';
@@ -223,12 +223,12 @@ async function save() {
     try{
         await EmailService.sendEmailCode(locale.value,{email:state.email});
         SubscriptionStorage.saveEmailNotVerified();
-        await PhoneNumberService.sendPhoneCode(locale.value,{phone_number:state.phoneCode+state.phone});
+        await PhoneNumberService.sendPhoneCode(locale.value,{phone_number:state.phoneCode+sanitizePhoneNumber(state.phone)});
         SubscriptionStorage.phoneNotValidated();
         const data:AccountInformationRequest = {
             email:state.email,
             password:state.password,
-            mobile:state.phone,
+            mobile:sanitizePhoneNumber(state.phone),
             prename:state.prename,
             surname :state.name,
             referral_code:state.referalCode,
