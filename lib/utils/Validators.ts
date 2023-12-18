@@ -3,9 +3,10 @@ export function validateEmail(email:string):boolean{
     return re.test(String(email).toLowerCase());
 }
 export function validatePhoneNumber(phone:string):boolean{
-    if(phone == "111111" ) return true;
+    const sanitized = sanitizePhoneNumber(phone);
+    if(sanitized == "111111" ) return true;
     const regex = new RegExp(/^[0-9]{8}/);
-    return regex.test(String(phone).toLowerCase());
+    return regex.test(String(sanitized).toLowerCase());
 }
 export function validatePassword(password:string):boolean{
     const validLength = password.length >= 6;
@@ -18,5 +19,13 @@ export const sanitizeEmail = (email:string) => {
         return email. replace(/\s/g, '' );
     else{
         return '';
+    }
+}
+export const sanitizePhoneNumber = (number:string)=>{
+    if(number.startsWith('0')){
+        return number.replace('0','');
+    }
+    else {
+        return number;
     }
 }
