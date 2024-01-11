@@ -127,6 +127,21 @@ export class Urls{
     public updateAddress(addressId:number):string{
         return this.buildUrl(BaseUrls.getCoreUrl(),`addresses/${addressId}`);
     }
+    public updateChannel(channelId?:number):string{
+        return this.buildUrl(BaseUrls.getCoreUrl(),`contact-channels${channelId?'/'+channelId:''}`);
+    }
+    public updateSettings(accountId?:number):string{
+        return this.buildUrl(BaseUrls.getCoreUrl(),`account-settings/${accountId}`);
+    }
+    public markPaymentAsDefault(paymentAccountId?:number):string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(),`payment-account/${paymentAccountId}/default`);
+    }
+    public deletePaymentBankAccount(paymentAccountId?:number):string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(),`payment-account/${paymentAccountId}`);
+    }
+    public addPaymentBankAccount():string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(),'payment-account/create');
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

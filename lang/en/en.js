@@ -220,5 +220,10 @@ export default {
     continueAutIdText:'In order to finish your identity check, you need to continue the auto identification either in app or by link (please keep your ID card near to you)',
     failedAutoIdText:'Your auto identification failed, please start a new identity check process.',
     continueAutoId:"Continue identification",
-    
+    accountHolder:'Account holder',
+    iban:'IBAN',
+    setAsDefault:'Set as default',
+    authorizeInaiaToAcceptPayment:'I authorize INAIA GmbH to accept payments from my account using collect direct debit. At the same time, I instruct my bank to redeem the direct debits drawn on my account by INAIA GmbH',
+    kycStatusIsPending:'We will now check your proof of identity. This process should be completed within 24 hours.',
+    kycStatusIsFailed:'Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document.'
 }

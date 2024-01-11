@@ -58,6 +58,21 @@ export class HttpRequester{
         }
    
     }
+    public async delete(url:string,headers:HttpHeader):Promise<HttpResponse>{
+        
+        const response = await fetch(url,{
+            method:'DELETE',
+            headers:headers.getHeaders(),
+        });
+        if(response.ok)
+        {
+            return await response.json();
+        }
+        else{
+            throw await this.handleError(response);
+        }
+   
+    }
     private async handleError(response:Response):Promise<Error>{
         let status = response.status;
         let error = "";

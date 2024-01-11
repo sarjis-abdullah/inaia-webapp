@@ -23,7 +23,10 @@ const props = defineProps({
         type:String,
         default:null
     },
-
+    phoneNumber:{
+        type:String,
+        default:null
+    },
 })
 
 const emit = defineEmits<{
@@ -65,6 +68,14 @@ watch(props,(currentvalue,oldvalue)=>{
     if(sV){
       selected.value = sV;
     }
+  }
+  if(currentvalue.phoneNumber){
+    countries.value.forEach(c=>{
+      if(currentvalue.phoneNumber.startsWith(c.calling_code)){
+        selected.value = c;
+        emit("change",c.calling_code,c.id);
+      }
+    })
   }
 })
 </script>

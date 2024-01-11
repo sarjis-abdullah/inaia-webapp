@@ -4,7 +4,9 @@ import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
 import { Address, ProductFee } from '../models';
-import { UpdateAddressRequest } from '../requests';
+import { ChannelRequest, UpdateAddressRequest } from '../requests';
+import { SettingRequest } from '../requests/SettingRequest';
+import { LocaleSettingRequest } from '../requests';
 export class AccountService{
     private static account:Account;
     private static links = Urls.URLS();
@@ -53,6 +55,32 @@ export class AccountService{
             let json = await this.requester.put(this.links.updateAddress(address.id),this.headers,address);
             this.account.address = json.data;
             return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateChannel(channel:ChannelRequest):Promise<Boolean>{
+        try{
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            if(channel.id)
+                await this.requester.put(this.links.updateChannel(channel.id),this.headers,channel);
+            else{
+                await this.requester.post(this.links.updateChannel(),this.headers,channel);
+            }
+            return true;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateSettings(accountId:number,setting:LocaleSettingRequest):Promise<any>{
+        try{
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            let data = await this.requester.put(this.links.updateSettings(accountId),this.headers,setting);
+            return data.data;
         }
         catch(err){
             throw err;

@@ -1,6 +1,6 @@
 <template>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <Notification :v-show="true" :title="notificationTitle" :v-text="notificationText" :type="notificationType" @close="onNotificationClosed"/>
+       
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <img src="~/assets/img/pageicons/adressIcon.png" alt="address" class="w-32 h-auto mb-5 mx-auto"/>
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('enter_address') }}</h2>
@@ -77,6 +77,7 @@
                   <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
                       :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
                       class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('save') }}</button>
+                    <InLineApiError :err="submitErr"/>
                 </div>
             </form>
         </div>
@@ -92,16 +93,14 @@ import { Address } from '~~/lib/models';
 import { AccountService } from '~~/lib/services';
 import {getMessageFromError} from '@/helpers/ApiErrorResponseHandler';
 import Notification from "@/components/common/Notification";
-import { NotificationTypes } from '~~/constants/NotificationTypes';
+import InLineApiError from '@/components/common/InLineApiError';
 const saveActivated = ref(false);
 const isSubmitting = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
 const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
-const notificationType = ref(null);
-const notificationTitle = ref('');
-const notificationText = ref('');
+
 const showNotification = ref(false);
 const {t}= useI18n();
 const onNotificationClosed = ()=>{
@@ -113,6 +112,7 @@ const props = defineProps({
     }
 })
 const submittingError = ref(false);
+const submitErr=ref(null);
 const state = reactive({
    country_id:-1,
    line1:'',
@@ -153,6 +153,7 @@ watch(state,(currentValue)=>{
 })
 async function save() {
     isSubmitting.value = true;
+    submitErr.value = null;
     try{
         let data: UpdateAddressRequest = {
             id:props.address?.id,
@@ -168,18 +169,12 @@ async function save() {
             type_id:props.address?.type_id
         }
         const address = await AccountService.updateAddress(data);
-        notificationText.value = t('address_updated')
-        notificationTitle.value = t('success');
-        notificationType.value = NotificationTypes.sucess;
-        showNotification.value = true;
+        
 
         emit('onSave',address);
     }
     catch(err){
-        notificationText.value = getMessageFromError(err);
-        notificationTitle.value = t('error_title');
-        notificationType.value = NotificationTypes.danger;
-        showNotification.value = true;
+       submitErr.value = err;
     }
     finally{
         isSubmitting.value = false;

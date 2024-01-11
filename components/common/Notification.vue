@@ -57,6 +57,10 @@
 
   })
   const types = NotificationTypes;
+  onMounted(()=>{
+  
+    console.log(props.show);
+  })
   watch(props,(currentValue)=>{
     if(currentValue.show){
         setTimeout(()=>{

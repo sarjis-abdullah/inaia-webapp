@@ -4,6 +4,7 @@ import { Product } from './Product';
 import { Fee } from './Plan';
 import { AccountSetting } from "./AccountSetting";
 import { Channel } from './Channel';
+import { KycStatus } from './KycStatus';
 
 interface AmlStatus{
     id:number;
@@ -59,5 +60,6 @@ export interface Account{
     type?:any;
     person_data:PersonData;
     address?:Address;
-    channels:Array<Channel>
+    channels:Array<Channel>,
+    kyc_status:KycStatus
 }
