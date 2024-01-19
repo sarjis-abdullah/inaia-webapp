@@ -6,11 +6,11 @@
           <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
               <div class="flex-shrink-0">
-                <img class="h-8 w-8" src="~/assets/img/logo/logo.png" alt="Your Company" />
+                <img class="h-8 w-24" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
               </div>
               <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-                  <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-blue-800 text-white' : 'text-white hover:bg-blue-500 hover:bg-opacity-75', 'px-3 py-2 rounded-md text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">
+                  <a v-for="item in navigation" :key="item.name" @click="item.action" :class="[item.current ? 'bg-blue-800 text-white' : 'text-white hover:bg-blue-500 hover:bg-opacity-75', 'px-3 py-2 rounded-md text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">
                     {{ item.name }}
                     
                 </a>
@@ -209,7 +209,10 @@ onMounted(async ()=>{
     return name;
  })
   const navigation = [
-    { name: t('dashboard'), href: '#', current: false },
+    { name: t('dashboard'), action: ()=>{
+      const url = "http://" + window.location.host + '/' +locale.value+'/dashboard';
+      window.open(url,'_self');
+    }, current: false },
   ]
   const userNavigation = [
     { name: t('your_profile'), action: ()=>{

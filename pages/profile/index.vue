@@ -214,7 +214,7 @@ const openUpdateEmail = () => {
   showUpdateEmail.value = true;
 }
 const closeUpdateEmail = () => {
-  showUpdateEmail.value = true;
+  showUpdateEmail.value = false;
 }
 const name = computed(() => {
   let n = "";
@@ -388,7 +388,6 @@ const deleteBankAccount = async (bankAccountId:number)=>{
   showConfirmation.value = true;
 }
 const handleError = (value) => {
-  debugger;
   console.log(value.getRealMessage());
   if (value instanceof MissingInformationException || value instanceof BadInputException) {
     return value.getRealMessage();

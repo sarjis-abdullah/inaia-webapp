@@ -19,7 +19,7 @@
                 </TransitionChild>
                 <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                   <div class="flex pt-8 justify-center">
-                    <img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+                    <a @click="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
                   </div>
                   <nav class="mt-8" aria-label="Progress">
                     <ol role="list" class="space-y-10">
@@ -75,7 +75,7 @@
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
           <div class="flex pt-8 justify-center">
-            <img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+            <a @click="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
           </div>
   
             <nav class="flex justify-center mt-20" aria-label="Progress">
@@ -177,6 +177,7 @@ import { Depot } from '~~/lib/models';
 import { AccountStorage } from '~~/storage';
 import InLineAoiError from '@/components/common/InLineApiError.vue';
 import Loading from '@/components/common/Loading.vue'
+import moment from 'moment';
 useHead({
       htmlAttrs: {
         class: 'h-full bg-gray-50'
@@ -189,7 +190,7 @@ definePageMeta({
   
   middleware:['protected'],
 });
-const { t } = useI18n();
+const { t,locale } = useI18n();
 const route = useRoute();
 import { SubscriptionSteps } from '@/constants';
 import { AddSavingsPlanRequest } from '~~/lib/requests';
@@ -200,7 +201,7 @@ import { AddDepotService, AssetsService } from '~~/lib/services';
 ]);
 const currentStep = ref(1);
 const sidebarOpen = ref(false)
-const year = ref(4)
+const year = moment().get('year');
 const reachedStep = ref(1);
 const totalAgio : Ref<number> = ref(null);
 const isSavingDepot = ref(false);
@@ -217,6 +218,11 @@ const navigateToStep = (step:number)=>{
     currentStep.value = step;
   }
 
+}
+const goToDashboard = ()=>{
+  const url = "http://" + window.location.host + '/' +locale.value+'/dashboard';
+    
+  window.open(url,'_self');
 }
 const saveDepot = async (conditions:string) => {
 

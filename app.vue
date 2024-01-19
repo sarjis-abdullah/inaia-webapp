@@ -15,6 +15,7 @@ import { AssetStorage } from './storage/AssetStorage';
 import { App } from './lib/app';
 import { UnauthenticatedListener } from './lib/listeners';
 import LogoutHelper from './helpers/LogoutHelper';
+const switchLocalePath = useSwitchLocalePath();
 const router = useRouter();
   const initApp =  async ()=>{
     const config = useRuntimeConfig();
@@ -36,6 +37,7 @@ const router = useRouter();
       LoginService.setIsLoggedIn(true);
       TokenService.init(token,expDate);
       let account = await AccountService.loadAccount(contactId);
+      
       AccountStorage.saveAccount(account);
       
       

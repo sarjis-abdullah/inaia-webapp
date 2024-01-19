@@ -19,7 +19,7 @@
                 </TransitionChild>
                 <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                   <div class="flex pt-8 justify-center">
-                    <img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+                    <a @click="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
                   </div>
                   <nav class="mt-8" aria-label="Progress">
                     <ol role="list" class="space-y-10">
@@ -75,7 +75,7 @@
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
           <div class="flex pt-8 justify-center">
-            <img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+            <a @click="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
           </div>
   
             <nav class="flex justify-center mt-20" aria-label="Progress">
@@ -184,13 +184,14 @@ definePageMeta({
   
   middleware:['protected'],
 });
-const { t } = useI18n();
+const { t,locale } = useI18n();
 const route = useRoute();
 const type = route.params.type;
 import { SubscriptionSteps } from '@/constants';
 import { AddDepotRequest } from '~~/lib/requests/AddDepotRequest';
 import { AddDepotService, AssetsService } from '~~/lib/services';
 import { AccountStorage } from '~~/storage';
+import moment from 'moment';
     const steps = ref([
 { number:1,id: t('step')+' 1', name: t('choose_purpose'), status: SubscriptionSteps.upcoming },
 
@@ -202,7 +203,7 @@ import { AccountStorage } from '~~/storage';
 ]);
 const currentStep = ref(0);
 const sidebarOpen = ref(false)
-const year = ref(4)
+const year = moment().get('year');
 const reachedStep = ref(1);
 const selectedDepotType : Ref<DepotType> = ref(null);
 const selectedDepotTarget:  Ref<DepotTarget>=ref(null);
@@ -217,6 +218,11 @@ const saveDepotRequest : Ref<AddDepotRequest> = ref({});
 const successfullyCreated = ref(false);
 const accountId = ref(null);
 const name = ref(t('welcome'));
+const goToDashboard = ()=>{
+  const url = "http://" + window.location.host + '/' +locale.value+'/dashboard';
+    
+  window.open(url,'_self');
+}
 const startAdding = ()=>{
   currentStep.value = 1;
   reachedStep.value = 1;

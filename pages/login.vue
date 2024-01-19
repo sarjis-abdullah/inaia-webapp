@@ -99,7 +99,14 @@ import { ServerErrorException } from '@/lib/exceptions';
             LoginStorage.saveSecret(response.secret);
         }
         const link = router.resolve('/dashboard');
-        const url = "http://"+window.location.host+link.fullPath;
+        let locale = 'en'
+        response.account.account.settings.forEach(s => {
+      if (s.name_translation_key == 'locale') {
+        locale = s.value;
+      }
+    })
+      const url = "http://" + window.location.host + '/' +locale+'/dashboard';
+    
         window.open(url,'_self');
     }
     catch(err){
