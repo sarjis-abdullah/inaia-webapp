@@ -4,6 +4,7 @@
         @filterOrderBy="handleFilterableQUery" 
         @downloadOrderStatement="handleDownloadOrderStatement" 
         :isLoading="loading" 
+        :pdfLoading="pdfLoading" 
         :loadingError="loadingError" 
         :orders="transactions" 
         :title="$t('orders')"
@@ -24,6 +25,7 @@ const props = defineProps({
 })
 const transactions:Ref<Array<Order>>= ref([]);
 const loading = ref(true);
+const pdfLoading = ref(false);
 const loadingError = ref(false)
 const page = ref(1);
 const lastPage = ref(1);
@@ -67,14 +69,14 @@ const handleFilterableQUery = (query: string) => {
     getOrdersData(query)
 }
 const handleDownloadOrderStatement = async(query: string) => {
-    loading.value = true;
+    pdfLoading.value = true;
     try {
         await OrderService.getDepotOrderSatement(props.depot.id, query);
     } catch (error) {
         console.log(error);
     }
     finally{
-        loading.value = false
+        pdfLoading.value = false
     }
 }
 </script>

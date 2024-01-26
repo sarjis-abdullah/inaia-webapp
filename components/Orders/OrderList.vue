@@ -35,7 +35,7 @@
                 </div>
               </section>
               <div>
-                <button :disabled="!conditionToDateFilter || isLoading" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
+                <button :disabled="!conditionToDateFilter || pdfLoading" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
                   <span>{{ $t('downloadPDF') }}</span>
                 </button>
               </div>
@@ -123,6 +123,10 @@ const props = defineProps ({
     isLoading:{
       type: Boolean,
       default:true
+    },
+    pdfLoading:{
+      type: Boolean,
+      default:false
     },
     loadingError:{
       type: Boolean,
