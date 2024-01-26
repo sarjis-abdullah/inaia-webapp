@@ -101,7 +101,7 @@ export class Urls{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/history?period=${period}`);
     }
     public getDepotOrders(depot_id:number,page:number,perPage:number, query: string = ""):string{
-        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&per_page=${perPage}&page=${page}&${query}`);
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&per_page=${perPage}&page=${page}${query}`);
     }
     public getDepotOrderStament(depot_id:number, query: string = ""):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/statement?${query}`);

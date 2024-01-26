@@ -11,8 +11,8 @@
                 <AdjustmentsVerticalIcon v-else @click="showFilterSection" class="h-5 w-5 cursor-pointer" aria-hidden="true"/>
               </div>
             </header>
-            <section v-if="showFilters" class="flex items-end justify-between">
-              <section class="flex gap-2 items-center">
+            <section v-if="showFilters" class="flex items-end justify-between py-4">
+              <section class="flex gap-2">
                 <div class="flex flex-col gap-2">
                     <div>Start Date</div>
                     <input 
@@ -29,12 +29,13 @@
                         class="block  w-full 10 pl-3 py-2 rounded-md"
                         placeholder="" />
                 </div>
-                <div v-if="conditionToDateFilter">
-                  <XMarkIcon @click="removeDateFilter" class="h-5 w-5 rounded-full cursor-pointer"/>
+                <div v-if="conditionToDateFilter" class="flex flex-col gap-2 justify-around">
+                    <div></div>
+                    <XMarkIcon @click="removeDateFilter" class="h-5 w-5 rounded-full cursor-pointer"/>
                 </div>
               </section>
               <div>
-                <button :disabled="!conditionToDateFilter" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
+                <button :disabled="!conditionToDateFilter || isLoading" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
                   <span>Download PDF</span>
                 </button>
               </div>
@@ -158,7 +159,7 @@ const dateQuery = computed(()=> {
 const statementDateQuery = computed(()=> {
   let query = ""
   if (startDate.value) {
-    query += `&start_date=${startDate.value}`
+    query += `start_date=${startDate.value}`
   }
   if (query != "" && endDate.value) {
     query += `&end_date=${endDate.value}`
@@ -170,7 +171,7 @@ const conditionToDateFilter = computed(()=> showFilters.value && startDate.value
 const filterOrderBy = (dateQuery: string)=>{
   emit('filterOrderBy', dateQuery);
 }
-const downloadOrderStatement = ()=>{
+const downloadOrderStatement = async()=>{
   emit('downloadOrderStatement', statementDateQuery.value);
 }
 const showFilterSection = () => {

@@ -67,6 +67,14 @@ const handleFilterableQUery = (query: string) => {
     getOrdersData(query)
 }
 const handleDownloadOrderStatement = async(query: string) => {
-    await OrderService.getDepotOrderSatement(props.depot.id, query);
+    loading.value = true;
+    try {
+        await OrderService.getDepotOrderSatement(props.depot.id, query);
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        loading.value = false
+    }
 }
 </script>
