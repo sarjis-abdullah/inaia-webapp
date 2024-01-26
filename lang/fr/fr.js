@@ -193,5 +193,8 @@ export default {
     setAsDefault:'Compte par défaut',
     authorizeInaiaToAcceptPayment:"J'autorise l'INAIA GmbH à effectuer des paiements sur mon compte par prélèvement automatique. En même temps, je donne l'ordre à ma banque d'encaisser les prélèvements effectués sur mon compte par l'INAIA GmbH.",
     kycStatusIsPending:"Nous allons maintenant vérifier votre pièce d’identité. Ce processus devrait être terminé dans les 24 heures.",
-    kycStatusIsFailed:"Malheureusement, le processus de vérification a échoué. Veuillez recommencer le processus et assurez-vous que les informations fournies correspondent à celles de votre pièce d’identité."
+    kycStatusIsFailed:"Malheureusement, le processus de vérification a échoué. Veuillez recommencer le processus et assurez-vous que les informations fournies correspondent à celles de votre pièce d’identité.",
+    downloadPDF: 'Télécharger le PDF',
+    startDate: 'Date de début',
+    endDate: 'Date de fin',
 }

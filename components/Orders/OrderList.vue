@@ -14,7 +14,7 @@
             <section v-if="showFilters" class="flex items-end justify-between py-4">
               <section class="flex gap-2">
                 <div class="flex flex-col gap-2">
-                    <div>Start Date</div>
+                    <div>{{ $t('startDate') }}</div>
                     <input 
                         type="date" name="startDate" id="orderStartDate" required
                         v-model="startDate"
@@ -22,7 +22,7 @@
                         placeholder="" />
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div>End Date</div>
+                    <div>{{ $t('endDate') }}</div>
                     <input 
                         type="date" name="startDate" id="orderStartDate" required
                         v-model="endDate"
@@ -36,7 +36,7 @@
               </section>
               <div>
                 <button :disabled="!conditionToDateFilter || isLoading" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
-                  <span>Download PDF</span>
+                  <span>{{ $t('downloadPDF') }}</span>
                 </button>
               </div>
             </section>

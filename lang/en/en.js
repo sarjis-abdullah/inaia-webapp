@@ -225,5 +225,8 @@ export default {
     setAsDefault:'Set as default',
     authorizeInaiaToAcceptPayment:'I authorize INAIA GmbH to accept payments from my account using collect direct debit. At the same time, I instruct my bank to redeem the direct debits drawn on my account by INAIA GmbH',
     kycStatusIsPending:'We will now check your proof of identity. This process should be completed within 24 hours.',
-    kycStatusIsFailed:'Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document.'
+    kycStatusIsFailed:'Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document.',
+    downloadPDF: 'Download PDF', 
+    startDate: 'Start Date', 
+    endDate: 'End Date', 
 }
