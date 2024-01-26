@@ -15,12 +15,11 @@ export class HttpRequester{
 
         return HttpRequester.instance;
     }
-    public async get(url:string,headers:HttpHeader):Promise<HttpResponse>{
-        
+    public async get(url:string,headers:HttpHeader, wouldBeBlob: Boolean = false):Promise<HttpResponse | Blob>{
         const response = await fetch(url,{headers:headers.getHeaders()});
         if(response.ok)
         {
-            return await response.json();
+            return wouldBeBlob ? await response.blob() : await response.json();
         }
         else{
             throw await this.handleError(response);

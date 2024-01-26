@@ -1,6 +1,13 @@
 <template>
     <div class="rounded-lg bg-white shadow p-3" >
-    <OrderList :isLoading="loading" :loadingError="loadingError" :orders="transactions" :title="$t('orders')"/>
+    <OrderList 
+        @filterOrderBy="handleFilterableQUery" 
+        @downloadOrderStatement="handleDownloadOrderStatement" 
+        :isLoading="loading" 
+        :loadingError="loadingError" 
+        :orders="transactions" 
+        :title="$t('orders')"
+    />
     <Pagination class="mt-6" :perPage="perPage" :lastPage="lastPage" :total="total" :totalPerPage="totalPerPage" @onChange="onPageChanged"/>
     </div>
 </template>
@@ -8,7 +15,7 @@
 import {Ref,ref,onMounted,PropType} from 'vue';
 import { Depot, Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
-import OrderList from '@/components/Orders/OrderList';
+import OrderList from '@/components/Orders/OrderList.vue';
 import Pagination from '@/components/common/Pagination.vue';
 const props = defineProps({
     depot:{
@@ -23,9 +30,9 @@ const lastPage = ref(1);
 const total = ref(0)
 const perPage = ref(10);
 const totalPerPage = ref(0);
-const loadData = async()=>{
+const loadData = async(query = "")=>{
     if(props.depot){
-        let data = await OrderService.getDepotOrders(props.depot?.id,{page:page.value,perPage:perPage.value});
+        let data = await OrderService.getDepotOrders(props.depot?.id,{page:page.value,perPage:perPage.value}, query);
         page.value = data.currentPage ;
         lastPage.value = data.lastPage;
         total.value = data.total;
@@ -35,15 +42,14 @@ const loadData = async()=>{
     
 }
 const onPageChanged=(p:number)=>{
- page.value = p;
- loadData();
+    page.value = p;
+    loadData();
 }
 
-onMounted(async()=>{
+const getOrdersData = async(query = "")=>{
     loading.value = true;
     try{
-        
-        await loadData();
+        await loadData(query);
     }
     catch(err){
         console.log(err);
@@ -52,5 +58,15 @@ onMounted(async()=>{
     finally{
         loading.value = false
     }
+}
+
+onMounted(()=> {
+    getOrdersData()
 })
+const handleFilterableQUery = (query: string) => {
+    getOrdersData(query)
+}
+const handleDownloadOrderStatement = async(query: string) => {
+    await OrderService.getDepotOrderSatement(props.depot.id, query);
+}
 </script>

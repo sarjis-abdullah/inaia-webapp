@@ -25,8 +25,8 @@ export class OrderService{
         };
         return response;
     }
-    public static async getDepotOrders(depot_id:number,request:PageRequest):Promise<PaginationResponse<Order>>{
-        const url = this.links.getDepotOrders(depot_id,request.page,request.perPage);
+    public static async getDepotOrders(depot_id:number,request:PageRequest, query: string = ""):Promise<PaginationResponse<Order>>{
+        const url = this.links.getDepotOrders(depot_id,request.page,request.perPage, query);
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         let json = await this.requester.get(url,this.headers);
@@ -37,6 +37,19 @@ export class OrderService{
             total:json.meta.total
         };
         return response;
+    }
+    public static async getDepotOrderSatement(depot_id:number, query: string = ""):Promise<void>{
+        const url = this.links.getDepotOrderStament(depot_id, query);
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        const wouldBeBlob = true
+        let response = await this.requester.get(url,this.headers, wouldBeBlob);
+        const a = document.createElement("a");
+        a.href = window.URL.createObjectURL(response);
+        a.download = `${depot_id}-${'statement'}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
     }
     public static getExecutionDate(order:Order):Date{
         if(order && order.transactions && order.transactions.length > 0){
