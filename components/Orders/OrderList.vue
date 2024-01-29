@@ -35,7 +35,8 @@
                 </div>
               </section>
               <div>
-                <button :disabled="!conditionToDateFilter || pdfLoading" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
+                <Loading v-if="pdfLoading"/>
+                <button v-else :disabled="!conditionToDateFilter || pdfLoading" @click="downloadOrderStatement" type="button" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
                   <span>{{ $t('downloadPDF') }}</span>
                 </button>
               </div>
@@ -115,6 +116,7 @@ import { OrderService,CurrencyService } from '@/lib/services';
 import { OrderStatuses } from '~~/lib/contants';
 import OrderDetails from '@/components/Orders/OrderDetails';
 import { AdjustmentsHorizontalIcon, AdjustmentsVerticalIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import Loading from '@/components/common/Loading.vue';
 
 const props = defineProps ({
     orders : {
