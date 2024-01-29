@@ -6,6 +6,7 @@
         :isLoading="loading" 
         :pdfLoading="pdfLoading" 
         :loadingError="loadingError" 
+        :showFilterButton="true" 
         :orders="transactions" 
         :title="$t('orders')"
     />

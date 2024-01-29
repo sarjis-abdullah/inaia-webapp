@@ -6,7 +6,7 @@
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <header class="flex justify-between text-gray-900 mb-3  text-xl">
               <h6>{{ title }}</h6>
-              <div>
+              <div v-if="showFilterButton">
                 <AdjustmentsHorizontalIcon v-if="!showFilters" @click="showFilterSection" class="h-5 w-5 cursor-pointer" aria-hidden="true"/>
                 <AdjustmentsVerticalIcon v-else @click="showFilterSection" class="h-5 w-5 cursor-pointer" aria-hidden="true"/>
               </div>
@@ -137,6 +137,10 @@ const props = defineProps ({
     title:{
       type:String,
       default:''
+    },
+    showFilterButton:{
+      type:Boolean,
+      default:false
     }
 })
 const currency = CurrencyService.getCurrencySymbol();
