@@ -91,9 +91,16 @@ const handleDownloadOrderStatement = async(params: statementDateParams) => {
 
     if (props.depot) {
         try {
-            await AttachmentService.getDepotOrderSatement(props.depot?.id, query);
+            const depotId = props.depot?.id
+            const response = await AttachmentService.getDepotOrderSatement(depotId, query);
+            const a = document.createElement("a");
+            a.href = window.URL.createObjectURL(response);
+            a.download = `${depotId}-${'statement'}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
         finally{
             pdfLoading.value = false
