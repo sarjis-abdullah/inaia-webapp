@@ -3,7 +3,7 @@ import { PricePeriods } from "../contants";
 import { PageRequest } from "../requests";
 import { StatementDateFilterRequest } from "../requests/DateFilterRequest";
 import { BaseUrls } from "./BaseUrls";
-import { objectToQueryString } from "./queryUtils";
+import { objectToQueryString } from "./QueryParamsHelper";
 const ACCOUNT_INCLUDES = "include=person_data,account,address,channels,country,new_inbox_message_count,new_support_ticket_answer_count,products,product_specs,kyc_details";
 const DEPOT_INCLUDES = "depot_status,depot_status_history,depot_orders,depot_agio_transactions,account,interval";
 
