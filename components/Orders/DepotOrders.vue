@@ -19,14 +19,14 @@ import { Depot, Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
 import OrderList from '@/components/Orders/OrderList.vue';
 import Pagination from '@/components/common/Pagination.vue';
-import { AttachmentService } from '~~/lib/services/AttachmentService';
+import { AttachmentService } from '@/lib/services/index';
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
     }
 })
-interface statementDateParams {end_date: string, start_date: string}
-interface dateParams {endDate: string, startDate: string}
+interface statementDateParams {end_date?: string, start_date?: string}
+interface dateParams {endDate?: string, startDate?: string}
 const transactions:Ref<Array<Order>>= ref([]);
 const loading = ref(true);
 const pdfLoading = ref(false);
