@@ -1,5 +1,5 @@
+import { StatementDateFilterRequest } from '@/lib/requests/index';
 import { PageRequest } from '../requests';
-import { StatementDateFilterRequest } from '../requests/DateFilterRequest';
 import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";

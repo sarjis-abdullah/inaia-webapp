@@ -1,4 +1,4 @@
-import { DateFilterRequest } from "./DateFilterRequest";
+import { DateFilterRequest } from "@/lib/requests/index";
 
 export interface PageRequest extends DateFilterRequest{
     page:number;
