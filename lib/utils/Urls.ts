@@ -1,8 +1,11 @@
 
 import { PricePeriods } from "../contants";
+import { PageRequest } from "../requests";
 import { BaseUrls } from "./BaseUrls";
+import { objectToQueryString } from "./queryUtils";
 const ACCOUNT_INCLUDES = "include=person_data,account,address,channels,country,new_inbox_message_count,new_support_ticket_answer_count,products,product_specs,kyc_details";
 const DEPOT_INCLUDES = "depot_status,depot_status_history,depot_orders,depot_agio_transactions,account,interval";
+
 export class Urls{
     private static instance:Urls;
     public static URLS():Urls{
@@ -100,8 +103,9 @@ export class Urls{
     public depotHistoryValue(depot_id:number,period:string):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/history?period=${period}`);
     }
-    public getDepotOrders(depot_id:number,page:number,perPage:number, query: string = ""):string{
-        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&per_page=${perPage}&page=${page}${query}`);
+    public getDepotOrders(depot_id:number,request:PageRequest):string{
+        const queryParams = objectToQueryString(request);
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&${queryParams}`);
     }
     public getDepotOrderStament(depot_id:number, query: string = ""):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/statement?${query}`);

@@ -25,8 +25,8 @@ export class OrderService{
         };
         return response;
     }
-    public static async getDepotOrders(depot_id:number,request:PageRequest, query: string = ""):Promise<PaginationResponse<Order>>{
-        const url = this.links.getDepotOrders(depot_id,request.page,request.perPage, query);
+    public static async getDepotOrders(depot_id:number,request:PageRequest){
+        const url = this.links.getDepotOrders(depot_id,request);
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         let json = await this.requester.get(url,this.headers);

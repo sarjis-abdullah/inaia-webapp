@@ -33,26 +33,37 @@ const lastPage = ref(1);
 const total = ref(0)
 const perPage = ref(10);
 const totalPerPage = ref(0);
-const loadData = async(query = "")=>{
+const startDate = ref("");
+const endDate = ref("");
+const queryParams = computed(()=> {
+    const params = {page:page.value,perPage:perPage.value}
+    if (startDate.value) {
+        params.startDate = startDate.value
+    }
+    if (endDate.value) {
+        params.endDate = endDate.value
+    }
+    return  params
+})
+const loadData = async()=>{
     if(props.depot){
-        let data = await OrderService.getDepotOrders(props.depot?.id,{page:page.value,perPage:perPage.value}, query);
+        let data = await OrderService.getDepotOrders(props.depot?.id, queryParams.value);
         page.value = data.currentPage ;
         lastPage.value = data.lastPage;
         total.value = data.total;
         totalPerPage.value = data.data.length;
         transactions.value = data.data;
     }
-    
 }
 const onPageChanged=(p:number)=>{
     page.value = p;
     loadData();
 }
 
-const getOrdersData = async(query = "")=>{
+const getOrdersData = async()=>{
     loading.value = true;
     try{
-        await loadData(query);
+        await loadData();
     }
     catch(err){
         console.log(err);
@@ -66,13 +77,16 @@ const getOrdersData = async(query = "")=>{
 onMounted(()=> {
     getOrdersData()
 })
-const handleFilterableQUery = (query: string) => {
-    getOrdersData(query)
+const handleFilterableQUery = (params: {}) => {
+    console.log(params);
+    startDate.value = params.startDate
+    endDate.value = params.endDate
+    getOrdersData()
 }
-const handleDownloadOrderStatement = async(query: string) => {
+const handleDownloadOrderStatement = async(params: {}) => {
     pdfLoading.value = true;
     try {
-        await OrderService.getDepotOrderSatement(props.depot.id, query);
+        await OrderService.getDepotOrderSatement(props.depot.id, params);
     } catch (error) {
         console.log(error);
     }

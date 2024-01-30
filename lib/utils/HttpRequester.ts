@@ -15,11 +15,21 @@ export class HttpRequester{
 
         return HttpRequester.instance;
     }
-    public async get(url:string,headers:HttpHeader, wouldBeBlob: Boolean = false):Promise<HttpResponse | Blob>{
+    public async get(url:string,headers:HttpHeader, wouldBeBlob: Boolean = false):Promise<HttpResponse>{
         const response = await fetch(url,{headers:headers.getHeaders()});
         if(response.ok)
         {
-            return wouldBeBlob ? await response.blob() : await response.json();
+            return await response.json();
+        }
+        else{
+            throw await this.handleError(response);
+        }
+    }
+    public async getFile(url:string,headers:HttpHeader, wouldBeBlob: Boolean = false):Promise<Blob>{
+        const response = await fetch(url,{headers:headers.getHeaders()});
+        if(response.ok)
+        {
+            return await response.blob();
         }
         else{
             throw await this.handleError(response);
