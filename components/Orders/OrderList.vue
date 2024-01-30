@@ -4,7 +4,17 @@
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div class="text-gray-900 mb-3  text-xl">{{ title }}</div>
+            <OrderFilters
+              v-if="showFilterButton"
+              :title="title" 
+              :showFilterButton="showFilterButton" 
+              :pdfLoading="pdfLoading" 
+              @filterOrderBy="filterOrderBy"
+              @downloadOrderStatement="downloadOrderStatement"
+            />
+            <header v-else class="flex justify-between text-gray-900 mb-3  text-xl">
+              <h6>{{ title }}</h6>
+          </header>
             <div v-if="!props.loadingError && !props.isLoading">
             <table class="min-w-full divide-y divide-gray-300" >
               <thead>
@@ -71,14 +81,15 @@
     </div>
 </template>
 <script lang="ts" setup>
-import ListLoader from '@/components/common/ListLoader';
-import ListLoadingError from '@/components/common/ListLoadingError';
-import OrderStatus from '@/components/Orders/OrderStatus';
-import {Ref,ref,onMounted,PropType,computed} from 'vue'
+import ListLoader from '@/components/common/ListLoader.vue';
+import ListLoadingError from '@/components/common/ListLoadingError.vue';
+import OrderStatus from '@/components/Orders/OrderStatus.vue';
+import {Ref,ref,onMounted,PropType,computed, watch} from 'vue'
 import { Order } from '@/lib/models';
 import { OrderService,CurrencyService } from '@/lib/services';
 import { OrderStatuses } from '~~/lib/contants';
-import OrderDetails from '@/components/Orders/OrderDetails';
+import OrderDetails from '@/components/Orders/OrderDetails.vue';
+import OrderFilters from '@/components/Orders/Filters.vue';
 
 const props = defineProps ({
     orders : {
@@ -88,6 +99,10 @@ const props = defineProps ({
       type: Boolean,
       default:true
     },
+    pdfLoading:{
+      type: Boolean,
+      default:false
+    },
     loadingError:{
       type: Boolean,
       default:false
@@ -95,11 +110,28 @@ const props = defineProps ({
     title:{
       type:String,
       default:''
+    },
+    showFilterButton:{
+      type:Boolean,
+      default:false
     }
 })
 const currency = CurrencyService.getCurrencySymbol();
 const showDetails = ref(false);
 const selectedOrder: Ref<Order | null> = ref(null);
+
+const emit = defineEmits<{
+  filterOrderBy: [dateQuery: {}]
+  downloadOrderStatement: [dateQuery: {}]
+}>()
+
+const filterOrderBy = (dateQuery: {})=>{
+  emit('filterOrderBy', dateQuery);
+}
+const downloadOrderStatement = async(statementDateQuery: {})=>{
+  emit('downloadOrderStatement', statementDateQuery);
+}
+
 const showTheDetails = (order:Order)=>{
 
   selectedOrder.value = order;

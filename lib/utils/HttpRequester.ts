@@ -16,11 +16,20 @@ export class HttpRequester{
         return HttpRequester.instance;
     }
     public async get(url:string,headers:HttpHeader):Promise<HttpResponse>{
-        
         const response = await fetch(url,{headers:headers.getHeaders()});
         if(response.ok)
         {
             return await response.json();
+        }
+        else{
+            throw await this.handleError(response);
+        }
+    }
+    public async getFile(url:string,headers:HttpHeader):Promise<Blob>{
+        const response = await fetch(url,{headers:headers.getHeaders()});
+        if(response.ok)
+        {
+            return await response.blob();
         }
         else{
             throw await this.handleError(response);

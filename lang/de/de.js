@@ -251,5 +251,8 @@ export default {
     setAsDefault:'Set as default',
     authorizeInaiaToAcceptPayment:'Ich ermächtige die INAIA GmbH, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von der INAIA GmbH auf mein Konto gezogenen Lastschriften einzulösen.',
     kycStatusIsPending:'Dein Identitätsnachweis wird nun von uns geprüft. Dieser Prozess sollte innerhalb von 24 Stunden abgeschlossen sein.',
-    kycStatusIsFailed:'Der Verifizierungsprozess ist leider fehlgeschlagen. Bitte starte den Vorgang erneut und stelle sicher, dass die angegebenen Daten mit denen in deinem Ausweisdokument übereinstimmen.'
+    kycStatusIsFailed:'Der Verifizierungsprozess ist leider fehlgeschlagen. Bitte starte den Vorgang erneut und stelle sicher, dass die angegebenen Daten mit denen in deinem Ausweisdokument übereinstimmen.',
+    downloadPDF: 'PDF herunterladen',
+    startDate: 'Startdatum',
+    endDate: 'Enddatum',
 }
