@@ -1,6 +1,7 @@
 
 import { PricePeriods } from "../contants";
 import { PageRequest } from "../requests";
+import { StatementDateFilterRequest } from "../requests/DateFilterRequest";
 import { BaseUrls } from "./BaseUrls";
 import { objectToQueryString } from "./queryUtils";
 const ACCOUNT_INCLUDES = "include=person_data,account,address,channels,country,new_inbox_message_count,new_support_ticket_answer_count,products,product_specs,kyc_details";
@@ -107,8 +108,9 @@ export class Urls{
         const queryParams = objectToQueryString(request);
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&${queryParams}`);
     }
-    public getDepotOrderStament(depot_id:number, query: string = ""):string{
-        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/statement?${query}`);
+    public getDepotOrderStament(depot_id:number, request: StatementDateFilterRequest):string{
+        const queryParams = objectToQueryString(request);
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`depots/${depot_id}/statement?${queryParams}`);
     }
     public getSavingPlanTarget():string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(),'target-types');

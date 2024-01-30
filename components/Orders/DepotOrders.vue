@@ -19,11 +19,14 @@ import { Depot, Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
 import OrderList from '@/components/Orders/OrderList.vue';
 import Pagination from '@/components/common/Pagination.vue';
+import { AttachmentService } from '~~/lib/services/AttachmentService';
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
     }
 })
+interface statementDateParams {end_date: string, start_date: string}
+interface dateParams {endDate: string, startDate: string}
 const transactions:Ref<Array<Order>>= ref([]);
 const loading = ref(true);
 const pdfLoading = ref(false);
@@ -77,21 +80,24 @@ const getOrdersData = async()=>{
 onMounted(()=> {
     getOrdersData()
 })
-const handleFilterableQUery = (params: {}) => {
-    console.log(params);
+const handleFilterableQUery = (params: dateParams) => {
     startDate.value = params.startDate
     endDate.value = params.endDate
     getOrdersData()
 }
-const handleDownloadOrderStatement = async(params: {}) => {
+const handleDownloadOrderStatement = async(params: statementDateParams) => {
     pdfLoading.value = true;
-    try {
-        await OrderService.getDepotOrderSatement(props.depot.id, params);
-    } catch (error) {
-        console.log(error);
-    }
-    finally{
-        pdfLoading.value = false
+    const query: statementDateParams = {...params}
+
+    if (props.depot) {
+        try {
+            await AttachmentService.getDepotOrderSatement(props.depot?.id, query);
+        } catch (error) {
+            console.log(error);
+        }
+        finally{
+            pdfLoading.value = false
+        }
     }
 }
 </script>

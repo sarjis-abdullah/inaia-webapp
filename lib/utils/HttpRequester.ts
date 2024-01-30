@@ -15,7 +15,7 @@ export class HttpRequester{
 
         return HttpRequester.instance;
     }
-    public async get(url:string,headers:HttpHeader, wouldBeBlob: Boolean = false):Promise<HttpResponse>{
+    public async get(url:string,headers:HttpHeader):Promise<HttpResponse>{
         const response = await fetch(url,{headers:headers.getHeaders()});
         if(response.ok)
         {
@@ -25,7 +25,7 @@ export class HttpRequester{
             throw await this.handleError(response);
         }
     }
-    public async getFile(url:string,headers:HttpHeader, wouldBeBlob: Boolean = false):Promise<Blob>{
+    public async getFile(url:string,headers:HttpHeader):Promise<Blob>{
         const response = await fetch(url,{headers:headers.getHeaders()});
         if(response.ok)
         {
