@@ -64,7 +64,8 @@
               <div class="ml-4 flex items-center md:ml-6">
                 <button type="button" class="rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
                   <span class="sr-only">View notifications</span>
-                  <BellIcon class="h-6 w-6" aria-hidden="true" />
+                  
+                  <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
                 </button>
   
                 <!-- Profile dropdown -->
@@ -142,7 +143,7 @@
   
   <script setup lang="ts">
   import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-  import { Bars3Icon, BellIcon, XMarkIcon,ChevronDownIcon } from '@heroicons/vue/24/outline';
+  import { Bars3Icon, BellIcon, XMarkIcon,ChevronDownIcon, InboxIcon } from '@heroicons/vue/24/outline';
   import { PlusIcon } from '@heroicons/vue/20/solid'
   import Footer from '@/components/Footer.vue';
 import { Account } from '~~/lib/models/Account';
@@ -222,4 +223,8 @@ onMounted(async ()=>{
       LogoutHelper(router);
     } },
   ]
+  const gotoInboxMessage = ()=> {
+    const url = "http://" + window.location.host + '/' +locale.value+'/inbox-message';
+    window.open(url,'_self');
+  }
   </script>
