@@ -1,104 +1,89 @@
 <template>
-    <section>
-        <section class="border-t border-gray-100 px-4 pb-6 sm:col-span-2 sm:px-0">
-            <article class="grid gap-2 mt-4">
-                <header>
-                    <h3 class="text-3xl font-medium leading-6 text-gray-900">hello</h3>
-                    <h6 class="text-base font-medium leading-6 text-gray-900">10-20-2023</h6>
-                </header>
-                <summury class="text-xl font-medium leading-6 text-gray-900">
-                     summury
-                </summury>
-                <p class="text-base">Message text details</p>
-            </article>
-            <section>
-                <header class="text-sm font-medium leading-6 text-gray-900">Documents</header>
-                <section class="mt-2 text-sm text-gray-900">
-                    <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
-                        <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                            <div class="flex w-0 flex-1 items-center">
-                                <PaperClipIcon class="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                                    <span class="truncate font-medium">resume_back_end_developer.pdf</span>
-                                    <span class="flex-shrink-0 text-gray-400">2.4mb</span>
-                                </div>
+    <section v-if="thisMessage?.id && !messageLoading" class="border border-gray-200 p-6">
+        <article class="grid gap-2">
+            <header>
+                <h3 class="text-3xl font-medium leading-6 text-gray-900">
+                    {{ thisMessage.title }}
+                </h3>
+                <h6 class="text-base font-medium leading-6 text-gray-900 mt-2">
+                    {{ formatDateByMoment(thisMessage.created_at) }}
+                </h6>
+            </header>
+            <div class="text-xl font-medium leading-6 text-gray-900">
+                {{ thisMessage.summary }}
+            </div>
+            <div class="text-base mt-4" v-html="thisMessage.message_text"></div>
+        </article>
+        <section v-if="thisMessage?.documents?.length" class="mt-4">
+            <header class="text-base font-medium leading-6 text-gray-900">Documents</header>
+            <section class="mt-2 text-sm text-gray-900">
+                <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                    <li v-for="doc in thisMessage.documents"
+                        class="flex items-center justify-between py-4 pl-4 pr-5 leading-6">
+                        <div class="flex w-0 flex-1 items-center">
+                            <PaperClipIcon class="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                            <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                                <span class="truncate font-base">
+                                    {{ doc.display_text ?? "Attachment" }}
+                                </span>
                             </div>
-                            <div class="ml-4 flex-shrink-0">
-                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                            </div>
-                        </li>
-                        <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                            <div class="flex w-0 flex-1 items-center">
-                                <PaperClipIcon class="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                                    <span class="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                                    <span class="flex-shrink-0 text-gray-400">4.5mb</span>
-                                </div>
-                            </div>
-                            <div class="ml-4 flex-shrink-0">
-                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
+                        </div>
+                        <div class="ml-4 flex-shrink-0">
+                            <a :href="doc.document.link" target="_blank"
+                                class="font-medium text-indigo-600 hover:text-indigo-500">
+                                <EyeIcon class="h-5 w-5" />
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </section>
         </section>
+    </section>
+    <section v-else class="flex justify-center items-center h-[50vh]">
+        <Loading />
     </section>
 </template>
   
 <script setup>
-import { CheckIcon, HandThumbUpIcon, UserIcon, PaperClipIcon } from '@heroicons/vue/20/solid'
+import { CheckIcon, HandThumbUpIcon, UserIcon, PaperClipIcon, EyeIcon } from '@heroicons/vue/20/solid'
+import Loading from '@/components/common/Loading.vue';
+import { InboxMessageService } from '@/lib/services/index';
+import { formatDateByMoment } from '@/lib/Formatters';
+import { AccountStorage } from '@/storage';
+import { ref, computed, watch } from 'vue'
 
-const timeline = [
-    {
-        id: 1,
-        content: 'Applied to',
-        target: 'Front End Developer',
-        href: '#',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        icon: UserIcon,
-        iconBackground: 'bg-gray-400',
-    },
-    {
-        id: 2,
-        content: 'Advanced to phone screening by',
-        target: 'Bethany Blake',
-        href: '#',
-        date: 'Sep 22',
-        datetime: '2020-09-22',
-        icon: HandThumbUpIcon,
-        iconBackground: 'bg-blue-500',
-    },
-    {
-        id: 3,
-        content: 'Completed phone screening with',
-        target: 'Martha Gardner',
-        href: '#',
-        date: 'Sep 28',
-        datetime: '2020-09-28',
-        icon: CheckIcon,
-        iconBackground: 'bg-green-500',
-    },
-    {
-        id: 4,
-        content: 'Advanced to interview by',
-        target: 'Bethany Blake',
-        href: '#',
-        date: 'Sep 30',
-        datetime: '2020-09-30',
-        icon: HandThumbUpIcon,
-        iconBackground: 'bg-blue-500',
-    },
-    {
-        id: 5,
-        content: 'Completed interview with',
-        target: 'Katherine Snyder',
-        href: '#',
-        date: 'Oct 4',
-        datetime: '2020-10-04',
-        icon: CheckIcon,
-        iconBackground: 'bg-green-500',
-    },
-]
+const props = defineProps({
+    selectedMessage: {
+        type: Object,
+        required: true,
+        default: () => ({})
+    }
+})
+const messageLoading = ref(1)
+const thisMessage = ref({})
+
+//computed
+const accountId = computed(() => AccountStorage.getAccountId());
+//functions
+const loadData = async () => {
+    if (!props.selectedMessage.is_read && props.selectedMessage.id) {
+        messageLoading.value = 1
+
+        try {
+            thisMessage.value = await InboxMessageService.getSingleInboxMessage(props.selectedMessage.id, accountId.value);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            messageLoading.value = 0
+        }
+    } else {
+        thisMessage.value = props.selectedMessage
+        messageLoading.value = 0
+    }
+}
+
+//watchers
+watch(props, () => {
+    loadData()
+}, { deep: true, immediate: true })
 </script>

@@ -151,6 +151,13 @@ export class Urls{
     public addPaymentBankAccount():string{
         return this.buildUrl(BaseUrls.getPaymentUrl(),'payment-account/create');
     }
+    public getInboxMessages(account_id:number,request:PageRequest):string{
+        const queryParams = objectToQueryString(request);
+        return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message?account_id=${account_id}&include=message_text,documents&${queryParams}`);
+    }
+    public getSingleInboxMessage(messageId: number,account_id:number):string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&include=message_text,documents`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

@@ -1,29 +1,49 @@
 <template>
     <section class="grid grid-cols-1-2 gap-4">
         <section>
-            <div class="border-t border-gray-100 px-4 pb-6 sm:col-span-2 sm:px-0">
-                <dd class="mt-2 text-sm text-gray-900">
-                    <ul role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
-                        <li v-for="(message, index) in messages" :class="`${index == 0 ? 'bg-blue-100' : ''}`" class="flex justify-between py-4 pl-4 pr-5 text-sm leading-6 ">
+            <div class="border-t border-gray-100 pxy-6 ">
+                <section class="text-sm text-gray-900">
+                    <ul v-if="hasMessages && !messageLoading" role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
+                        <li 
+                        v-for="(message, index) in messages"
+                        :key="index"
+                        @click="selectMessage(message)"  
+                        :class="`${selectedMessage.id == message.id ? 'bg-blue-100' : ''}`" 
+                        class="flex justify-between py-4 pl-4 pr-5 text-sm leading-6 cursor-pointer">
                             <div class="flex w-0 flex-1 items-center">
                                 <div class="grid gap-2">
-                                    <div class="truncate font-medium">Payment Failed for Depot 1010419 Test silver te</div>
-                                    <div class="truncate text-gray-400">Payment Failed for Depot 1010419 Test silver te</div>
+                                    <div class="truncate font-medium">
+                                        {{ message.title }}
+                                    </div>
+                                    <div class="truncate text-gray-400">
+                                        {{ message.summary }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="ml-4 flex flex-col justify-around items-end">
-                                <div class="w-2 h-2 rounded-full bg-blue-700"></div>
+                            <div class="ml-8 flex flex-col justify-end items-end gap-4">
+                                <div v-if="!message.is_read" class="w-2 h-2 rounded-full bg-blue-700"></div>
                                 <div href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                    10-20-2023
+                                    {{formatDateByMoment(message.created_at)}}
                                 </div>
                             </div>
                         </li>
+                        <li v-if="moreToCome" class="py-4 pl-4 pr-5 cursor-pointer" @click.prevent="loadMoreInboxMessages">
+                            <div class="text-blue-500 text-sm text-center mt-3">
+                                <a v-if="!loadMore">{{ $t('see_more') }}</a>
+                                <span v-else><Loading></Loading></span>
+                            </div>
+                        </li>
                     </ul>
-                </dd>
+                    <ul v-else role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
+                        <li>
+                            <ListSkeleton/>
+                        </li>
+                    </ul>
+                </section>
             </div>
         </section>
         <section>
-            <InboxMessageDetails />
+            <InboxMessageDetails :selectedMessage="selectedMessage" />
         </section>
     </section>
 </template>
@@ -31,59 +51,83 @@
 <script setup>
 import { CheckIcon, HandThumbUpIcon, UserIcon, PaperClipIcon } from '@heroicons/vue/20/solid'
 import InboxMessageDetails from './InboxMessageDetails.vue'
-import {ref} from 'vue'
+import ListSkeleton from '@/components/common/ListSkeleton.vue'
+import Loading from '@/components/common/Loading.vue'
+import Pagination from '@/components/common/Pagination.vue';
+import { InboxMessageService } from '@/lib/services/index';
+import { formatDateByMoment } from '@/lib/Formatters';
+import { AccountStorage } from '@/storage';
+import {ref, computed} from 'vue'
 
-const timeline = [
-    {
-        id: 1,
-        content: 'Applied to',
-        target: 'Front End Developer',
-        href: '#',
-        date: 'Sep 20',
-        datetime: '2020-09-20',
-        icon: UserIcon,
-        iconBackground: 'bg-gray-400',
-    },
-    {
-        id: 2,
-        content: 'Advanced to phone screening by',
-        target: 'Bethany Blake',
-        href: '#',
-        date: 'Sep 22',
-        datetime: '2020-09-22',
-        icon: HandThumbUpIcon,
-        iconBackground: 'bg-blue-500',
-    },
-    {
-        id: 3,
-        content: 'Completed phone screening with',
-        target: 'Martha Gardner',
-        href: '#',
-        date: 'Sep 28',
-        datetime: '2020-09-28',
-        icon: CheckIcon,
-        iconBackground: 'bg-green-500',
-    },
-    {
-        id: 4,
-        content: 'Advanced to interview by',
-        target: 'Bethany Blake',
-        href: '#',
-        date: 'Sep 30',
-        datetime: '2020-09-30',
-        icon: HandThumbUpIcon,
-        iconBackground: 'bg-blue-500',
-    },
-    {
-        id: 5,
-        content: 'Completed interview with',
-        target: 'Katherine Snyder',
-        href: '#',
-        date: 'Oct 4',
-        datetime: '2020-10-04',
-        icon: CheckIcon,
-        iconBackground: 'bg-green-500',
-    },
-]
-const messages = ref([{}, {}, {}, {}])
+const messages = ref([])
+const selectedMessage = ref({})
+const messageLoading = ref(0);
+//pagination variables
+const page = ref(1);
+const lastPage = ref(1);
+const total = ref(0)
+const perPage = ref(10);
+const totalPerPage = ref(0);
+const loadMore = ref(false);
+const moreToCome = ref(true);
+
+//computed
+const queryParams = computed(()=> {
+    const params = {page:page.value,perPage:perPage.value}
+    
+    return  params
+})
+const hasMessages = computed(()=> {    
+    return  !!(messages.value && messages.value.length)
+})
+const accountId = computed(()=> AccountStorage.getAccountId());
+
+//functions
+const loadData = async()=>{
+    if (!loadMore.value) {
+        messageLoading.value = 1
+    }
+    
+    try {
+        if(accountId.value){
+            let data = await InboxMessageService.getInboxMessages(accountId.value, queryParams.value);
+            page.value = data.currentPage + 1;
+            moreToCome.value = data.currentPage < data.lastPage;
+            if (data?.data?.length) {
+                messages.value = [...messages.value, ...data.data];
+            }
+            if (messages.value?.length && !selectedMessage.value.id) {
+                selectedMessage.value = messages.value[0]
+            }
+        }
+    } catch (error) {
+        console.console.error();(error);
+    } finally {
+        messageLoading.value = 0
+        loadMore.value = false;
+    }
+}
+
+const loadMoreInboxMessages = async ()=>{
+    loadMore.value = true;
+    loadData()
+}
+
+const onPageChanged = (p) => {
+    page.value = p;
+    loadData();
+}
+
+const selectMessage = (message) => {
+    selectedMessage.value = message
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+}
+
+//onmounted
+onMounted(()=> {
+    loadData()
+})
 </script>

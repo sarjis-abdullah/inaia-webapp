@@ -1,3 +1,6 @@
+import moment from 'moment'
+const dateFormat1 = "YYYY-MM-DD HH:mm:ss"
+const dateFormat2 = "YYYY-MM-DD"
 export const formatDate= (date:Date)=>{
     if(!date)
         return null;
@@ -12,4 +15,8 @@ export const formatDate= (date:Date)=>{
         day = "0"+day;
     }
     return date.getFullYear()+"-"+month+"-"+day;
+}
+
+export const formatDateByMoment= (date:Date, formatType = dateFormat1)=>{
+    return moment(date).format(formatType);
 }
