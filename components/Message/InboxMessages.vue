@@ -1,46 +1,7 @@
 <template>
     <section class="grid grid-cols-1-2 gap-4">
         <section>
-            <div class="border-t border-gray-100 pxy-6 ">
-                <section class="text-sm text-gray-900">
-                    <ul v-if="hasMessages && !messageLoading" role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
-                        <li 
-                        v-for="(message, index) in messages"
-                        :key="index"
-                        @click="selectMessage(message)"  
-                        :class="`${selectedMessage.id == message.id ? 'bg-blue-100' : ''}`" 
-                        class="flex justify-between py-4 pl-4 pr-5 text-sm leading-6 cursor-pointer">
-                            <div class="flex w-0 flex-1 items-center">
-                                <div class="grid gap-2">
-                                    <div class="truncate font-medium">
-                                        {{ message.title }}
-                                    </div>
-                                    <div class="truncate text-gray-400">
-                                        {{ message.summary }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ml-8 flex flex-col justify-end items-end gap-4">
-                                <div v-if="!message.is_read" class="w-2 h-2 rounded-full bg-blue-700"></div>
-                                <div href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                    {{formatDateByMoment(message.created_at)}}
-                                </div>
-                            </div>
-                        </li>
-                        <li v-if="moreToCome" class="py-4 pl-4 pr-5 cursor-pointer" @click.prevent="loadMoreInboxMessages">
-                            <div class="text-blue-500 text-sm text-center mt-3">
-                                <a v-if="!loadMore">{{ $t('see_more') }}</a>
-                                <span v-else><Loading></Loading></span>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul v-else role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
-                        <li>
-                            <ListSkeleton/>
-                        </li>
-                    </ul>
-                </section>
-            </div>
+            <InboxMessages @setSelectedMessage="selectMessage"/>
         </section>
         <section>
             <InboxMessageDetails :selectedMessage="selectedMessage" />
@@ -49,85 +10,21 @@
 </template>
   
 <script setup>
-import { CheckIcon, HandThumbUpIcon, UserIcon, PaperClipIcon } from '@heroicons/vue/20/solid'
 import InboxMessageDetails from './InboxMessageDetails.vue'
-import ListSkeleton from '@/components/common/ListSkeleton.vue'
-import Loading from '@/components/common/Loading.vue'
-import Pagination from '@/components/common/Pagination.vue';
-import { InboxMessageService } from '@/lib/services/index';
-import { formatDateByMoment } from '@/lib/Formatters';
-import { AccountStorage } from '@/storage';
-import {ref, computed} from 'vue'
+import InboxMessages from './Index.vue'
 
-const messages = ref([])
+import {ref} from 'vue'
+
+//data variables
 const selectedMessage = ref({})
-const messageLoading = ref(0);
-//pagination variables
-const page = ref(1);
-const lastPage = ref(1);
-const total = ref(0)
-const perPage = ref(10);
-const totalPerPage = ref(0);
-const loadMore = ref(false);
-const moreToCome = ref(true);
-
-//computed
-const queryParams = computed(()=> {
-    const params = {page:page.value,perPage:perPage.value}
-    
-    return  params
-})
-const hasMessages = computed(()=> {    
-    return  !!(messages.value && messages.value.length)
-})
-const accountId = computed(()=> AccountStorage.getAccountId());
 
 //functions
-const loadData = async()=>{
-    if (!loadMore.value) {
-        messageLoading.value = 1
-    }
-    
-    try {
-        if(accountId.value){
-            let data = await InboxMessageService.getInboxMessages(accountId.value, queryParams.value);
-            page.value = data.currentPage + 1;
-            moreToCome.value = data.currentPage < data.lastPage;
-            if (data?.data?.length) {
-                messages.value = [...messages.value, ...data.data];
-            }
-            if (messages.value?.length && !selectedMessage.value.id) {
-                selectedMessage.value = messages.value[0]
-            }
-        }
-    } catch (error) {
-        console.console.error();(error);
-    } finally {
-        messageLoading.value = 0
-        loadMore.value = false;
-    }
-}
-
-const loadMoreInboxMessages = async ()=>{
-    loadMore.value = true;
-    loadData()
-}
-
-const onPageChanged = (p) => {
-    page.value = p;
-    loadData();
-}
-
 const selectMessage = (message) => {
     selectedMessage.value = message
-    window.scrollTo({
+    window?.scrollTo({
         top: 0,
         behavior: 'smooth',
     });
 }
 
-//onmounted
-onMounted(()=> {
-    loadData()
-})
 </script>
