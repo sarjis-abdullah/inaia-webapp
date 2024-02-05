@@ -236,7 +236,7 @@ onMounted(async ()=>{
     } },
   ]
   const gotoInboxMessage = ()=> {
-    const url = "http://" + window.location.host + '/' +locale.value+'/inbox-message';
-    window.open(url,'_self');
+    const url = '/' + locale.value + '/inbox-message';
+    router.push(url)
   }
   </script>
