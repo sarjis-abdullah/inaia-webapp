@@ -10,11 +10,9 @@
 </template>
   
 <script setup>
-import InboxMessageDetails from './InboxMessageDetails.vue'
-import InboxMessages from './Index.vue'
-
 import {ref} from 'vue'
-
+import InboxMessageDetails from './InboxMessageDetails.vue'
+import InboxMessages from './InboxMessages.vue'
 //data variables
 const selectedMessage = ref({})
 

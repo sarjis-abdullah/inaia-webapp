@@ -38,14 +38,13 @@
 </template>
   
 <script setup lang="ts">
-import InboxMessageDetails from './InboxMessageDetails.vue'
+import { ref, computed } from 'vue'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
 import Pagination from '@/components/common/Pagination.vue';
 import { InboxMessageService } from '@/lib/services/index';
 import { formatDateByMoment } from '@/lib/Formatters';
 import { AccountStorage } from '@/storage';
-import { ref, computed } from 'vue'
 //emits
 const emit = defineEmits<{
   setSelectedMessage: [any: {}]
@@ -104,6 +103,7 @@ const loadMoreInboxMessages = async () => {
 
 const setSelectedMessage = (message = {}) => {
     emit("setSelectedMessage", message)
+    selectedMessage.value = message
     window?.scrollTo({
         top: 0,
         behavior: 'smooth',

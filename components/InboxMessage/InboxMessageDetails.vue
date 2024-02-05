@@ -45,12 +45,12 @@
 </template>
   
 <script setup>
-import { CheckIcon, HandThumbUpIcon, UserIcon, PaperClipIcon, EyeIcon } from '@heroicons/vue/20/solid'
+import { ref, computed, watch } from 'vue'
+import { PaperClipIcon, EyeIcon } from '@heroicons/vue/20/solid'
 import Loading from '@/components/common/Loading.vue';
 import { InboxMessageService } from '@/lib/services/index';
 import { formatDateByMoment } from '@/lib/Formatters';
 import { AccountStorage } from '@/storage';
-import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
     selectedMessage: {
