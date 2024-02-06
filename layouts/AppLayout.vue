@@ -62,9 +62,13 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-4 flex items-center md:ml-6">
-                <button type="button" class="rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-                  <span class="sr-only">View notifications</span>
-                  <BellIcon class="h-6 w-6" aria-hidden="true" />
+                <button type="button" class="relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                  <span v-if="newInboxMessageCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                    {{ newInboxMessageCount }}
+                  </span>
+                  <span class="sr-only">View Inbox Messages</span>
+                  
+                  <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
                 </button>
   
                 <!-- Profile dropdown -->
@@ -112,9 +116,12 @@
                 <div class="text-base font-medium text-white">{{ name }}</div>
                 <div class="text-sm font-medium text-blue-300">{{ email }}</div>
               </div>
-              <button type="button" class="ml-auto flex-shrink-0 rounded-full bg-blue-600 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-                <span class="sr-only">View notifications</span>
-                <BellIcon class="h-6 w-6" aria-hidden="true" />
+              <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-blue-600 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                <span class="sr-only">View Inbox Messages</span>
+                <span v-if="newInboxMessageCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                {{ newInboxMessageCount }}
+                </span>
+                <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
             <div class="mt-3 space-y-1 px-2">
@@ -142,7 +149,7 @@
   
   <script setup lang="ts">
   import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-  import { Bars3Icon, BellIcon, XMarkIcon,ChevronDownIcon } from '@heroicons/vue/24/outline';
+  import { Bars3Icon, XMarkIcon,ChevronDownIcon, InboxIcon } from '@heroicons/vue/24/outline';
   import { PlusIcon } from '@heroicons/vue/20/solid'
   import Footer from '@/components/Footer.vue';
 import { Account } from '~~/lib/models/Account';
@@ -172,6 +179,12 @@ onMounted(async ()=>{
       return 'depot_detail'
     }
     return 'dashboard'
+  })
+  const newInboxMessageCount  = computed(()=>{
+    if(user.value?.account?.new_inbox_message_count){
+      return user.value.account.new_inbox_message_count
+    }
+    return 0
   })
   const showTrading = ref(false);
   const openTrading = ()=>{
@@ -222,4 +235,8 @@ onMounted(async ()=>{
       LogoutHelper(router);
     } },
   ]
+  const gotoInboxMessage = ()=> {
+    const url = '/' + locale.value + '/inbox-message';
+    router.push(url)
+  }
   </script>

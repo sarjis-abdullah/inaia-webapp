@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         sans: ['Noah', 'sans-serif']
       },
+      gridTemplateColumns: {
+        '1-2': '1fr 2fr',
+      },
     },
   },
   plugins: [
