@@ -35,6 +35,7 @@
             <ListSkeleton />
         </li>
     </ul>
+    <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
 </template>
   
 <script setup lang="ts">
@@ -44,6 +45,7 @@ import Loading from '@/components/common/Loading.vue'
 import Pagination from '@/components/common/Pagination.vue';
 import { InboxMessageService } from '@/lib/services/index';
 import { formatDateByMoment } from '@/lib/Formatters';
+import {getMessageFromError} from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
 //emits
 const emit = defineEmits<{
@@ -52,12 +54,13 @@ const emit = defineEmits<{
 //data variables
 const messages = ref([])
 const selectedMessage = ref({})
-const messageLoading = ref(0);
+const messageLoading = ref(false);
 //pagination data variables
 const page = ref(1);
 const perPage = ref(10);
 const loadMore = ref(false);
 const moreToCome = ref(true);
+const errorText = ref("");
 
 //computed
 const queryParams = computed(() => {
@@ -73,7 +76,7 @@ const accountId = computed(() => AccountStorage.getAccountId());
 //functions
 const loadData = async () => {
     if (!loadMore.value) {
-        messageLoading.value = 1
+        messageLoading.value = true
     }
 
     try {
@@ -88,10 +91,12 @@ const loadData = async () => {
                 setSelectedMessage(messages.value[0])
             }
         }
+        errorText.value = ""
     } catch (error) {
         console.error(error);
+        errorText.value = getMessageFromError(error)
     } finally {
-        messageLoading.value = 0
+        messageLoading.value = false
         loadMore.value = false;
     }
 }

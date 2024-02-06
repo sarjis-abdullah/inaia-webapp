@@ -42,6 +42,7 @@
     <section v-else class="flex justify-center items-center h-[50vh]">
         <Loading />
     </section>
+    <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
 </template>
   
 <script setup>
@@ -50,6 +51,7 @@ import { PaperClipIcon, EyeIcon } from '@heroicons/vue/20/solid'
 import Loading from '@/components/common/Loading.vue';
 import { InboxMessageService } from '@/lib/services/index';
 import { formatDateByMoment } from '@/lib/Formatters';
+import {getMessageFromError} from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
 
 const props = defineProps({
@@ -59,26 +61,30 @@ const props = defineProps({
         default: () => ({})
     }
 })
-const messageLoading = ref(1)
+const messageLoading = ref(true)
 const thisMessage = ref({})
+const errorText = ref("")
 
 //computed
 const accountId = computed(() => AccountStorage.getAccountId());
 //functions
 const loadData = async () => {
     if (!props.selectedMessage.is_read && props.selectedMessage.id) {
-        messageLoading.value = 1
+        messageLoading.value = true
 
         try {
             thisMessage.value = await InboxMessageService.getSingleInboxMessage(props.selectedMessage.id, accountId.value);
+            errorText.value = ""
         } catch (error) {
             console.error(error);
+            errorText.value = getMessageFromError(error)
+            
         } finally {
-            messageLoading.value = 0
+            messageLoading.value = false
         }
     } else {
         thisMessage.value = props.selectedMessage
-        messageLoading.value = 0
+        messageLoading.value = false
     }
 }
 
