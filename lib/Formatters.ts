@@ -1,6 +1,6 @@
 import moment from 'moment'
-const dateFormat1 = "YYYY-MM-DD HH:mm:ss"
-const dateFormat2 = "YYYY-MM-DD"
+export const dateFormat1 = "YYYY-MM-DD HH:mm:ss"
+export const dateFormat2 = "YYYY-MM-DD"
 export const formatDate= (date:Date)=>{
     if(!date)
         return null;
