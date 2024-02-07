@@ -1,11 +1,8 @@
 <template>
-    <!-- <pre>
-        {{ groupedMessages }}
-    </pre> -->
-    <ul v-if="hasMessages && !messageLoading" role="list"
+    <ul v-if="hasTickets && !ticketLoading" role="list"
         class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-screen overflow-y-auto">
-        <li v-for="(message, index) in messages" :key="index" @click="setSelectedMessage(message)"
-            :class="`${selectedMessage.id == message.id ? 'bg-blue-100' : ''}`"
+        <li v-for="(ticket, index) in tickets" :key="index" @click="setselectedTicket(ticket)"
+            :class="`${selectedTicket.id == ticket.id ? 'bg-blue-100' : ''}`"
             class="grid gap-1 items-center text-sm leading-6 cursor-pointer p-2"
             style="grid-template-columns: 14% 63% 21%;">
             <picture>
@@ -15,10 +12,10 @@
             </picture>
             <div class="grid gap-2">
                 <div class="truncate text-sm">
-                    {{ message.name }}
+                    {{ ticket.name }}
                 </div>
                 <div class="truncate text-base font-bold">
-                    {{ message.subject }}
+                    {{ ticket.subject }}
                 </div>
             </div>
             <div class="grid gap-2 justify-end">
@@ -27,11 +24,11 @@
                         class="uppercase text-[#03acca] bg-[#aaedf9] inline-block text-center rounded-md py-[.35rem] px-[.375rem] text-xs">Answered</span>
                 </div>
                 <div class="text-gray-400 hover:text-gray-500">
-                    {{ formatDateByMoment(message.created_at, dateFormat2) }}
+                    {{ formatDateByMoment(ticket.created_at, dateFormat2) }}
                 </div>
             </div>
         </li>
-        <li v-if="moreToCome" class="py-4 pl-4 pr-5 cursor-pointer" @click.prevent="loadMoreInboxMessages">
+        <li v-if="moreToCome" class="py-4 pl-4 pr-5 cursor-pointer" @click.prevent="loadMoreTickets">
             <div class="text-blue-500 text-sm text-center mt-3">
                 <a v-if="!loadMore">{{ $t('see_more') }}</a>
                 <span v-else>
@@ -60,13 +57,13 @@ import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
 //emits
 const emit = defineEmits<{
-    setSelectedMessage: [any: {}]
+    setselectedTicket: [any: {}]
 }>()
 //data variables
-const messages = ref([])
+const tickets = ref([])
 const groupedMessages = ref([])
-const selectedMessage = ref({})
-const messageLoading = ref(false);
+const selectedTicket = ref({})
+const ticketLoading = ref(false);
 //pagination data variables
 const page = ref(1);
 const perPage = ref(10);
@@ -80,15 +77,15 @@ const queryParams = computed(() => {
 
     return params
 })
-const hasMessages = computed(() => {
-    return !!(messages.value && messages.value.length)
+const hasTickets = computed(() => {
+    return !!(tickets.value && tickets.value.length)
 })
 const accountId = computed(() => AccountStorage.getAccountId());
 
 //functions
 const loadData = async () => {
     if (!loadMore.value) {
-        messageLoading.value = true
+        ticketLoading.value = true
     }
 
     try {
@@ -97,7 +94,7 @@ const loadData = async () => {
             page.value = data.currentPage + 1;
             moreToCome.value = data.currentPage < data.lastPage;
             if (data?.data?.length) {
-                messages.value = [...messages.value, ...data.data].map(ticket => {
+                tickets.value = [...tickets.value, ...data.data].map(ticket => {
                     const getName = () => {
                         if (ticket && ticket.account && ticket.account.contact) {
                             let name = ticket.account.contact.name;
@@ -132,8 +129,8 @@ const loadData = async () => {
                 // })
                 // messages.value = [...messages.value, ...data.data];
             }
-            // if (messages.value?.length && !selectedMessage.value.id) {
-            //     setSelectedMessage(messages.value[0])
+            // if (messages.value?.length && !selectedTicket.value.id) {
+            //     setselectedTicket(messages.value[0])
             // }
         }
         errorText.value = ""
@@ -141,23 +138,23 @@ const loadData = async () => {
         console.error(error);
         errorText.value = getMessageFromError(error)
     } finally {
-        messageLoading.value = false
+        ticketLoading.value = false
         loadMore.value = false;
     }
 }
 
-const loadMoreInboxMessages = async () => {
+const loadMoreTickets = async () => {
     loadMore.value = true;
     loadData()
 }
 
-const setSelectedMessage = (message = {}) => {
-    emit("setSelectedMessage", message)
-    selectedMessage.value = message
-    window?.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    });
+const setselectedTicket = (ticket = {}) => {
+    // emit("setselectedTicket", ticket)
+    // selectedTicket.value = ticket
+    // window?.scrollTo({
+    //     top: 0,
+    //     behavior: 'smooth',
+    // });
 }
 
 //onmounted
