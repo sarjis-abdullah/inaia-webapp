@@ -1,9 +1,13 @@
 <template>
+    <!-- <pre>
+        {{ groupedMessages }}
+    </pre> -->
     <ul v-if="hasMessages && !messageLoading" role="list"
         class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-screen overflow-y-auto">
         <li v-for="(message, index) in messages" :key="index" @click="setSelectedMessage(message)"
             :class="`${selectedMessage.id == message.id ? 'bg-blue-100' : ''}`"
-            class="grid gap-1 items-center text-sm leading-6 cursor-pointer p-2" style="grid-template-columns: 14% 63% 21%;">
+            class="grid gap-1 items-center text-sm leading-6 cursor-pointer p-2"
+            style="grid-template-columns: 14% 63% 21%;">
             <picture>
                 <img class="h-12 w-12 rounded-full"
                     src="https://s3.eu-central-1.amazonaws.com/staging-storage.inaia.cloud/profile/1706132271-Mahdi.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIARXODEP55RFK2VQOH%2F20240207%2Feu-central-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20240207T052840Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=21600&amp;X-Amz-Signature=1dc24ae7baf9808bc627a7f6d39d348c5993ec93b4d754f06285781fd7c3c96a"
@@ -11,10 +15,10 @@
             </picture>
             <div class="grid gap-2">
                 <div class="truncate text-sm">
-                    {{ message.title }}
+                    {{ message.name }}
                 </div>
                 <div class="truncate text-base font-bold">
-                    {{ message.summary }}
+                    {{ message.subject }}
                 </div>
             </div>
             <div class="grid gap-2 justify-end">
@@ -46,10 +50,11 @@
   
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import moment from 'moment'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
 import Pagination from '@/components/common/Pagination.vue';
-import { InboxMessageService } from '@/lib/services/index';
+import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, dateFormat2 } from '@/lib/Formatters';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
@@ -59,6 +64,7 @@ const emit = defineEmits<{
 }>()
 //data variables
 const messages = ref([])
+const groupedMessages = ref([])
 const selectedMessage = ref({})
 const messageLoading = ref(false);
 //pagination data variables
@@ -86,16 +92,49 @@ const loadData = async () => {
     }
 
     try {
-        if (accountId.value) {
-            let data = await InboxMessageService.getInboxMessages(accountId.value, queryParams.value);
+        if (true) {
+            let data = await SupportTicketService.getSupportTickets(queryParams.value);
             page.value = data.currentPage + 1;
             moreToCome.value = data.currentPage < data.lastPage;
             if (data?.data?.length) {
-                messages.value = [...messages.value, ...data.data];
+                messages.value = [...messages.value, ...data.data].map(ticket => {
+                    const getName = () => {
+                        if (ticket && ticket.account && ticket.account.contact) {
+                            let name = ticket.account.contact.name;
+                            if (ticket.account.contact.person_data) {
+                                name += ' ' + ticket.account.contact.person_data.surname;
+                            }
+                            return name;
+                        }
+                        return '';
+                    }
+                    return { ...ticket, name: getName() }
+                });
+                // data.data.forEach((element,index)=>{
+                //     const creationDate = moment(element.created_at);
+                //     const pureDate = moment({year:creationDate.get('year'),month:creationDate.get('month'),date:creationDate.get('date')});
+                //     let goupMessage = groupedMessages.value.find(x=>pureDate.isSame(x.date));
+                //     if(goupMessage)
+                //     {
+                //         if (!goupMessage?.messages?.length) {
+                //             goupMessage.messages = []
+                //         }
+                //         goupMessage.messages.push(element);
+                //     }
+                //     else
+                //     {
+                //         groupedMessages.value.push({
+                //             id:index,
+                //             date:pureDate,
+                //             messages:[element]
+                //         })
+                //     }
+                // })
+                // messages.value = [...messages.value, ...data.data];
             }
-            if (messages.value?.length && !selectedMessage.value.id) {
-                setSelectedMessage(messages.value[0])
-            }
+            // if (messages.value?.length && !selectedMessage.value.id) {
+            //     setSelectedMessage(messages.value[0])
+            // }
         }
         errorText.value = ""
     } catch (error) {

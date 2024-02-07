@@ -158,6 +158,15 @@ export class Urls{
     public getSingleInboxMessage(messageId: number,account_id:number):string{
         return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&include=message_text,documents`);
     }
+    public getSupportTickets(request:PageRequest):string{
+        const queryParams = objectToQueryString(request);
+        const include = "include=creater,contacts,support_status,person_data"
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets?${include}&${queryParams}`);
+    }
+    public getSingleSupportTicket(messageId: number,account_id:number):string{
+        const include = "creater,contacts,support_status,person_data"
+        return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&${include}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }
