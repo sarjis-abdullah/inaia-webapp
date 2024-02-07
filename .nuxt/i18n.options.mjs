@@ -241,7 +241,10 @@ export const resolveNuxtI18nOptions = async (context) => {
   "kycStatusIsFailed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Der Verifizierungsprozess ist leider fehlgeschlagen. Bitte starte den Vorgang erneut und stelle sicher, dass die angegebenen Daten mit denen in deinem Ausweisdokument übereinstimmen."])};fn.source="Der Verifizierungsprozess ist leider fehlgeschlagen. Bitte starte den Vorgang erneut und stelle sicher, dass die angegebenen Daten mit denen in deinem Ausweisdokument übereinstimmen.";return fn;})(),
   "downloadPDF": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["PDF herunterladen"])};fn.source="PDF herunterladen";return fn;})(),
   "startDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Startdatum"])};fn.source="Startdatum";return fn;})(),
-  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enddatum"])};fn.source="Enddatum";return fn;})()
+  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enddatum"])};fn.source="Enddatum";return fn;})(),
+  "write_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Antwort schreiben..."])};fn.source="Antwort schreiben...";return fn;})(),
+  "send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nachricht senden"])};fn.source="Nachricht senden";return fn;})(),
+  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle ein Ticket um Nachrichten einzusehen."])};fn.source="Wähle ein Ticket um Nachrichten einzusehen.";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -468,7 +471,10 @@ export const resolveNuxtI18nOptions = async (context) => {
   "kycStatusIsFailed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document."])};fn.source="Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document.";return fn;})(),
   "downloadPDF": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Download PDF"])};fn.source="Download PDF";return fn;})(),
   "startDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Start Date"])};fn.source="Start Date";return fn;})(),
-  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["End Date"])};fn.source="End Date";return fn;})()
+  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["End Date"])};fn.source="End Date";return fn;})(),
+  "write_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write an answer..."])};fn.source="Write an answer...";return fn;})(),
+  "send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Send message"])};fn.source="Send message";return fn;})(),
+  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please select a ticket to see description"])};fn.source="Please select a ticket to see description";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -666,7 +672,10 @@ export const resolveNuxtI18nOptions = async (context) => {
   "kycStatusIsFailed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Malheureusement, le processus de vérification a échoué. Veuillez recommencer le processus et assurez-vous que les informations fournies correspondent à celles de votre pièce d’identité."])};fn.source="Malheureusement, le processus de vérification a échoué. Veuillez recommencer le processus et assurez-vous que les informations fournies correspondent à celles de votre pièce d’identité.";return fn;})(),
   "downloadPDF": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Télécharger le PDF"])};fn.source="Télécharger le PDF";return fn;})(),
   "startDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de début"])};fn.source="Date de début";return fn;})(),
-  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de fin"])};fn.source="Date de fin";return fn;})()
+  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de fin"])};fn.source="Date de fin";return fn;})(),
+  "write_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez une réponse..."])};fn.source="Écrivez une réponse...";return fn;})(),
+  "send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Envoyer un message"])};fn.source="Envoyer un message";return fn;})(),
+  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle ein Ticket um Nachrichten einzusehen."])};fn.source="Wähle ein Ticket um Nachrichten einzusehen.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

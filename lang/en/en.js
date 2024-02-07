@@ -229,4 +229,7 @@ export default {
     downloadPDF: 'Download PDF', 
     startDate: 'Start Date', 
     endDate: 'End Date', 
+    write_answer: 'Write an answer...', 
+    send_message: 'Send message', 
+    select_ticket:"Please select a ticket to see description",
 }

@@ -163,9 +163,9 @@ export class Urls{
         const include = "include=creater,contacts,support_status,person_data"
         return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets?${include}&${queryParams}`);
     }
-    public getSingleSupportTicket(messageId: number,account_id:number):string{
-        const include = "creater,contacts,support_status,person_data"
-        return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&${include}`);
+    public getSingleSupportTicket(ticketId: number):string{
+        const include = "include=messages,creater,owner,contacts,support_status,person_data"
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets/${ticketId}?${include}`);
     }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;

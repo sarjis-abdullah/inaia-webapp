@@ -1,10 +1,10 @@
 <template>
     <section class="grid grid-cols-1-2 gap-4">
         <section>
-            <SupportTickets/>
+            <SupportTickets @setSelectedTicket="setSelectedTicket"/>
         </section>
         <section>
-            Ticket
+            <SupportTicketSingleDetails :ticket="selectedTicket"/>
         </section>
     </section>
 </template>
@@ -12,17 +12,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import SupportTickets from './SupportTickets'
+import SupportTicketSingleDetails from './SupportTicketSingleDetails'
 
 //data variables
-const selectedMessage = ref({})
+const selectedTicket = ref({})
 
 //functions
-const selectMessage = (message) => {
-    selectedMessage.value = message
-    window?.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    });
+const setSelectedTicket = (ticket) => {
+    selectedTicket.value = ticket
 }
 
 </script>

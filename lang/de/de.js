@@ -255,4 +255,7 @@ export default {
     downloadPDF: 'PDF herunterladen',
     startDate: 'Startdatum',
     endDate: 'Enddatum',
+    write_answer: 'Antwort schreiben...',
+    send_message: 'Nachricht senden',
+    select_ticket: "Wähle ein Ticket um Nachrichten einzusehen.",
 }

@@ -197,4 +197,7 @@ export default {
     downloadPDF: 'Télécharger le PDF',
     startDate: 'Date de début',
     endDate: 'Date de fin',
+    write_answer: 'Écrivez une réponse...',
+    send_message: 'Envoyer un message',
+    select_ticket: "Wähle ein Ticket um Nachrichten einzusehen.",
 }

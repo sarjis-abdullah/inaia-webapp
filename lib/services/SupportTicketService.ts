@@ -24,8 +24,8 @@ export class SupportTicketService{
         return response;
     }
 
-    public static async getSingleSupportTicket(messageId: number, account_id:number):Promise<InboxMessage>{
-        const url = this.links.getSingleSupportTicket(messageId, account_id);
+    public static async getSingleSupportTicket(ticketId: number):Promise<InboxMessage>{
+        const url = this.links.getSingleSupportTicket(ticketId);
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         const json = await this.requester.get(url,this.headers);
