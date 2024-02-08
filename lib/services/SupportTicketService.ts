@@ -31,4 +31,12 @@ export class SupportTicketService{
         const json = await this.requester.get(url,this.headers);
         return json.data;
     }
+
+    public static async sendMessageForSupportTicket(supportMessage: {}):Promise<InboxMessage>{
+        const url = this.links.sendMessageForSupportTicket();
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        const json = await this.requester.post(url,this.headers, supportMessage);
+        return json.data;
+    }
 }
