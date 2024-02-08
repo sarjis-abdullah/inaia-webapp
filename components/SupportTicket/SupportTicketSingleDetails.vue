@@ -1,6 +1,6 @@
 <template>
-    <div v-if="!ticketLoading && hasGroupMessages">
-        <div class="grid gap-4 max-h-[60vh] overflow-y-auto mesaageListToScrollTarget" ref="mesaageListToScrollTarget">
+    <div v-if="!ticketLoading && hasGroupMessages" class="ml-4">
+        <div class="grid gap-4 max-h-[40vh] overflow-y-auto mesaageListToScrollTarget" ref="mesaageListToScrollTarget">
             <div v-for="(group, ind) in groupedMessages" :key="ind" class="">
 
                 <div class="flex justify-center items-center mb-4">

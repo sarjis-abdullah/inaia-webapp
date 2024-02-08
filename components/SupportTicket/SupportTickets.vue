@@ -1,7 +1,15 @@
 <template>
     <ul v-if="hasTickets && !ticketLoading" role="list"
-        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-[80vh] overflow-y-auto">
-        <SupportTicketSingle v-for="(ticket, index) in tickets" :key="index" :ticket="ticket" @setSelectedTicket="setSelectedTicket"/>
+        class="border-t border-r border-l rounded-l-md border-gray-200">
+        <li class="py-4 pl-4 pr-5 cursor-pointer">
+            <SupportTicketFIlter />
+        </li>
+    </ul>
+    
+    <ul v-if="hasTickets && !ticketLoading" role="list"
+        class="divide-y divide-gray-200 rounded-b-md border border-gray-200 max-h-[70vh] overflow-y-auto">
+        <SupportTicketSingle v-for="(ticket, index) in tickets" :key="index" :ticket="ticket"
+            @setSelectedTicket="setSelectedTicket" />
         <li v-if="moreToCome" class="py-4 pl-4 pr-5 cursor-pointer" @click.prevent="loadMoreTickets">
             <div class="text-blue-500 text-sm text-center mt-3">
                 <a v-if="!loadMore">{{ $t('see_more') }}</a>
@@ -21,14 +29,12 @@
   
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import moment from 'moment'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
-import Pagination from '@/components/common/Pagination.vue';
 import SupportTicketSingle from './SupportTicketSingle.vue';
 import { SupportTicketService } from '@/lib/services/index';
-import { formatDateByMoment, dateFormat2 } from '@/lib/Formatters';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
+import SupportTicketFIlter from './SupportTicketFIlter'
 import { AccountStorage } from '@/storage';
 //emits
 const emit = defineEmits<{
@@ -39,7 +45,7 @@ const tickets = ref([])
 const ticketLoading = ref(false);
 //pagination data variables
 const page = ref(1);
-const perPage = ref(10);
+const perPage = ref(7);
 const loadMore = ref(false);
 const moreToCome = ref(true);
 const errorText = ref("");

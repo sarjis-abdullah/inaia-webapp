@@ -244,7 +244,16 @@ export const resolveNuxtI18nOptions = async (context) => {
   "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enddatum"])};fn.source="Enddatum";return fn;})(),
   "write_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Antwort schreiben..."])};fn.source="Antwort schreiben...";return fn;})(),
   "send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nachricht senden"])};fn.source="Nachricht senden";return fn;})(),
-  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle ein Ticket um Nachrichten einzusehen."])};fn.source="Wähle ein Ticket um Nachrichten einzusehen.";return fn;})()
+  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle ein Ticket um Nachrichten einzusehen."])};fn.source="Wähle ein Ticket um Nachrichten einzusehen.";return fn;})(),
+  "new": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Neu"])};fn.source="Neu";return fn;})(),
+  "closed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geschlossen"])};fn.source="Geschlossen";return fn;})(),
+  "open": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Offen"])};fn.source="Offen";return fn;})(),
+  "has_new_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Beantwortet"])};fn.source="Beantwortet";return fn;})(),
+  "has_new_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Neue Nachricht"])};fn.source="Neue Nachricht";return fn;})(),
+  "support_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Support-Tickets"])};fn.source="Support-Tickets";return fn;})(),
+  "subject": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Betreff"])};fn.source="Betreff";return fn;})(),
+  "creation_date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erstellungsdatum"])};fn.source="Erstellungsdatum";return fn;})(),
+  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lade Support-Ticket-Details"])};fn.source="Lade Support-Ticket-Details";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -474,7 +483,16 @@ export const resolveNuxtI18nOptions = async (context) => {
   "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["End Date"])};fn.source="End Date";return fn;})(),
   "write_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write an answer..."])};fn.source="Write an answer...";return fn;})(),
   "send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Send message"])};fn.source="Send message";return fn;})(),
-  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please select a ticket to see description"])};fn.source="Please select a ticket to see description";return fn;})()
+  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please select a ticket to see description"])};fn.source="Please select a ticket to see description";return fn;})(),
+  "new": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New"])};fn.source="New";return fn;})(),
+  "closed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Closed"])};fn.source="Closed";return fn;})(),
+  "open": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["open"])};fn.source="open";return fn;})(),
+  "has_new_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Answered"])};fn.source="Answered";return fn;})(),
+  "has_new_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New message"])};fn.source="New message";return fn;})(),
+  "support_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Support tickets"])};fn.source="Support tickets";return fn;})(),
+  "subject": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Subject"])};fn.source="Subject";return fn;})(),
+  "creation_date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Creation date"])};fn.source="Creation date";return fn;})(),
+  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Loading support ticket details"])};fn.source="Loading support ticket details";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -675,7 +693,16 @@ export const resolveNuxtI18nOptions = async (context) => {
   "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de fin"])};fn.source="Date de fin";return fn;})(),
   "write_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez une réponse..."])};fn.source="Écrivez une réponse...";return fn;})(),
   "send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Envoyer un message"])};fn.source="Envoyer un message";return fn;})(),
-  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle ein Ticket um Nachrichten einzusehen."])};fn.source="Wähle ein Ticket um Nachrichten einzusehen.";return fn;})()
+  "select_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wähle ein Ticket um Nachrichten einzusehen."])};fn.source="Wähle ein Ticket um Nachrichten einzusehen.";return fn;})(),
+  "new": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nouveau"])};fn.source="Nouveau";return fn;})(),
+  "closed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Fermé"])};fn.source="Fermé";return fn;})(),
+  "open": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ouvert"])};fn.source="Ouvert";return fn;})(),
+  "has_new_answer": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Répondu"])};fn.source="Répondu";return fn;})(),
+  "has_new_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nouveau message"])};fn.source="Nouveau message";return fn;})(),
+  "support_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tickets de support"])};fn.source="Tickets de support";return fn;})(),
+  "subject": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sujet"])};fn.source="Sujet";return fn;})(),
+  "creation_date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de création"])};fn.source="Date de création";return fn;})(),
+  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Chargement des détails du ticket de support"])};fn.source="Chargement des détails du ticket de support";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]
