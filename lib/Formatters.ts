@@ -17,6 +17,22 @@ export const formatDate= (date:Date)=>{
     return date.getFullYear()+"-"+month+"-"+day;
 }
 
+export const formatTime = (date: Date) =>
+{
+    let d = new Date(date);
+    let hours: number | string = d.getHours();
+    if(hours<10)
+    {
+        hours = "0"+hours;
+    }
+    let minutes: number | string = d.getMinutes();
+    if(minutes < 10 )
+    {
+        minutes = "0"+minutes;
+    }
+    return hours+":"+minutes;
+}
+
 export const formatDateByMoment= (date:Date, formatType = dateFormat1)=>{
     return moment(date).format(formatType);
 }
