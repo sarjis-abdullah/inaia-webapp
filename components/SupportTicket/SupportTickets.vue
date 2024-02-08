@@ -1,6 +1,6 @@
 <template>
     <ul v-if="hasTickets && !ticketLoading" role="list"
-        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-screen overflow-y-auto">
+        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-[80vh] overflow-y-auto">
         <SupportTicketSingle v-for="(ticket, index) in tickets" :key="index" :ticket="ticket" @setSelectedTicket="setSelectedTicket"/>
         <li v-if="moreToCome" class="py-4 pl-4 pr-5 cursor-pointer" @click.prevent="loadMoreTickets">
             <div class="text-blue-500 text-sm text-center mt-3">
