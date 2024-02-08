@@ -1,6 +1,8 @@
 <template>
-    <div v-if="!ticketLoading && hasGroupMessages" class="ml-4">
-        <div class="grid gap-4 max-h-[40vh] overflow-y-auto mesaageListToScrollTarget" ref="mesaageListToScrollTarget">
+    <div v-if="!ticketLoading && hasGroupMessages" class="m-4">
+        <div 
+        class="grid gap-4 overflow-y-auto mesaageListToScrollTarget" 
+        :class="shouldShowMessageBoxAndCloseTicket ? 'max-h-[40vh]' : 'max-h-[60vh]'" ref="mesaageListToScrollTarget">
             <div v-for="(group, ind) in groupedMessages" :key="ind" class="">
 
                 <div class="flex justify-center items-center mb-4">
@@ -25,7 +27,7 @@
         </div>
 
         <form class="mt-4" v-if="shouldShowMessageBoxAndCloseTicket">
-            <textarea type="text" class="bg-[#f5f5f5] w-full p-3 border-0" :placeholder="$t('write_answer')" rows="5"
+            <textarea type="text" class="bg-[#f5f5f5] w-full p-3 border-0" :placeholder="$t('write_answer')" rows="3"
                 v-model="messageText"></textarea>
             <div class="flex justify-end">
                 <button v-if="!messageLoading" :disabled="messageLoading || !messageText" type="button"

@@ -3,7 +3,7 @@
         <section>
             <SupportTickets @setSelectedTicket="setSelectedTicket" />
         </section>
-        <section>
+        <section class="border-b border-r">
             <section v-if="selectedTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4">
                 <section class="flex justify-between">
                     <section>
