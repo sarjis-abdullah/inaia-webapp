@@ -258,4 +258,13 @@ export default {
     write_answer: 'Antwort schreiben...',
     send_message: 'Nachricht senden',
     select_ticket: "Wähle ein Ticket um Nachrichten einzusehen.",
+    "new": "Neu",
+    "closed": "Geschlossen",
+    "open": "Offen",
+    "has_new_answer": "Beantwortet",
+    "has_new_message": "Neue Nachricht",
+    "support_ticket": "Support-Tickets",
+    "subject": "Betreff",
+    "creation_date": "Erstellungsdatum",
+    "loading_ticket_details": "Lade Support-Ticket-Details"
 }

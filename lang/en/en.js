@@ -232,4 +232,13 @@ export default {
     write_answer: 'Write an answer...', 
     send_message: 'Send message', 
     select_ticket:"Please select a ticket to see description",
+    new:'New',
+    closed:'Closed',
+    open:'open',
+    has_new_answer:'Answered',
+    has_new_message:'New message',
+    support_ticket:'Support tickets',
+    subject:'Subject',
+    creation_date:'Creation date',
+    loading_ticket_details:"Loading support ticket details",
 }
