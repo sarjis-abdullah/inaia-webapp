@@ -1,8 +1,63 @@
 <template>
+    <section v-if="thisTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4">
+        <section class="flex justify-between">
+            <section>
+                <div>Client</div>
+                <div>{{ ticket?.name }}</div>
+            </section>
+            <section>
+                <div>{{ thisTicket.subject }}</div>
+                <div>{{ formatDateByMoment(thisTicket.created_at, dateFormat2) }}</div>
+            </section>
+            <section class="flex items-center gap-1">
+                <div>
+                    <SupportTicketStatus v-if="thisTicket?.support_status?.name_translation_key"
+                        :status='thisTicket.support_status.name_translation_key' class="mr-2">
+                        {{ $t(thisTicket.support_status.name_translation_key) }}
+                    </SupportTicketStatus>
+                </div>
+                <div>
+                    <div>
+                        <Menu as="div" class="relative ml-3">
+                            <div>
+                                <MenuButton
+                                    class="flex items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 hover:ring-offset-blue-100">
+                                    <EllipsisVerticalIcon class="w-5 h-5" />
+                                </MenuButton>
+                            </div>
+                            <transition enter-active-class="transition ease-out duration-100"
+                                enter-from-class="transform opacity-0 scale-95"
+                                enter-to-class="transform opacity-100 scale-100"
+                                leave-active-class="transition ease-in duration-75"
+                                leave-from-class="transform opacity-100 scale-100"
+                                leave-to-class="transform opacity-0 scale-95">
+                                <MenuItems
+                                    class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <MenuItem v-slot="{ active }">
+                                    <article @click="closeTicket"
+                                        :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
+                                        class="flex gap-2">
+                                        <div>
+                                            <LockClosedIcon class="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                            <header class="font-bold">Close ticket</header>
+                                            <p>by closing this ticket you won't be able to continue this
+                                                conversation</p>
+                                        </div>
+                                    </article>
+                                    </MenuItem>
+                                </MenuItems>
+                            </transition>
+                        </Menu>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
     <div v-if="!ticketLoading && hasGroupMessages" class="m-4">
-        <div 
-        class="grid gap-4 overflow-y-auto mesaageListToScrollTarget" 
-        :class="shouldShowMessageBoxAndCloseTicket ? 'max-h-[40vh]' : 'max-h-[60vh]'" ref="mesaageListToScrollTarget">
+        <div class="grid gap-4 overflow-y-auto mesaageListToScrollTarget"
+            :class="shouldShowMessageBoxAndCloseTicket ? 'max-h-[40vh]' : 'max-h-[60vh]'" ref="mesaageListToScrollTarget">
             <div v-for="(group, ind) in groupedMessages" :key="ind" class="">
 
                 <div class="flex justify-center items-center mb-4">
@@ -42,7 +97,7 @@
             </div>
         </form>
     </div>
-    <div v-if="!hasGroupMessages && !ticket.id" class="flex flex-col justify-center h-[50vh] items-center">
+    <div v-if="!hasGroupMessages && !thisTicket?.id" class="flex flex-col justify-center h-[50vh] items-center">
         <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <title>message-arrow-left-outline</title>
             <path
@@ -54,6 +109,16 @@
         <Loading />
     </div>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
+    <Modal :open="confirmClose" @onClose="toggleTicketClosing" :title="`Are you sure you want to re-open this ticket?`">
+        <template v-slot:footer>
+            <div class="flex justify-end gap-2 mt-4">
+            <button @click="confirmClose = false" class="px-2 py-1 border">Cancel</button>
+            <button v-if="!statusLoading" @click="submitTicketNewStatus"
+                class="px-2 py-1 border bg-blue-400 text-white">Ok</button>
+            <Loading v-else />
+        </div>
+        </template>
+    </Modal>
 </template>
   
 <script setup>
@@ -62,9 +127,15 @@ import moment from 'moment'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
 import Pagination from '@/components/common/Pagination.vue';
+import Modal from '@/components/common/Modal';
+import SupportTicketSingleDetailsHeader from './SupportTicketSingleDetailsHeader.vue';
+import SupportTicketStatus from './SupportTicketStatus.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, formatTime, dateFormat2 } from '@/lib/Formatters';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
+import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
 
 //props
@@ -78,12 +149,14 @@ const props = defineProps({
 const groupedMessages = ref([])
 const ticketLoading = ref(false);
 const messageLoading = ref(false);
+const confirmClose = ref(false);
+const statusLoading = ref(false);
 const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
 const errorText = ref("");
 
 //computed
-const thisTicket = computed(() => props.ticket)
+const thisTicket = ref(null)
 const hasGroupMessages = computed(() => (groupedMessages.value && groupedMessages.value.length))
 const accountId = computed(() => AccountStorage.getAccountId());
 const messageData = computed(() => {
@@ -93,8 +166,8 @@ const messageData = computed(() => {
         support_ticket_id: props.ticket.id,
     }
 });
-const shouldShowMessageBoxAndCloseTicket = computed(()=> {
-    return props.ticket && props.ticket.support_status && props.ticket.support_status.name_translation_key != 'closed'
+const shouldShowMessageBoxAndCloseTicket = computed(() => {
+    return thisTicket.value && thisTicket.value.support_status && thisTicket.value.support_status.name_translation_key != 'closed'
 })
 
 //functions
@@ -119,6 +192,7 @@ const loadData = async () => {
     try {
         let data = await SupportTicketService.getSingleSupportTicket(props.ticket.id);
         if (data?.id) {
+            thisTicket.value = data
             groupedMessages.value = groupDataByDate(data.messages)
         }
         errorText.value = ""
@@ -164,6 +238,29 @@ const sendMessage = async () => {
         messageLoading.value = false
     }
 }
+const submitTicketNewStatus = async () => {
+    try {
+        statusLoading.value = true
+        const object = {
+            support_status_id: 5
+        }
+        let data = await SupportTicketService.submitTicketNewStatus(props.ticket.id, object);
+        if (data?.id) {
+            thisTicket.value = {
+                ...thisTicket.value,
+                support_status: data.support_status,
+                support_status_id: data.support_status_id,
+            }
+        }
+        statusLoading.value = false
+        errorText.value = ""
+    } catch (error) {
+        errorText.value = error.message ?? getMessageFromError(error)
+    } finally {
+        statusLoading.value = false
+        confirmClose.value = false
+    }
+}
 const getOwnerName = (owner) => {
     let name = owner?.contact?.name ?? ""
     if (owner?.contact?.person_data) {
@@ -173,23 +270,32 @@ const getOwnerName = (owner) => {
 }
 const scrollIntoView = () => {
     if (hasGroupMessages && mesaageListToScrollTarget.value) {
-        let lastGroupMessage = groupedMessages.value[groupedMessages.value.length - 1]
+        const lastGroupMessage = groupedMessages.value[groupedMessages.value.length - 1]
         if (lastGroupMessage && lastGroupMessage.messages) {
             const messageLength = lastGroupMessage.messages.length
             const lastMessage = lastGroupMessage.messages[messageLength - 1]
-            console.log(lastMessage, "last message");
-            var messageArea = document.querySelector("#message-" + lastMessage.id.toString());
-            console.log(messageArea, "messageArea");
-            if (messageArea)
-                messageArea.scrollIntoView();
+            if (lastMessage && lastMessage.id) {
+                const messageArea = document.querySelector("#message-" + lastMessage.id.toString());
+                if (messageArea)
+                    messageArea.scrollIntoView();
+            }
         }
 
     }
 }
+const closeTicket = () => {
+    confirmClose.value = true
+    // submitTicketNewStatus()
+}
+const toggleTicketClosing = () => {
+    confirmClose.value = false
+    // submitTicketNewStatus()
+}
 
 watch(props, () => {
-    if (props?.ticket.id) {
+    if (props?.ticket?.id) {
         groupedMessages.value = []
+        thisTicket.value = props.ticket
         loadData()
     }
 }, { deep: true, immediate: true })

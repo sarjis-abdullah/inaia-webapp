@@ -171,6 +171,10 @@ export class Urls{
         const include = "include=messages,creater,owner,contacts,support_status,person_data"
         return this.buildUrl(BaseUrls.getCoreUrl(), `support-messages?${include}`);
     }
+    public submitTicketNewStatus(ticketId: number):string{
+        const include = "include=support_status"
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets/${ticketId}?${include}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

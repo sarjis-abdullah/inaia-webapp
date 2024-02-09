@@ -11,7 +11,8 @@
             <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
               
               <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <div class="flex justify-end mb-3">
+                <div class="flex justify-between mb-3">
+                  <span>{{ title }}</span>
                   <a @click="onClose" class="cursor-pointer"><XMarkIcon class="w-6 h-6"/></a>
                 </div>
                 <slot />
@@ -34,7 +35,11 @@
     open:{
         type: Boolean,
         default: false
-    }
+    },
+    title:{
+        type: String,
+        default: ""
+    },
  })
  const emit = defineEmits<{
   (e: 'onClose'): void

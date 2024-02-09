@@ -39,4 +39,12 @@ export class SupportTicketService{
         const json = await this.requester.post(url,this.headers, supportMessage);
         return json.data;
     }
+
+    public static async submitTicketNewStatus(ticketId: number, supportStatus: {}):Promise<InboxMessage>{
+        const url = this.links.submitTicketNewStatus(ticketId);
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        const json = await this.requester.put(url,this.headers, supportStatus);
+        return json.data;
+    }
 }

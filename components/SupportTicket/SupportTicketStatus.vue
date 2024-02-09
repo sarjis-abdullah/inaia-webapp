@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-green-500" :class="statusClass" v-if="status == 'new'">
+    <div class="bg-[#1aae6f]" :class="statusClass" v-if="status == 'new'">
         <slot></slot>
     </div>
     <div class="bg-blue-500" :class="statusClass" v-else-if="status == 'closed'">
