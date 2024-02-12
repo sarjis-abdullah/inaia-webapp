@@ -2,7 +2,9 @@
     <section v-if="thisTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4">
         <section class="flex justify-between">
             <section>
-                <div>Client</div>
+                <div>
+                    {{ $t('client') }}
+                </div>
                 <div>{{ ticket?.name }}</div>
             </section>
             <section>
@@ -42,11 +44,10 @@
                                         </div>
                                         <div>
                                             <header class="font-bold">
-                                                {{ currentStatus == 'closed' ? 'Open ticket' : 'Close ticket' }}
+                                                {{ currentStatus == 'closed' ? $t('close_ticket') : $t('open_ticket') }}
                                             </header>
-                                            <p v-if="currentStatus != 'closed'">By closing this ticket you won't be able to continue this
-                                                conversation</p>
-                                            <p v-else>To restart the conversation you can re-open the ticket</p>
+                                            <p v-if="currentStatus != 'closed'">{{ $t('close_ticket_message') }}</p>
+                                            <p v-else>{{ $t('open_ticket_message') }}</p>
                                         </div>
                                     </article>
                                     </MenuItem>
@@ -64,7 +65,7 @@
             <div v-for="(group, ind) in groupedMessages" :key="ind" class="">
 
                 <div class="flex justify-center items-center mb-4">
-                    <div class="text-center">{{ isDateIsCurrentDay(group.date) ? 'Today' : group.date }}</div>
+                    <div class="text-center">{{ isDateIsCurrentDay(group.date) ? $t('today') : group.date }}</div>
                 </div>
 
                 <ul class="grid gap-4">
@@ -101,9 +102,13 @@
     <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="`Are you sure you want to re-open this ticket?`">
         <template v-slot:footer>
             <div class="flex justify-end gap-2 mt-4">
-                <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border-gray-300 rounded-md">Cancel</button>
+                <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border-gray-300 rounded-md">
+                    {{ $t('cancel') }}
+                </button>
                 <button v-if="!statusLoading" @click="updateSupportTicketStatus"
-                    class="px-2 py-1 border-gray-300 rounded-md bg-blue-400 text-white">Ok</button>
+                    class="px-2 py-1 border-gray-300 rounded-md bg-blue-400 text-white">
+                    {{ $t('ok') }}
+                </button>
                 <Loading v-else />
             </div>
         </template>

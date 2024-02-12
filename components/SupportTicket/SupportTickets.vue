@@ -3,7 +3,9 @@
         <li class="p-4 cursor-pointer">
             <button v-if="!createTicketProcessing" @click="openCreateTicketModal = !openCreateTicketModal"
             class="flex justify-end gap-2 bg-[#0074d9] text-white px-2 py-2 rounded-md"
-            >Create new ticket</button>
+            >
+            {{ $t('create_ticket') }}
+        </button>
             <Loading v-else></Loading>
         </li>
     </ul>
@@ -28,16 +30,16 @@
     </ul>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
     <Modal :open="openCreateTicketModal" @onClose="toggleCreateTicketModal" maxWidth="sm:max-w-2xl"
-        :title="`${$t('createSupportTicket')}`">
+        :title="`${$t('new_ticket')}`">
         <form class="grid gap-4">
             <div class="flex flex-col gap-2">
-                <div>{{ $t('createSupportTicketSubject') }}</div>
+                <div>{{ $t('subject') }}</div>
                 <input type="text" name="subject" required v-model="subject" class="block  w-full 10 pl-3 py-2 rounded-md border-gray-300"
                     placeholder="Add a subject" />
             </div>
             <div class="flex flex-col gap-2">
-                <div>{{ $t('yourMessage') }}</div>
-                <textarea type="text" class="bg-[#f5f5f5] w-full border-gray-300 rounded-md" :placeholder="$t('write_answer')" rows="3"
+                <div>{{ $t('message') }}</div>
+                <textarea type="text" class="bg-[#f5f5f5] w-full border-gray-300 rounded-md" :placeholder="$t('write_message')" rows="3"
                     v-model="message"></textarea>
             </div>
         </form>
@@ -45,7 +47,9 @@
             <div class="flex justify-end gap-2 mt-4">
                 <button @click="openCreateTicketModal = false" class="px-2 py-1 border-gray-300 rounded-md">Cancel</button>
                 <button :disabled="(!message || !subject)" v-if="!createTicketProcessing" @click="createSupportTicket"
-                    class="px-2 py-1 border-gray-300 bg-blue-500 text-white rounded-md">Create</button>
+                    class="px-2 py-1 border-gray-300 bg-blue-500 text-white rounded-md">
+                    {{ $t('send') }}
+                </button>
                 <Loading v-else />
             </div>
         </template>

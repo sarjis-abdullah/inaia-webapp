@@ -253,7 +253,22 @@ export const resolveNuxtI18nOptions = async (context) => {
   "support_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Support-Tickets"])};fn.source="Support-Tickets";return fn;})(),
   "subject": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Betreff"])};fn.source="Betreff";return fn;})(),
   "creation_date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erstellungsdatum"])};fn.source="Erstellungsdatum";return fn;})(),
-  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lade Support-Ticket-Details"])};fn.source="Lade Support-Ticket-Details";return fn;})()
+  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lade Support-Ticket-Details"])};fn.source="Lade Support-Ticket-Details";return fn;})(),
+  "send": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["schicken"])};fn.source="schicken";return fn;})(),
+  "create": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erstellt"])};fn.source="Erstellt";return fn;})(),
+  "create_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Erstellt ticket"])};fn.source="Erstellt ticket";return fn;})(),
+  "new_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Neues ticket"])};fn.source="Neues ticket";return fn;})(),
+  "close_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Wenn Sie dieses Ticket schließen, können Sie dieses Gespräch nicht fortsetzen"])};fn.source="Wenn Sie dieses Ticket schließen, können Sie dieses Gespräch nicht fortsetzen";return fn;})(),
+  "close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ticket schließen"])};fn.source="Ticket schließen";return fn;})(),
+  "today": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Heute"])};fn.source="Heute";return fn;})(),
+  "cant_send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enable to send your message due to an error"])};fn.source="Enable to send your message due to an error";return fn;})(),
+  "ticket_closed_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["This ticket was closed successfully"])};fn.source="This ticket was closed successfully";return fn;})(),
+  "ticket_closed_unsuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We couldn't close this ticket due to an error"])};fn.source="We couldn't close this ticket due to an error";return fn;})(),
+  "are_you_sure_you_want_to_close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Are you sure you want to close this ticket?"])};fn.source="Are you sure you want to close this ticket?";return fn;})(),
+  "open_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["To restart the conversation you can re-open the ticket"])};fn.source="To restart the conversation you can re-open the ticket";return fn;})(),
+  "message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nachricht"])};fn.source="Nachricht";return fn;})(),
+  "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Klientin"])};fn.source="Klientin";return fn;})(),
+  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Schreiben nachricht ..."])};fn.source="Schreiben nachricht ...";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -492,7 +507,22 @@ export const resolveNuxtI18nOptions = async (context) => {
   "support_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Support tickets"])};fn.source="Support tickets";return fn;})(),
   "subject": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Subject"])};fn.source="Subject";return fn;})(),
   "creation_date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Creation date"])};fn.source="Creation date";return fn;})(),
-  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Loading support ticket details"])};fn.source="Loading support ticket details";return fn;})()
+  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Loading support ticket details"])};fn.source="Loading support ticket details";return fn;})(),
+  "send": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Send"])};fn.source="Send";return fn;})(),
+  "create": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create"])};fn.source="Create";return fn;})(),
+  "create_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create ticket"])};fn.source="Create ticket";return fn;})(),
+  "new_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New ticket"])};fn.source="New ticket";return fn;})(),
+  "close_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["by closing this ticket you won't be able to continue this conversation"])};fn.source="by closing this ticket you won't be able to continue this conversation";return fn;})(),
+  "close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ticket schließen"])};fn.source="Ticket schließen";return fn;})(),
+  "today": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Heute"])};fn.source="Heute";return fn;})(),
+  "cant_send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enable to send your message due to an error"])};fn.source="Enable to send your message due to an error";return fn;})(),
+  "ticket_closed_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["This ticket was closed successfully"])};fn.source="This ticket was closed successfully";return fn;})(),
+  "ticket_closed_unsuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We couldn't close this ticket due to an error"])};fn.source="We couldn't close this ticket due to an error";return fn;})(),
+  "are_you_sure_you_want_to_close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Are you sure you want to close this ticket?"])};fn.source="Are you sure you want to close this ticket?";return fn;})(),
+  "open_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["To restart the conversation you can re-open the ticket"])};fn.source="To restart the conversation you can re-open the ticket";return fn;})(),
+  "message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Message"])};fn.source="Message";return fn;})(),
+  "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Client"])};fn.source="Client";return fn;})(),
+  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write message ..."])};fn.source="Write message ...";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -702,7 +732,23 @@ export const resolveNuxtI18nOptions = async (context) => {
   "support_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tickets de support"])};fn.source="Tickets de support";return fn;})(),
   "subject": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sujet"])};fn.source="Sujet";return fn;})(),
   "creation_date": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de création"])};fn.source="Date de création";return fn;})(),
-  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Chargement des détails du ticket de support"])};fn.source="Chargement des détails du ticket de support";return fn;})()
+  "loading_ticket_details": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Chargement des détails du ticket de support"])};fn.source="Chargement des détails du ticket de support";return fn;})(),
+  "send": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Envoyer"])};fn.source="Envoyer";return fn;})(),
+  "cancel": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Annulé"])};fn.source="Annulé";return fn;})(),
+  "create": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créé"])};fn.source="Créé";return fn;})(),
+  "create_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créé ticket"])};fn.source="Créé ticket";return fn;})(),
+  "new_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nouveau ticket"])};fn.source="Nouveau ticket";return fn;})(),
+  "close_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["en fermant ce ticket vous ne pourrez plus continuer cette conversation"])};fn.source="en fermant ce ticket vous ne pourrez plus continuer cette conversation";return fn;})(),
+  "close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ticket schließen"])};fn.source="Ticket schließen";return fn;})(),
+  "today": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Heute"])};fn.source="Heute";return fn;})(),
+  "cant_send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enable to send your message due to an error"])};fn.source="Enable to send your message due to an error";return fn;})(),
+  "ticket_closed_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["This ticket was closed successfully"])};fn.source="This ticket was closed successfully";return fn;})(),
+  "ticket_closed_unsuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["We couldn't close this ticket due to an error"])};fn.source="We couldn't close this ticket due to an error";return fn;})(),
+  "are_you_sure_you_want_to_close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Are you sure you want to close this ticket?"])};fn.source="Are you sure you want to close this ticket?";return fn;})(),
+  "open_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["To restart the conversation you can re-open the ticket"])};fn.source="To restart the conversation you can re-open the ticket";return fn;})(),
+  "message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Message"])};fn.source="Message";return fn;})(),
+  "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Cliente"])};fn.source="Cliente";return fn;})(),
+  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez message ..."])};fn.source="Écrivez message ...";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]
