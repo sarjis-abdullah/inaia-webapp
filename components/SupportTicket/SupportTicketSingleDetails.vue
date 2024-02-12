@@ -125,11 +125,8 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import moment from 'moment'
-import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
-import Pagination from '@/components/common/Pagination.vue';
 import Modal from '@/components/common/Modal';
-import SupportTicketSingleDetailsHeader from './SupportTicketSingleDetailsHeader.vue';
 import SupportTicketStatus from './SupportTicketStatus.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, formatTime, dateFormat2 } from '@/lib/Formatters';

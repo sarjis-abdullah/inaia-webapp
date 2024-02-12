@@ -6,13 +6,6 @@
             <Loading v-else></Loading>
         </li>
     </ul>
-    <!-- Todo -->
-    <ul v-if="false && hasTickets && !ticketLoading" role="list"
-        class="border-t border-r border-l rounded-l-md border-gray-200">
-        <li class="py-4 pl-4 pr-5 cursor-pointer">
-            <SupportTicketFIlter />
-        </li>
-    </ul>
 
     <ul v-if="hasTickets && !ticketLoading" role="list"
         class="divide-y divide-gray-200 rounded-b-md border border-gray-200 max-h-[70vh] overflow-y-auto">
@@ -65,7 +58,6 @@ import SupportTicketSingle from './SupportTicketSingle.vue';
 import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
-import SupportTicketFIlter from './SupportTicketFIlter'
 import { AccountStorage } from '@/storage';
 //emits
 const emit = defineEmits<{

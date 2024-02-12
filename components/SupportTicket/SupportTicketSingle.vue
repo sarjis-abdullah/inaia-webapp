@@ -30,12 +30,8 @@
   
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import Loading from '@/components/common/Loading.vue'
-import Pagination from '@/components/common/Pagination.vue';
 import SupportTicketStatus from './SupportTicketStatus.vue';
-import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, dateFormat2 } from '@/lib/Formatters';
-import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 //emits
 const emit = defineEmits<{
     setSelectedTicket: [any: {}]
