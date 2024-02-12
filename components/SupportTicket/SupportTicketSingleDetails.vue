@@ -55,8 +55,8 @@
             </section>
         </section>
     </section>
-    <div v-if="!ticketLoading && hasGroupMessages" class="m-4">
-        <div class="grid gap-4 overflow-y-auto mesaageListToScrollTarget"
+    <div v-if="!ticketLoading" class="m-4">
+        <div v-if="hasGroupMessages" class="grid gap-4 overflow-y-auto mesaageListToScrollTarget"
             :class="shouldShowMessageBoxAndCloseTicket ? 'max-h-[40vh]' : 'max-h-[60vh]'" ref="mesaageListToScrollTarget">
             <div v-for="(group, ind) in groupedMessages" :key="ind" class="">
 
@@ -81,21 +81,7 @@
             </div>
         </div>
 
-        <form class="mt-4" v-if="shouldShowMessageBoxAndCloseTicket">
-            <textarea type="text" class="bg-[#f5f5f5] w-full p-3 border-0" :placeholder="$t('write_answer')" rows="3"
-                v-model="messageText"></textarea>
-            <div class="flex justify-end">
-                <button v-if="!messageLoading" :disabled="messageLoading || !messageText" type="button"
-                    class="flex justify-end gap-2 mt-2 bg-[#0074d9] text-white px-2 py-2 rounded-md" @click="sendMessage">
-                    {{ $t('send_message') }}
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <title>send</title>
-                        <path fill="white" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
-                    </svg>
-                </button>
-                <Loading v-else />
-            </div>
-        </form>
+
     </div>
     <div v-if="!hasGroupMessages && !thisTicket?.id" class="flex flex-col justify-center h-[50vh] items-center">
         <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -109,16 +95,31 @@
         <Loading />
     </div>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
-    <Modal :open="confirmClose" @onClose="toggleTicketClosing" :title="`Are you sure you want to re-open this ticket?`">
+    <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="`Are you sure you want to re-open this ticket?`">
         <template v-slot:footer>
             <div class="flex justify-end gap-2 mt-4">
-            <button @click="confirmClose = false" class="px-2 py-1 border">Cancel</button>
-            <button v-if="!statusLoading" @click="submitTicketNewStatus"
-                class="px-2 py-1 border bg-blue-400 text-white">Ok</button>
-            <Loading v-else />
-        </div>
+                <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border">Cancel</button>
+                <button v-if="!statusLoading" @click="updateSupportTicketStatus"
+                    class="px-2 py-1 border bg-blue-400 text-white">Ok</button>
+                <Loading v-else />
+            </div>
         </template>
     </Modal>
+    <form class="p-4 absolute bottom-0 w-full" v-if="shouldShowMessageBoxAndCloseTicket">
+        <textarea type="text" class="bg-[#f5f5f5] w-full border-0" :placeholder="$t('write_answer')" rows="3"
+            v-model="messageText"></textarea>
+        <div class="flex justify-end">
+            <button v-if="!messageLoading" :disabled="messageLoading || !messageText" type="button"
+                class="flex justify-end gap-2 mt-2 bg-[#0074d9] text-white px-2 py-2 rounded-md" @click="sendMessage">
+                {{ $t('send_message') }}
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>send</title>
+                    <path fill="white" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                </svg>
+            </button>
+            <Loading v-else />
+        </div>
+    </form>
 </template>
   
 <script setup>
@@ -149,7 +150,7 @@ const props = defineProps({
 const groupedMessages = ref([])
 const ticketLoading = ref(false);
 const messageLoading = ref(false);
-const confirmClose = ref(false);
+const confirmWarningTicketModal = ref(false);
 const statusLoading = ref(false);
 const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
@@ -238,13 +239,13 @@ const sendMessage = async () => {
         messageLoading.value = false
     }
 }
-const submitTicketNewStatus = async () => {
+const updateSupportTicketStatus = async () => {
     try {
         statusLoading.value = true
         const object = {
             support_status_id: 5
         }
-        let data = await SupportTicketService.submitTicketNewStatus(props.ticket.id, object);
+        let data = await SupportTicketService.updateSupportTicketStatus(props.ticket.id, object);
         if (data?.id) {
             thisTicket.value = {
                 ...thisTicket.value,
@@ -258,7 +259,7 @@ const submitTicketNewStatus = async () => {
         errorText.value = error.message ?? getMessageFromError(error)
     } finally {
         statusLoading.value = false
-        confirmClose.value = false
+        confirmWarningTicketModal.value = false
     }
 }
 const getOwnerName = (owner) => {
@@ -284,12 +285,12 @@ const scrollIntoView = () => {
     }
 }
 const closeTicket = () => {
-    confirmClose.value = true
-    // submitTicketNewStatus()
+    confirmWarningTicketModal.value = true
+    // updateSupportTicketStatus()
 }
 const toggleTicketClosing = () => {
-    confirmClose.value = false
-    // submitTicketNewStatus()
+    confirmWarningTicketModal.value = false
+    // updateSupportTicketStatus()
 }
 
 watch(props, () => {

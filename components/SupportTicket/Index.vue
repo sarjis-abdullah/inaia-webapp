@@ -3,7 +3,7 @@
         <section>
             <SupportTickets @setSelectedTicket="setSelectedTicket" />
         </section>
-        <section class="border-b border-r">
+        <section class="relative border-b border-r">
             
             <SupportTicketSingleDetails :ticket="selectedTicket" />
         </section>

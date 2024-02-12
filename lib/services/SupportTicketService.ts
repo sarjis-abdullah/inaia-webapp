@@ -40,8 +40,16 @@ export class SupportTicketService{
         return json.data;
     }
 
-    public static async submitTicketNewStatus(ticketId: number, supportStatus: {}):Promise<InboxMessage>{
-        const url = this.links.submitTicketNewStatus(ticketId);
+    public static async createSupportTicket(supportTicket: {}):Promise<InboxMessage>{
+        const url = this.links.createSupportTicket();
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        const json = await this.requester.post(url,this.headers, supportTicket);
+        return json.data;
+    }
+
+    public static async updateSupportTicketStatus(ticketId: number, supportStatus: {}):Promise<InboxMessage>{
+        const url = this.links.updateSupportTicketStatus(ticketId);
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         const json = await this.requester.put(url,this.headers, supportStatus);
