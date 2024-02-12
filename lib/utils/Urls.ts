@@ -163,6 +163,10 @@ export class Urls{
         const include = "include=creater,contacts,support_status,person_data"
         return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets?${include}&${queryParams}`);
     }
+    public getSupportTicketStatusList(request:PageRequest):string{
+        const queryParams = objectToQueryString(request);
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-statuses?${queryParams}`);
+    }
     public getSingleSupportTicket(ticketId: number):string{
         const include = "include=messages,creater,owner,contacts,support_status,person_data"
         return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets/${ticketId}?${include}`);

@@ -55,4 +55,18 @@ export class SupportTicketService{
         const json = await this.requester.put(url,this.headers, supportStatus);
         return json.data;
     }
+
+    public static async getSupportTicketStatusList(request:PageRequest):Promise<PaginationResponse<InboxMessage>>{
+        const url = this.links.getSupportTicketStatusList(request);
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        let json = await this.requester.get(url,this.headers);
+        let response:PaginationResponse<InboxMessage> = {
+            data:json.data,
+            currentPage:json.meta.current_page,
+            lastPage:json.meta.last_page,
+            total:json.meta.total
+        };
+        return response;
+    }
 }

@@ -34,16 +34,19 @@
                                 <MenuItems
                                     class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <MenuItem v-slot="{ active }">
-                                    <article @click="closeTicket"
+                                    <article @click="confirmWarningTicketModal = !confirmWarningTicketModal"
                                         :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                                        class="flex gap-2">
-                                        <div>
+                                        class="flex gap-2 cursor-pointer">
+                                        <div v-if="currentStatus != 'closed'">
                                             <LockClosedIcon class="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <header class="font-bold">Close ticket</header>
-                                            <p>by closing this ticket you won't be able to continue this
+                                            <header class="font-bold">
+                                                {{ currentStatus == 'closed' ? 'Open ticket' : 'Close ticket' }}
+                                            </header>
+                                            <p v-if="currentStatus != 'closed'">By closing this ticket you won't be able to continue this
                                                 conversation</p>
+                                            <p v-else>To restart the conversation you can re-open the ticket</p>
                                         </div>
                                     </article>
                                     </MenuItem>
@@ -98,9 +101,9 @@
     <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="`Are you sure you want to re-open this ticket?`">
         <template v-slot:footer>
             <div class="flex justify-end gap-2 mt-4">
-                <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border">Cancel</button>
+                <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border-gray-300 rounded-md">Cancel</button>
                 <button v-if="!statusLoading" @click="updateSupportTicketStatus"
-                    class="px-2 py-1 border bg-blue-400 text-white">Ok</button>
+                    class="px-2 py-1 border-gray-300 rounded-md bg-blue-400 text-white">Ok</button>
                 <Loading v-else />
             </div>
         </template>
@@ -152,6 +155,7 @@ const statusLoading = ref(false);
 const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
 const errorText = ref("");
+const statusList = ref("");
 
 //computed
 const thisTicket = ref(null)
@@ -166,6 +170,27 @@ const messageData = computed(() => {
 });
 const shouldShowMessageBoxAndCloseTicket = computed(() => {
     return thisTicket.value && thisTicket.value.support_status && thisTicket.value.support_status.name_translation_key != 'closed'
+})
+const statusListQueryParams = computed(() => {
+    const params = { page: 1, perPage: 5 }
+
+    return params
+})
+const currentStatus = computed(() => {
+    return thisTicket.value?.support_status?.name_translation_key
+})
+const statusCanBeChangeTo = computed(() => {
+    let updateAbleStatus = "open"
+    if (currentStatus.value != 'closed') {
+        updateAbleStatus = 'closed'
+    }
+    console.log(currentStatus.value);
+    return statusList.value.find(s => s.name_translation_key == updateAbleStatus)
+})
+const payloadForChangeStatus = computed(() => {
+    return {
+        support_status_id: statusCanBeChangeTo.value?.id
+    }
 })
 
 //functions
@@ -239,16 +264,32 @@ const sendMessage = async () => {
 const updateSupportTicketStatus = async () => {
     try {
         statusLoading.value = true
-        const object = {
-            support_status_id: 5
-        }
-        let data = await SupportTicketService.updateSupportTicketStatus(props.ticket.id, object);
+        let data = await SupportTicketService.updateSupportTicketStatus(props.ticket.id, payloadForChangeStatus.value);
         if (data?.id) {
             thisTicket.value = {
                 ...thisTicket.value,
                 support_status: data.support_status,
                 support_status_id: data.support_status_id,
             }
+        }
+        statusLoading.value = false
+        errorText.value = ""
+    } catch (error) {
+        errorText.value = error.message ?? getMessageFromError(error)
+    } finally {
+        statusLoading.value = false
+        confirmWarningTicketModal.value = false
+    }
+}
+const loadSupportStatusList = async () => {
+    try {
+        statusLoading.value = true
+        const object = {
+            support_status_id: 5
+        }
+        let data = await SupportTicketService.getSupportTicketStatusList(statusListQueryParams.value);
+        if (data?.data?.length) {
+            statusList.value = data.data
         }
         statusLoading.value = false
         errorText.value = ""
@@ -307,4 +348,7 @@ watch(groupedMessages, () => {
         scrollIntoView()
     }, 100);
 }, { deep: true, immediate: false })
+onMounted(()=> {
+    loadSupportStatusList()
+})
 </script>
