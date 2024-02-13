@@ -1,5 +1,5 @@
 <template>
-    <li @click="setSelectedTicket()" :class="`${showSelectedInURL ? 'bg-blue-100' : ''}`"
+    <li @click="setSelectedTicket(ticket)" :class="`${showSelectedInURL ? 'bg-blue-100' : ''}`"
         class="grid gap-1 items-center text-sm leading-6 cursor-pointer p-2" style="grid-template-columns: 14% 60% 24%;">
         <picture>
             <img class="h-12 w-12 rounded-full"
@@ -52,10 +52,10 @@ const showSelectedInURL = computed(()=> {
 })
 
 //functions
-const setSelectedTicket = () => {
-    const url = '/' + locale.value + '/support-tickets?id=' + props.ticket.id;
+const setSelectedTicket = (ticket = {}) => {
+    const url = '/' + locale.value + '/support-tickets?id=' + ticket.id;
     router.push(url)
-    emit("setSelectedTicket", props.ticket)
+    emit("setSelectedTicket", ticket)
 }
 
 </script>

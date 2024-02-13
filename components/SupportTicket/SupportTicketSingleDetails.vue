@@ -13,9 +13,9 @@
             </section>
             <section class="flex items-center gap-1">
                 <div>
-                    <SupportTicketStatus v-if="thisTicket?.support_status?.name_translation_key"
-                        :status='thisTicket.support_status.name_translation_key' class="mr-2">
-                        {{ $t(thisTicket.support_status.name_translation_key) }}
+                    <SupportTicketStatus v-if="formattedTicket?.support_status?.name_translation_key"
+                        :status='formattedTicket.support_status.name_translation_key' class="mr-2">
+                        {{ $t(formattedTicket.support_status.name_translation_key) }}
                     </SupportTicketStatus>
                 </div>
                 <div>
@@ -97,7 +97,7 @@
         <Loading />
     </div>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
-    <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="`Are you sure you want to re-open this ticket?`">
+    <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="currentStatus != 'closed' ? $t('are_you_sure_you_want_to_close_ticket') : $t('are_you_sure_you_want_to_open_ticket')">
         <template v-slot:footer>
             <div class="flex justify-end gap-2 mt-4">
                 <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border-gray-300 rounded-md">
@@ -126,6 +126,7 @@
             <Loading v-else />
         </div>
     </form>
+    <Snackbar @update:show="showSnackbar=false" :show="showSnackbar" :message="currentStatus != 'closed' ? $t('ticket_opened_successfully') : $t('ticket_closed_successfully')" />
 </template>
   
 <script setup lang="ts">
@@ -133,6 +134,7 @@ import { ref, computed, watch } from 'vue'
 import moment from 'moment'
 import Loading from '@/components/common/Loading.vue'
 import Modal from '@/components/common/Modal.vue';
+import Snackbar from '@/components/common/Snackbar.vue';
 import SupportTicketStatus from './SupportTicketStatus.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, formatTime, dateFormat2 } from '@/lib/Formatters';
@@ -163,6 +165,7 @@ const groupedMessages: Ref<GroupMessages[]> = ref([])
 const ticketLoading = ref(false);
 const messageLoading = ref(false);
 const confirmWarningTicketModal = ref(false);
+const showSnackbar = ref(false);
 const statusLoading = ref(false);
 const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
@@ -184,7 +187,7 @@ const messageData = computed(() => {
     return {
         created_by: accountId.value,
         message: messageText.value,
-        support_ticket_id: props.ticket.id,
+        support_ticket_id: props.ticket.id ?? queryId.value,
     }
 });
 const shouldShowMessageBoxAndCloseTicket = computed(() => {
@@ -282,7 +285,7 @@ const sendMessage = async () => {
 const updateSupportTicketStatus = async () => {
     try {
         statusLoading.value = true
-        let data: any = await SupportTicketService.updateSupportTicketStatus(props.ticket.id, payloadForChangeStatus.value);
+        let data: any = await SupportTicketService.updateSupportTicketStatus(thisTicket.value.id, payloadForChangeStatus.value);
         if (data?.id) {
             thisTicket.value = {
                 ...thisTicket.value,
@@ -290,6 +293,7 @@ const updateSupportTicketStatus = async () => {
                 support_status_id: data.support_status_id,
             }
             emit("updateTicketData", thisTicket.value)
+            showSnackbar.value = true
         }
         statusLoading.value = false
         errorText.value = ""
@@ -344,12 +348,15 @@ const toggleTicketClosing = () => {
 }
 
 watch(props, () => {
-    if (queryId.value) {
-        loadData(queryId.value)
-    }else if (props?.ticket?.id) {
+    if (props.ticket) {
+        thisTicket.value = props.ticket
+    }
+    if (props?.ticket?.id) {
         groupedMessages.value = []
         thisTicket.value = props.ticket
         loadData(props.ticket.id)
+    }else if (queryId.value) {
+        loadData(queryId.value)
     }
 }, { deep: true, immediate: true })
 

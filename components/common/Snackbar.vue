@@ -1,6 +1,6 @@
 <template>
     <transition name="slide-fade">
-        <div v-if="show" class="flex fixed top-[105px] right-[344px] bg-green-500 text-white p-4 z-50">
+        <div v-if="show" class="flex fixed top-[64px] right-0 bg-green-500 text-white p-4 z-50">
             <div>{{ message }}</div>
             <button @click="dismiss" class="ml-4 focus:outline-none">
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
