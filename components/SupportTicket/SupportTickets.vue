@@ -66,6 +66,7 @@ import { SupportTicketService } from '@/lib/services/index';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
 import { SupportTicket, SupportMessages, SupportStatus } from '@/lib/models';
+import { useUserInfo } from '@/hooks/useUserInfo';
 import { Ref } from 'nuxt/dist/app/compat/capi';
 //emits
 const emit = defineEmits<{
@@ -111,17 +112,8 @@ const supportData = computed(() => {
 });
 const formattedTickets = computed(() => {
     return tickets.value.map(ticket => {
-        const getName = () => {
-            if (ticket && ticket.account && ticket.account.contact) {
-                let name = ticket.account.contact.name;
-                if (ticket.account.contact.person_data) {
-                    name += ' ' + ticket.account.contact.person_data.surname;
-                }
-                return name;
-            }
-            return '';
-        }
-        return { ...ticket, name: getName() }
+        const account = ticket.account.contact ? useUserInfo(ticket.account.contact) : {}
+        return { ...ticket, name: account?.fullName }
     });
 });
 

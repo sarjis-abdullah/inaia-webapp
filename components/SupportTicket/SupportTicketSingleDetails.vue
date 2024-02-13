@@ -5,7 +5,7 @@
                 <div>
                     {{ $t('client') }}
                 </div>
-                <div>{{ ticket?.name }}</div>
+                <div>{{ formattedTicket?.name }}</div>
             </section>
             <section>
                 <div>{{ thisTicket.subject }}</div>
@@ -84,10 +84,8 @@
                 </ul>
             </div>
         </div>
-
-
     </div>
-    <div v-if="!hasGroupMessages && !thisTicket?.id" class="flex flex-col justify-center h-[50vh] items-center">
+    <div v-if="!hasGroupMessages && !thisTicket?.id && !queryId" class="flex flex-col justify-center h-[50vh] items-center">
         <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <title>message-arrow-left-outline</title>
             <path
@@ -144,7 +142,10 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
 import { SupportTicket, GroupMessages, SupportStatus } from '@/lib/models';
+import { useUserInfo } from '@/hooks/useUserInfo';
 import { Ref } from 'nuxt/dist/app/compat/capi';
+const router = useRouter();
+const route = useRoute()
 
 //emits
 const emit = defineEmits<{
@@ -171,6 +172,14 @@ const thisTicket: Ref<any> = ref(null)
 //computed
 const hasGroupMessages = computed(() => (groupedMessages.value && groupedMessages.value.length))
 const accountId = computed(() => AccountStorage.getAccountId());
+const formattedTicket = computed(() => {
+    const user = thisTicket.value?.account?.contact ? useUserInfo(thisTicket.value.account.contact) : {}
+    return {
+        ...thisTicket.value,
+        name: user?.fullName ?? ""
+    }
+});
+const queryId = computed(() => route?.query?.id ?? null);
 const messageData = computed(() => {
     return {
         created_by: accountId.value,
@@ -219,10 +228,10 @@ function groupDataByDate(data: any) {
 
     return groupedData;
 }
-const loadData = async () => {
+const loadData = async (id: number) => {
     ticketLoading.value = true
     try {
-        let data = await SupportTicketService.getSingleSupportTicket(props.ticket.id);
+        let data = await SupportTicketService.getSingleSupportTicket(id);
         if (data?.id) {
             thisTicket.value = data
             groupedMessages.value = groupDataByDate(data.messages)
@@ -311,11 +320,8 @@ const loadSupportStatusList = async () => {
     }
 }
 const getOwnerName = (owner: any) => {
-    let name = owner?.contact?.name ?? ""
-    if (owner?.contact?.person_data) {
-        name += ' ' + owner.contact?.person_data.surname
-    }
-    return name
+    const user = owner?.contact? useUserInfo(owner.contact) : {}
+    return user?.fullName ?? ""
 }
 const scrollIntoView = () => {
     if (hasGroupMessages && mesaageListToScrollTarget.value) {
@@ -332,20 +338,18 @@ const scrollIntoView = () => {
 
     }
 }
-const closeTicket = () => {
-    confirmWarningTicketModal.value = true
-    // updateSupportTicketStatus()
-}
+
 const toggleTicketClosing = () => {
     confirmWarningTicketModal.value = false
-    // updateSupportTicketStatus()
 }
 
 watch(props, () => {
-    if (props?.ticket?.id) {
+    if (queryId.value) {
+        loadData(queryId.value)
+    }else if (props?.ticket?.id) {
         groupedMessages.value = []
         thisTicket.value = props.ticket
-        loadData()
+        loadData(props.ticket.id)
     }
 }, { deep: true, immediate: true })
 
@@ -358,6 +362,8 @@ watch(groupedMessages, () => {
         scrollIntoView()
     }, 100);
 }, { deep: true, immediate: false })
+
+//mounted
 onMounted(()=> {
     loadSupportStatusList()
 })
