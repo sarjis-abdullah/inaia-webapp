@@ -2,10 +2,9 @@
     <ul role="list" class="border-t border-r border-l rounded-tl-md border-gray-200">
         <li class="p-4 cursor-pointer">
             <button v-if="!createTicketProcessing" @click="openCreateTicketModal = !openCreateTicketModal"
-            class="flex justify-end gap-2 bg-[#0074d9] text-white px-2 py-2 rounded-md"
-            >
-            {{ $t('create_ticket') }}
-        </button>
+                class="flex justify-end gap-2 bg-[#0074d9] text-white px-2 py-2 rounded-md">
+                {{ $t('create_ticket') }}
+            </button>
             <Loading v-else></Loading>
         </li>
     </ul>
@@ -34,13 +33,13 @@
         <form class="grid gap-4">
             <div class="flex flex-col gap-2">
                 <div>{{ $t('subject') }}</div>
-                <input type="text" name="subject" required v-model="subject" class="block  w-full 10 pl-3 py-2 rounded-md border-gray-300"
-                    placeholder="Add a subject" />
+                <input type="text" name="subject" required v-model="subject"
+                    class="block  w-full 10 pl-3 py-2 rounded-md border-gray-300" placeholder="Add a subject" />
             </div>
             <div class="flex flex-col gap-2">
                 <div>{{ $t('message') }}</div>
-                <textarea type="text" class="bg-[#f5f5f5] w-full border-gray-300 rounded-md" :placeholder="$t('write_message')" rows="3"
-                    v-model="message"></textarea>
+                <textarea type="text" class="bg-[#f5f5f5] w-full border-gray-300 rounded-md"
+                    :placeholder="$t('write_message')" rows="3" v-model="message"></textarea>
             </div>
         </form>
         <template v-slot:footer>
@@ -54,12 +53,14 @@
             </div>
         </template>
     </Modal>
+    <Snackbar @update:show="showSnackbar=false" :show="showSnackbar" :message="$t('ticketCreatedSuccessfully')" />
 </template>
   
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
+import Snackbar from '@/components/common/Snackbar.vue'
 import SupportTicketSingle from './SupportTicketSingle.vue';
 import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
@@ -84,6 +85,7 @@ const tickets: Ref<SupportTicket[]> = ref([])
 const ticketLoading = ref(false);
 const createTicketProcessing = ref(false);
 const openCreateTicketModal = ref(false);
+const showSnackbar = ref(false);
 const subject = ref("");
 const message = ref("");
 //pagination data variables
@@ -154,6 +156,7 @@ const createSupportTicket = async () => {
         if (data?.id) {
             tickets.value = [data, ...tickets.value]
         }
+        showSnackbar.value = true
         errorText.value = ""
     } catch (error) {
         console.error(error);
@@ -178,7 +181,7 @@ onMounted(() => {
 })
 
 //wathers
-watch(props, ()=> {
+watch(props, () => {
     if (props.updatedTicket?.id) {
         tickets.value = tickets.value.map(item => {
             if (item.id == props.updatedTicket.id) {
@@ -191,6 +194,6 @@ watch(props, ()=> {
             return item
         })
     }
-    
-}, {deep: true, immediate: false})
+
+}, { deep: true, immediate: false })
 </script>

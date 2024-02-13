@@ -268,7 +268,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "open_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["To restart the conversation you can re-open the ticket"])};fn.source="To restart the conversation you can re-open the ticket";return fn;})(),
   "message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nachricht"])};fn.source="Nachricht";return fn;})(),
   "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Klientin"])};fn.source="Klientin";return fn;})(),
-  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Schreiben nachricht ..."])};fn.source="Schreiben nachricht ...";return fn;})()
+  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Schreiben nachricht ..."])};fn.source="Schreiben nachricht ...";return fn;})(),
+  "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
+  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dein ticket wurde erfolgreich angelegt"])};fn.source="Dein ticket wurde erfolgreich angelegt";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -513,7 +515,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "create_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create ticket"])};fn.source="Create ticket";return fn;})(),
   "new_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New ticket"])};fn.source="New ticket";return fn;})(),
   "close_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["by closing this ticket you won't be able to continue this conversation"])};fn.source="by closing this ticket you won't be able to continue this conversation";return fn;})(),
-  "close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ticket schließen"])};fn.source="Ticket schließen";return fn;})(),
+  "close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Close ticket"])};fn.source="Close ticket";return fn;})(),
   "today": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Heute"])};fn.source="Heute";return fn;})(),
   "cant_send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enable to send your message due to an error"])};fn.source="Enable to send your message due to an error";return fn;})(),
   "ticket_closed_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["This ticket was closed successfully"])};fn.source="This ticket was closed successfully";return fn;})(),
@@ -522,7 +524,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "open_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["To restart the conversation you can re-open the ticket"])};fn.source="To restart the conversation you can re-open the ticket";return fn;})(),
   "message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Message"])};fn.source="Message";return fn;})(),
   "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Client"])};fn.source="Client";return fn;})(),
-  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write message ..."])};fn.source="Write message ...";return fn;})()
+  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write message ..."])};fn.source="Write message ...";return fn;})(),
+  "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
+  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your support ticket has been created successfully"])};fn.source="Your support ticket has been created successfully";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -748,7 +752,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "open_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["To restart the conversation you can re-open the ticket"])};fn.source="To restart the conversation you can re-open the ticket";return fn;})(),
   "message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Message"])};fn.source="Message";return fn;})(),
   "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Cliente"])};fn.source="Cliente";return fn;})(),
-  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez message ..."])};fn.source="Écrivez message ...";return fn;})()
+  "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez message ..."])};fn.source="Écrivez message ...";return fn;})(),
+  "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
+  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Votre ticket a été créé avec succès"])};fn.source="Votre ticket a été créé avec succès";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

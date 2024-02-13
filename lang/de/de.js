@@ -283,4 +283,5 @@ export default {
     client:"Klientin",
     write_message:"Schreiben nachricht ...",
     ok:"Ok",
+    ticketCreatedSuccessfully:'Dein ticket wurde erfolgreich angelegt',
 }

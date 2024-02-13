@@ -226,4 +226,5 @@ export default {
     client:"Cliente",
     write_message:"Écrivez message ...",
     ok:"Ok",
+    ticketCreatedSuccessfully:'Votre ticket a été créé avec succès',
 }
