@@ -154,3 +154,8 @@ export interface SupportTicket {
     support_status: SupportStatus;
     messages: SupportMessages[];
 }
+
+export interface GroupMessages {
+    date: string;
+    messages: SupportMessages[];
+}

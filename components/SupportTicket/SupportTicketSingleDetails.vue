@@ -143,7 +143,7 @@ import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
-import { SupportTicket, SupportMessages, SupportStatus } from '@/lib/models';
+import { SupportTicket, GroupMessages, SupportStatus } from '@/lib/models';
 import { Ref } from 'nuxt/dist/app/compat/capi';
 
 //emits
@@ -158,7 +158,7 @@ const props = defineProps({
     },
 })
 //data variables
-const groupedMessages = ref([])
+const groupedMessages: Ref<GroupMessages[]> = ref([])
 const ticketLoading = ref(false);
 const messageLoading = ref(false);
 const confirmWarningTicketModal = ref(false);
@@ -203,10 +203,10 @@ const payloadForChangeStatus = computed(() => {
 })
 
 //functions
-function groupDataByDate(data) {
-    const groupedData = [];
+function groupDataByDate(data: any) {
+    const groupedData: GroupMessages[] = [];
 
-    data.forEach(item => {
+    data.forEach((item: any) => {
         const createdAt = moment(item.created_at);
         const formattedDate = createdAt.format('YYYY-MM-DD');
         const existingGroup = groupedData.find(group => group.date === formattedDate);
@@ -236,7 +236,7 @@ const loadData = async () => {
     }
 }
 
-const isDateIsCurrentDay = (date) => moment().isSame(date, 'day')
+const isDateIsCurrentDay = (date: string) => moment().isSame(date, 'day')
 
 const sendMessage = async () => {
     try {
@@ -245,7 +245,7 @@ const sendMessage = async () => {
         if (data?.id) {
             const formatDate = (createdAt = dateFormat2) => formatDateByMoment(createdAt, dateFormat2)
             const createdAT = data.created_at
-            const checkCondition = item => formatDate(item.date) == formatDate(createdAT)
+            const checkCondition = (item: any) => formatDate(item.date) == formatDate(createdAT)
             const found = groupedMessages.value.find(checkCondition)
             if (found) {
                 groupedMessages.value = groupedMessages.value.map(item => {
@@ -273,7 +273,7 @@ const sendMessage = async () => {
 const updateSupportTicketStatus = async () => {
     try {
         statusLoading.value = true
-        let data = await SupportTicketService.updateSupportTicketStatus(props.ticket.id, payloadForChangeStatus.value);
+        let data: any = await SupportTicketService.updateSupportTicketStatus(props.ticket.id, payloadForChangeStatus.value);
         if (data?.id) {
             thisTicket.value = {
                 ...thisTicket.value,
@@ -284,7 +284,7 @@ const updateSupportTicketStatus = async () => {
         }
         statusLoading.value = false
         errorText.value = ""
-    } catch (error) {
+    } catch (error: any) {
         errorText.value = error.message ?? getMessageFromError(error)
     } finally {
         statusLoading.value = false
@@ -303,14 +303,14 @@ const loadSupportStatusList = async () => {
         }
         statusLoading.value = false
         errorText.value = ""
-    } catch (error) {
+    } catch (error: any) {
         errorText.value = error.message ?? getMessageFromError(error)
     } finally {
         statusLoading.value = false
         confirmWarningTicketModal.value = false
     }
 }
-const getOwnerName = (owner) => {
+const getOwnerName = (owner: any) => {
     let name = owner?.contact?.name ?? ""
     if (owner?.contact?.person_data) {
         name += ' ' + owner.contact?.person_data.surname
