@@ -247,7 +247,7 @@ export default {
     new_ticket : "New ticket",
     close_ticket_message:"by closing this ticket you won't be able to continue this conversation",
     close_ticket:'Close ticket',
-    today:'Heute',
+    today:'Today',
     cant_send_message:"Enable to send your message due to an error",
     ticket_opened_successfully:'The ticket was re-opened successfully',
     ticket_closed_successfully:'This ticket was closed successfully',
