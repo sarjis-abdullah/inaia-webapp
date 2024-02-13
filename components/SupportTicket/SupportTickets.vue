@@ -65,6 +65,8 @@ import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
+import { SupportTicket, SupportMessages, SupportStatus } from '@/lib/models';
+import { Ref } from 'nuxt/dist/app/compat/capi';
 //emits
 const emit = defineEmits<{
     setSelectedTicket: [any: {}]
@@ -77,7 +79,7 @@ const props = defineProps({
     },
 })
 //data variables
-const tickets = ref([])
+const tickets: Ref<SupportTicket[]> = ref([])
 const ticketLoading = ref(false);
 const createTicketProcessing = ref(false);
 const openCreateTicketModal = ref(false);

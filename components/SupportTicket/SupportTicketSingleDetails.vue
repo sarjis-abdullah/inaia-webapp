@@ -143,6 +143,8 @@ import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
+import { SupportTicket, SupportMessages, SupportStatus } from '@/lib/models';
+import { Ref } from 'nuxt/dist/app/compat/capi';
 
 //emits
 const emit = defineEmits<{
@@ -164,10 +166,9 @@ const statusLoading = ref(false);
 const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
 const errorText = ref("");
-const statusList = ref("");
-
+const statusList: Ref<SupportStatus[]> = ref([]);
+const thisTicket: Ref<any> = ref(null)
 //computed
-const thisTicket = ref(null)
 const hasGroupMessages = computed(() => (groupedMessages.value && groupedMessages.value.length))
 const accountId = computed(() => AccountStorage.getAccountId());
 const messageData = computed(() => {
