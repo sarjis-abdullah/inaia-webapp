@@ -1,10 +1,10 @@
 <template>
     <section class="grid" style="grid-template-columns: 4fr 7fr;">
         <section>
-            <SupportTickets @setSelectedTicket="setSelectedTicket" />
+            <SupportTickets :updatedTicket="updatedTicket" @setSelectedTicket="setSelectedTicket" />
         </section>
         <section class="relative border-b border-r">
-            <SupportTicketSingleDetails :ticket="selectedTicket" />
+            <SupportTicketSingleDetails @updateTicketData="updateTicketData" :ticket="selectedTicket" />
         </section>
     </section>
 </template>
@@ -16,10 +16,14 @@ import SupportTicketSingleDetails from './SupportTicketSingleDetails.vue'
 
 //data variables
 const selectedTicket = ref({})
+const updatedTicket = ref({})
 
 //functions
 const setSelectedTicket = (ticket = {}) => {
     selectedTicket.value = ticket
+}
+const updateTicketData = (ticket = {}) => {
+    updatedTicket.value = ticket
 }
 
 </script>

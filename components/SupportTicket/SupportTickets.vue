@@ -69,6 +69,13 @@ import { AccountStorage } from '@/storage';
 const emit = defineEmits<{
     setSelectedTicket: [any: {}]
 }>()
+//props
+const props = defineProps({
+    updatedTicket: {
+        type: Object,
+        default: () => ({})
+    },
+})
 //data variables
 const tickets = ref([])
 const ticketLoading = ref(false);
@@ -175,4 +182,21 @@ const setSelectedTicket = (ticket = {}) => {
 onMounted(() => {
     loadData()
 })
+
+//wathers
+watch(props, ()=> {
+    if (props.updatedTicket?.id) {
+        tickets.value = tickets.value.map(item => {
+            if (item.id == props.updatedTicket.id) {
+                return {
+                    ...item,
+                    support_status: props.updatedTicket.support_status,
+                    support_status_id: props.updatedTicket.support_status_id,
+                }
+            }
+            return item
+        })
+    }
+    
+}, {deep: true, immediate: false})
 </script>

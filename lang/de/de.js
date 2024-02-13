@@ -282,4 +282,5 @@ export default {
     message:"Nachricht",
     client:"Klientin",
     write_message:"Schreiben nachricht ...",
+    ok:"Ok",
 }

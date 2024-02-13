@@ -1,5 +1,5 @@
 <template>
-    <li @click="setSelectedTicket()" :class="`${selectedTicket.id == ticket.id ? 'bg-blue-100' : ''}`"
+    <li @click="setSelectedTicket()" :class="`${showSelectedInURL ? 'bg-blue-100' : ''}`"
         class="grid gap-1 items-center text-sm leading-6 cursor-pointer p-2" style="grid-template-columns: 14% 60% 24%;">
         <picture>
             <img class="h-12 w-12 rounded-full"
@@ -29,9 +29,12 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import SupportTicketStatus from './SupportTicketStatus.vue';
 import { formatDateByMoment, dateFormat2 } from '@/lib/Formatters';
+const {t,locale} = useI18n();
+const router = useRouter();
+const route = useRoute()
 //emits
 const emit = defineEmits<{
     setSelectedTicket: [any: {}]
@@ -43,12 +46,15 @@ const props = defineProps({
         default: () => ({})
     },
 })
-//data variables
-const selectedTicket = ref({})
+//computed props
+const showSelectedInURL = computed(()=> {
+    return props.ticket.id == route.query.id
+})
 
 //functions
 const setSelectedTicket = () => {
-    // selectedTicket.value = props.ticket
+    const url = '/' + locale.value + '/support-tickets?id=' + props.ticket.id;
+    router.push(url)
     emit("setSelectedTicket", props.ticket)
 }
 

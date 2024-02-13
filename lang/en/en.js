@@ -246,7 +246,7 @@ export default {
     create_ticket : "Create ticket",
     new_ticket : "New ticket",
     close_ticket_message:"by closing this ticket you won't be able to continue this conversation",
-    close_ticket:'Ticket schließen',
+    close_ticket:'Close ticket',
     today:'Heute',
     cant_send_message:"Enable to send your message due to an error",
     ticket_closed_successfully:'This ticket was closed successfully',
@@ -256,4 +256,5 @@ export default {
     message:"Message",
     client:"Client",
     write_message:"Write message ...",
+    ok:"Ok",
 }

@@ -225,4 +225,5 @@ export default {
     message:"Message",
     client:"Cliente",
     write_message:"Écrivez message ...",
+    ok:"Ok",
 }

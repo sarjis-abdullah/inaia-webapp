@@ -44,7 +44,7 @@
                                         </div>
                                         <div>
                                             <header class="font-bold">
-                                                {{ currentStatus == 'closed' ? $t('close_ticket') : $t('open_ticket') }}
+                                                {{ currentStatus != 'closed' ? $t('close_ticket') : $t('open_ticket') }}
                                             </header>
                                             <p v-if="currentStatus != 'closed'">{{ $t('close_ticket_message') }}</p>
                                             <p v-else>{{ $t('open_ticket_message') }}</p>
@@ -130,11 +130,11 @@
     </form>
 </template>
   
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import moment from 'moment'
 import Loading from '@/components/common/Loading.vue'
-import Modal from '@/components/common/Modal';
+import Modal from '@/components/common/Modal.vue';
 import SupportTicketStatus from './SupportTicketStatus.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, formatTime, dateFormat2 } from '@/lib/Formatters';
@@ -144,6 +144,10 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
 
+//emits
+const emit = defineEmits<{
+    updateTicketData: [any: {}]
+}>()
 //props
 const props = defineProps({
     ticket: {
@@ -189,7 +193,6 @@ const statusCanBeChangeTo = computed(() => {
     if (currentStatus.value != 'closed') {
         updateAbleStatus = 'closed'
     }
-    console.log(currentStatus.value);
     return statusList.value.find(s => s.name_translation_key == updateAbleStatus)
 })
 const payloadForChangeStatus = computed(() => {
@@ -276,6 +279,7 @@ const updateSupportTicketStatus = async () => {
                 support_status: data.support_status,
                 support_status_id: data.support_status_id,
             }
+            emit("updateTicketData", thisTicket.value)
         }
         statusLoading.value = false
         errorText.value = ""
