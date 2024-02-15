@@ -62,7 +62,7 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-4 flex items-center md:ml-6">
-                <div type="button" class="cursor-pointer relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                <div class="cursor-pointer relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
                   <span v-if="newInboxMessageCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
                     {{ newInboxMessageCount }}
                   </span>
@@ -70,11 +70,11 @@
                   
                   <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
                 </div>
-                <div @click="gotoSupport" type="button" class="cursor-pointer relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-                  <span v-if="newInboxMessageCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
-                    {{ newInboxMessageCount }}
+                <div @click="gotoSupport" class="cursor-pointer relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                  <span v-if="newSupportTicketAnswerCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                    {{ newSupportTicketAnswerCount }}
                   </span>
-                  <span class="sr-only">View Inbox Messages</span>
+                  <span class="sr-only">View Support Messages</span>
                   
                   <svg fill="white" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>headphones</title><path d="M12,1C7,1 3,5 3,10V17A3,3 0 0,0 6,20H9V12H5V10A7,7 0 0,1 12,3A7,7 0 0,1 19,10V12H15V20H18A3,3 0 0,0 21,17V10C21,5 16.97,1 12,1Z" /></svg>
                 </div>
@@ -131,6 +131,14 @@
                 </span>
                 <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
               </button>
+              <button type="button" @click="gotoSupport" class="cursor-pointer relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                  <span v-if="newSupportTicketAnswerCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                    {{ newSupportTicketAnswerCount }}
+                  </span>
+                  <span class="sr-only">View Support Messages</span>
+                  
+                  <svg fill="white" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>headphones</title><path d="M12,1C7,1 3,5 3,10V17A3,3 0 0,0 6,20H9V12H5V10A7,7 0 0,1 12,3A7,7 0 0,1 19,10V12H15V20H18A3,3 0 0,0 21,17V10C21,5 16.97,1 12,1Z" /></svg>
+                </button>
             </div>
             <div class="mt-3 space-y-1 px-2">
               <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" @click.prevent="item.action" class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75">
@@ -191,6 +199,12 @@ onMounted(async ()=>{
   const newInboxMessageCount  = computed(()=>{
     if(user.value?.account?.new_inbox_message_count){
       return user.value.account.new_inbox_message_count
+    }
+    return 0
+  })
+  const newSupportTicketAnswerCount  = computed(()=>{
+    if(user.value?.account?.new_support_ticket_answer_count){
+      return user.value.account.new_support_ticket_answer_count
     }
     return 0
   })
