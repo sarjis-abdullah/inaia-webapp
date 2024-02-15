@@ -143,14 +143,13 @@ import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
-import { SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
+import { SupportTicket, SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
-const router = useRouter();
 const route = useRoute()
 
 //emits
 const emit = defineEmits<{
-    updateTicketData: [any: {}]
+    updateTicketData: [SupportTicket: {}]
 }>()
 //props
 const props = defineProps({
@@ -174,7 +173,7 @@ const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
 const errorText = ref("");
 const statusList: Ref<SupportTicketStatusModel[]> = ref([]);
-const thisTicket: Ref<any> = ref(null)
+const thisTicket: Ref<SupportTicket|any> = ref(null)
 //computed
 const hasGroupMessages = computed(() => (groupedMessages.value && groupedMessages.value.length))
 const accountId = computed(() => AccountStorage.getAccountId());

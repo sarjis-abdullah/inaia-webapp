@@ -70,7 +70,7 @@ import { SupportTicket } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 //emits
 const emit = defineEmits<{
-    setSelectedTicket: [any: {}]
+    setSelectedTicket: [SupportTicket: {}]
 }>()
 //props
 const props = defineProps({
@@ -170,7 +170,7 @@ const loadMoreTickets = async () => {
     loadData()
 }
 
-const setSelectedTicket = (ticket = {}) => {
+const setSelectedTicket = (ticket: SupportTicket) => {
     emit("setSelectedTicket", ticket)
 }
 
