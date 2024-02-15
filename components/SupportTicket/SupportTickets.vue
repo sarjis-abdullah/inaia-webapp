@@ -66,7 +66,7 @@ import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
-import { SupportTicket, SupportMessages, SupportStatus } from '@/lib/models';
+import { SupportTicket } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { Ref } from 'nuxt/dist/app/compat/capi';
 //emits

@@ -143,7 +143,7 @@ import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
-import { SupportTicket, GroupMessages, SupportStatus } from '@/lib/models';
+import { SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { Ref } from 'nuxt/dist/app/compat/capi';
 const router = useRouter();
@@ -160,6 +160,10 @@ const props = defineProps({
         default: () => ({})
     },
 })
+interface GroupMessages {
+    date: string;
+    messages: SupportTicketMessage[];
+}
 //data variables
 const groupedMessages: Ref<GroupMessages[]> = ref([])
 const ticketLoading = ref(false);
@@ -170,7 +174,7 @@ const statusLoading = ref(false);
 const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
 const errorText = ref("");
-const statusList: Ref<SupportStatus[]> = ref([]);
+const statusList: Ref<SupportTicketStatusModel[]> = ref([]);
 const thisTicket: Ref<any> = ref(null)
 //computed
 const hasGroupMessages = computed(() => (groupedMessages.value && groupedMessages.value.length))

@@ -4,8 +4,8 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
-import { SupportTicket, SupportMessages, SupportStatus } from '../models';
-import { CreateSupportTicketMessageRequest, CreateSupportTicketRequest } from '../requests';
+import { SupportTicket, SupportTicketMessage, SupportTicketStatus } from '../models';
+import { SupportTicketMessageStoreRequest, SupportTicketStoreRequest } from '../requests';
 import { SupportTicketStatusUpdateRequest } from '../requests/SupportTicketStatusRequest';
 export class SupportTicketService{
     private static links = Urls.URLS();
@@ -34,7 +34,7 @@ export class SupportTicketService{
         return json.data;
     }
 
-    public static async sendMessageForSupportTicket(supportMessage: CreateSupportTicketMessageRequest):Promise<SupportMessages>{
+    public static async sendMessageForSupportTicket(supportMessage: SupportTicketMessageStoreRequest):Promise<SupportTicketMessage>{
         const url = this.links.sendMessageForSupportTicket();
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
@@ -42,7 +42,7 @@ export class SupportTicketService{
         return json.data;
     }
 
-    public static async createSupportTicket(supportTicket: CreateSupportTicketRequest):Promise<SupportTicket>{
+    public static async createSupportTicket(supportTicket: SupportTicketStoreRequest):Promise<SupportTicket>{
         const url = this.links.createSupportTicket();
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
@@ -50,7 +50,7 @@ export class SupportTicketService{
         return json.data;
     }
 
-    public static async updateSupportTicketStatus(ticketId: number, supportStatus: SupportTicketStatusUpdateRequest):Promise<SupportStatus>{
+    public static async updateSupportTicketStatus(ticketId: number, supportStatus: SupportTicketStatusUpdateRequest):Promise<SupportTicketStatus>{
         const url = this.links.updateSupportTicketStatus(ticketId);
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
@@ -58,12 +58,12 @@ export class SupportTicketService{
         return json.data;
     }
 
-    public static async getSupportTicketStatusList(request:PageRequest):Promise<PaginationResponse<SupportStatus>>{
+    public static async getSupportTicketStatusList(request:PageRequest):Promise<PaginationResponse<SupportTicketStatus>>{
         const url = this.links.getSupportTicketStatusList(request);
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         let json = await this.requester.get(url,this.headers);
-        let response:PaginationResponse<SupportStatus> = {
+        let response:PaginationResponse<SupportTicketStatus> = {
             data:json.data,
             currentPage:json.meta.current_page,
             lastPage:json.meta.last_page,

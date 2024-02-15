@@ -23,7 +23,7 @@ export interface KycDetail{
     url:string,
     vendor_data:string
 }
-interface AccountData{
+export interface AccountData{
     id:number;
     contact_id:number;
     type_id:number;
@@ -41,7 +41,7 @@ interface AccountData{
     plan_fee?:Fee;
     new_support_ticket_answer_count:number;
     new_inbox_message_count:number;
-    contact:number;
+    contact:number|Account;
     products:Array<Product>;
     kyc_details:KycDetail;
 }
