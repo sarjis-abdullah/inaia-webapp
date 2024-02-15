@@ -130,12 +130,12 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, Ref } from 'vue'
 import moment from 'moment'
 import Loading from '@/components/common/Loading.vue'
 import Modal from '@/components/common/Modal.vue';
 import Snackbar from '@/components/common/Snackbar.vue';
-import SupportTicketStatus from './SupportTicketStatus.vue';
+import SupportTicketStatus from '@/components/SupportTicket/SupportTicketStatus.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, formatTime, dateFormat2 } from '@/lib/Formatters';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
@@ -145,7 +145,6 @@ import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
 import { SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
-import { Ref } from 'nuxt/dist/app/compat/capi';
 const router = useRouter();
 const route = useRoute()
 

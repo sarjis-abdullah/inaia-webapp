@@ -11,8 +11,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import SupportTickets from './SupportTickets.vue'
-import SupportTicketSingleDetails from './SupportTicketSingleDetails.vue'
+import SupportTickets from '@/components/SupportTicket/SupportTickets.vue'
+import SupportTicketSingleDetails from '@/components/SupportTicket/SupportTicketSingleDetails.vue'
 
 //data variables
 const selectedTicket = ref({})

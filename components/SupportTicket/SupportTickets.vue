@@ -57,18 +57,17 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, Ref } from 'vue'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
 import Snackbar from '@/components/common/Snackbar.vue'
-import SupportTicketSingle from './SupportTicketSingle.vue';
+import SupportTicketSingle from '@/components/SupportTicket/SupportTicketSingle.vue';
 import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
 import { SupportTicket } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
-import { Ref } from 'nuxt/dist/app/compat/capi';
 //emits
 const emit = defineEmits<{
     setSelectedTicket: [any: {}]
