@@ -260,4 +260,5 @@ export default {
     write_message:"Write message ...",
     ok:"Ok",
     ticketCreatedSuccessfully:'Your support ticket has been created successfully',
+    open_ticket:'Open ticket',
 }

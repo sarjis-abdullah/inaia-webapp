@@ -272,7 +272,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Klientin"])};fn.source="Klientin";return fn;})(),
   "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Schreiben nachricht ..."])};fn.source="Schreiben nachricht ...";return fn;})(),
   "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
-  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dein ticket wurde erfolgreich angelegt"])};fn.source="Dein ticket wurde erfolgreich angelegt";return fn;})()
+  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dein ticket wurde erfolgreich angelegt"])};fn.source="Dein ticket wurde erfolgreich angelegt";return fn;})(),
+  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -530,7 +531,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Client"])};fn.source="Client";return fn;})(),
   "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write message ..."])};fn.source="Write message ...";return fn;})(),
   "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
-  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your support ticket has been created successfully"])};fn.source="Your support ticket has been created successfully";return fn;})()
+  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your support ticket has been created successfully"])};fn.source="Your support ticket has been created successfully";return fn;})(),
+  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -760,7 +762,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "client": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Cliente"])};fn.source="Cliente";return fn;})(),
   "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez message ..."])};fn.source="Écrivez message ...";return fn;})(),
   "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
-  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Votre ticket a été créé avec succès"])};fn.source="Votre ticket a été créé avec succès";return fn;})()
+  "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Votre ticket a été créé avec succès"])};fn.source="Votre ticket a été créé avec succès";return fn;})(),
+  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

@@ -229,4 +229,5 @@ export default {
     write_message:"Écrivez message ...",
     ok:"Ok",
     ticketCreatedSuccessfully:'Votre ticket a été créé avec succès',
+    open_ticket:'Open ticket',
 }

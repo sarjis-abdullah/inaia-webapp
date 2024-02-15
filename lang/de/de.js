@@ -286,4 +286,5 @@ export default {
     write_message:"Schreiben nachricht ...",
     ok:"Ok",
     ticketCreatedSuccessfully:'Dein ticket wurde erfolgreich angelegt',
+    open_ticket:'Open ticket',
 }
