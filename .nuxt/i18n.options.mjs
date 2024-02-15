@@ -518,7 +518,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "new_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New ticket"])};fn.source="New ticket";return fn;})(),
   "close_ticket_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["by closing this ticket you won't be able to continue this conversation"])};fn.source="by closing this ticket you won't be able to continue this conversation";return fn;})(),
   "close_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Close ticket"])};fn.source="Close ticket";return fn;})(),
-  "today": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Heute"])};fn.source="Heute";return fn;})(),
+  "today": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Today"])};fn.source="Today";return fn;})(),
   "cant_send_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enable to send your message due to an error"])};fn.source="Enable to send your message due to an error";return fn;})(),
   "ticket_opened_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["The ticket was re-opened successfully"])};fn.source="The ticket was re-opened successfully";return fn;})(),
   "ticket_closed_successfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["This ticket was closed successfully"])};fn.source="This ticket was closed successfully";return fn;})(),
