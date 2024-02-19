@@ -3,7 +3,7 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
-import { Address, ProductFee } from '../models';
+import { Address, ProductFee, AccountData } from '../models';
 import { ChannelRequest, UpdateAddressRequest } from '../requests';
 import { SettingRequest } from '../requests/SettingRequest';
 import { LocaleSettingRequest, PasswordUpdateRequest } from '../requests';
@@ -86,7 +86,7 @@ export class AccountService{
             throw err;
         }
     }
-    public static async updatePassword(payload:PasswordUpdateRequest):Promise<any>{
+    public static async updatePassword(payload:PasswordUpdateRequest):Promise<AccountData>{
         try{
             const url = this.links.updatePassword();
             const token = TokenService.getToken();

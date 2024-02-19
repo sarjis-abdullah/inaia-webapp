@@ -129,7 +129,6 @@ async function save() {
     try {
         const obj: PasswordUpdateRequest = state;
         const result = await AccountService.updatePassword(obj)
-        console.log(result);
         emit('onSave');
         LogoutHelper(router)
     }
