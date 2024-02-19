@@ -241,7 +241,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "kycStatusIsFailed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Der Verifizierungsprozess ist leider fehlgeschlagen. Bitte starte den Vorgang erneut und stelle sicher, dass die angegebenen Daten mit denen in deinem Ausweisdokument übereinstimmen."])};fn.source="Der Verifizierungsprozess ist leider fehlgeschlagen. Bitte starte den Vorgang erneut und stelle sicher, dass die angegebenen Daten mit denen in deinem Ausweisdokument übereinstimmen.";return fn;})(),
   "downloadPDF": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["PDF herunterladen"])};fn.source="PDF herunterladen";return fn;})(),
   "startDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Startdatum"])};fn.source="Startdatum";return fn;})(),
-  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enddatum"])};fn.source="Enddatum";return fn;})()
+  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Enddatum"])};fn.source="Enddatum";return fn;})(),
+  "old_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Altes Passwort"])};fn.source="Altes Passwort";return fn;})(),
+  "update_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort aktualisieren"])};fn.source="Passwort aktualisieren";return fn;})(),
+  "password_confirmation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort bestätigen"])};fn.source="Passwort bestätigen";return fn;})(),
+  "password_updated": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort aktualisiert"])};fn.source="Passwort aktualisiert";return fn;})(),
+  "password_update_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nach dem Ändern Ihres Passworts werden Sie abgemeldet. Bitte melden Sie sich erneut mit Ihrem neuen Passwort an, um fortzufahren."])};fn.source="Nach dem Ändern Ihres Passworts werden Sie abgemeldet. Bitte melden Sie sich erneut mit Ihrem neuen Passwort an, um fortzufahren.";return fn;})(),
+  "password_mismatch_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Die eingegebenen Passwörter stimmen nicht überein."])};fn.source="Die eingegebenen Passwörter stimmen nicht überein.";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -468,7 +474,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "kycStatusIsFailed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document."])};fn.source="Unfortunately the verification process failed. Please start the process again and make sure that the details provided match those in your ID document.";return fn;})(),
   "downloadPDF": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Download PDF"])};fn.source="Download PDF";return fn;})(),
   "startDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Start Date"])};fn.source="Start Date";return fn;})(),
-  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["End Date"])};fn.source="End Date";return fn;})()
+  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["End Date"])};fn.source="End Date";return fn;})(),
+  "old_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Old password"])};fn.source="Old password";return fn;})(),
+  "update_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Update password"])};fn.source="Update password";return fn;})(),
+  "password_confirmation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm password"])};fn.source="Confirm password";return fn;})(),
+  "password_updated": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password updated"])};fn.source="Password updated";return fn;})(),
+  "password_update_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["After changing your password, you will be logged out. Please log in again with your new password to continue."])};fn.source="After changing your password, you will be logged out. Please log in again with your new password to continue.";return fn;})(),
+  "password_mismatch_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["The passwords you entered don't match. Please try again."])};fn.source="The passwords you entered don't match. Please try again.";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -666,7 +678,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "kycStatusIsFailed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Malheureusement, le processus de vérification a échoué. Veuillez recommencer le processus et assurez-vous que les informations fournies correspondent à celles de votre pièce d’identité."])};fn.source="Malheureusement, le processus de vérification a échoué. Veuillez recommencer le processus et assurez-vous que les informations fournies correspondent à celles de votre pièce d’identité.";return fn;})(),
   "downloadPDF": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Télécharger le PDF"])};fn.source="Télécharger le PDF";return fn;})(),
   "startDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de début"])};fn.source="Date de début";return fn;})(),
-  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de fin"])};fn.source="Date de fin";return fn;})()
+  "endDate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de fin"])};fn.source="Date de fin";return fn;})(),
+  "old_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ancien mot de passe"])};fn.source="Ancien mot de passe";return fn;})(),
+  "update_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mettre à jour le mot de passe"])};fn.source="Mettre à jour le mot de passe";return fn;})(),
+  "password_confirmation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirmer le mot de passe"])};fn.source="Confirmer le mot de passe";return fn;})(),
+  "password_updated": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mot de passe mis à jour"])};fn.source="Mot de passe mis à jour";return fn;})(),
+  "password_update_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Après avoir changé votre mot de passe, vous serez déconnecté(e). Veuillez vous reconnecter avec votre nouveau mot de passe pour continuer."])};fn.source="Après avoir changé votre mot de passe, vous serez déconnecté(e). Veuillez vous reconnecter avec votre nouveau mot de passe pour continuer.";return fn;})(),
+  "password_mismatch_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Les mots de passe que vous avez saisis ne correspondent pas."])};fn.source="Les mots de passe que vous avez saisis ne correspondent pas.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

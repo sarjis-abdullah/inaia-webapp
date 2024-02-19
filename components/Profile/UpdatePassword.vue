@@ -1,9 +1,9 @@
 <template>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
 
-        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <img src="~/assets/img/pageicons/emailVerif.png" alt="address" class="w-32 h-auto mb-5 mx-auto" />
-            <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('enter_address') }}</h2>
+        <div class="bg-white pb-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <img src="~/assets/img/pageicons/emailVerif.png" alt="update_password" class="w-32 h-auto mb-5 mx-auto" />
+            <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('update_password') }}</h2>
             <form class="space-y-6" action="#" method="POST">
                 <div>
                     <label for="old_password" class="block text-sm font-medium text-gray-700">{{ $t('old_password')
@@ -45,6 +45,10 @@
                 </div>
 
                 <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}
+                </p>
+                <p class="mt-2 text-sm text-red-600" id="email-error" v-if="state.password && state.password_confirmation && !passwordMatched">{{ $t('password_mismatch_alert') }}
+                </p>
+                <p class="mt-2 text-sm text-yellow-600">{{ $t('password_update_alert') }}
                 </p>
 
                 <div class="mt-8 text-center">
@@ -109,6 +113,12 @@ const shouldShowRequiredError = computed(() => {
     const c2 = showNewPasswordError.value
     const c3 = showConfirmPasswordError.value
     if (c1 || c2 || c3) {
+        return true
+    }
+    return false
+})
+const passwordMatched = computed(()=> {
+    if (state?.password === state?.password_confirmation) {
         return true
     }
     return false
