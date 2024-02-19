@@ -158,6 +158,9 @@ export class Urls{
     public getSingleInboxMessage(messageId: number,account_id:number):string{
         return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&include=message_text,documents`);
     }
+    public updatePassword():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), `password-update`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

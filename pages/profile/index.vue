@@ -352,17 +352,12 @@ const onAddressUpdated = (address: Address) => {
   notificationType.value = NotificationTypes.sucess;
   closeUpdateAddress();
 }
-const onPasswordUpdated = (address: Address) => {
-console.log("onPasswordUpdated");
-  // let newAccount: Account = JSON.parse(JSON.stringify(account.value));
-  // newAccount.address = address;
-  // account.value = newAccount;
-  // AccountStorage.saveAccount(newAccount);
-  // showSuccessNotification.value = true
-  // notificationText.value = t('address_updated')
-  // notificationTitle.value = t('success');
-  // notificationType.value = NotificationTypes.sucess;
-  // closeUpdateAddress();
+const onPasswordUpdated = () => {
+  showSuccessNotification.value = true
+  notificationText.value = t('password_updated')
+  notificationTitle.value = t('success');
+  notificationType.value = NotificationTypes.sucess;
+  showPasswordUpdatePopup.value = false
 }
 const formatPaymentAccountDisplay = (paymentAccount: PaymentAccount) => {
   let bankName = "";

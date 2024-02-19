@@ -88,10 +88,11 @@ export class AccountService{
     }
     public static async updatePassword(payload:PasswordUpdateRequest):Promise<any>{
         try{
+            const url = this.links.updatePassword();
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
-            let data = await this.requester.post(this.links.updateSettings(accountId),this.headers,setting);
-            return data.data;
+            const json = await this.requester.post(url,this.headers, payload);
+            return json.data;
         }
         catch(err){
             throw err;

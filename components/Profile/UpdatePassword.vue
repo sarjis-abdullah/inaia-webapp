@@ -16,29 +16,29 @@
                     </div>
                 </div>
                 <div>
-                    <label for="new_password" class="block text-sm font-medium text-gray-700">{{ $t('new_password')
+                    <label for="password" class="block text-sm font-medium text-gray-700">{{ $t('password')
                     }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
 
-                        <input type="text" name="new_password" id="new_password" v-model="state.new_password"
+                        <input type="text" name="password" id="password" v-model="state.password"
                             class="block  w-full 10 pl-3 py-2 rounded-md"
                             :class="!showNewPasswordError ? inputStyle : inputErrorStyle" />
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-                            v-if="state.new_password.length == 0">
+                            v-if="state.password.length == 0">
                             <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                         </div>
                     </div>
                 </div>
                 <div>
-                    <label for="confirm_password" class="block text-sm font-medium text-gray-700">{{ $t('confirm_password')
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">{{ $t('password_confirmation')
                     }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
 
-                        <input type="text" name="confirm_password" id="confirm_password" v-model="state.confirm_password"
+                        <input type="text" name="password_confirmation" id="password_confirmation" v-model="state.password_confirmation"
                             class="block  w-full 10 pl-3 py-2 rounded-md"
                             :class="!showConfirmPasswordError ? inputStyle : inputErrorStyle" />
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-                            v-if="state.confirm_password.length == 0">
+                            v-if="state.password_confirmation.length == 0">
                             <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                         </div>
                     </div>
@@ -47,12 +47,12 @@
                 <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}
                 </p>
 
-                <div class="mt-8">
-                    {{ disableSubmition }}
-                    <button type="submit" :disabled="disableSubmition || isSubmitting" @click.prevent="save"
+                <div class="mt-8 text-center">
+                    <button v-if="!isSubmitting" type="submit" :disabled="disableSubmition || isSubmitting" @click.prevent="save"
                         :class="(disableSubmition || isSubmitting) ? 'opacity-50' : 'opacity-100'"
                         class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{
                             $t('save') }}</button>
+                    <Loading v-else/>
                     <InLineApiError :err="submitErr" />
                 </div>
             </form>
@@ -60,41 +60,30 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { EnvelopeIcon, ExclamationCircleIcon, UserIcon, LockClosedIcon, HashtagIcon } from '@heroicons/vue/20/solid';
-
-import { ref, reactive, toRefs, watch, computed, onMounted, PropType } from 'vue';
+import { ExclamationCircleIcon } from '@heroicons/vue/20/solid';
+import LogoutHelper from '@/helpers/LogoutHelper';
+const router = useRouter();
+import { ref, reactive, computed } from 'vue';
 import { PasswordUpdateRequest } from '@/lib/requests';
 import { AccountService } from '~~/lib/services';
-import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
-import Notification from "@/components/common/Notification";
-import InLineApiError from '@/components/common/InLineApiError';
-// const disableSubmition = ref(false);
+import Loading from "@/components/common/Loading.vue";
+import InLineApiError from '@/components/common/InLineApiError.vue';
 const isSubmitting = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
-const errorIconColor = 'text-red-900';
-const iconColor = 'text-gray-400';
 const minimumPasswordLength = 8
 
-const showNotification = ref(false);
 const { t } = useI18n();
-const onNotificationClosed = () => {
-    showNotification.value = false;
-}
-
 const submittingError = ref(false);
 const submitErr = ref(null);
 const inputType = ref("text");
 const state = reactive({
     old_password: '',
-    new_password: '',
-    confirm_password: '',
+    password: '',
+    password_confirmation: '',
 });
-const handleCountryChange = (value: number) => {
-    state.country_id = value;
-}
 const emit = defineEmits<{
-    // (e: 'onSave', address: Address): void
+    (e: 'onSave'): void
 }>()
 
 //computed
@@ -104,16 +93,16 @@ const showOldPasswordError = computed(()=> {
 })
 const showNewPasswordError = computed(()=> {
     
-    return !((state.new_password.length > 0) && (state.new_password.length >= minimumPasswordLength))
+    return !((state.password.length > 0) && (state.password.length >= minimumPasswordLength))
 })
 const showConfirmPasswordError = computed(()=> {
     
-    return !((state.confirm_password.length > 0) && (state.confirm_password.length >= minimumPasswordLength))
+    return !((state.password_confirmation.length > 0) && (state.password_confirmation.length >= minimumPasswordLength))
 })
 
 const shouldShowRequiredError = computed(() => {
-    const { old_password, new_password, confirm_password } = state
-    if (!old_password || !new_password || !confirm_password) {
+    const { old_password, password, password_confirmation } = state
+    if (!old_password || !password || !password_confirmation) {
         return true
     }
     const c1 = showOldPasswordError.value
@@ -128,7 +117,7 @@ const disableSubmition = computed(() => {
     if (shouldShowRequiredError.value) {
         return true
     }
-    if (state.new_password === state.confirm_password) {
+    if (state.password === state.password_confirmation) {
         return false
     }
     return true
@@ -139,7 +128,12 @@ async function save() {
     submitErr.value = null;
     try {
         const obj: PasswordUpdateRequest = state;
-        // emit('onSave', address);
+        const result = await AccountService.updatePassword(obj)
+        console.log(result);
+        emit('onSave');
+        setTimeout(() => {
+            // LogoutHelper(router)
+        }, 1);
     }
     catch (err) {
         submitErr.value = err;
