@@ -1,3 +1,4 @@
+import { SupportTicketStatus } from './../models/SupportTicketStatus';
 import { AddPaymentAccountRequest } from './AppPaymentAccountRequest';
 import { UpdateAddressRequest } from './UpdateAddressRequest';
 import { ConditionsRequest } from './ConditionsRequest';
@@ -25,6 +26,7 @@ import { LocaleSettingRequest } from './LocaleSettingRequest';
 import { DateFilterRequest, StatementDateFilterRequest } from './DateFilterRequest';
 import { SupportTicketMessageStoreRequest, SupportTicketMessageListRequest } from './SupportTicketMessageRequest';
 import { SupportTicketStoreRequest } from './SupportTicketRequest';
+import { SupportTicketStatusUpdateRequest } from './SupportTicketStatusRequest';
 export { ConditionsRequest };
 export { AccountInformationRequest };
 export { AddressRequest };
@@ -51,4 +53,5 @@ export {LocaleSettingRequest};
 export {AddPaymentAccountRequest};
 export {DateFilterRequest, StatementDateFilterRequest};
 export {SupportTicketStoreRequest};
+export {SupportTicketStatusUpdateRequest};
 export {SupportTicketMessageStoreRequest, SupportTicketMessageListRequest};

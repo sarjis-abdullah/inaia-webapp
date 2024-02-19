@@ -5,8 +5,7 @@ import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
 import { SupportTicket, SupportTicketMessage, SupportTicketStatus } from '../models';
-import { SupportTicketMessageStoreRequest, SupportTicketStoreRequest } from '../requests';
-import { SupportTicketStatusUpdateRequest } from '../requests/SupportTicketStatusRequest';
+import { SupportTicketMessageStoreRequest, SupportTicketStoreRequest, SupportTicketStatusUpdateRequest } from '../requests';
 export class SupportTicketService{
     private static links = Urls.URLS();
     private static requester = HttpRequester.httpRequester();

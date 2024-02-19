@@ -39,14 +39,14 @@
                                     <article @click="confirmWarningTicketModal = !confirmWarningTicketModal"
                                         :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                                         class="flex gap-2 cursor-pointer">
-                                        <div v-if="currentStatus != 'closed'">
+                                        <div v-if="currentStatus != SupportTicketStatusList.closed">
                                             <LockClosedIcon class="w-5 h-5" />
                                         </div>
                                         <div>
                                             <header class="font-bold">
-                                                {{ currentStatus != 'closed' ? $t('close_ticket') : $t('open_ticket') }}
+                                                {{ currentStatus != SupportTicketStatusList.closed ? $t('close_ticket') : $t('open_ticket') }}
                                             </header>
-                                            <p v-if="currentStatus != 'closed'">{{ $t('close_ticket_message') }}</p>
+                                            <p v-if="currentStatus != SupportTicketStatusList.closed">{{ $t('close_ticket_message') }}</p>
                                             <p v-else>{{ $t('open_ticket_message') }}</p>
                                         </div>
                                     </article>
@@ -97,7 +97,7 @@
         <Loading />
     </div>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
-    <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="currentStatus != 'closed' ? $t('are_you_sure_you_want_to_close_ticket') : $t('are_you_sure_you_want_to_open_ticket')">
+    <Modal :open="confirmWarningTicketModal" @onClose="toggleTicketClosing" :title="currentStatus != SupportTicketStatusList.closed ? $t('are_you_sure_you_want_to_close_ticket') : $t('are_you_sure_you_want_to_open_ticket')">
         <template v-slot:footer>
             <div class="flex justify-end gap-2 mt-4">
                 <button @click="confirmWarningTicketModal = false" class="px-2 py-1 border-gray-300 rounded-md">
@@ -126,12 +126,12 @@
             <Loading v-else />
         </div>
     </form>
-    <Notification :show="showSnackbar" :title="$t('success')" :text="currentStatus != 'closed' ? $t('ticket_opened_successfully') : $t('ticket_closed_successfully')"
+    <Notification :show="showSnackbar" :title="$t('success')" :text="currentStatus != SupportTicketStatusList.closed ? $t('ticket_opened_successfully') : $t('ticket_closed_successfully')"
         :type="notificationType" @close="showSnackbar = false" />
 </template>
   
 <script setup lang="ts">
-import { ref, computed, watch, Ref } from 'vue'
+import { ref, computed, watch, Ref, PropType } from 'vue'
 import moment from 'moment'
 import Loading from '@/components/common/Loading.vue'
 import Modal from '@/components/common/Modal.vue';
@@ -147,6 +147,7 @@ import { AccountStorage } from '@/storage';
 import { SupportTicket, SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { NotificationTypes } from '@/constants/NotificationTypes';
+import { SupportTicketStatusList } from '@/lib/contants/SupportTicketStatusList'
 const route = useRoute()
 
 //emits
@@ -156,7 +157,7 @@ const emit = defineEmits<{
 //props
 const props = defineProps({
     ticket: {
-        type: Object,
+        type: Object as PropType<SupportTicket>,
         default: () => ({})
     },
 })
@@ -196,7 +197,7 @@ const messageData = computed(() => {
     }
 });
 const shouldShowMessageBoxAndCloseTicket = computed(() => {
-    return thisTicket.value && thisTicket.value.support_status && thisTicket.value.support_status.name_translation_key != 'closed'
+    return thisTicket.value && thisTicket.value.support_status && thisTicket.value.support_status.name_translation_key != SupportTicketStatusList.closed
 })
 const statusListQueryParams = computed(() => {
     const params = { page: 1, perPage: 5 }
@@ -207,9 +208,9 @@ const currentStatus = computed(() => {
     return thisTicket.value?.support_status?.name_translation_key
 })
 const statusCanBeChangeTo = computed(() => {
-    let updateAbleStatus = "open"
-    if (currentStatus.value != 'closed') {
-        updateAbleStatus = 'closed'
+    let updateAbleStatus = SupportTicketStatusList.open
+    if (currentStatus.value != SupportTicketStatusList.closed) {
+        updateAbleStatus = SupportTicketStatusList.closed
     }
     return statusList.value.find(s => s.name_translation_key == updateAbleStatus)
 })
@@ -220,10 +221,10 @@ const payloadForChangeStatus = computed(() => {
 })
 
 //functions
-function groupDataByDate(data: any) {
+function groupDataByDate(data: Array<SupportTicketMessage>) {
     const groupedData: GroupMessages[] = [];
 
-    data.forEach((item: any) => {
+    data.forEach((item) => {
         const createdAt = moment(item.created_at);
         const formattedDate = createdAt.format('YYYY-MM-DD');
         const existingGroup = groupedData.find(group => group.date === formattedDate);

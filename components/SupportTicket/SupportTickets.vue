@@ -58,7 +58,7 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed, Ref } from 'vue'
+import { ref, computed, Ref, PropType } from 'vue'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
 import Notification from '@/components/common/Notification.vue'
@@ -77,7 +77,7 @@ const emit = defineEmits<{
 //props
 const props = defineProps({
     updatedTicket: {
-        type: Object,
+        type: Object as PropType<SupportTicket>,
         default: () => ({})
     },
 })

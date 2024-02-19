@@ -29,30 +29,31 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import SupportTicketStatus from './SupportTicketStatus.vue';
+import { PropType, computed } from 'vue'
+import SupportTicketStatus from '@/components/SupportTicket/SupportTicketStatus.vue';
 import { formatDateByMoment, dateFormat2 } from '@/lib/Formatters';
+import { SupportTicket } from '@/lib/models';
 const {t,locale} = useI18n();
 const router = useRouter();
 const route = useRoute()
 //emits
 const emit = defineEmits<{
-    setSelectedTicket: [any: {}]
+    setSelectedTicket: [SupportTicket: {}]
 }>()
 //props
 const props = defineProps({
     ticket: {
-        type: Object,
+        type: Object as PropType<SupportTicket>,
         default: () => ({})
     },
 })
 //computed props
 const showSelectedInURL = computed(()=> {
-    return props.ticket.id == route.query.id
+    return Number(props.ticket.id) == Number(route.query.id)
 })
 
 //functions
-const setSelectedTicket = (ticket = {}) => {
+const setSelectedTicket = (ticket: SupportTicket) => {
     const url = '/' + locale.value + '/support-tickets?id=' + ticket.id;
     router.push(url)
     emit("setSelectedTicket", ticket)
