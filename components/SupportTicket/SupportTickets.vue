@@ -53,14 +53,15 @@
             </div>
         </template>
     </Modal>
-    <Snackbar @update:show="showSnackbar=false" :show="showSnackbar" :message="$t('ticketCreatedSuccessfully')" />
+    <Notification :show="showSnackbar" :title="$t('success')" :text="$t('ticketCreatedSuccessfully')"
+        :type="notificationType" @close="showSnackbar = false" />
 </template>
   
 <script setup lang="ts">
 import { ref, computed, Ref } from 'vue'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
-import Snackbar from '@/components/common/Snackbar.vue'
+import Notification from '@/components/common/Notification.vue'
 import SupportTicketSingle from '@/components/SupportTicket/SupportTicketSingle.vue';
 import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
@@ -68,6 +69,7 @@ import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
 import { SupportTicket } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import { NotificationTypes } from '@/constants/NotificationTypes';
 //emits
 const emit = defineEmits<{
     setSelectedTicket: [SupportTicket: {}]
@@ -95,6 +97,7 @@ const moreToCome = ref(true);
 const errorText = ref("");
 
 //computed
+const notificationType = computed(() => NotificationTypes.sucess)
 const queryParams = computed(() => {
     const params = { page: page.value, perPage: perPage.value }
 

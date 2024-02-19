@@ -126,7 +126,8 @@
             <Loading v-else />
         </div>
     </form>
-    <Snackbar @update:show="showSnackbar=false" :show="showSnackbar" :message="currentStatus != 'closed' ? $t('ticket_opened_successfully') : $t('ticket_closed_successfully')" />
+    <Notification :show="showSnackbar" :title="$t('success')" :text="currentStatus != 'closed' ? $t('ticket_opened_successfully') : $t('ticket_closed_successfully')"
+        :type="notificationType" @close="showSnackbar = false" />
 </template>
   
 <script setup lang="ts">
@@ -134,7 +135,7 @@ import { ref, computed, watch, Ref } from 'vue'
 import moment from 'moment'
 import Loading from '@/components/common/Loading.vue'
 import Modal from '@/components/common/Modal.vue';
-import Snackbar from '@/components/common/Snackbar.vue';
+import Notification from '@/components/common/Notification.vue';
 import SupportTicketStatus from '@/components/SupportTicket/SupportTicketStatus.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { formatDateByMoment, formatTime, dateFormat2 } from '@/lib/Formatters';
@@ -145,6 +146,7 @@ import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
 import { SupportTicket, SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
+import { NotificationTypes } from '@/constants/NotificationTypes';
 const route = useRoute()
 
 //emits
@@ -175,6 +177,7 @@ const errorText = ref("");
 const statusList: Ref<SupportTicketStatusModel[]> = ref([]);
 const thisTicket: Ref<SupportTicket|any> = ref(null)
 //computed
+const notificationType = computed(() => NotificationTypes.sucess)
 const hasGroupMessages = computed(() => (groupedMessages.value && groupedMessages.value.length))
 const accountId = computed(() => AccountStorage.getAccountId());
 const formattedTicket = computed(() => {
