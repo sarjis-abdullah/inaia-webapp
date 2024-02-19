@@ -141,9 +141,7 @@ async function save() {
         const result = await AccountService.updatePassword(obj)
         console.log(result);
         emit('onSave');
-        setTimeout(() => {
-            // LogoutHelper(router)
-        }, 1);
+        LogoutHelper(router)
     }
     catch (err) {
         submitErr.value = err;
