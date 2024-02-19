@@ -1,46 +1,37 @@
 <template>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-
         <div class="bg-white pb-8 px-4 shadow sm:rounded-lg sm:px-10">
             <img src="~/assets/img/pageicons/emailVerif.png" alt="update_password" class="w-32 h-auto mb-5 mx-auto" />
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('update_password') }}</h2>
             <form class="space-y-6" action="#" method="POST">
                 <div>
-                    <label for="old_password" class="block text-sm font-medium text-gray-700">{{ $t('old_password')
-                    }}</label>
+                    <label for="old_password" class="block text-sm font-medium text-gray-700">
+                        {{ $t('old_password') }}
+                    </label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <input type="text" name="old_password" id="old_password" v-model="state.old_password"
                             class="block  w-full 10 pl-3 py-2 rounded-md"
-                            :class="!showOldPasswordError ? inputStyle : inputErrorStyle" />
-
+                            :class="!state.old_password || !showOldPasswordError ? inputStyle : inputErrorStyle" />
                     </div>
                 </div>
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">{{ $t('password')
-                    }}</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        {{ $t('new_password') }}
+                    </label>
                     <div class="relative mt-1 rounded-md shadow-sm">
-
                         <input type="text" name="password" id="password" v-model="state.password"
                             class="block  w-full 10 pl-3 py-2 rounded-md"
-                            :class="!showNewPasswordError ? inputStyle : inputErrorStyle" />
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-                            v-if="state.password.length == 0">
-                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                        </div>
+                            :class="!state.password || !showNewPasswordError ? inputStyle : inputErrorStyle" />
                     </div>
                 </div>
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">{{ $t('password_confirmation')
-                    }}</label>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
+                        {{ $t('password_confirmation') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
 
                         <input type="text" name="password_confirmation" id="password_confirmation" v-model="state.password_confirmation"
                             class="block  w-full 10 pl-3 py-2 rounded-md"
-                            :class="!showConfirmPasswordError ? inputStyle : inputErrorStyle" />
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-                            v-if="state.password_confirmation.length == 0">
-                            <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                        </div>
+                            :class="!state.password_confirmation || !showConfirmPasswordError ? inputStyle : inputErrorStyle" />
                     </div>
                 </div>
 
@@ -50,7 +41,6 @@
                 </p>
                 <p class="mt-2 text-sm text-yellow-600">{{ $t('password_update_alert') }}
                 </p>
-
                 <div class="mt-8 text-center">
                     <button v-if="!isSubmitting" type="submit" :disabled="disableSubmition || isSubmitting" @click.prevent="save"
                         :class="(disableSubmition || isSubmitting) ? 'opacity-50' : 'opacity-100'"
