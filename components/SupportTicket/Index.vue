@@ -10,19 +10,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import SupportTickets from '@/components/SupportTicket/SupportTickets.vue'
 import SupportTicketSingleDetails from '@/components/SupportTicket/SupportTicketSingleDetails.vue'
+import { SupportTicket } from '@/lib/models';
 
 //data variables
-const selectedTicket = ref({})
-const updatedTicket = ref({})
+const selectedTicket: Ref<SupportTicket> = ref({} as SupportTicket)
+const updatedTicket: Ref<SupportTicket> = ref({} as SupportTicket)
 
 //functions
-const setSelectedTicket = (ticket = {}) => {
+const setSelectedTicket = (ticket: SupportTicket) => {
     selectedTicket.value = ticket
 }
-const updateTicketData = (ticket = {}) => {
+const updateTicketData = (ticket: SupportTicket) => {
     updatedTicket.value = ticket
 }
 
