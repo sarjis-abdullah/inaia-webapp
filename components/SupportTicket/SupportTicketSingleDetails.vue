@@ -147,7 +147,7 @@ import { AccountStorage } from '@/storage';
 import { SupportTicket, SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { NotificationTypes } from '@/constants/NotificationTypes';
-import { SupportTicketStatusList } from '@/lib/contants/SupportTicketStatusList'
+import { SupportTicketStatusList } from '@/lib/contants/index.ts'
 const route = useRoute()
 
 //emits

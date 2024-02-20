@@ -17,7 +17,7 @@
 </template>
 <script setup lang="ts">
 import {ref, PropType} from 'vue'
-import { SupportTicketStatusList } from '@/lib/contants/SupportTicketStatusList'
+import { SupportTicketStatusList } from '@/lib/contants/index'
 defineProps({
     status:{
         type: String as PropType<SupportTicketStatusList>,
