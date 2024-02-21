@@ -10,8 +10,7 @@
                     </label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <input :type="inputType" name="old_password" id="old_password" v-model="state.old_password"
-                            class="block  w-full 10 pl-3 py-2 rounded-md"
-                            :class="!state.old_password || !showOldPasswordError ? inputStyle : inputErrorStyle" />
+                            class="block  w-full 10 pl-3 py-2 rounded-md" :class="inputStyle" />
                     </div>
                 </div>
                 <div>
@@ -21,23 +20,28 @@
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <input :type="inputType" name="password" id="password" v-model="state.password"
                             class="block  w-full 10 pl-3 py-2 rounded-md"
-                            :class="!state.password || !showNewPasswordError ? inputStyle : inputErrorStyle" />
+                            :class="!passwordValidated && state.password.length > 0 ? inputErrorStyle : inputStyle" />
                     </div>
+                    <p class="mt-2 text-sm text-red-600" id="email-error"
+                        v-if="!passwordValidated && state.password.length > 0">
+                        {{ $t('password_message') }}
+                    </p>
                 </div>
                 <div>
                     <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
                         {{ $t('password_confirmation') }}</label>
                     <div class="mt-1">
-                        <input id="password" name="password" :type="inputType" v-model="state.password_confirmation"
-                            :class="confirmedPasswordValidated ? 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6' : inputErrorStyle" />
+                        <input id="password_confirmation" name="password" class="block  w-full 10 pl-3 py-2 rounded-md" :type="inputType"
+                            v-model="state.password_confirmation"
+                            :class="confirmedPasswordValidated ? inputStyle : inputErrorStyle" />
                     </div>
-                    <p class="mt-1 text-center text-sm text-red-500" v-if="!confirmedPasswordValidated">{{
+                    <p class="mt-1 text-center text-sm text-red-500" v-if="!confirmedPasswordValidated && state.password_confirmation">{{
                         $t('confirm_password_is_required') }}</p>
                 </div>
 
                 <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ $t('account_info_error') }}
                 </p>
-                <p class="mt-2 text-sm text-yellow-600">{{ $t('password_mismatch_alert') }}
+                <p class="mt-2 text-sm text-yellow-600">{{ $t('password_update_alert') }}
                 </p>
                 <div class="mt-8 text-center">
                     <button v-if="!isSubmitting" type="submit" :disabled="disabled || isSubmitting" @click.prevent="save"
@@ -55,7 +59,7 @@
 import { validatePassword } from '@/lib/utils/Validators';
 import LogoutHelper from '@/helpers/LogoutHelper';
 const router = useRouter();
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive } from 'vue';
 import { PasswordUpdateRequest } from '@/lib/requests';
 import { AccountService } from '~~/lib/services';
 import Loading from "@/components/common/Loading.vue";
@@ -80,22 +84,12 @@ const emit = defineEmits<{
     (e: 'onSave'): void
 }>()
 
-//computed
-const showOldPasswordError = computed(() => {
-
-    return !((state.old_password.length > 0))
-})
-const showNewPasswordError = computed(() => {
-
-    return !((state.password.length > 0))
-})
-
 async function save() {
     isSubmitting.value = true;
     submitErr.value = null;
     try {
         const obj: PasswordUpdateRequest = state;
-        const result = await AccountService.updatePassword(obj)
+        await AccountService.updatePassword(obj)
         emit('onSave');
         LogoutHelper(router)
     }
@@ -107,7 +101,7 @@ async function save() {
     }
 }
 watch(state, (currentValue) => {
-    if (state.password && state.password_confirmation) {
+    if (state.old_password && state.password) {
         passwordValidated.value = validatePassword(currentValue.password);
         confirmedPasswordValidated.value = passwordValidated.value && (currentValue.password_confirmation == currentValue.password)
         disabled.value = !(passwordValidated.value && emailValidated.value && confirmedPasswordValidated.value)
