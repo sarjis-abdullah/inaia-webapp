@@ -273,7 +273,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Schreiben nachricht ..."])};fn.source="Schreiben nachricht ...";return fn;})(),
   "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
   "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Dein ticket wurde erfolgreich angelegt"])};fn.source="Dein ticket wurde erfolgreich angelegt";return fn;})(),
-  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})()
+  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})(),
+  "old_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Altes Passwort"])};fn.source="Altes Passwort";return fn;})(),
+  "update_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort aktualisieren"])};fn.source="Passwort aktualisieren";return fn;})(),
+  "password_confirmation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort bestätigen"])};fn.source="Passwort bestätigen";return fn;})(),
+  "password_updated": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Passwort aktualisiert"])};fn.source="Passwort aktualisiert";return fn;})(),
+  "password_update_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nach dem Ändern Ihres Passworts werden Sie abgemeldet. Bitte melden Sie sich erneut mit Ihrem neuen Passwort an, um fortzufahren."])};fn.source="Nach dem Ändern Ihres Passworts werden Sie abgemeldet. Bitte melden Sie sich erneut mit Ihrem neuen Passwort an, um fortzufahren.";return fn;})(),
+  "password_mismatch_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Die eingegebenen Passwörter stimmen nicht überein."])};fn.source="Die eingegebenen Passwörter stimmen nicht überein.";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -532,7 +538,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Write message ..."])};fn.source="Write message ...";return fn;})(),
   "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
   "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Your support ticket has been created successfully"])};fn.source="Your support ticket has been created successfully";return fn;})(),
-  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})()
+  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})(),
+  "old_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Old password"])};fn.source="Old password";return fn;})(),
+  "update_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Update password"])};fn.source="Update password";return fn;})(),
+  "password_confirmation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm password"])};fn.source="Confirm password";return fn;})(),
+  "password_updated": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Password updated"])};fn.source="Password updated";return fn;})(),
+  "password_update_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["After changing your password, you will be logged out. Please log in again with your new password to continue."])};fn.source="After changing your password, you will be logged out. Please log in again with your new password to continue.";return fn;})(),
+  "password_mismatch_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["The passwords you entered don't match."])};fn.source="The passwords you entered don't match.";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -763,7 +775,13 @@ export const resolveNuxtI18nOptions = async (context) => {
   "write_message": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Écrivez message ..."])};fn.source="Écrivez message ...";return fn;})(),
   "ok": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ok"])};fn.source="Ok";return fn;})(),
   "ticketCreatedSuccessfully": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Votre ticket a été créé avec succès"])};fn.source="Votre ticket a été créé avec succès";return fn;})(),
-  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})()
+  "open_ticket": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Open ticket"])};fn.source="Open ticket";return fn;})(),
+  "old_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ancien mot de passe"])};fn.source="Ancien mot de passe";return fn;})(),
+  "update_password": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mettre à jour le mot de passe"])};fn.source="Mettre à jour le mot de passe";return fn;})(),
+  "password_confirmation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirmer le mot de passe"])};fn.source="Confirmer le mot de passe";return fn;})(),
+  "password_updated": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mot de passe mis à jour"])};fn.source="Mot de passe mis à jour";return fn;})(),
+  "password_update_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Après avoir changé votre mot de passe, vous serez déconnecté(e). Veuillez vous reconnecter avec votre nouveau mot de passe pour continuer."])};fn.source="Après avoir changé votre mot de passe, vous serez déconnecté(e). Veuillez vous reconnecter avec votre nouveau mot de passe pour continuer.";return fn;})(),
+  "password_mismatch_alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Les mots de passe que vous avez saisis ne correspondent pas."])};fn.source="Les mots de passe que vous avez saisis ne correspondent pas.";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

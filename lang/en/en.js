@@ -261,4 +261,10 @@ export default {
     ok:"Ok",
     ticketCreatedSuccessfully:'Your support ticket has been created successfully',
     open_ticket:'Open ticket',
+    old_password: "Old password",
+    update_password: "Update password",
+    password_confirmation: "Confirm password",
+    password_updated: "Password updated",
+    password_update_alert: "After changing your password, you will be logged out. Please log in again with your new password to continue.",
+    password_mismatch_alert: "The passwords you entered don't match."
 }

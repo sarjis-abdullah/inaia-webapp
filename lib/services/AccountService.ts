@@ -3,10 +3,10 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
-import { Address, ProductFee } from '../models';
+import { Address, ProductFee, AccountData } from '../models';
 import { ChannelRequest, UpdateAddressRequest } from '../requests';
 import { SettingRequest } from '../requests/SettingRequest';
-import { LocaleSettingRequest } from '../requests';
+import { LocaleSettingRequest, PasswordUpdateRequest } from '../requests';
 export class AccountService{
     private static account:Account;
     private static links = Urls.URLS();
@@ -81,6 +81,18 @@ export class AccountService{
             this.headers.addAuthHeader(token);
             let data = await this.requester.put(this.links.updateSettings(accountId),this.headers,setting);
             return data.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updatePassword(payload:PasswordUpdateRequest):Promise<AccountData>{
+        try{
+            const url = this.links.updatePassword();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.post(url,this.headers, payload);
+            return json.data;
         }
         catch(err){
             throw err;

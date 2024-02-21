@@ -39,6 +39,14 @@
                 $t('update') }}</button>
             </dd>
           </div>
+          <div class="pt-6 sm:flex">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{{ $t('update_password') }}</dt>
+            <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <div class="text-gray-900">{{ '*******' }}</div>
+              <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="editPassword">{{
+                $t('update') }}</button>
+            </dd>
+          </div>
         </dl>
       </div>
 
@@ -96,6 +104,9 @@
     <Modal :open="showUpdateEmail" @onClose="closeUpdateEmail" v-if="account && emailChannel">
       <UpdateEmail :channel="emailChannel" @onSave="onChannelUpdated" :account="account" />
     </Modal>
+    <Modal :open="showPasswordUpdatePopup" @onClose="closeUpdatePassword" v-if="account">
+      <UpdatePassword :account="account" @onSave="onPasswordUpdated" />
+    </Modal>
     <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
     <Confirmation :show="showConfirmation" @cancel="cancelDelete" @confirm="confirmDelete" :title="$t('confirm_delete')" :text="$t('do_you_want_to_delete_bank_account')"/>
   </main>
@@ -124,6 +135,7 @@ import InLineApiError from '@/components/common/InLineApiError';
 import { AccountService, PaymentAccountService } from '~~/lib/services';
 import { PaymentAccountSpecs } from '~~/lib/contants';
 import UpdateAddress from '@/components/Profile/UpdateAddress.vue';
+import UpdatePassword from '@/components/Profile/UpdatePassword.vue';
 import Notification from "@/components/common/Notification";
 import Modal from '@/components/common/Modal';
 import { NotificationTypes } from '~~/constants/NotificationTypes';
@@ -149,6 +161,7 @@ const isModfyingBankAccount = ref(false);
 const addNewPaymentAcoount = ref(false);
 const showConfirmation = ref(false);
 const selectedPaymentAccountToDelete = ref(-1);
+const showPasswordUpdatePopup = ref(false);
 const confirmDelete = async ()=>{
   try {
     isModfyingBankAccount.value = true;
@@ -203,12 +216,18 @@ const showUpdateAddress = ref(false);
 const updateAddress = () => {
   showUpdateAddress.value = true;
 }
+const editPassword = () => {
+  showPasswordUpdatePopup.value = true;
+}
 const onNotificationClosed = () => {
 
   showSuccessNotification.value = false;
 }
 const closeUpdateAddress = () => {
   showUpdateAddress.value = false;
+}
+const closeUpdatePassword = () => {
+  showPasswordUpdatePopup.value = false;
 }
 const openUpdateEmail = () => {
   showUpdateEmail.value = true;
@@ -332,6 +351,13 @@ const onAddressUpdated = (address: Address) => {
   notificationTitle.value = t('success');
   notificationType.value = NotificationTypes.sucess;
   closeUpdateAddress();
+}
+const onPasswordUpdated = () => {
+  showSuccessNotification.value = true
+  notificationText.value = t('password_updated')
+  notificationTitle.value = t('success');
+  notificationType.value = NotificationTypes.sucess;
+  showPasswordUpdatePopup.value = false
 }
 const formatPaymentAccountDisplay = (paymentAccount: PaymentAccount) => {
   let bankName = "";

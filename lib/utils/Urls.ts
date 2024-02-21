@@ -183,6 +183,9 @@ export class Urls{
         const include = "include=support_status"
         return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets/${ticketId}?${include}`);
     }
+    public updatePassword():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), `password-update`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }
