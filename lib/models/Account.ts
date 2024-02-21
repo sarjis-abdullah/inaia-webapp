@@ -41,7 +41,7 @@ export interface AccountData{
     plan_fee?:Fee;
     new_support_ticket_answer_count:number;
     new_inbox_message_count:number;
-    contact:number;
+    contact:number|Account;
     products:Array<Product>;
     kyc_details:KycDetail;
 }
