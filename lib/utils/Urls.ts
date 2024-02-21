@@ -6,7 +6,7 @@ import { BaseUrls } from "./BaseUrls";
 import { objectToQueryString } from "./QueryParamsHelper";
 const ACCOUNT_INCLUDES = "include=person_data,account,address,channels,country,new_inbox_message_count,new_support_ticket_answer_count,products,product_specs,kyc_details";
 const DEPOT_INCLUDES = "depot_status,depot_status_history,depot_orders,depot_agio_transactions,account,interval";
-
+const SINGLE_SUPPORT_TICKET_INCLUDE = "include=messages,creater,owner,contacts,support_status,person_data"
 export class Urls{
     private static instance:Urls;
     public static URLS():Urls{
@@ -157,6 +157,31 @@ export class Urls{
     }
     public getSingleInboxMessage(messageId: number,account_id:number):string{
         return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&include=message_text,documents`);
+    }
+    public getSupportTickets(request:PageRequest):string{
+        const queryParams = objectToQueryString(request);
+        const include = "include=creater,contacts,support_status,person_data"
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets?${include}&${queryParams}`);
+    }
+    public getSupportTicketStatusList(request:PageRequest):string{
+        const queryParams = objectToQueryString(request);
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-statuses?${queryParams}`);
+    }
+    public getSingleSupportTicket(ticketId: number):string{
+        const include = SINGLE_SUPPORT_TICKET_INCLUDE
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets/${ticketId}?${include}`);
+    }
+    public sendMessageForSupportTicket():string{
+        const include = SINGLE_SUPPORT_TICKET_INCLUDE
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-messages?${include}`);
+    }
+    public createSupportTicket():string{
+        const include = SINGLE_SUPPORT_TICKET_INCLUDE
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets?${include}`);
+    }
+    public updateSupportTicketStatus(ticketId: number):string{
+        const include = "include=support_status"
+        return this.buildUrl(BaseUrls.getCoreUrl(), `support-tickets/${ticketId}?${include}`);
     }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;

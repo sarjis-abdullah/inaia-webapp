@@ -1,6 +1,6 @@
 import moment from 'moment'
-const dateFormat1 = "YYYY-MM-DD HH:mm:ss"
-const dateFormat2 = "YYYY-MM-DD"
+export const dateFormat1 = "YYYY-MM-DD HH:mm:ss"
+export const dateFormat2 = "YYYY-MM-DD"
 export const formatDate= (date:Date)=>{
     if(!date)
         return null;
@@ -15,6 +15,22 @@ export const formatDate= (date:Date)=>{
         day = "0"+day;
     }
     return date.getFullYear()+"-"+month+"-"+day;
+}
+
+export const formatTime = (date: Date) =>
+{
+    let d = new Date(date);
+    let hours: number | string = d.getHours();
+    if(hours<10)
+    {
+        hours = "0"+hours;
+    }
+    let minutes: number | string = d.getMinutes();
+    if(minutes < 10 )
+    {
+        minutes = "0"+minutes;
+    }
+    return hours+":"+minutes;
 }
 
 export const formatDateByMoment= (date:Date, formatType = dateFormat1)=>{
