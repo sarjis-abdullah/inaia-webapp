@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref, inject } from 'vue';
-import { CameraIcon } from '@heroicons/vue/20/solid';
+import { onMounted, ref, inject, Ref } from 'vue';
 import { AccountService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
 import defaultImage from '@/assets/img/defaultAvatar.png';
 import Loading from '@/components/common/Loading.vue';
 import InLineApiError from '@/components/common/InLineApiError.vue';
-import { Ref } from 'nuxt/dist/app/compat/capi';
-import { Account } from '~~/lib/models';
+import SelectAvatar from '@/components/common/SelectAvatar.vue';
+import { Account } from '@/lib/models';
 
 const updateProfileAvatarProvider = inject('updateProfileAvatarProvider', () => ({}))
 
 const photoPreview = ref(null);
-const photoInput = ref(null);
 const account = ref(null);
 const loading = ref(false);
 const newAvatarCreated = ref(false);
@@ -46,21 +44,9 @@ const updateProfileInformation = async (e) => {
     }
 };
 
-const selectNewPhoto = () => photoInput.value.click()
-
-const updatePhotoPreview = () => {
-    const photo = photoInput.value.files[0];
-
-    if (!photo) return;
-
-    const reader = new FileReader();
-
-    reader.onload = e => photoPreview.value = e.target.result
-
-    reader.readAsDataURL(photo);
-
-    newAvatarCreated.value = false
-};
+const handleOnSelectAvatar = (base_64_url: any)=> {
+    photoPreview.value = base_64_url
+}
 
 onMounted(() => {
     account.value = AccountStorage.getAccount();
@@ -70,20 +56,8 @@ onMounted(() => {
 <template>
     <form @submit="updateProfileInformation" formId="updateProfileInfoForm">
         <div class="col-span-6 sm:col-span-4 z-[1]">
-            <input ref="photoInput" type="file" class="hidden" accept=".svg,.jpg,.png,.gif" @change="updatePhotoPreview">
-            <div v-if="account?.avatar" class="mt-2 relative">
-                <img v-if="!photoPreview" :src="defaultAvatar" :alt="'user.name'"
-                    class="rounded-full h-20 w-20 object-cover">
-
-                <span v-else class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                    :style="'background-image: url(\'' + photoPreview + '\');'" />
-                <button
-                    class="absolute rounded-full left-0 top-0 h-20 w-20 bg-gray-900 text-white font-semibold opacity-50 hover:text-white hover:font-semibold hover:opacity-50 hover:border hover:border-sukuuk-main"
-                    type="button" @click.prevent="selectNewPhoto">
-                    <CameraIcon class="h-5 w-5 mx-auto"></CameraIcon>
-                </button>
-            </div>
-            <Loading class="rounded-full w-20 h-20" v-else/>
+            <SelectAvatar v-if="account?.avatar" :avatarUrl="defaultAvatar" @onSelectAvatar="handleOnSelectAvatar"/>
+            <Loading v-else className="rounded-full w-20 h-20"/>
 
             <div class="ml-4 mt-2" v-if="loading">
                 <Loading/>
