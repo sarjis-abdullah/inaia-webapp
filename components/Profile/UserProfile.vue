@@ -1,33 +1,59 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref, reactive } from 'vue';
 import { CameraIcon } from '@heroicons/vue/20/solid';
 import { AccountService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
+import defaultImage from '@/assets/img/defaultAvatar.png';
+import Loading from '@/components/common/Loading.vue';
+import { Ref } from 'nuxt/dist/app/compat/capi';
+import { Account } from '~~/lib/models';
 
+//emits
+const emit = defineEmits<{
+    onUpdate: [any: {}]
+}>()
+//props
 const props = defineProps({
     readonly: {
         type: Boolean,
         default: false
-    },
-    avatar: {
-        type: String,
-        default: ""
     }
 });
 
 const photoPreview = ref(null);
 const photoInput = ref(null);
-const defaultImage = props.avatar ?? "https://s3.eu-central-1.amazonaws.com/staging-storage.inaia.cloud/profile/1708588713-Mahdi.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARXODEP55RFK2VQOH%2F20240222%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20240222T093452Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Signature=45d02c6b0374b30c0f3c4a970a93e01ddf34bd079837bc616dfce7e3f6f8e372"
+const account = ref(null);
+const loading = ref(false);
+const newAvatarCreated = ref(false);
+const errorText: Ref<string> = ref("");
 const contactId = computed(() => AccountStorage.getContactId());
 const payload = computed(() => {
     return {
         avatar: photoPreview.value
     }
 });
+const defaultAvatar = computed(() => {
+    return photoPreview.value ?? account.value?.avatar ?? defaultImage
+});
 
-const updateProfileInformation = async(e) => {
+const updateProfileInformation = async (e) => {
     e.preventDefault();
-    await AccountService.updateProfile(contactId.value, payload.value)
+    loading.value = true
+    try {
+        const result = await AccountService.updateProfile(contactId.value, payload.value)
+        const obj: Account = {
+            ...account.value,
+            avatar: "https://cdn-staging.inaia.cloud/icons/depot_avatar_other.jpg"
+            // avatar: result.avatar
+        }
+        AccountStorage.saveAccount(obj);
+        emit("onUpdate", result)
+        newAvatarCreated.value = true
+    } catch (error) {
+        errorText.value = error
+    } finally {
+        loading.value = false
+    }
 };
 
 const selectNewPhoto = () => photoInput.value.click()
@@ -42,41 +68,25 @@ const updatePhotoPreview = () => {
     reader.onload = e => photoPreview.value = e.target.result
 
     reader.readAsDataURL(photo);
+
+    newAvatarCreated.value = false
 };
 
-const deletePhoto = () => {
-    console.log("delete");
-    // Inertia.delete(route('current-user-photo.destroy'), {
-    //     preserveScroll: true,
-    //     onSuccess: () => {
-    //         photoPreview.value = null;
-    //         clearPhotoFileInput();
-    //     },
-    // });
-};
-
-const clearPhotoFileInput = () => {
-    if (photoInput.value?.value)
-        photoInput.value.value = null;
-};
+onMounted(() => {
+    account.value = AccountStorage.getAccount();
+})
 </script>
 
 <template>
     <div v-if="readonly">
-        <img class="h-8 w-8 rounded-full" :src="avatar" alt="">
+        <img class="h-8 w-8 rounded-full" :src="defaultAvatar" alt="">
     </div>
     <form v-else @submit="updateProfileInformation" formId="updateProfileInfoForm">
-
-        <!-- Profile Photo -->
         <div class="col-span-6 sm:col-span-4">
-            <!-- Profile Photo File Input -->
             <input ref="photoInput" type="file" class="hidden" accept=".svg,.jpg,.png,.gif" @change="updatePhotoPreview">
-
-            <!--                <JetLabel for="photo" value="Photo" />-->
-
-            <!-- Current Profile Photo -->
-            <div class="mt-2 relative">
-                <img v-if="!photoPreview" :src="defaultImage" :alt="'user.name'" class="rounded-full h-20 w-20 object-cover">
+            <div v-if="account?.avatar" class="mt-2 relative">
+                <img v-if="!photoPreview" :src="defaultAvatar" :alt="'user.name'"
+                    class="rounded-full h-20 w-20 object-cover">
 
                 <span v-else class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
                     :style="'background-image: url(\'' + photoPreview + '\');'" />
@@ -86,18 +96,14 @@ const clearPhotoFileInput = () => {
                     <CameraIcon class="h-5 w-5 mx-auto"></CameraIcon>
                 </button>
             </div>
+            <Loading class="rounded-full w-20 h-20" v-else/>
 
-            <!-- New Profile Photo Preview -->
-            <button type="submit"  v-show="photoPreview" class="mt-2">
-               Update
+            <div class="ml-4 mt-2" v-if="loading">
+                <Loading/>
+            </div>
+            <button v-else-if="!loading && !newAvatarCreated" type="submit" v-show="photoPreview"  class="font-semibold text-blue-600 hover:text-blue-500 mt-2 ml-3">{{
+                $t('update') }}
             </button>
-
-
-            <!-- <button v-if="user.profile_photo_path" type="button" class="mt-2" @click.prevent="deletePhoto">
-                Remove Photo
-            </button> -->
-
-            <!-- <p :message="form.errors.photo" class="mt-2" /> -->
         </div>
     </form>
 </template>

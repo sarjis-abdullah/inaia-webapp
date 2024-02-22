@@ -98,7 +98,7 @@ export class AccountService{
             throw err;
         }
     }
-    public static async updateProfile(contactId: number, payload:Avatar):Promise<AccountData>{
+    public static async updateProfile(contactId: number, payload:Avatar):Promise<Account>{
         try{
             const url = this.links.updateProfile(contactId);
             const token = TokenService.getToken();
