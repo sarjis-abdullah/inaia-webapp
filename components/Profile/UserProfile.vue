@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, ref, inject } from 'vue';
 import { CameraIcon } from '@heroicons/vue/20/solid';
 import { AccountService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
@@ -8,17 +8,7 @@ import Loading from '@/components/common/Loading.vue';
 import { Ref } from 'nuxt/dist/app/compat/capi';
 import { Account } from '~~/lib/models';
 
-//emits
-const emit = defineEmits<{
-    onUpdate: [any: {}]
-}>()
-//props
-const props = defineProps({
-    readonly: {
-        type: Boolean,
-        default: false
-    }
-});
+const updateProfileAvatarProvider = inject('updateProfileAvatarProvider', () => ({}))
 
 const photoPreview = ref(null);
 const photoInput = ref(null);
@@ -43,11 +33,10 @@ const updateProfileInformation = async (e) => {
         const result = await AccountService.updateProfile(contactId.value, payload.value)
         const obj: Account = {
             ...account.value,
-            avatar: "https://cdn-staging.inaia.cloud/icons/depot_avatar_other.jpg"
-            // avatar: result.avatar
+            avatar: result.avatar
         }
         AccountStorage.saveAccount(obj);
-        emit("onUpdate", result)
+        updateProfileAvatarProvider(result)
         newAvatarCreated.value = true
     } catch (error) {
         errorText.value = error
@@ -78,10 +67,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="readonly">
-        <img class="h-8 w-8 rounded-full" :src="defaultAvatar" alt="">
-    </div>
-    <form v-else @submit="updateProfileInformation" formId="updateProfileInfoForm">
+    <form @submit="updateProfileInformation" formId="updateProfileInfoForm">
         <div class="col-span-6 sm:col-span-4">
             <input ref="photoInput" type="file" class="hidden" accept=".svg,.jpg,.png,.gif" @change="updatePhotoPreview">
             <div v-if="account?.avatar" class="mt-2 relative">
