@@ -84,8 +84,7 @@
                   <div>
                     <MenuButton class="flex max-w-xs items-center rounded-full bg-blue-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
                       <span class="sr-only">Open user menu</span>
-                      <!-- <img class="h-8 w-8 rounded-full" :src="avatar" alt="" /> -->
-                      <UserProfile :readonly="true" :avatar="avatar"/>
+                      <img class="h-8 w-8 rounded-full" :src="updatedAvatar ?? avatar" alt="" />
                     </MenuButton>
                   </div>
                   <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -175,9 +174,8 @@ import { AccountService } from '~~/lib/services/AccountService';
 import { AccountStorage } from '~~/storage/AccountStorage';
 import TradingModal from '@/components/TradingModal';
 import LogoutHelper from '~~/helpers/LogoutHelper';
-import UserProfile from '@/components/Profile/UserProfile.vue';
-
 const user:Ref<Account>= ref(null);
+const updatedAvatar = ref();
 const {t,locale} = useI18n();
 const router = useRouter();
 useHead({
@@ -191,8 +189,6 @@ useHead({
 onMounted(async ()=>{
     const contactId = AccountStorage.getContactId();
     user.value = await AccountService.getAccount(parseInt(contactId));
-    console.log(user.value);
-    provide('authUser', user.value)
 })
   const route = router.currentRoute.value.name?.toString();
   const pageName  = computed(()=>{
@@ -270,4 +266,11 @@ onMounted(async ()=>{
     const url = '/' + locale.value + '/support-tickets';
     router.push(url)
   }
+  const onUserProfileUpdate = (data)=> {
+    console.log(data, "onUserProfileUpdate");
+  }
+  const updateProfileAvatarProvider =(account)=> {
+    updatedAvatar.value = account.avatar
+  }
+  provide('updateProfileAvatarProvider', updateProfileAvatarProvider);
   </script>
