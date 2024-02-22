@@ -266,10 +266,7 @@ onMounted(async ()=>{
     const url = '/' + locale.value + '/support-tickets';
     router.push(url)
   }
-  const onUserProfileUpdate = (data)=> {
-    console.log(data, "onUserProfileUpdate");
-  }
-  const updateProfileAvatarProvider =(account)=> {
+  const updateProfileAvatarProvider =(account: Account)=> {
     updatedAvatar.value = account.avatar
   }
   provide('updateProfileAvatarProvider', updateProfileAvatarProvider);

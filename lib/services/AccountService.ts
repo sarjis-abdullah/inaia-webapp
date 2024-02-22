@@ -3,10 +3,10 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
-import { Address, ProductFee, AccountData } from '../models';
+import { Address, ProductFee, AccountData, Avatar } from '../models';
 import { ChannelRequest, UpdateAddressRequest } from '../requests';
 import { SettingRequest } from '../requests/SettingRequest';
-import { LocaleSettingRequest, PasswordUpdateRequest, Avatar } from '../requests';
+import { LocaleSettingRequest, PasswordUpdateRequest } from '../requests';
 export class AccountService{
     private static account:Account;
     private static links = Urls.URLS();
