@@ -186,6 +186,9 @@ export class Urls{
     public updatePassword():string{
         return this.buildUrl(BaseUrls.getCoreUrl(), `password-update`);
     }
+    public updateProfile(contactId: number):string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), `contacts/update-avatar/${contactId}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

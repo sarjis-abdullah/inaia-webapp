@@ -6,7 +6,7 @@ import { TokenService } from './TokenService';
 import { Address, ProductFee, AccountData } from '../models';
 import { ChannelRequest, UpdateAddressRequest } from '../requests';
 import { SettingRequest } from '../requests/SettingRequest';
-import { LocaleSettingRequest, PasswordUpdateRequest } from '../requests';
+import { LocaleSettingRequest, PasswordUpdateRequest, Avatar } from '../requests';
 export class AccountService{
     private static account:Account;
     private static links = Urls.URLS();
@@ -92,6 +92,18 @@ export class AccountService{
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             const json = await this.requester.post(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateProfile(contactId: number, payload:Avatar):Promise<AccountData>{
+        try{
+            const url = this.links.updateProfile(contactId);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.put(url,this.headers, payload);
             return json.data;
         }
         catch(err){
