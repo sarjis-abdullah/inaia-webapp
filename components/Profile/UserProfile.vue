@@ -5,6 +5,7 @@ import { AccountService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
 import defaultImage from '@/assets/img/defaultAvatar.png';
 import Loading from '@/components/common/Loading.vue';
+import InLineApiError from '@/components/common/InLineApiError.vue';
 import { Ref } from 'nuxt/dist/app/compat/capi';
 import { Account } from '~~/lib/models';
 
@@ -15,7 +16,7 @@ const photoInput = ref(null);
 const account = ref(null);
 const loading = ref(false);
 const newAvatarCreated = ref(false);
-const errorText: Ref<string> = ref("");
+const submitErr: Ref<string> = ref("");
 const contactId = computed(() => AccountStorage.getContactId());
 const payload = computed(() => {
     return {
@@ -39,7 +40,7 @@ const updateProfileInformation = async (e) => {
         updateProfileAvatarProvider(result)
         newAvatarCreated.value = true
     } catch (error) {
-        errorText.value = error
+        submitErr.value = error
     } finally {
         loading.value = false
     }
@@ -68,7 +69,7 @@ onMounted(() => {
 
 <template>
     <form @submit="updateProfileInformation" formId="updateProfileInfoForm">
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-4 z-[1]">
             <input ref="photoInput" type="file" class="hidden" accept=".svg,.jpg,.png,.gif" @change="updatePhotoPreview">
             <div v-if="account?.avatar" class="mt-2 relative">
                 <img v-if="!photoPreview" :src="defaultAvatar" :alt="'user.name'"
@@ -92,4 +93,5 @@ onMounted(() => {
             </button>
         </div>
     </form>
+    <InLineApiError :err="submitErr"/>
 </template>
