@@ -2,7 +2,7 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('createDepot') }}</h2>
-            <img :src="target.avatar"  v-if="target" class="h-32 w-32 rounded-full mx-auto mb-4"/>
+            <img :src="target.avatar_base64 ?? target.avatar"  v-if="target" class="h-32 w-32 rounded-full mx-auto mb-4"/>
             <div class="text-center font-semibold my-3 text-gray-900">{{ depotName }}</div>
             <div class="text-center font-semibold my-3 text-gray-900">{{ $t('createDepotText') }}</div>
             <div class="divide-y divide-gray-200">

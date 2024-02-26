@@ -3,7 +3,13 @@
       <div class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
     <div class="ml-4 mt-2">
         <div class="flex flex-row items-center" >
-        <img :src="depot?depot.avatar:''" class="w-16 h-16 rounded-full"/>
+        <div class="flex flex-col gap-2">
+          <SelectAvatar @onSelectAvatar="handleOnSelectAvatar" :iconClass="'top-[4px]'" :avatar-url="depot?.avatar" className="w-16 h-16"/>
+          <button v-if="photoPreview" :disabled="loading" @click="updateDepotAvatar" type="button" class="font-semibold text-blue-600 hover:text-blue-500">
+            <Loading v-if="loading"></Loading> 
+            <span v-else>{{$t('update')}}</span>
+          </button>
+        </div>
         <div class="ml-4">
             <div class="text-gray-900">
                 {{ $t('depot') }} # {{ depot?.depot_number }}
@@ -51,9 +57,10 @@
 import {AssetTypes, PricePeriods} from '@/lib/contants';
 import { onMounted,Ref,ref,watch,PropType } from 'vue';
 import { Depot, DepotHistoryValue, HistoricalPrice } from '~~/lib/models';
-import { CurrencyService, AssetsService } from '@/lib/services';
+import { CurrencyService, AssetsService, AddDepotService } from '@/lib/services';
 import { AssetStorage } from '@/storage/AssetStorage';
 import Loading from '@/components/common/Loading';
+import SelectAvatar from '@/components/common/SelectAvatar.vue';
 import * as array from 'd3-array';
 const options = {
   dataLabels: {
@@ -149,6 +156,8 @@ const options = {
   },
 }
 const series = ref([]);
+const photoPreview = ref("");
+const loading = ref(false);
 const silverPrice : Ref<number> = ref(0);
 const goldPrice : Ref<number> = ref(0);
 const depotHistoryData : Ref<DepotHistoryValue[]> = ref([]);
@@ -243,6 +252,24 @@ const getPrice = computed( ()=>{
 })
 const followChartValues = (config) =>{
   console.log(config)
+}
+const handleOnSelectAvatar = (base_64_url: string) =>{
+  photoPreview.value = base_64_url
+}
+const updateDepotAvatar = async() =>{
+  const obj = {
+    avatar_base64: photoPreview.value
+  }
+  loading.value = true
+  try {
+    if(props?.depot)
+      await AddDepotService.updateDepotAvatar(props?.depot?.id, obj)
+  } catch (error) {
+    
+  }finally {
+    loading.value = false
+    photoPreview.value = ""
+  }
 }
 onMounted(async ()=>{
     if(props.depot)

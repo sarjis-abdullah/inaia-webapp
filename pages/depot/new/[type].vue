@@ -238,6 +238,7 @@ const setTarget = (target:DepotTarget)=>{
 }
 const handleOnSelectAvatar = (url:string)=>{
   saveDepotRequest.value.avatar_base64 = url
+  selectedDepotTarget.value = {...selectedDepotTarget.value, avatar_base64: url}
 }
 const onNameSet = (name:string)=>{
   depotName.value = name;

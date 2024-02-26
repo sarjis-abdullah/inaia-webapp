@@ -1,7 +1,7 @@
 import { AgioPaymentsModels } from '../contants/AgioPaymentsModels';
 import { AgioPaymentsPercentages, MINIMUM_PERIOD_TO_START_SAVING_PLAN, SavingPlanPaymentIntervals } from '../contants';
-import { DataItem, NextPossibleDate, SavingsPlanPaymentInterval, SpPerformanceData } from '../models';
-import { AddDepotRequest, AddSavingsPlanRequest } from '../requests';
+import { DataItem, Depot, NextPossibleDate, SavingsPlanPaymentInterval, SpPerformanceData } from '../models';
+import { AddDepotRequest, AddSavingsPlanRequest, UpdateDepotRequest } from '../requests';
 import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
@@ -156,5 +156,17 @@ export class AddDepotService {
         let json = await this.requester.get(url,this.headers);
         let data:SavingsPlanPaymentInterval[] = json.data;
         return data;
+    }
+    public static async updateDepotAvatar(depotId: number, payload:UpdateDepotRequest):Promise<Depot>{
+        try{
+            const url = this.links.updateDepotAvatar(depotId);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
     }
 }

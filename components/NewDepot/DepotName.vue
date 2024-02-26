@@ -3,7 +3,7 @@
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('set_the_name') }}</h2>
             <div class="col-span-6 sm:col-span-4 z-[1]">
-            <SelectAvatar :avatar-url="target.avatar" @onSelectAvatar="handleOnSelectAvatar" className="h-32 w-32 mx-auto mb-4" />
+            <SelectAvatar icon-class="top-[12px]" :avatar-url="target.avatar" @onSelectAvatar="handleOnSelectAvatar" className="h-32 w-32 mx-auto mb-4" />
         </div>
             <div class="mt-10">
                     
