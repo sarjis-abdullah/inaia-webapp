@@ -157,7 +157,7 @@ const options = {
   },
 }
 const series = ref([]);
-const photoPreview = ref("");
+const photoPreview: Ref<string|null> = ref(null);
 const loading = ref(false);
 const silverPrice : Ref<number> = ref(0);
 const goldPrice : Ref<number> = ref(0);

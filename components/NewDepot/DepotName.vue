@@ -53,7 +53,7 @@ const setName = ()=>{
         emit('onNameSet',state.name);
     }
 }
-const handleOnSelectAvatar = (base_64_url: any)=> {
+const handleOnSelectAvatar = (base_64_url: string)=> {
     emit('onSelectAvatar', base_64_url);
 }
 </script>

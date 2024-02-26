@@ -4,15 +4,6 @@
       :type="notificationType" @close="onNotificationClosed" />
     <div class="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
       <div>
-        <!-- <h2 class="text-base font-semibold leading-7 text-gray-900">{{ $t('profile') }}</h2> -->
-        <!-- <div data-headlessui-state="" class="relative">
-          <div>
-            <button type="button" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="" class="flex max-w-xs items-center rounded-full bg-blue-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-              <span class="sr-only">Open user menu</span>
-              <img class="h-12 w-12 rounded-full" src="https://s3.eu-central-1.amazonaws.com/staging-storage.inaia.cloud/profile/1708588713-Mahdi.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARXODEP55RFK2VQOH%2F20240222%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20240222T093452Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Signature=45d02c6b0374b30c0f3c4a970a93e01ddf34bd079837bc616dfce7e3f6f8e372" alt="">
-            </button>
-          </div>
-        </div> -->
         <UpdateProfile/>
 
         <dl class="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">

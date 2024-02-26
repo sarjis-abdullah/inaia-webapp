@@ -5,7 +5,7 @@ import { PencilIcon } from '@heroicons/vue/20/solid';
 
 //emits
 const emit = defineEmits<{
-    onSelectAvatar: [String: {}]
+    onSelectAvatar: [string: void]
 }>()
 //props
 const props = defineProps({

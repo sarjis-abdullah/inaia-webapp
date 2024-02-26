@@ -10,8 +10,8 @@ import { Account } from '@/lib/models';
 
 const updateProfileAvatarProvider = inject('updateProfileAvatarProvider', () => ({}))
 
-const photoPreview = ref(null);
-const account = ref(null);
+const photoPreview: Ref<string|null> = ref(null);
+const account: Ref<Account|null> = ref(null);
 const loading = ref(false);
 const newAvatarCreated = ref(false);
 const submitErr: Ref<string> = ref("");
@@ -25,7 +25,7 @@ const defaultAvatar = computed(() => {
     return photoPreview.value ?? account.value?.avatar ?? defaultImage
 });
 
-const updateProfileInformation = async (e) => {
+const updateProfileInformation = async (e: Event) => {
     e.preventDefault();
     loading.value = true
     try {
@@ -44,7 +44,7 @@ const updateProfileInformation = async (e) => {
     }
 };
 
-const handleOnSelectAvatar = (base_64_url: any)=> {
+const handleOnSelectAvatar = (base_64_url: string)=> {
     photoPreview.value = base_64_url
 }
 

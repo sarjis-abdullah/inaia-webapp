@@ -3,5 +3,6 @@ export interface DepotTarget {
     avatar:string,
     title:string,
     interval_amount:number,
-    duration:number
+    duration:number,
+    avatar_base64?:string,
 }
