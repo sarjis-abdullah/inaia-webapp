@@ -1,4 +1,6 @@
 <template>
+    <Notification :show="showSuccessNotification" :title="notificationTitle" :text="notificationText"
+      :type="notificationType" @close="onNotificationClosed" className="mt-12"/>
     <div class="rounded-lg shadow bg-white px-4 py-5 sm:px-6">
       <div class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
     <div class="ml-4 mt-2">
@@ -63,6 +65,8 @@ import { AssetStorage } from '@/storage/AssetStorage';
 import Loading from '@/components/common/Loading.vue';
 import SelectAvatar from '@/components/common/SelectAvatar.vue';
 import * as array from 'd3-array';
+import Notification from "@/components/common/Notification.vue";
+import { NotificationTypes } from '~~/constants/NotificationTypes';
 const options = {
   dataLabels: {
     enabled: false
@@ -164,6 +168,11 @@ const goldPrice : Ref<number> = ref(0);
 const depotHistoryData : Ref<DepotHistoryValue[]> = ref([]);
 const currency = CurrencyService.getCurrency().symbol;
 const period = ref(PricePeriods.month);
+const showSuccessNotification = ref(false);
+const notificationType = ref('');
+const notificationTitle = ref('');
+const notificationText = ref('');
+//props
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
@@ -257,6 +266,12 @@ const followChartValues = (config) =>{
 const handleOnSelectAvatar = (base_64_url: string) =>{
   photoPreview.value = base_64_url
 }
+const onDepotAvatarUpdated = () => {
+  showSuccessNotification.value = true
+  notificationText.value = t('depot_avatar_updated')
+  notificationTitle.value = t('success');
+  notificationType.value = NotificationTypes.sucess;
+}
 const updateDepotAvatar = async() =>{
   const obj: UpdateDepotRequest = {
     avatar_base64: photoPreview.value
@@ -265,6 +280,7 @@ const updateDepotAvatar = async() =>{
   try {
     if(props?.depot)
       await AddDepotService.updateDepotAvatar(props?.depot?.id, obj)
+      onDepotAvatarUpdated()
   } catch (error) {
     
   }finally {

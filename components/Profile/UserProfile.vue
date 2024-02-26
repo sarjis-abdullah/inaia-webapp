@@ -8,6 +8,10 @@ import InLineApiError from '@/components/common/InLineApiError.vue';
 import SelectAvatar from '@/components/common/SelectAvatar.vue';
 import { Account } from '@/lib/models';
 
+//emits
+const emit = defineEmits<{
+  (e: 'onUpdate'): void,
+}>()
 const updateProfileAvatarProvider = inject('updateProfileAvatarProvider', () => ({}))
 
 const photoPreview: Ref<string|null> = ref(null);
@@ -37,6 +41,7 @@ const updateProfileInformation = async (e: Event) => {
         AccountStorage.saveAccount(obj);
         updateProfileAvatarProvider(result)
         newAvatarCreated.value = true
+        emit('onUpdate')
     } catch (error) {
         submitErr.value = error
     } finally {

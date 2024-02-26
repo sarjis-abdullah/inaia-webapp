@@ -1,10 +1,10 @@
 <template>
   <main class="px-4 sm:px-6 lg:flex-auto lg:px-0">
     <Notification :show="showSuccessNotification" :title="notificationTitle" :text="notificationText"
-      :type="notificationType" @close="onNotificationClosed" />
+      :type="notificationType" @close="onNotificationClosed" className="mt-12"/>
     <div class="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
       <div>
-        <UpdateProfile/>
+        <UpdateProfile @onUpdate="onProfileUpdated"/>
 
         <dl class="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
           <div class="pt-6 sm:flex">
@@ -153,7 +153,7 @@ const errorLoadingBankAccount = ref(null);
 const showUpdatPhoneNumber = ref(false);
 const showUpdateEmail = ref(false);
 const showSuccessNotification = ref(false);
-const notificationType = ref(null);
+const notificationType = ref('');
 const notificationTitle = ref('');
 const notificationText = ref('');
 const selectedLanguage = ref('');
@@ -358,6 +358,12 @@ const onPasswordUpdated = () => {
   notificationTitle.value = t('success');
   notificationType.value = NotificationTypes.sucess;
   showPasswordUpdatePopup.value = false
+}
+const onProfileUpdated = () => {
+  showSuccessNotification.value = true
+  notificationText.value = t('profile_avatar_updated')
+  notificationTitle.value = t('success');
+  notificationType.value = NotificationTypes.sucess;
 }
 const formatPaymentAccountDisplay = (paymentAccount: PaymentAccount) => {
   let bankName = "";

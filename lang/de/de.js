@@ -292,5 +292,7 @@ export default {
     password_confirmation: "Passwort bestätigen",
     password_updated: "Passwort aktualisiert",
     password_update_alert: "Nach dem Ändern Ihres Passworts werden Sie abgemeldet. Bitte melden Sie sich erneut mit Ihrem neuen Passwort an, um fortzufahren.",
-    password_mismatch_alert: "Die eingegebenen Passwörter stimmen nicht überein."
+    password_mismatch_alert: "Die eingegebenen Passwörter stimmen nicht überein.",
+    depot_avatar_updated: "Depot-Avatar aktualisiert",
+    profile_avatar_updated: "Profil-Avatar aktualisiert"
 }
