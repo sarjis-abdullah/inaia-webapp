@@ -255,4 +255,13 @@ export default {
     downloadPDF: 'PDF herunterladen',
     startDate: 'Startdatum',
     endDate: 'Enddatum',
+    minimumAmountRequired:(currency)=>`Der Mindestbetrag beträgt 25 ${currency}`,
+    orderOverview:'Auftragsübersicht',
+    orderOverview:'Order details',
+    orderOverview:'Détails de la commande',
+    showPreview:'Vorschau anzeigen',
+    depotText:'Depot',
+    purshaseSellNote:'Hinweis: Die hier aufgeführte Übersicht stellt keine verbindliche Auftragsannahme dar. Der Kauf- bzw. Verkaufsauftrag kommt erst mit Zusendung der Auftragsbestätigung per E-Mail zustande.\nEs gelten die Kauf- und Verkaufsintervalle in unseren Geschäftsbedingungen.',
+    buyingNoteOnExecutionDate:'Die Käufe im Fremdgeschäft (Wakalah-Transaktion) werden unverzüglich zum nächstmöglichen Zeitpunkt, spätestens jedoch innerhalb von 2 Arbeitstagen nach Geldeingang ausgeführt.',
+    buygoldtooltip:"Der hier angezeigt Kurs dient lediglich der ungefähren Einschätzung. Der tatsächliche Kurs zum Tag der Ausführung deines Auftrags kann hiervon abweichen.",
 }

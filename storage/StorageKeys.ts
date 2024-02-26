@@ -17,4 +17,5 @@ export enum StorageKeys{
     goldPrice='goldprice',
     silverPrice='silverprice',
     depotTypes = 'depottypes',
+    depotToTrade = 'depotToTrade'
 }

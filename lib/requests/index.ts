@@ -23,6 +23,10 @@ import { AddSavingsPlanRequest } from './AddSavingsPlanRequest';
 import { ChannelRequest } from './ChannelRequest';
 import { LocaleSettingRequest } from './LocaleSettingRequest';
 import { DateFilterRequest, StatementDateFilterRequest } from './DateFilterRequest';
+import { OrderPreviewRequest } from './OrderPreviewRequest';
+import { PlaceOrderRequest } from './PlaceOrderRequest';
+import { ConfirmOrderRequest } from './ConfirmOrderRequest';
+import { TransferAssetRequest } from './TransferAssetRequest';
 export { ConditionsRequest };
 export { AccountInformationRequest };
 export { AddressRequest };
@@ -48,3 +52,7 @@ export {ChannelRequest};
 export {LocaleSettingRequest};
 export {AddPaymentAccountRequest};
 export {DateFilterRequest, StatementDateFilterRequest};
+export {OrderPreviewRequest}
+export {PlaceOrderRequest}
+export {ConfirmOrderRequest}
+export {TransferAssetRequest}

@@ -229,4 +229,11 @@ export default {
     downloadPDF: 'Download PDF', 
     startDate: 'Start Date', 
     endDate: 'End Date', 
+    minimumAmountRequired:(currency)=>`A minimum purchase amount of 25 ${currency} is required`,
+    showPreview:'Preview',
+    depotText:'Depot',
+    buyingNoteOnExecutionDate:'The purchases in the third-party transaction (Wakalah transaction) will be executed promptly at the earliest possible time, but no later than within 2 business days after receipt of funds.',
+    purshaseSellNote:'Note: The overview given here does not represent a binding order acceptance. The purchase or sale order only comes into effect when the order confirmation is sent by e-mail.\nThe purchase and sale intervals in our terms and conditions apply.',
+    buygoldtooltip:"The shown rate is only intended as an approximate estimate. The actual rate on the day your order is executed may deviate",
+    
 }

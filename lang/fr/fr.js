@@ -197,4 +197,10 @@ export default {
     downloadPDF: 'Télécharger le PDF',
     startDate: 'Date de début',
     endDate: 'Date de fin',
+    minimumAmountRequired:(currency)=>`Un montant minimum d'achat de 25 ${currency} est requis`,
+    showPreview:'Aperçu',
+    depotText:'Dépôt',
+    buyingNoteOnExecutionDate:"Les achats effectués dans le cadre d'une transaction pour le compte de tiers (Transaction Wakalah) sont exécutés sans délai, dès que possible et au plus tard dans les deux jours ouvrables suivant la réception des fonds.",
+    purshaseSellNote:"Remarque : l'aperçu donné ici ne constitue pas une acceptation de commande contraignante. L'ordre d'achat ou de vente n'entre en vigueur que lorsque la confirmation de la commande est envoyée par courrier électronique.  Nos conditions générales de vente s'appliquent.",
+    buygoldtooltip:"Le taux indiqué n'est qu'une estimation approximative. Le taux réel le jour de l'exécution de votre ordre peut être différent",
 }
