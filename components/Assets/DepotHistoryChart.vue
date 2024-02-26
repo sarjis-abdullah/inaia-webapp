@@ -57,9 +57,10 @@
 import {AssetTypes, PricePeriods} from '@/lib/contants';
 import { onMounted,Ref,ref,watch,PropType } from 'vue';
 import { Depot, DepotHistoryValue, HistoricalPrice } from '~~/lib/models';
+import { UpdateDepotRequest } from '@/lib/requests/UpdateDepotRequest';
 import { CurrencyService, AssetsService, AddDepotService } from '@/lib/services';
 import { AssetStorage } from '@/storage/AssetStorage';
-import Loading from '@/components/common/Loading';
+import Loading from '@/components/common/Loading.vue';
 import SelectAvatar from '@/components/common/SelectAvatar.vue';
 import * as array from 'd3-array';
 const options = {
@@ -257,7 +258,7 @@ const handleOnSelectAvatar = (base_64_url: string) =>{
   photoPreview.value = base_64_url
 }
 const updateDepotAvatar = async() =>{
-  const obj = {
+  const obj: UpdateDepotRequest = {
     avatar_base64: photoPreview.value
   }
   loading.value = true
