@@ -3,7 +3,7 @@ import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
-import { Address, ProductFee, AccountData, Avatar } from '../models';
+import { Address, ProductFee, AccountData, ContactAvatar } from '../models';
 import { ChannelRequest, UpdateAddressRequest } from '../requests';
 import { SettingRequest } from '../requests/SettingRequest';
 import { LocaleSettingRequest, PasswordUpdateRequest } from '../requests';
@@ -98,7 +98,7 @@ export class AccountService{
             throw err;
         }
     }
-    public static async updateProfile(contactId: number, payload:Avatar):Promise<Account>{
+    public static async updateProfile(contactId: number, payload:ContactAvatar):Promise<Account>{
         try{
             const url = this.links.updateProfile(contactId);
             const token = TokenService.getToken();
