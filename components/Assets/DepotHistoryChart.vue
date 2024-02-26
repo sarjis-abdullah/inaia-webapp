@@ -1,6 +1,6 @@
 <template>
     <Notification :show="showSuccessNotification" :title="notificationTitle" :text="notificationText"
-      :type="notificationType" @close="onNotificationClosed" className="mt-12"/>
+      :type="notificationType" @close="showSuccessNotification = false" className="mt-12"/>
     <div class="rounded-lg shadow bg-white px-4 py-5 sm:px-6">
       <div class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
     <div class="ml-4 mt-2">

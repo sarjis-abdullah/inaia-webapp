@@ -31,13 +31,17 @@ const defaultAvatar = computed(() => {
 const selectNewPhoto = () => photoInput.value.click()
 
 const updatePhotoPreview = () => {
-    const photo = photoInput.value.files[0];
+    const photo = photoInput.value?.files[0];
 
     if (!photo) return;
 
     const reader = new FileReader();
 
-    reader.onload = (e: any) => photoPreview.value = e.target.result
+    reader.onload = (e: Event) => {
+        const target = e.target as FileReader;
+        if(target.result)
+            photoPreview.value = target.result
+    }
 
     reader.readAsDataURL(photo);
 };
