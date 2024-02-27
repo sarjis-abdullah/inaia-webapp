@@ -135,7 +135,7 @@
        
           <Welcome v-if="currentStep == 0" :type="type" @start="startAdding"/>
           <DepotTargets v-if="currentStep == 1" @choose="setTarget"/>
-          <DepotName v-if="currentStep == 2 && selectedDepotTarget" :target="selectedDepotTarget" @onNameSet="onNameSet"/>
+          <DepotName v-if="currentStep == 2 && selectedDepotTarget" :target="selectedDepotTarget" @onSelectAvatar="handleOnSelectAvatar" @onNameSet="onNameSet"/>
           <ConfirmCreateDepot v-if="currentStep == 3 && !isConfirmingDepotConditions" :type="type" @onDepotCreated="onDepotCreation" @onSavingPlanSetup="setupSavingPlan"/>
           <ConfirmDepotConditions v-if="currentStep == 3 && isConfirmingDepotConditions" :type="type" :target="selectedDepotTarget" :depotName="depotName" @onConditionsAccepted="saveDepot"/>
           <SetupSavingPlan v-if="currentStep == 4 && accountId" :accountId="accountId" :type="type" :target="selectedDepotTarget" @onContractDataSet="confirmSavingPlanContactData
@@ -235,6 +235,10 @@ const setTarget = (target:DepotTarget)=>{
   selectedDepotTarget.value = target
   saveDepotRequest.value.target_type_id = target.id;
   
+}
+const handleOnSelectAvatar = (url:string)=>{
+  saveDepotRequest.value.avatar_base64 = url
+  selectedDepotTarget.value = {...selectedDepotTarget.value, avatar_base64: url}
 }
 const onNameSet = (name:string)=>{
   depotName.value = name;

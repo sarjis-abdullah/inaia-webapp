@@ -2,7 +2,9 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('set_the_name') }}</h2>
-            <img :src="target.avatar"  v-if="target" class="h-32 w-32 rounded-full mx-auto mb-4"/>
+            <div class="col-span-6 sm:col-span-4 z-[1]">
+            <SelectAvatar icon-class="top-[12px]" :avatar-url="target.avatar" @onSelectAvatar="handleOnSelectAvatar" className="h-32 w-32 mx-auto mb-4" />
+        </div>
             <div class="mt-10">
                     
                     <div class="relative mt-1 rounded-md shadow-sm">
@@ -29,6 +31,8 @@
 import { PropType } from "vue";
 import { ExclamationCircleIcon } from '@heroicons/vue/20/solid';
 import { DepotTarget } from "~~/lib/models";
+import SelectAvatar from '@/components/common/SelectAvatar.vue';
+
 const state = reactive({
    name:""
 });
@@ -39,7 +43,8 @@ const props = defineProps({
          },
 });
 const emit = defineEmits<{
-  (e: 'onNameSet',name:string): void
+  (e: 'onNameSet',name:string): void,
+  (e: 'onSelectAvatar',base_64_url:string): void,
 }>()
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
@@ -47,5 +52,8 @@ const setName = ()=>{
     if(state.name != ''){
         emit('onNameSet',state.name);
     }
+}
+const handleOnSelectAvatar = (base_64_url: string)=> {
+    emit('onSelectAvatar', base_64_url);
 }
 </script>

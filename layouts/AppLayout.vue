@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-full">
       <TradingModal :open="showTrading" @closed="closeTrading"/>
-      <Disclosure as="nav" class="bg-blue-700 sticky top-0" v-slot="{ open }">
+      <Disclosure as="nav" class="bg-blue-700 sticky top-0 z-[2]" v-slot="{ open }">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
@@ -84,7 +84,8 @@
                   <div>
                     <MenuButton class="flex max-w-xs items-center rounded-full bg-blue-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
                       <span class="sr-only">Open user menu</span>
-                      <img class="h-8 w-8 rounded-full" :src="avatar" alt="" />
+                      <img v-if="updatedAvatar || avatar" class="h-8 w-8 rounded-full" :src="updatedAvatar ?? avatar" alt="" />
+                      <div v-else class="h-8 w-8 rounded-full"><Loading/></div>
                     </MenuButton>
                   </div>
                   <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -168,13 +169,15 @@
   import { Bars3Icon, XMarkIcon,ChevronDownIcon, InboxIcon } from '@heroicons/vue/24/outline';
   import { PlusIcon } from '@heroicons/vue/20/solid'
   import Footer from '@/components/Footer.vue';
+  import Loading from '@/components/common/Loading.vue';
 import { Account } from '~~/lib/models/Account';
-import { computed,onMounted,Ref } from 'vue';
+import { computed,onMounted,Ref,provide } from 'vue';
 import { AccountService } from '~~/lib/services/AccountService';
 import { AccountStorage } from '~~/storage/AccountStorage';
 import TradingModal from '@/components/TradingModal';
 import LogoutHelper from '~~/helpers/LogoutHelper';
 const user:Ref<Account>= ref(null);
+const updatedAvatar = ref();
 const {t,locale} = useI18n();
 const router = useRouter();
 useHead({
@@ -265,4 +268,8 @@ onMounted(async ()=>{
     const url = '/' + locale.value + '/support-tickets';
     router.push(url)
   }
+  const updateProfileAvatarProvider =(account: Account)=> {
+    updatedAvatar.value = account.avatar
+  }
+  provide('updateProfileAvatarProvider', updateProfileAvatarProvider);
   </script>

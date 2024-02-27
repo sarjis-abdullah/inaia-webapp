@@ -63,3 +63,21 @@ export interface Account{
     channels:Array<Channel>,
     kyc_status:KycStatus
 }
+export interface Account{
+    id:number;
+    type_id:number;
+    name:string;
+    avatar:string;
+    avatar_file:string;
+    is_verified:boolean;
+    aml_status_id:boolean;
+    aml_search_id:number | null;
+    aml_status:AmlStatus;
+    created_at:string;
+    account:AccountData;
+    type?:any;
+    person_data:PersonData;
+    address?:Address;
+    channels:Array<Channel>,
+    kyc_status:KycStatus
+}

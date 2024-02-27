@@ -235,5 +235,7 @@ export default {
     password_confirmation: "Confirmer le mot de passe",
     password_updated: "Mot de passe mis à jour",
     password_update_alert: "Après avoir changé votre mot de passe, vous serez déconnecté(e). Veuillez vous reconnecter avec votre nouveau mot de passe pour continuer.",
-    password_mismatch_alert: "Les mots de passe que vous avez saisis ne correspondent pas."
+    password_mismatch_alert: "Les mots de passe que vous avez saisis ne correspondent pas.",
+    depot_avatar_updated: "Avatar du dépôt mis à jour",
+    profile_avatar_updated: "Avatar du profil mis à jour"
 }
