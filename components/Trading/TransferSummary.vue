@@ -64,7 +64,8 @@ const execute = async () => {
         source_depot_id:props.depot?.id,
         destination_depot_id:props.receiver?.id,
         account_id:account?.account.id,
-        gram_amount:props.amount
+        gram_amount:props.amount,
+        order_approval_method:props.confirmationMethod
     };
     
     try {

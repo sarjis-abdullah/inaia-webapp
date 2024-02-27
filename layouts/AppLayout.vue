@@ -6,12 +6,14 @@
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <img class="h-8 w-24" src="~/assets/img/logo/logo_contrast.png" alt="INAIA GmbH" />
+              <NuxtLink :to="'/'+lang+'/dashboard'" class="flex flex-row"><img class="h-8 w-24 cursor-pointer" src="~/assets/img/logo/logo_contrast.png" alt="INAIA GmbH" />
+                <div class="text-white ml-2 text-sm">BETA</div>
+              </NuxtLink>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <a v-for="item in navigation" :key="item.name" @click="item.action"
-                  :class="[item.current ? 'bg-blue-800 text-white' : 'text-white hover:bg-blue-500 hover:bg-opacity-75', 'px-3 py-2 rounded-md text-sm font-medium']"
+                  :class="[item.current ? 'bg-blue-800 text-white' : 'text-white hover:bg-blue-500 hover:bg-opacity-75', 'px-3 py-2 rounded-md text-sm font-medium cursor-pointer']"
                   :aria-current="item.current ? 'page' : undefined">
                   {{ item.name }}
 
@@ -93,7 +95,7 @@
                 </button>
             </div>
             <div class="mt-3 space-y-1 px-2">
-              <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" @click.prevent="item.action" class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75">
+              <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" @click.prevent="item.action" class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75 cursor-pointer">
                 {{ item.name }}
               </DisclosureButton>
             </div>
@@ -143,7 +145,7 @@
           </div>
           <div class="mt-3 space-y-1 px-2">
             <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" @click.prevent="item.action"
-              class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75">
+              class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75 cursor-pointer">
               {{ item.name }}
             </DisclosureButton>
           </div>

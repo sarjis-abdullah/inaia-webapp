@@ -322,12 +322,13 @@
                 </div>
     </div>
     <Modal :open="showPaymentTable" @onClose="closePaymentTable">
+        <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
         <div class="text-center my-6 text-2xl font-semibold">{{ $t('paymentPlan') }}</div>
         <div class="grid grid-cols-4 gap-2 py-2 px-2 bg-gray-50 text-center">
             <div>{{ $t('month') }}</div>
             <div>{{ $t('deposit') }}</div>
             <div>{{ $t('agio') }}</div>
-            <div>{{ $t('asset_purchase') }}</div>
+            <div>{{ $t('buy_assets') }}</div>
         </div>
         <div class="grid grid-cols-4 gap-2 py-2 px-2" v-for="paymentData in paymentTableData" :key="paymentData.month">
             <div>{{ paymentData.month }}</div>
@@ -349,6 +350,7 @@
              {{ $n(totalAgio) }} {{ currency }}
             </div>
         </div>
+    </div>
     </Modal>
 
 </div></template>

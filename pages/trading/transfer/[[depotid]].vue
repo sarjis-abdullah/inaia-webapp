@@ -66,10 +66,10 @@ const onInformationSet = ({selectedDepot,entredAmount,receiverDepot,cMethod})=>{
   confirmationMethod.value = cMethod;
   if(depot.value.depot_type?.name_translation_key.toLocaleUpperCase() == AssetTypes.gold.toUpperCase())
   {
-    title.value = t('gold_transfer')
+    title.value = t('gold_transfer_in')
   }
   else{
-    title.value = t('silver_transfer')
+    title.value = t('silver_transfer_in')
   }
   currentStep.value = 2
   reachedStep.value = 2

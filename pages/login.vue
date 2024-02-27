@@ -29,11 +29,8 @@
             </div>
           </div>
   
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" v-model="state.keepMeSignedIn"/>
-              <label for="remember-me" class="ml-2 block text-sm text-gray-900" >{{ $t('rememberMe') }}</label>
-            </div>
+          <div class="flex items-center justify-end">
+            
   
             <div class="text-sm">
               <NuxtLink to="request-password" class="font-medium text-blue-600 hover:text-blue-500">{{ $t('forGotPassword') }}</NuxtLink>
@@ -62,7 +59,7 @@
 import { stat } from 'fs';
   import { ref,reactive,watch } from 'vue';
 import { BadInputException,UnauthenticatedException } from '@/lib/exceptions';
-import { validateEmail } from '@/lib/utils/Validators';
+import { validateEmail,verifyIsAccountNumber } from '@/lib/utils/Validators';
 import {LoginStorage,AccountStorage } from '@/storage';
 import {AccountService,TokenService,LoginService} from '@/lib/services';
 import { ServerErrorException } from '@/lib/exceptions';
@@ -128,7 +125,7 @@ import { ServerErrorException } from '@/lib/exceptions';
     
   }
   watch(state,(currentValue)=>{
-    emailValidated.value = validateEmail(currentValue.email);
+    emailValidated.value = validateEmail(currentValue.email) || verifyIsAccountNumber(currentValue.email);
     passwordValidated.value = currentValue.password!="";
     activateSignin.value = (emailValidated.value && passwordValidated.value);
   })

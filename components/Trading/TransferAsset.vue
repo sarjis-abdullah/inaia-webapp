@@ -18,7 +18,7 @@
         <p class="text-center mt-4 text-l text-red-400" v-show="exceededAmount">{{ $t('sellGoldWarningText') }}
         </p>
         <DepotSelect @onDepotSet="onReceiverDepotSelected" :label="$t('receiverDepot')" v-if="selectedDepot" class="mt-3" :showOnly="selectedDepot.depot_type?.name_translation_key"></DepotSelect>
-        <div v-else class="mt-3 text-gray-600">{{ $t('chooseSenderDepot') }}</div>
+        <div v-else class="mt-3 text-gray-400">{{ $t('chooseSenderDepot') }}</div>
         <keyboard class="mt-8" @onPress="onKeyboardPressed" />
         <div class="mt-8">
             <button type="submit" :disabled="!activated || isSubmitting" @click.prevent="save"
@@ -74,7 +74,7 @@ const onReceiverDepotSelected = (depot: Depot)=>{
     receiverDepot.value = depot;
 }
 const activated = computed(()=>{
-    return (selectedDepot.value!=null && !emptyDepot.value  && !exceededAmount.value && amount.value > 0 && tradeableAmount.value && tradeableAmount.value.tradeable_gram_amount>0)
+    return (receiverDepot.value!=null && selectedDepot.value!=null && !emptyDepot.value  && !exceededAmount.value && amount.value > 0 && tradeableAmount.value && tradeableAmount.value.tradeable_gram_amount>0)
 })
 watch([selectedDepot], async () => {
     try{

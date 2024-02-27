@@ -40,3 +40,6 @@ export const validateIban = (iban:string)=>{
     const regex = new RegExp(/^[a-zA-Z0-9 ]+$/);
     return regex.test(iban);
 }
+export const verifyIsAccountNumber = (value:string)=>{
+    return value.toLowerCase().indexOf('gd')==0;
+}
