@@ -244,6 +244,7 @@ export default {
     delivery:'Livraison',
     receiverDepot:'Récepteur',
     orderconfirmed:'Commande confirmée',
-    backtodepot:'retour au dépôt',
+    backToDepot:'retour au dépôt',
     welcome: "Bienvenue",
+    orderdeclined:'La commande a été rejetée'
 }

@@ -289,7 +289,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "delivery": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Auslieferung"])};fn.source="Auslieferung";return fn;})(),
   "receiverDepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Senden an"])};fn.source="Senden an";return fn;})(),
   "orderconfirmed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Order confirmed"])};fn.source="Order confirmed";return fn;})(),
-  "backtodepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Back to depot"])};fn.source="Back to depot";return fn;})()
+  "backtodepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Back to depot"])};fn.source="Back to depot";return fn;})(),
+  "welcome": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Willkommen"])};fn.source="Willkommen";return fn;})(),
+  "orderdeclined": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["The order has been declined"])};fn.source="The order has been declined";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -565,7 +567,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "delivery": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Delivery"])};fn.source="Delivery";return fn;})(),
   "receiverDepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Receiver"])};fn.source="Receiver";return fn;})(),
   "orderconfirmed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Order confirmed"])};fn.source="Order confirmed";return fn;})(),
-  "backtodepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Back to depot"])};fn.source="Back to depot";return fn;})()
+  "backtodepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Back to depot"])};fn.source="Back to depot";return fn;})(),
+  "welcome": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Welcome"])};fn.source="Welcome";return fn;})(),
+  "orderdeclined": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["The order has been declined"])};fn.source="The order has been declined";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -811,7 +815,9 @@ export const resolveNuxtI18nOptions = async (context) => {
   "delivery": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Livraison"])};fn.source="Livraison";return fn;})(),
   "receiverDepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Récepteur"])};fn.source="Récepteur";return fn;})(),
   "orderconfirmed": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Commande confirmée"])};fn.source="Commande confirmée";return fn;})(),
-  "backtodepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["retour au dépôt"])};fn.source="retour au dépôt";return fn;})()
+  "backtodepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["retour au dépôt"])};fn.source="retour au dépôt";return fn;})(),
+  "welcome": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bienvenue"])};fn.source="Bienvenue";return fn;})(),
+  "orderdeclined": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["La commande a été rejetée"])};fn.source="La commande a été rejetée";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

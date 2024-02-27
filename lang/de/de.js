@@ -306,6 +306,7 @@ export default {
     delivery:'Auslieferung',
     receiverDepot:'Senden an',
     orderconfirmed:'Order confirmed',
-    backtodepot:'Back to depot',
+    backToDepot:'Back to depot',
     welcome: "Willkommen",
+    orderdeclined:'The order has been declined'
 }

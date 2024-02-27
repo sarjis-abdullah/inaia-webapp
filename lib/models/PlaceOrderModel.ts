@@ -18,5 +18,6 @@ export interface PlaceOrderModel {
     hash:string,
     extra?:any,
     type:string,
-    expires_in:number
+    expires_in:number,
+    is_approved:boolean
 }

@@ -159,7 +159,6 @@ export class Urls{
         return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&include=message_text,documents`);
     }
     public getOrderPreview():string{
-        debugger;
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/preview');
     }
     public placeOrder():string{
@@ -169,7 +168,7 @@ export class Urls{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/confirm?include=order_transactions,orders_payment_transactions');
     }
     public getPendingApprovals():string{
-        return this.buildUrl(BaseUrls.getCoreUrl(), 'pending-approvals');
+        return this.buildUrl(BaseUrls.getCoreUrl(), 'pending-approvals?show_approved=1');
     }
     public getConfirmationMethods():string{
         return this.buildUrl(BaseUrls.getCoreUrl(), 'order-approval-methods');

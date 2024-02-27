@@ -2,7 +2,7 @@
 
 <div >
    
-    <div  v-if="!confirmed && !expired">
+    <div  v-if="!confirmed && !expired && !declined">
         <img src="~/assets/img/pageicons/pinscreen.jpg" alt="personal info" class="w-32 h-auto mb-5 mx-auto"/>
         <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.mobilePin">{{ $t('confirmwithmobiletext') }}</h2>
         <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.email">{{ $t('confirmwithemailtext') }}</h2>
@@ -27,11 +27,19 @@
                     class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{
                         $t('backToDepot') }}</button>
     </div>
+    <div v-if="declined" class="flex flex-col items-center justify-items-center">
+        <img src="~/assets/img/icons/error_large.png" alt="personal info" class="w-32 h-auto mb-5 mx-auto"/>
+        <h2 class="text-center mb-8 text-xl">{{ $t("orderdeclined") }}</h2>
+        <button type="submit"  @click.prevent="goToDepot"
+                    
+                    class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{
+                        $t('backToDepot') }}</button>
+    </div>
     <div v-if="expired">
         <img src="~/assets/img/icons/error_houston.png" alt="personal info" class="w-32 h-auto mb-5 mx-auto"/>
         <h2 class="text-center mb-8 text-xl">{{ $t("orderexpired") }}</h2>
     </div>
-    <div class="mt-12" v-if="!confirmed">
+    <div class="mt-12" v-if="!confirmed && !declined">
         <p class="text-center text-gray-600">{{ $t('donthaveaccesstoconfirmationmethod') }} {{ PlaceOrderInfo?.order_approval_method.translated_name }} ? 
             <a class="text-blue-600 font-semibold underline underline-offset-2 cursor-pointer" @click="changeConfirmationMethod">{{ $t('changeconfirmationmethod') }}</a></p>
         
@@ -79,6 +87,7 @@ const emit = defineEmits<{
 const interval = ref({} as any);
 const confirmed = ref(false);
 const expired = ref(false);
+const declined = ref(false);
 const timeout = ref(null);
 const isSubmitting = ref(false);
 const submitErr = ref(null);
@@ -109,11 +118,17 @@ const setExpirationTimeOut = (placedOrder:PlaceOrderModel)=>{
         interval.value = setInterval(async ()=>{
             if(!expired.value){
                 const data = await AssetTradingService.getPendingTradings();
-                if(data.find(p=>p.approval_id == PlaceOrderInfo.value?.approval_id)){
-                    confirmed.value = false
+                let pendingOrder = data.find(p=>p.approval_id == PlaceOrderInfo.value?.approval_id);
+                if(pendingOrder){
+                    if(pendingOrder.is_approved)
+                    {
+                        confirmed.value = true;
+                        clearTimeout(timeout.value);
+                        clearInterval(interval.value);
+                    }
                 }
                 else{
-                    confirmed.value = true;
+                    declined.value = true;
                     clearTimeout(timeout.value);
                     clearInterval(interval.value);
                 }
