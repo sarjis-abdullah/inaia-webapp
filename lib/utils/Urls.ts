@@ -192,6 +192,27 @@ export class Urls{
     public updateDepotAvatar(depotId: number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/update-avatar/${depotId}`);
     }
+    public getOrderPreview():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/preview');
+    }
+    public placeOrder():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders');
+    }
+    public confirmOrder():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/confirm?include=order_transactions,orders_payment_transactions');
+    }
+    public getPendingApprovals():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), 'pending-approvals?show_approved=1');
+    }
+    public getConfirmationMethods():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), 'order-approval-methods');
+    }
+    public transferAsset():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'depots/transfer');
+    }
+    public getTradableAmount(depotId:number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/tradeable-amount?include=order_transactions,orders_payment_transactions,depot`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

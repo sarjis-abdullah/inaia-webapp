@@ -35,7 +35,7 @@ export class HttpRequester{
             throw await this.handleError(response);
         }
     }
-    public async post(url:string,headers:HttpHeader,data:Object):Promise<HttpResponse>{
+    public async post(url:string,headers:HttpHeader,data:Object):Promise<HttpResponse | any>{
         
         const response = await fetch(url,{
             method:'POST',

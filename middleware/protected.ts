@@ -7,7 +7,6 @@ export default defineNuxtRouteMiddleware((to,from)=>{
    
     let token = LoginStorage.getToken();
     if(!token){
-        console.log(to);
         return navigateTo('/login')
     }
     else{

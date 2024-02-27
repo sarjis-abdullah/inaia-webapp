@@ -36,3 +36,7 @@ export const formatTime = (date: Date) =>
 export const formatDateByMoment= (date:Date, formatType = dateFormat1)=>{
     return moment(date).format(formatType);
 }
+export const formatIban = (iban:string)=>{
+    var lastDigits  = iban.substr(iban.length - 4);
+    return "**** "+lastDigits;
+}

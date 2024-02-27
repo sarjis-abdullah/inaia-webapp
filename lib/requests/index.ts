@@ -29,6 +29,10 @@ import { SupportTicketMessageStoreRequest, SupportTicketMessageListRequest } fro
 import { SupportTicketStoreRequest } from './SupportTicketRequest';
 import { SupportTicketStatusUpdateRequest } from './SupportTicketStatusRequest';
 import { UpdateDepotRequest } from './UpdateDepotRequest';
+import { OrderPreviewRequest } from './OrderPreviewRequest';
+import { PlaceOrderRequest } from './PlaceOrderRequest';
+import { ConfirmOrderRequest } from './ConfirmOrderRequest';
+import { TransferAssetRequest } from './TransferAssetRequest';
 export { ConditionsRequest };
 export { AccountInformationRequest };
 export { AddressRequest };
@@ -59,3 +63,7 @@ export {SupportTicketStoreRequest};
 export {SupportTicketStatusUpdateRequest};
 export {SupportTicketMessageStoreRequest, SupportTicketMessageListRequest};
 export { UpdateDepotRequest };
+export {OrderPreviewRequest}
+export {PlaceOrderRequest}
+export {ConfirmOrderRequest}
+export {TransferAssetRequest}

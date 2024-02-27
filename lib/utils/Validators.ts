@@ -36,3 +36,7 @@ export const sanitizePhoneNumber = (number:string)=>{
         return number;
     }
 }
+export const validateIban = (iban:string)=>{
+    const regex = new RegExp(/^[a-zA-Z0-9 ]+$/);
+    return regex.test(iban);
+}

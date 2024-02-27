@@ -20,7 +20,7 @@ const handleError = (value)=>{
             errorText.value = t(value.err.getTranslationKey());
         }
         else
-            errorText.value = t(value.err.getTranslationKey());
+            errorText.value = t(value.err);
 }
 onMounted(()=>{
     if(props.err)
