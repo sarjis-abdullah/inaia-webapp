@@ -1,7 +1,7 @@
 <template>
    
         <div>
-            <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('asset_purchase') }}</h2>
+            <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('buy_assets') }}</h2>
             <DepotSelect @onDepotSet="onDepotSelected" :depotID="depotId"></DepotSelect>
             <h3 class="text-center mt-8 text-2xl font-bold">{{ $n(amount/100) }} {{ currency }}</h3>
             <p class="text-center mt-4 text-l text-red-400" v-show="error">{{ $t('minimumAmountRequired',{currency:currency}) }}</p>
@@ -65,7 +65,7 @@ watch([selectedDepot,amount,paymentMethod,selectedPaymentAccount],()=>{
     else{
         error.value = false;
     }
-    if(amount.value>TradingMinimumAmounts.minMoneyAmount && paymentMethod!=null && selectedDepot){
+    if(amount.value>=TradingMinimumAmounts.minMoneyAmount && paymentMethod!=null && selectedDepot.value){
         if(paymentMethod.value == PaymentMethods.bankAccount){
             if(selectedPaymentAccount){
                 activated.value = true;
@@ -127,7 +127,7 @@ onMounted(()=>{
 })
 const save = async ()=>{
     let type = OrderTypes.gold_purchase;
-    if(selectedDepot.value.depot_type?.name_translation_key == AssetTypes.silver){
+    if(selectedDepot.value.depot_type?.name_translation_key.toUpperCase() == AssetTypes.silver.toUpperCase()){
         type = OrderTypes.silver_purchase;
     }
     const request : OrderPreviewRequest = {

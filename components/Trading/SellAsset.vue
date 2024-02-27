@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('asset_sell') }}</h2>
+        <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('sell_assets') }}</h2>
         <DepotSelect @onDepotSet="onDepotSelected" :depotID="depotId"></DepotSelect>
         <h3 class="text-center mt-8 text-2xl font-bold">{{ $n(amount / 1000) }} g</h3>
         <div class="flex flex-col items-center justify-items-center mt-3">
             <div class="flex flex-row items-center justify-items-center">
             <p class="text-center text-l text-gray-700" v-if="!loadTradeableAmount && tradeableAmount!=null">{{ $t('from') }} : {{ $n(tradeableAmount.tradeable_gram_amount/1000) }} g
             </p>
-            <a class="ml-1 cursor-pointer" v-if="!loadTradeableAmount && tradeableAmount!=null && tradeableAmount.total_blocked_gram_amount > 0" @click="openTradeableDetails">
+            <a class="ml-1 cursor-pointer active:opacity-50" v-if="!loadTradeableAmount && tradeableAmount!=null && tradeableAmount.total_blocked_gram_amount > 0" @click="openTradeableDetails">
                                 <InformationCircleIcon class="w-6 text-gray-400" />
                             </a>
         </div>
@@ -164,13 +164,13 @@ onMounted(() => {
 })
 const save = async () => {
     let type = OrderTypes.gold_sell;
-    if (selectedDepot.value.depot_type?.name_translation_key == AssetTypes.silver) {
+    if (selectedDepot.value.depot_type?.name_translation_key.toUpperCase() == AssetTypes.silver.toUpperCase()) {
         type = OrderTypes.silver_sell;
     }
     const request: OrderPreviewRequest = {
         order_type: type,
         amount: amount.value,
-        unit: "EUR",
+        unit: "gram",
         depot_id: selectedDepot.value.id
     };
     try {

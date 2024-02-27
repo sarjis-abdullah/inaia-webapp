@@ -7,7 +7,7 @@
             <div class="flex flex-row items-center justify-items-center">
             <p class="text-center text-l text-gray-700" v-if="!loadTradeableAmount && tradeableAmount!=null">{{ $t('from') }} : {{ $n(tradeableAmount.tradeable_gram_amount/1000) }} g
             </p>
-            <a class="ml-1 cursor-pointer" v-if="!loadTradeableAmount && tradeableAmount!=null && tradeableAmount.total_blocked_gram_amount > 0" @click="openTradeableDetails">
+            <a class="ml-1 cursor-pointer active:opacity-50" v-if="!loadTradeableAmount && tradeableAmount!=null && tradeableAmount.total_blocked_gram_amount > 0" @click="openTradeableDetails">
                                 <InformationCircleIcon class="w-6 text-gray-400" />
                             </a>
         </div>
@@ -211,7 +211,7 @@ const save = async () => {
     const request: OrderPreviewRequest = {
         order_type: type,
         amount: amount.value,
-        unit: "EUR",
+        unit: "gram",
         depot_id: selectedDepot.value.id
     };
     try {

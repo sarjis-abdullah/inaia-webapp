@@ -10,7 +10,7 @@
             <ListItem :title="$t('execution')">{{ $t('asSoonAsPossible') }}</ListItem>
             <div class="px-0 py-2 flex">
                 <div class="px-0 flex justify-center font-semibold">
-                    {{ $t('course') }} <VTooltip :triggers="['click']" :placements="'top-start'" class="ml-2">
+                    {{ $t('course') }} <VTooltip :triggers="['click']" :placements="'top-start'" class="ml-2 cursor-pointer active:opacity-50">
                         <a>
                             <InformationCircleIcon class="w-6 text-gray-400" />
                         </a>
@@ -21,7 +21,7 @@
                     </VTooltip>
                 </div>
                 <div class="px-0 text-sm text-right justify-center flex-1">
-                    {{ $n(orderPreview?.gram_price_trading) }} {{ currency }}
+                    {{ $n(orderPreview?.gram_price_trading/100) }} {{ currency }}
                 </div>
             </div>
             

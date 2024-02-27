@@ -9,6 +9,7 @@ export class AssetTradingService{
     private static requester = HttpRequester.httpRequester();
     private static headers = new HttpHeader();
     public static async getOrderPreview(request:OrderPreviewRequest):Promise<OrderPreview>{
+        debugger;
         const url = this.links.getOrderPreview();
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);

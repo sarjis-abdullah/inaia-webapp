@@ -1,20 +1,20 @@
 <template>
     <div v-if="tradeableInfo">
         <h2 class="text-center mt-3 text-2xl font-bold">{{ $t('blockedAmountdetails') }}</h2>
-        <p class="text-center mt-8 mb-8 text-gray-900">{{ $t('blockedAmountExplanation',{amount:$n(tradeableInfo?.total_blocked_gram_amount/1000)}) }}</p>
+        <p class="text-center mt-8 mb-8 text-gray-900">{{ $t('blockedAmountExplanation',{blockedAmount:$n(tradeableInfo?.total_blocked_gram_amount/1000).toString()}) }}</p>
         <div class="divide-y">
             <ListItem :title="$t('blockedAmount')">{{ $n(tradeableInfo?.total_blocked_gram_amount/1000) }} g</ListItem>
             <ListItem :title="$t('tradeableAmount')">{{ $n(tradeableInfo?.tradeable_gram_amount/1000) }} g</ListItem>
         </div>
-        <h2 class="mt-8 font-semibold">{{ $t('blockedAmountdetails') }}</h2>
+        <h2 class="mt-8 font-semibold">{{ $t('blockedAmountdetails',) }}</h2>
         <div class="divide-y w-full">
-            <div v-for="order in tradeableInfo.blocked_orders" :key="order.id" class="flex flex-row py-4 w-full">
-                <img :src="order?.logo" class="w-12 h-auto" />
+            <div v-for="order in tradeableInfo.blocked_orders" :key="order.id" class="flex flex-row py-4 w-full items-center">
+                <img :src="order?.logo" class="w-12 h-12 h-auto" />
                 <div class="ml-3">
                     <div class="font-semibold">{{ $t(order.order_type.name_translation_key) }}</div>
                     <div class="flex flex-row">
                         <div class="text-gray-400">{{ $d(getExecutionDate(order)) }}</div>
-                        <VTooltip :triggers="['click']" :placements="'top-start'" class="ml-2">
+                        <VTooltip :triggers="['click']" :placements="'top-start'" class="ml-2 cursor-pointer active:opacity-50">
                             <a>
                                 <InformationCircleIcon class="w-6 text-gray-400" />
                             </a>

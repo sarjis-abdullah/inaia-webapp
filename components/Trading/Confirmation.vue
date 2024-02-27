@@ -115,6 +115,7 @@ const setExpirationTimeOut = (placedOrder:PlaceOrderModel)=>{
                 else{
                     confirmed.value = true;
                     clearTimeout(timeout.value);
+                    clearInterval(interval.value);
                 }
             }
             else{
@@ -181,6 +182,10 @@ onMounted(async()=>{
     if(props.placedOrder)
         PlaceOrderInfo.value = props.placedOrder;
     setExpirationTimeOut(props.placedOrder)
+})
+onUnmounted(()=>{
+    clearTimeout(timeout.value);
+    clearInterval(interval.value);
 })
 </script>
 

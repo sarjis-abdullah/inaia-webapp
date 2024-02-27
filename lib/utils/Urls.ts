@@ -159,6 +159,7 @@ export class Urls{
         return this.buildUrl(BaseUrls.getCoreUrl(), `inbox-message/${messageId}?account_id=${account_id}&include=message_text,documents`);
     }
     public getOrderPreview():string{
+        debugger;
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/preview');
     }
     public placeOrder():string{

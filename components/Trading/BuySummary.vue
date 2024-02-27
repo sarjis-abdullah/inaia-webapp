@@ -11,7 +11,7 @@
                 <ListItem :title="$t('execution')">{{ $t('asSoonAsPossible') }}</ListItem>
                 <div class="px-0 py-2 flex">
                     <div class="px-0 flex justify-center font-semibold">
-                        {{ $t('course') }} <VTooltip :triggers="['click']" :placements="'top-start'" class="ml-2">
+                        {{ $t('course') }} <VTooltip :triggers="['click']" :placements="'top-start'" class="ml-2 cursor-pointer active:opacity-50">
                             <a>
                                 <InformationCircleIcon class="w-6 text-gray-400" />
                             </a>
@@ -22,7 +22,7 @@
                         </VTooltip>
                     </div>
                     <div class="px-0 text-sm text-right justify-center flex-1">
-                        {{ $n(orderPreview?.gram_price_trading) }} {{ currency }}
+                        {{ $n(orderPreview?.gram_price_trading/100) }} {{ currency }}
                     </div>
                 </div>
                 <ListItem :title="$t('paymentMethod')">{{ payment }}</ListItem>
@@ -152,8 +152,11 @@ const execute = async ()=>{
 }
 const conditions = computed(()=>{
     if(props.orderPreview){
-        if(props.type == TransactionTypes.purchase && props.depot?.depot_type?.name_translation_key.toLocaleUpperCase() == AssetTypes.gold.toLocaleUpperCase() ){
+        if(props.depot?.depot_type?.name_translation_key.toLocaleUpperCase() == AssetTypes.gold.toLocaleUpperCase() ){
             return props.orderPreview.conditions.gold_one_time
+        }
+        else{
+            return props.orderPreview.conditions.silver_one_time
         }
     }
     return []
