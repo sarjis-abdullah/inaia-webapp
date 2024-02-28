@@ -203,7 +203,7 @@ export default {
     set_the_name:'Name of the depot',
     savings_plan_contract:'Set the saving plan contract',
     savings_plan_summary:'Confirm saving plan contract',
-    new_depot:'New depot',
+    new_depot:'Create new depot',
     new_gold_depot:'New gold depot',
     new_silver_depot:'New silver depot',
     start:'Start',
@@ -400,6 +400,10 @@ export default {
     birthplace:'Geburtsort',
     go_to_login:"Go to login",
     or:"Or",
-    you_have_no_message_yet: "Sie haben noch keine Nachricht.",
-    you_have_no_support_ticket_yet: "Sie haben noch kein Support-Ticket."
+    you_have_no_message_yet: "Du hast noch keine Nachrichten in deiner Inbox.",
+    you_have_no_support_ticket_yet: "Sie haben noch kein Support-Ticket.",
+    inboxMessages:'Inbox (virtuelles Postfach)',
+    supportTickets:'Support-Tickets',
+    inaiaSupport:'INAIA Kundenservice',
+    
 }

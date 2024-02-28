@@ -30,7 +30,7 @@
                         </div>
                         <div class="ml-4 flex-shrink-0">
                             <a :href="doc.document.link" target="_blank"
-                                class="font-medium text-indigo-600 hover:text-indigo-500">
+                                class="font-medium text-blue-600 hover:text-blue-500">
                                 <EyeIcon class="h-5 w-5" />
                             </a>
                         </div>

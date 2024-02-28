@@ -177,7 +177,7 @@ export default {
     set_the_name:'Depot name',
     savings_plan_contract:'Set the saving plan contract',
     savings_plan_summary:'Confirm saving plan contract',
-    new_depot:'New depot',
+    new_depot:'Create new depot',
     new_gold_depot:'New gold depot',
     new_silver_depot:'New silver depot',
     start:'Start',
@@ -365,7 +365,7 @@ export default {
     please_verify_account_to_create_depot:'Please finish your identity check in order to start creating depots',
     create_new_depot:"Currently you have no depots, please create new silver or gold depot to start.",
     you_have_no_transactions:'You have no transactions',
-    you_have_no_message_yet:'You have no message yet.',
+    you_have_no_message_yet:'You currently have no messages in your inbox.',
     you_have_no_support_ticket_yet:'You have no support ticket yet.',
     personalInformation:"Personal information",
     gender:"Gender",
@@ -373,5 +373,8 @@ export default {
     nationality:'Nationality',
     birthplace:'Birthplace',
     go_to_login:"Go to login",
-    or:"Or"
+    or:"Or",
+    inboxMessages:'Inbox messages',
+    supportTickets:'Support tickets',
+    inaiaSupport:'INAIA Support',
 }

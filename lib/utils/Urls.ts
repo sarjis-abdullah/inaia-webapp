@@ -199,7 +199,7 @@ export class Urls{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders');
     }
     public confirmOrder():string{
-        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/confirm?include=order_transactions,orders_payment_transactions');
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'orders/confirm');
     }
     public getPendingApprovals():string{
         return this.buildUrl(BaseUrls.getCoreUrl(), 'pending-approvals?show_approved=1');

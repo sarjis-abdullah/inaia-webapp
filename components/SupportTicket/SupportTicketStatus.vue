@@ -1,14 +1,14 @@
 <template>
-    <div class="bg-[#1aae6f]" :class="statusClass" v-if="status == SupportTicketStatusList.new">
+    <div class="bg-green-200 text-green-700 ring-green-600/20" :class="statusClass" v-if="status == SupportTicketStatusList.new">
         <slot></slot>
     </div>
-    <div class="bg-red-500" :class="statusClass" v-else-if="status == SupportTicketStatusList.closed">
+    <div class="bg-red-200 text-red-700 ring-red-600/20" :class="statusClass" v-else-if="status == SupportTicketStatusList.closed">
         <slot></slot>
     </div>
-    <div class="bg-blue-500" :class="statusClass" v-else-if="status == SupportTicketStatusList.open || status == SupportTicketStatusList.has_new_answer">
+    <div class="bg-blue-200 text-blue-700 ring-blue-600/20" :class="statusClass" v-else-if="status == SupportTicketStatusList.open || status == SupportTicketStatusList.has_new_answer">
         <slot></slot>
     </div>
-    <div class="bg-[#1aae6f]" :class="statusClass" v-else-if="status == SupportTicketStatusList.has_new_message">
+    <div class="bg-green-200 text-green-700 ring-green-600/20" :class="statusClass" v-else-if="status == SupportTicketStatusList.has_new_message">
         <slot></slot>
     </div>
     <div class="default" :class="statusClass" v-else>
@@ -24,5 +24,5 @@ defineProps({
         required: true
     }
 })
-const statusClass = "text-white py-1 px-2 rounded-md text-xs"
+const statusClass = 'inline-flex items-center rounded-md  px-2 py-1 text-xs font-medium  ring-1 ring-inset '
 </script>

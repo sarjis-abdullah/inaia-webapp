@@ -147,7 +147,7 @@ export default {
     set_the_name:'Nom de dépôt',
     savings_plan_contract:"Définir le contrat de plan d'épargne",
     savings_plan_summary:"Confirmer le contrat de plan d'épargne",
-    new_depot:'Nouveau depôt',
+    new_depot:'Créer un nouveau depôt',
     new_gold_depot:"Nouveau depôt d'or",
     new_silver_depot:"Nouveau depôt d'argent",
     start:'Start',
@@ -339,6 +339,9 @@ export default {
     birthplace:'Lieu de naissance',
     go_to_login:"Connectez-vous ici",
     or:"Ou bien",
-    you_have_no_message_yet: "Vous n'avez pas encore de message.",
-    you_have_no_support_ticket_yet: "Vous n'avez pas encore de ticket de support."
+    you_have_no_message_yet: "Vous n’avez actuellement aucun message dans votre boîte de réception.",
+    you_have_no_support_ticket_yet: "Vous n'avez pas encore de ticket de support.",
+    inboxMessages:'Boîte de réception',
+    supportTickets:'Tickets de support',
+    inaiaSupport:'Service client INAIA',
 }

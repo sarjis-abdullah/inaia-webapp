@@ -8,11 +8,12 @@
             <div class="flex flex-column mb-3">
                 <div class="text-gray-900   text-xl flex-1">{{ $t('depots') }}</div>
                 <div class="inline-flex rounded-md shadow-sm">
-    <button  v-if="isVerified" type="button" class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">{{ $t('new_depot') }}</button>
+    
     <Menu as="div" class="relative -ml-px block" v-if="isVerified">
-      <MenuButton class="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+      <MenuButton class="relative inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-white ring-1 ring-inset ring-blue-600 hover:bg-blue-600 focus:z-10">
         <span class="sr-only">Open options</span>
-        <ChevronDownIcon class="h-5 w-5" aria-hidden="true" />
+        <span>{{ $t('new_depot') }}</span>
+        <ChevronDownIcon class="h-5 w-5 text-white" aria-hidden="true" />
       </MenuButton>
       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
         <MenuItems class="absolute right-0 z-10 -mr-1 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -89,7 +90,11 @@
             </div>
             <div v-if="!loadingError && !isLoading && depots.length==0" class="text-center py-10">
               <p class="text-xl text-gray-400" v-if="!isVerified">{{ $t('please_verify_account_to_create_depot') }}</p>
-              <p class="text-xl text-gray-400" v-else>{{ $t('create_new_depot') }}</p>
+              <div v-else>
+                <p class="text-xl text-gray-400">{{ $t('create_new_depot') }}</p>
+
+  </div>
+              
             </div>
           </div>
         </div>

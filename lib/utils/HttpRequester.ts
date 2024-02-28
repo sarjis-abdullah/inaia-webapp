@@ -87,8 +87,11 @@ export class HttpRequester{
         let error = "";
         try{
             let errorJson = await response.json();
+      
             if(errorJson.errors && errorJson.errors.message)
                 error = errorJson.errors.message;
+            else if(errorJson.data && errorJson.data.message)
+                error = errorJson.data.message;
             else
                 error = errorJson.message;
         }

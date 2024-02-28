@@ -1,13 +1,5 @@
 <template>
-    <ul role="list" class="border-t border-r border-l rounded-tl-md border-gray-200" :class="!hasTickets && !ticketLoading && noSupportTickets ? 'border-b' : ''">
-        <li class="p-4 cursor-pointer">
-            <button v-if="!createTicketProcessing" @click="openCreateTicketModal = !openCreateTicketModal"
-                class="flex justify-end gap-2 bg-[#0074d9] text-white px-2 py-2 rounded-md">
-                {{ $t('create_ticket') }}
-            </button>
-            <Loading v-else></Loading>
-        </li>
-    </ul>
+   
 
     <ul v-if="hasTickets && !ticketLoading" role="list"
         class="divide-y divide-gray-200 rounded-b-md border border-gray-200 max-h-[70vh] overflow-y-auto">
@@ -25,6 +17,15 @@
     <ul v-else-if="ticketLoading" role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
         <li>
             <ListSkeleton />
+        </li>
+    </ul>
+    <ul role="list" class="border-b  border-gray-200" :class="!hasTickets && !ticketLoading && noSupportTickets ? 'border-b' : ''">
+        <li class="py-4 px-8 cursor-pointer">
+            <button v-if="!createTicketProcessing" @click="openCreateTicketModal = !openCreateTicketModal"
+                class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                {{ $t('create_ticket') }}
+            </button>
+            <Loading v-else></Loading>
         </li>
     </ul>
     <p v-if="!hasTickets && !ticketLoading && noSupportTickets" class="flex items-center min-h-[70vh] mt-2 text-sm">{{ $t('you_have_no_support_ticket_yet') }}</p>

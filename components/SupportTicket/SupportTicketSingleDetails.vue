@@ -1,15 +1,10 @@
 <template>
     <section v-if="thisTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4">
         <section class="flex justify-between">
+            
             <section>
-                <div>
-                    {{ $t('client') }}
-                </div>
-                <div>{{ formattedTicket?.name }}</div>
-            </section>
-            <section>
-                <div>{{ thisTicket.subject }}</div>
-                <div>{{ formatDateByMoment(thisTicket.created_at, dateFormat2) }}</div>
+                <div class="font-semibold text-gray-900">{{ thisTicket.subject }}</div>
+                <div class="text-xs text-gray-500">{{ formatDateByMoment(thisTicket.created_at, dateFormat2) }}</div>
             </section>
             <section class="flex items-center gap-1">
                 <div>
@@ -117,9 +112,9 @@
             v-model="messageText"></textarea>
         <div class="flex justify-end">
             <button v-if="!messageLoading" :disabled="messageLoading || !messageText" type="button"
-                class="flex justify-end gap-2 mt-2 bg-[#0074d9] text-white px-2 py-2 rounded-md" @click="sendMessage">
+                class="flex w-fitl justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" @click="sendMessage">
                 {{ $t('send_message') }}
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <title>send</title>
                     <path fill="white" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
                 </svg>

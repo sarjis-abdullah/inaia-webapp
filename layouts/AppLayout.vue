@@ -76,7 +76,7 @@
           <div class="hidden md:flex items-center">
             <div class="hover:bg-blue-500 hover:bg-opacity-75 relative rounded-full bg-blue-700 p-2 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 cursor-pointer">
                 <span v-if="newInboxMessageCount"
-                  class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                  class="absolute top-[-4px] right-[-2px] h-4 w-4 text-[10px] text-blue-700 text-center rounded-full bg-white ">
                   {{ newInboxMessageCount }}
                 </span>
                 <span class="sr-only">View Inbox Messages</span>
@@ -84,7 +84,7 @@
                 <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
               </div>
               <div @click="gotoSupport" class="hover:bg-blue-500 hover:bg-opacity-75 cursor-pointer relative rounded-full bg-blue-700 p-2 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
-                  <span v-if="newSupportTicketAnswerCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                  <span v-if="newSupportTicketAnswerCount" class="absolute top-[-10px] right-[-2px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white ">
                     {{ newSupportTicketAnswerCount }}
                   </span>
                   <span class="sr-only">View Support Messages</span>
@@ -147,7 +147,7 @@
               class="relative ml-auto flex-shrink-0 rounded-full bg-blue-600 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
               <span class="sr-only">View Inbox Messages</span>
               <span v-if="newInboxMessageCount"
-                class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
+                class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white text-center">
                 {{ newInboxMessageCount }}
               </span>
               <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />

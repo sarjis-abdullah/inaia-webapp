@@ -65,7 +65,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Mobilnummer erfolgreich bestätigt."])};fn.source="Mobilnummer erfolgreich bestätigt.";return fn;})(),
   "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Weiter"])};fn.source="Weiter";return fn;})(),
   "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Anmelden"])};fn.source="Anmelden";return fn;})(),
-  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["oder"])};fn.source="oder";return fn;})(),
+  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Or"])};fn.source="Or";return fn;})(),
   "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["E-Mail Addresse"])};fn.source="E-Mail Addresse";return fn;})(),
   "rememberMe": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Remember me"])};fn.source="Remember me";return fn;})(),
   "forGotPassword": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgot your password?"])};fn.source="Forgot your password?";return fn;})(),
@@ -381,6 +381,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsdatum"])};fn.source="Geburtsdatum";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Staatsangehörigkeit"])};fn.source="Staatsangehörigkeit";return fn;})(),
   "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsort"])};fn.source="Geburtsort";return fn;})(),
+  "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to login"])};fn.source="Go to login";return fn;})(),
   "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sie haben noch keine Nachricht."])};fn.source="Sie haben noch keine Nachricht.";return fn;})(),
   "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sie haben noch kein Support-Ticket."])};fn.source="Sie haben noch kein Support-Ticket.";return fn;})()
 },"en":{
@@ -434,7 +435,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Phone number verified"])};fn.source="Phone number verified";return fn;})(),
   "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Next"])};fn.source="Next";return fn;})(),
   "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sign in"])};fn.source="Sign in";return fn;})(),
-  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["or"])};fn.source="or";return fn;})(),
+  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Or"])};fn.source="Or";return fn;})(),
   "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Email address"])};fn.source="Email address";return fn;})(),
   "rememberMe": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Remember me"])};fn.source="Remember me";return fn;})(),
   "forGotPassword": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Forgot your password?"])};fn.source="Forgot your password?";return fn;})(),
@@ -752,7 +753,8 @@ export const resolveNuxtI18nOptions = async (context) => {
   "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gender"])};fn.source="Gender";return fn;})(),
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthday"])};fn.source="Birthday";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationality"])};fn.source="Nationality";return fn;})(),
-  "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthplace"])};fn.source="Birthplace";return fn;})()
+  "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthplace"])};fn.source="Birthplace";return fn;})(),
+  "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to login"])};fn.source="Go to login";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -804,7 +806,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "phone_number_verified": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Numéro de téléphone portable vérifié avec succès."])};fn.source="Numéro de téléphone portable vérifié avec succès.";return fn;})(),
   "next": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Suivant"])};fn.source="Suivant";return fn;})(),
   "signin": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Se connecter"])};fn.source="Se connecter";return fn;})(),
-  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ou"])};fn.source="ou";return fn;})(),
+  "or": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Ou bien"])};fn.source="Ou bien";return fn;})(),
   "emailAddress": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Adresse e-mail"])};fn.source="Adresse e-mail";return fn;})(),
   "choose_country": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez votre pays de résidence"])};fn.source="Choisissez votre pays de résidence";return fn;})(),
   "line1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Rue et numéro"])};fn.source="Rue et numéro";return fn;})(),
@@ -1091,6 +1093,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de naissance"])};fn.source="Date de naissance";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationalité"])};fn.source="Nationalité";return fn;})(),
   "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lieu de naissance"])};fn.source="Lieu de naissance";return fn;})(),
+  "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Connectez-vous ici"])};fn.source="Connectez-vous ici";return fn;})(),
   "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez pas encore de message."])};fn.source="Vous n'avez pas encore de message.";return fn;})(),
   "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez pas encore de ticket de support."])};fn.source="Vous n'avez pas encore de ticket de support.";return fn;})()
 },}),})

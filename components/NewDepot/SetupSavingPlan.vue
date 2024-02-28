@@ -1,5 +1,5 @@
 <template>
-    <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
+    <div class="sm:mx-auto sm:w-full sm:max-w-2xl min-w-fit">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('calculateTrustData') }}</h2>
             <h2 class="text-center mb-8  text-xl font-bold">{{ $n(totalReturns) }} {{ currency }}</h2>
@@ -321,37 +321,37 @@
                       >{{ $t('confirm') }}</button>
                 </div>
     </div>
-    <Modal :open="showPaymentTable" @onClose="closePaymentTable">
-        <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
-        <div class="text-center my-6 text-2xl font-semibold">{{ $t('paymentPlan') }}</div>
-        <div class="grid grid-cols-4 gap-2 py-2 px-2 bg-gray-50 text-center">
-            <div>{{ $t('month') }}</div>
-            <div>{{ $t('deposit') }}</div>
-            <div>{{ $t('agio') }}</div>
-            <div>{{ $t('buy_assets') }}</div>
-        </div>
-        <div class="grid grid-cols-4 gap-2 py-2 px-2" v-for="paymentData in paymentTableData" :key="paymentData.month">
-            <div>{{ paymentData.month }}</div>
-            <div>{{ $n(paymentData.saving) }} {{ currency }}</div>
-            <div>{{ $n(paymentData.agio) }} {{ currency }}</div>
-            <div>{{ $n(paymentData.assetPurchase) }} {{ currency }}</div>
-        </div>
-        <div class="grid grid-cols-4 gap-2 py-2 px-2 mt-3 bg-gray-50 text-center">
-            <div>
+    <Modal :open="showPaymentTable" @onClose="closePaymentTable" :minWidth="'min-w-fit'" >
+            <div class="sm:mx-auto sm:w-full sm:max-w-2xl min-w-fit" >
+            <div class="text-center my-6 text-2xl font-semibold">{{ $t('paymentPlan') }}</div>
+            <div class="grid grid-cols-4 gap-2 py-2 px-2 bg-gray-50 text-center">
+                <div>{{ $t('month') }}</div>
+                <div>{{ $t('deposit') }}</div>
+                <div>{{ $t('agio') }}</div>
+                <div>{{ $t('buy_assets') }}</div>
+            </div>
+            <div class="grid grid-cols-4 gap-2 py-2 px-2" v-for="paymentData in paymentTableData" :key="paymentData.month">
+                <div>{{ paymentData.month }}</div>
+                <div>{{ $n(paymentData.saving) }} {{ currency }}</div>
+                <div>{{ $n(paymentData.agio) }} {{ currency }}</div>
+                <div>{{ $n(paymentData.assetPurchase) }} {{ currency }}</div>
+            </div>
+            <div class="grid grid-cols-4 gap-2 py-2 px-2 mt-3 bg-gray-50 text-center">
+                <div>
 
-            </div>
-            <div>
+                </div>
+                <div>
 
-            </div>
-            <div>
-             {{ $t('total_agio') }}
-            </div>
-            <div>
-             {{ $n(totalAgio) }} {{ currency }}
+                </div>
+                <div>
+                 {{ $t('total_agio') }}
+                </div>
+                <div>
+                 {{ $n(totalAgio) }} {{ currency }}
+                </div>
             </div>
         </div>
-    </div>
-    </Modal>
+        </Modal>
 
 </div></template>
 <script lang="ts" setup>
