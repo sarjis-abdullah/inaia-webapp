@@ -63,7 +63,7 @@ try{
 }
 catch(err){
     isError.value = true;
-    errorkey = err.getTranslationKey();
+    errorkey.value = err.getTranslationKey();
 }
 finally{
     isLoading.value = false;
