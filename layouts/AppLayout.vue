@@ -73,10 +73,8 @@
               </div>
             </div>
           </div>
-          <div class="hidden md:block">
-            <div class="ml-4 flex items-center md:ml-6">
-              <button type="button"
-                class="relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+          <div class="hidden md:flex items-center">
+            <div class="hover:bg-blue-500 hover:bg-opacity-75 relative rounded-full bg-blue-700 p-2 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 cursor-pointer">
                 <span v-if="newInboxMessageCount"
                   class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
                   {{ newInboxMessageCount }}
@@ -84,21 +82,20 @@
                 <span class="sr-only">View Inbox Messages</span>
 
                 <InboxIcon @click="gotoInboxMessage" class="h-6 w-6" aria-hidden="true" />
-              </button>
-              <button type="button" @click="gotoSupport" class="cursor-pointer relative rounded-full bg-blue-700 p-1 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+              </div>
+              <div @click="gotoSupport" class="hover:bg-blue-500 hover:bg-opacity-75 cursor-pointer relative rounded-full bg-blue-700 p-2 text-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
                   <span v-if="newSupportTicketAnswerCount" class="absolute top-[-10px] right-[-4px] h-4 w-4 text-[10px] text-blue-700 rounded-full bg-white p-[2px]">
                     {{ newSupportTicketAnswerCount }}
                   </span>
                   <span class="sr-only">View Support Messages</span>
-                  
-                  <svg fill="white" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>headphones</title><path d="M12,1C7,1 3,5 3,10V17A3,3 0 0,0 6,20H9V12H5V10A7,7 0 0,1 12,3A7,7 0 0,1 19,10V12H15V20H18A3,3 0 0,0 21,17V10C21,5 16.97,1 12,1Z" /></svg>
-                </button>
-            </div>
-            <div class="mt-3 space-y-1 px-2">
-              <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" @click.prevent="item.action" class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75 cursor-pointer">
+                    <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 13.973V10.7297C20 9.452 19.7483 8.18679 19.2594 7.00632C18.7704 5.82586 18.0537 4.75326 17.1502 3.84977C16.2467 2.94628 15.1741 2.2296 13.9937 1.74063C12.8132 1.25167 11.548 1 10.2703 1C8.99253 1 7.72732 1.25167 6.54685 1.74063C5.36639 2.2296 4.29379 2.94628 3.3903 3.84977C2.48681 4.75326 1.77012 5.82586 1.28116 7.00632C0.792194 8.18679 0.540527 9.452 0.540527 10.7297V13.973" stroke="#D3E4FF" stroke-linecap="round"/>
+                    <path d="M0.540541 13.9732V13.4326H0V13.9732H0.540541ZM0.540541 14.5137H3.78378V13.4326H0.540541V14.5137ZM4.32432 15.0542V18.2975H5.40541V15.0542H4.32432ZM1.08108 18.2975V13.9732H0V18.2975H1.08108ZM2.7027 19.9191C2.27262 19.9191 1.86016 19.7483 1.55604 19.4441C1.25193 19.14 1.08108 18.7276 1.08108 18.2975H0C0 19.0143 0.284748 19.7017 0.791603 20.2086C1.29846 20.7154 1.9859 21.0002 2.7027 21.0002V19.9191ZM4.32432 18.2975C4.32432 18.7276 4.15348 19.14 3.84936 19.4441C3.54525 19.7483 3.13278 19.9191 2.7027 19.9191V21.0002C3.4195 21.0002 4.10695 20.7154 4.6138 20.2086C5.12066 19.7017 5.40541 19.0143 5.40541 18.2975H4.32432ZM3.78378 14.5137C3.92714 14.5137 4.06463 14.5706 4.166 14.672C4.26737 14.7734 4.32432 14.9109 4.32432 15.0542H5.40541C5.40541 14.6242 5.23456 14.2117 4.93044 13.9076C4.62633 13.6035 4.21386 13.4326 3.78378 13.4326V14.5137ZM20 13.9732H20.5405V13.4326H20V13.9732ZM16.7568 14.5137H20V13.4326H16.7568V14.5137ZM19.4595 13.9732V18.2975H20.5405V13.9732H19.4595ZM16.2162 18.2975V15.0542H15.1351V18.2975H16.2162ZM17.8378 19.9191C17.4078 19.9191 16.9953 19.7483 16.6912 19.4441C16.3871 19.14 16.2162 18.7276 16.2162 18.2975H15.1351C15.1351 19.0143 15.4199 19.7017 15.9267 20.2086C16.4336 20.7154 17.121 21.0002 17.8378 21.0002V19.9191ZM19.4595 18.2975C19.4595 18.7276 19.2886 19.14 18.9845 19.4441C18.6804 19.7483 18.2679 19.9191 17.8378 19.9191V21.0002C18.5546 21.0002 19.2421 20.7154 19.7489 20.2086C20.2558 19.7017 20.5405 19.0143 20.5405 18.2975H19.4595ZM16.7568 13.4326C16.3267 13.4326 15.9142 13.6035 15.6101 13.9076C15.306 14.2117 15.1351 14.6242 15.1351 15.0542H16.2162C16.2162 14.9109 16.2732 14.7734 16.3745 14.672C16.4759 14.5706 16.6134 14.5137 16.7568 14.5137V13.4326Z" fill="#D3E4FF"/>
+                  </svg>
+                </div>
+                <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" @click.prevent="item.action" class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-500 hover:bg-opacity-75 cursor-pointer">
                 {{ item.name }}
               </DisclosureButton>
-            </div>
           </div>
           <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
