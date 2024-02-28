@@ -87,7 +87,7 @@
             <div v-if="loadingError && !isLoading">
              <ListLoadingError :message="'cant_load_depot_list'"/>
             </div>
-            <div v-if="depots.length==0" class="text-center py-10">
+            <div v-if="!loadingError && !isLoading && depots.length==0" class="text-center py-10">
               <p class="text-xl text-gray-400" v-if="!isVerified">{{ $t('please_verify_account_to_create_depot') }}</p>
               <p class="text-xl text-gray-400" v-else>{{ $t('create_new_depot') }}</p>
             </div>

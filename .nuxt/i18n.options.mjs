@@ -380,7 +380,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Anrede"])};fn.source="Anrede";return fn;})(),
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsdatum"])};fn.source="Geburtsdatum";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Staatsangehörigkeit"])};fn.source="Staatsangehörigkeit";return fn;})(),
-  "birthPlace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsort"])};fn.source="Geburtsort";return fn;})()
+  "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsort"])};fn.source="Geburtsort";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -748,7 +748,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gender"])};fn.source="Gender";return fn;})(),
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthday"])};fn.source="Birthday";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationality"])};fn.source="Nationality";return fn;})(),
-  "birthPlace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthplace"])};fn.source="Birthplace";return fn;})()
+  "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthplace"])};fn.source="Birthplace";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -1086,7 +1086,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sexe"])};fn.source="Sexe";return fn;})(),
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de naissance"])};fn.source="Date de naissance";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationalité"])};fn.source="Nationalité";return fn;})(),
-  "birthPlace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lieu de naissance"])};fn.source="Lieu de naissance";return fn;})()
+  "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lieu de naissance"])};fn.source="Lieu de naissance";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]
