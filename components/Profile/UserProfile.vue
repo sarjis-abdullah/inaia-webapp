@@ -51,6 +51,7 @@ const updateProfileInformation = async (e: Event) => {
 
 const handleOnSelectAvatar = (base_64_url: string)=> {
     photoPreview.value = base_64_url
+    newAvatarCreated.value = false
 }
 
 onMounted(() => {
@@ -64,12 +65,14 @@ onMounted(() => {
             <SelectAvatar iconClass="top-4" className="w-32 h-32 mx-auto" v-if="account?.avatar || defaultAvatar" :avatarUrl="defaultAvatar" @onSelectAvatar="handleOnSelectAvatar"/>
             <Loading v-else className="rounded-full w-32 h-32 mx-auto !block" :width="128" :height="128"/>
 
-            <div class="ml-4 mt-2" v-if="loading">
+            <div class="flex justify-center ml-4 mt-2" v-if="loading">
                 <Loading/>
             </div>
-            <button v-else-if="!loading && !newAvatarCreated" type="submit" v-show="photoPreview"  class="font-semibold text-blue-600 hover:text-blue-500 mt-2 ml-3">{{
-                $t('update') }}
-            </button>
+            <div v-else-if="!loading && !newAvatarCreated" class="flex justify-center">
+                <button type="submit" v-show="photoPreview" class="font-semibold text-blue-600 hover:text-blue-500 mt-2 ml-3">{{
+                    $t('update') }}
+                </button>
+            </div>
         </div>
     </form>
     <InLineApiError :err="submitErr"/>
