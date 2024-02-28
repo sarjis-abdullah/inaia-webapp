@@ -1,6 +1,6 @@
 <template>
     <ul v-if="hasMessages && !messageLoading" role="list"
-        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-[70vh] overflow-y-auto">
+        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-[83vh] overflow-y-auto">
         <li v-for="(message, index) in messages" :key="index" @click="setSelectedMessage(message)"
             :class="`${selectedMessage.id == message.id ? 'bg-blue-100' : ''}`"
             class="flex justify-between py-4 pl-4 pr-5 text-sm leading-6 cursor-pointer">
@@ -57,7 +57,7 @@ const selectedMessage = ref({})
 const messageLoading = ref(false);
 //pagination data variables
 const page = ref(1);
-const perPage = ref(10);
+const perPage = ref(7);
 const loadMore = ref(false);
 const moreToCome = ref(true);
 const errorText = ref("");
