@@ -36,7 +36,7 @@
                       </div>
                       </NuxtLink>
                       <NuxtLink :to="'/'+lang+'/trading/transfer'" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
-                      <img src="./../assets/img/icons/gold_sel.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
+                      <img src="./../assets/img/icons/gold_sell.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
                       <div class="text-left">
                         <div>{{ $t('asset_transfer') }}</div>
                         
