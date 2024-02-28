@@ -202,7 +202,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "set_the_name": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Name of the depot"])};fn.source="Name of the depot";return fn;})(),
   "savings_plan_contract": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Set the saving plan contract"])};fn.source="Set the saving plan contract";return fn;})(),
   "savings_plan_summary": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm saving plan contract"])};fn.source="Confirm saving plan contract";return fn;})(),
-  "new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New depot"])};fn.source="New depot";return fn;})(),
+  "new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create new depot"])};fn.source="Create new depot";return fn;})(),
   "new_gold_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New gold depot"])};fn.source="New gold depot";return fn;})(),
   "new_silver_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New silver depot"])};fn.source="New silver depot";return fn;})(),
   "start": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Start"])};fn.source="Start";return fn;})(),
@@ -382,8 +382,11 @@ export const resolveNuxtI18nOptions = async (context) => {
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Staatsangehörigkeit"])};fn.source="Staatsangehörigkeit";return fn;})(),
   "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsort"])};fn.source="Geburtsort";return fn;})(),
   "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to login"])};fn.source="Go to login";return fn;})(),
-  "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sie haben noch keine Nachricht."])};fn.source="Sie haben noch keine Nachricht.";return fn;})(),
-  "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sie haben noch kein Support-Ticket."])};fn.source="Sie haben noch kein Support-Ticket.";return fn;})()
+  "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Du hast noch keine Nachrichten in deiner Inbox."])};fn.source="Du hast noch keine Nachrichten in deiner Inbox.";return fn;})(),
+  "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sie haben noch kein Support-Ticket."])};fn.source="Sie haben noch kein Support-Ticket.";return fn;})(),
+  "inboxMessages": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Inbox (virtuelles Postfach)"])};fn.source="Inbox (virtuelles Postfach)";return fn;})(),
+  "supportTickets": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Support-Tickets"])};fn.source="Support-Tickets";return fn;})(),
+  "inaiaSupport": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["INAIA Kundenservice"])};fn.source="INAIA Kundenservice";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -571,7 +574,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "set_the_name": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Depot name"])};fn.source="Depot name";return fn;})(),
   "savings_plan_contract": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Set the saving plan contract"])};fn.source="Set the saving plan contract";return fn;})(),
   "savings_plan_summary": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirm saving plan contract"])};fn.source="Confirm saving plan contract";return fn;})(),
-  "new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New depot"])};fn.source="New depot";return fn;})(),
+  "new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Create new depot"])};fn.source="Create new depot";return fn;})(),
   "new_gold_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New gold depot"])};fn.source="New gold depot";return fn;})(),
   "new_silver_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["New silver depot"])};fn.source="New silver depot";return fn;})(),
   "start": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Start"])};fn.source="Start";return fn;})(),
@@ -747,14 +750,17 @@ export const resolveNuxtI18nOptions = async (context) => {
   "please_verify_account_to_create_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please finish your identity check in order to start creating depots"])};fn.source="Please finish your identity check in order to start creating depots";return fn;})(),
   "create_new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Currently you have no depots, please create new silver or gold depot to start."])};fn.source="Currently you have no depots, please create new silver or gold depot to start.";return fn;})(),
   "you_have_no_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["You have no transactions"])};fn.source="You have no transactions";return fn;})(),
-  "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["You have no message yet."])};fn.source="You have no message yet.";return fn;})(),
+  "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["You currently have no messages in your inbox."])};fn.source="You currently have no messages in your inbox.";return fn;})(),
   "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["You have no support ticket yet."])};fn.source="You have no support ticket yet.";return fn;})(),
   "personalInformation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Personal information"])};fn.source="Personal information";return fn;})(),
   "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gender"])};fn.source="Gender";return fn;})(),
   "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthday"])};fn.source="Birthday";return fn;})(),
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationality"])};fn.source="Nationality";return fn;})(),
   "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthplace"])};fn.source="Birthplace";return fn;})(),
-  "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to login"])};fn.source="Go to login";return fn;})()
+  "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to login"])};fn.source="Go to login";return fn;})(),
+  "inboxMessages": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Inbox messages"])};fn.source="Inbox messages";return fn;})(),
+  "supportTickets": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Support tickets"])};fn.source="Support tickets";return fn;})(),
+  "inaiaSupport": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["INAIA Support"])};fn.source="INAIA Support";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -915,7 +921,7 @@ export const resolveNuxtI18nOptions = async (context) => {
   "set_the_name": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nom de dépôt"])};fn.source="Nom de dépôt";return fn;})(),
   "savings_plan_contract": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Définir le contrat de plan d'épargne"])};fn.source="Définir le contrat de plan d'épargne";return fn;})(),
   "savings_plan_summary": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Confirmer le contrat de plan d'épargne"])};fn.source="Confirmer le contrat de plan d'épargne";return fn;})(),
-  "new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nouveau depôt"])};fn.source="Nouveau depôt";return fn;})(),
+  "new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Créer un nouveau depôt"])};fn.source="Créer un nouveau depôt";return fn;})(),
   "new_gold_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nouveau depôt d'or"])};fn.source="Nouveau depôt d'or";return fn;})(),
   "new_silver_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nouveau depôt d'argent"])};fn.source="Nouveau depôt d'argent";return fn;})(),
   "start": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Start"])};fn.source="Start";return fn;})(),
@@ -1094,8 +1100,11 @@ export const resolveNuxtI18nOptions = async (context) => {
   "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationalité"])};fn.source="Nationalité";return fn;})(),
   "birthplace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lieu de naissance"])};fn.source="Lieu de naissance";return fn;})(),
   "go_to_login": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Connectez-vous ici"])};fn.source="Connectez-vous ici";return fn;})(),
-  "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez pas encore de message."])};fn.source="Vous n'avez pas encore de message.";return fn;})(),
-  "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez pas encore de ticket de support."])};fn.source="Vous n'avez pas encore de ticket de support.";return fn;})()
+  "you_have_no_message_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n’avez actuellement aucun message dans votre boîte de réception."])};fn.source="Vous n’avez actuellement aucun message dans votre boîte de réception.";return fn;})(),
+  "you_have_no_support_ticket_yet": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez pas encore de ticket de support."])};fn.source="Vous n'avez pas encore de ticket de support.";return fn;})(),
+  "inboxMessages": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Boîte de réception"])};fn.source="Boîte de réception";return fn;})(),
+  "supportTickets": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tickets de support"])};fn.source="Tickets de support";return fn;})(),
+  "inaiaSupport": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Service client INAIA"])};fn.source="Service client INAIA";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

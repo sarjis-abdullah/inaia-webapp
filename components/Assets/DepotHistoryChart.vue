@@ -135,7 +135,6 @@ const options = {
     },
     events: {
           mouseMove: (e, chartContext, config) => {
-            debugger;
             console.log(config);
           }
       }

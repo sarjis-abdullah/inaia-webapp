@@ -553,7 +553,6 @@ const setupMonths = ()=>{
     return getMonths(0);
 }
 const confirm = ()=>{
-    debugger;
     emit('onContractDataSet',{
         agio_payment_option:state.selectedPaymentOption.name,
         interval_amount:state.monthlySaving,
