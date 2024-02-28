@@ -192,6 +192,7 @@ import { AddDepotRequest } from '~~/lib/requests/AddDepotRequest';
 import { AddDepotService, AssetsService } from '~~/lib/services';
 import { AccountStorage } from '~~/storage';
 import moment from 'moment';
+import { urlBuilder } from '~~/helpers/urlBuilder';
     const steps = ref([
 { number:1,id: t('step')+' 1', name: t('choose_purpose'), status: SubscriptionSteps.upcoming },
 
@@ -219,7 +220,7 @@ const successfullyCreated = ref(false);
 const accountId = ref(null);
 const name = ref(t('welcome'));
 const goToDashboard = ()=>{
-  const url = "http://" + window.location.host + '/' +locale.value+'/dashboard';
+  const url = urlBuilder(locale.value,'/dashboard')
     
   window.open(url,'_self');
 }

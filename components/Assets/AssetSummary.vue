@@ -1,8 +1,8 @@
 <template>
     <div v-if="!isLoadingAssets">
-      <div class="text-center text-sm text-gray-500">Total amount</div>
+      <div class="text-center text-sm text-gray-500">{{ $t('totalAmount') }}</div>
       <h1 class="text-center text-4xl">{{ $n(balance) }} €</h1>
-      <Alert v-if="!isVerified" :kycDetails="kycDetails" class="my-3"/>
+      <Alert v-if="!isVerified" :kycDetails="kycDetails" class="my-3" :kycStatus="kycStatus"/>
         <div  class="grid grid-cols-2 gap-10 mt-10">
           <div v-for="asset in assets" :key="asset.name">
           <AssetItem   :item="asset"/>
@@ -26,7 +26,7 @@
 <script lang="ts" setup>
 import AssetItem from '@/components/Assets/AssetItem';
 import PriceHistory from '@/components/Assets/PriceHistory';
-import {Asset, KycDetail} from '@/lib/models';
+import {Asset, KycDetail,KycStatus} from '@/lib/models';
 import { AssetsService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
 import { onMounted,Ref,ref,PropType } from 'vue';
@@ -40,6 +40,9 @@ const isLoadingAssets = ref(true);
 const props = defineProps({
     kycDetails:{
         type : Object as PropType<KycDetail>
+    },
+    kycStatus:{
+        type : Object as PropType<KycStatus>
     },
     isVerified:{
       type:Boolean

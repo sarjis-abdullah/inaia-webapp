@@ -5,7 +5,7 @@
     <div class="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
       <div>
         <UpdateProfile @onUpdate="onProfileUpdated"/>
-
+        <Alert v-if="!isVerified" :kycDetails="account?.account.kyc_details" class="my-3" :kycStatus="account?.kyc_status"/>
         <dl class="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
           <div class="pt-6 sm:flex">
             <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{{ $t('full_name') }}</dt>
@@ -145,6 +145,7 @@ import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount';
 import { BadInputException, MissingInformationException, ServerErrorException } from '@/lib/exceptions';
 import Confirmation from '@/components/common/Confirmation'; 
 import { formatIban } from '@/lib/Formatters';
+import  Alert  from '@/components/Kyc/Alert.vue';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
 const account: Ref<Account> = ref(null);

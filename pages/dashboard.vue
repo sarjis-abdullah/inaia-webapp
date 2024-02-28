@@ -2,7 +2,7 @@
   
     <div >
       
-        <AssetSummary :isVerified="isVerified" :kycDetails="kycDetails"/>
+        <AssetSummary :isVerified="isVerified" :kycDetails="kycDetails" :kycStatus="kycStatus"/>
         
         <DepotList class="mt-6" :isVerified="isVerified"/>
        
@@ -26,6 +26,7 @@ definePageMeta({
 const account : Ref<Account> = ref(null);
 const isVerified = ref(false);
 const kycDetails = ref(null);
+const kycStatus = ref(null);
 onMounted(async ()=>{
   account.value = AccountStorage.getAccount();
   if(!account.value){
@@ -35,7 +36,8 @@ onMounted(async ()=>{
   }
   if(account.value){
     isVerified.value = account.value.is_verified;
-    kycDetails.value = account.value.account.kyc_details
+    kycDetails.value = account.value.account.kyc_details;
+    kycStatus.value = account.value.kyc_status
   }
 })
 </script>
