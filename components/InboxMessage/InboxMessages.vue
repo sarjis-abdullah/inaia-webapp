@@ -30,6 +30,11 @@
             </div>
         </li>
     </ul>
+    <div v-else-if="noNewMessages" class="flex items-center min-h-[83vh]">
+        <p>
+            {{ $t('you_have_no_message_yet') }}
+        </p>
+    </div>
     <ul v-else role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
         <li>
             <ListSkeleton />
@@ -61,6 +66,7 @@ const perPage = ref(7);
 const loadMore = ref(false);
 const moreToCome = ref(true);
 const errorText = ref("");
+const noNewMessages = ref(false);
 
 //computed
 const queryParams = computed(() => {
@@ -86,6 +92,8 @@ const loadData = async () => {
             moreToCome.value = data.currentPage < data.lastPage;
             if (data?.data?.length) {
                 messages.value = [...messages.value, ...data.data];
+            }else{
+                noNewMessages.value = true
             }
             if (messages.value?.length && !selectedMessage.value.id) {
                 setSelectedMessage(messages.value[0])

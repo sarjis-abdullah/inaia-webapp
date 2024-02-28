@@ -398,4 +398,6 @@ export default {
     birthdate:"Geburtsdatum",
     nationality:'Staatsangehörigkeit',
     birthplace:'Geburtsort',
+    you_have_no_message_yet: "Sie haben noch keine Nachricht.",
+    you_have_no_support_ticket_yet: "Sie haben noch kein Support-Ticket."
 }

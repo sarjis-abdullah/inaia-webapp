@@ -337,4 +337,6 @@ export default {
     birthdate:"Date de naissance",
     nationality:'Nationalité',
     birthplace:'Lieu de naissance',
+    you_have_no_message_yet: "Vous n'avez pas encore de message.",
+    you_have_no_support_ticket_yet: "Vous n'avez pas encore de ticket de support."
 }

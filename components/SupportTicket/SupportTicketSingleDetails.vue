@@ -85,7 +85,8 @@
             </div>
         </div>
     </div>
-    <div v-if="!hasGroupMessages && !thisTicket?.id && !queryId" class="flex flex-col justify-center h-[50vh] items-center">
+    <div v-if="groupedMessages.length == 0"></div>
+    <div v-else-if="!hasGroupMessages && !thisTicket?.id && !queryId" class="flex flex-col justify-center h-[50vh] items-center">
         <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <title>message-arrow-left-outline</title>
             <path

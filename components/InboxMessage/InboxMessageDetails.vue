@@ -39,7 +39,7 @@
             </section>
         </section>
     </section>
-    <section v-else class="flex justify-center items-center h-[50vh]">
+    <section v-else-if="messageLoading" class="flex justify-center items-center h-[50vh]">
         <Loading />
     </section>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
