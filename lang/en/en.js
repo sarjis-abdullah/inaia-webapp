@@ -370,4 +370,6 @@ export default {
     birthdate:"Birthday",
     nationality:'Nationality',
     birthplace:'Birthplace',
+    go_to_login:"Go to login",
+    or:"Or"
 }

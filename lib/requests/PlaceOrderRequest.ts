@@ -1,7 +1,7 @@
 export interface PlaceOrderRequest {
-    order_type_id:number,
-    depot_id:number,
-    amount:number,
+    order_type_id:string,
+    depot_id:string,
+    amount:string,
     unit:string,
     conditions:Array<number>,
     payment_method?:string,

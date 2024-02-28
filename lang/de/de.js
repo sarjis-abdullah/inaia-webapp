@@ -398,4 +398,6 @@ export default {
     birthdate:"Geburtsdatum",
     nationality:'Staatsangehörigkeit',
     birthplace:'Geburtsort',
+    go_to_login:"Go to login",
+    or:"Or"
 }

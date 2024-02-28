@@ -122,10 +122,10 @@ const emit = defineEmits<{
 }>()
 const execute = async ()=>{
     const request : PlaceOrderRequest = {
-        order_type_id:props.orderPreview?.order_type_id,
-        amount:props.orderPreview?.amount,
+        order_type_id:props.orderPreview?.order_type_id.toString(),
+        amount:props.orderPreview?.amount.toString(),
         unit:"EUR",
-        depot_id:props.depot?.id,
+        depot_id:props.depot?.id.toString(),
         conditions:checkedConditions.value.join(','),
         payment_method:props.PaymentMethod,
         order_approval_method:props.confirmationMethod

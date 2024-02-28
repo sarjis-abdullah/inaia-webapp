@@ -360,12 +360,12 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import { AccountService, AddDepotService, CurrencyService, PaymentAccountService } from "~~/lib/services";
-import { AssetTypes, ProductsSpec } from "~~/lib/contants";
+import { AssetTypes, PaymentAccountSpecs, ProductsSpec } from "~~/lib/contants";
 import { Ref,PropType } from 'vue';
 import { SpPerformanceData,DepotTarget, PaymentAccount, Depot } from '~~/lib/models';
 import { AgioPaymentsModels } from '~~/lib/contants/AgioPaymentsModels';
 import { PaymentMethods } from '~~/lib/contants/PaymentMethods';
-import { formatDate } from '~~/lib/Formatters';
+import { formatDate, formatIban } from '~~/lib/Formatters';
 import PerformanceChart from '@/components/NewDepot/PerformanceChart';
 import Modal from '@/components/common/Modal';
 const {t} = useI18n();
@@ -520,15 +520,19 @@ watch([agioPercentage,state],([newAgioPercentage,newState],[oldAgioPercentage,ol
     
 })
 const formatBankAccount = (option:PaymentAccount)=>{
-    let format = '';
+    let iban = '';
+    let bank = ''
     if(option && option.payment_account_specs.length > 0){
         option.payment_account_specs.forEach(spec=>{
-            if(spec.name == 'iban'){
-                format = spec.value;
+            if(spec.name == PaymentAccountSpecs.iban){
+                iban = formatIban(spec.value);
+            }
+            if(spec.name == PaymentAccountSpecs.bank_name){
+                bank = spec.value;
             }
         })
     }
-    return format;
+    return bank+" "+iban;
 }
 const closePaymentTable = ()=>{
     showPaymentTable.value = false;

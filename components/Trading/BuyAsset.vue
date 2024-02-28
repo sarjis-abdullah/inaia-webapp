@@ -65,9 +65,12 @@ watch([selectedDepot,amount,paymentMethod,selectedPaymentAccount],()=>{
     else{
         error.value = false;
     }
-    if(amount.value>=TradingMinimumAmounts.minMoneyAmount && paymentMethod!=null && selectedDepot.value){
+    if(amount.value>=TradingMinimumAmounts.minMoneyAmount && paymentMethod.value!='' && selectedDepot.value){
         if(paymentMethod.value == PaymentMethods.bankAccount){
-            if(selectedPaymentAccount){
+            if(selectedPaymentAccount.value){
+                activated.value = true;
+            }
+            else{
                 activated.value = true;
             }
         }

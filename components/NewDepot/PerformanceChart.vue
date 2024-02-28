@@ -1,17 +1,18 @@
 <template>
     <div>
         <div class="flex flex-row justify-end">
-            <button type="button" @click="changeDisplay(displays.bars)" class="relative inline-flex items-center rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset" :class="isActive(displays.bars)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
+          <button type="button" @click="changeDisplay(displays.line)" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset " :class="isActive(displays.line)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
+       
+       <span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
+               <PresentationChartLineIcon class="h-full w-full" aria-hidden="true" :class="isActive(displays.line)?'text-white':'text-blue-600 group-hover:text-blue-800'"/>
+             </span>
+   </button>
+            <button type="button" @click="changeDisplay(displays.bars)" class="relative ml-1 inline-flex items-center rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset" :class="isActive(displays.bars)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
                 <span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
                     <ChartBarIcon class="h-full w-full" aria-hidden="true" :class="isActive(displays.bars)?'text-white':'text-blue-600 group-hover:text-blue-800'"/>
                   </span>
         </button>
-        <button type="button" @click="changeDisplay(displays.line)" class="relative ml-1 inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset " :class="isActive(displays.line)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
-       
-            <span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
-                    <PresentationChartLineIcon class="h-full w-full" aria-hidden="true" :class="isActive(displays.line)?'text-white':'text-blue-600 group-hover:text-blue-800'"/>
-                  </span>
-        </button>
+        
         <button type="button"  @click="changeDisplay(displays.table)" class="relative ml-1 inline-flex items-center rounded-md  px-3 py-1 text-sm font-semibold  shadow-sm ring-1 ring-inset" :class="isActive(displays.table)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
           
             <span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
@@ -235,7 +236,7 @@ const optionsArea = {
         table:'table',
         bars:'bars'
     }
-    const selectedDisplay = ref(displays.bars);
+    const selectedDisplay = ref(displays.line);
     const props = defineProps({
         data:{
             type : Object as PropType<SpPerformanceData>

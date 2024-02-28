@@ -337,4 +337,6 @@ export default {
     birthdate:"Date de naissance",
     nationality:'Nationalité',
     birthplace:'Lieu de naissance',
+    go_to_login:"Connectez-vous ici",
+    or:"Ou bien"
 }
