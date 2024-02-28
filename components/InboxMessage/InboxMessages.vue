@@ -1,6 +1,6 @@
 <template>
     <ul v-if="hasMessages && !messageLoading" role="list"
-        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-screen overflow-y-auto">
+        class="divide-y divide-gray-200 rounded-md border border-gray-200 max-h-[70vh] overflow-y-auto">
         <li v-for="(message, index) in messages" :key="index" @click="setSelectedMessage(message)"
             :class="`${selectedMessage.id == message.id ? 'bg-blue-100' : ''}`"
             class="flex justify-between py-4 pl-4 pr-5 text-sm leading-6 cursor-pointer">
@@ -109,10 +109,6 @@ const loadMoreInboxMessages = async () => {
 const setSelectedMessage = (message = {}) => {
     emit("setSelectedMessage", message)
     selectedMessage.value = message
-    window?.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    });
 }
 
 //onmounted

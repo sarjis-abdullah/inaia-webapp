@@ -19,10 +19,6 @@ const selectedMessage = ref({})
 //functions
 const selectMessage = (message) => {
     selectedMessage.value = message
-    window?.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    });
 }
 
 </script>
