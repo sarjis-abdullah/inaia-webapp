@@ -97,7 +97,7 @@
                   <div>
                     <MenuButton class="flex max-w-xs items-center rounded-full bg-blue-600 text-sm focus:outline-none focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
                       <span class="sr-only">Open user menu</span>
-                      <img v-if="updatedAvatar || avatar" class="h-8 w-8 rounded-full" :src="updatedAvatar ?? avatar" alt="" />
+                      <img v-if="updatedAvatar || avatar || defaultAvatar" class="h-8 w-8 rounded-full" :src="updatedAvatar || avatar || defaultAvatar" alt="" />
                       <div v-else class="h-8 w-8 rounded-full"><Loading/></div>
                     </MenuButton>
                   </div>
@@ -189,6 +189,7 @@ import { AccountService } from '~~/lib/services/AccountService';
 import { AccountStorage } from '~~/storage/AccountStorage';
 import TradingModal from '@/components/TradingModal';
 import LogoutHelper from '~~/helpers/LogoutHelper';
+import defaultAvatar from '@/assets/img/defaultAvatar.png';
 const user:Ref<Account>= ref(null);
 const updatedAvatar = ref();
 const {t,locale} = useI18n();
