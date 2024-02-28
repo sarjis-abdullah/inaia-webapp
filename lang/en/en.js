@@ -365,6 +365,8 @@ export default {
     please_verify_account_to_create_depot:'Please finish your identity check in order to start creating depots',
     create_new_depot:"Currently you have no depots, please create new silver or gold depot to start.",
     you_have_no_transactions:'You have no transactions',
+    you_have_no_message_yet:'You have no message yet.',
+    you_have_no_support_ticket_yet:'You have no support ticket yet.',
     personalInformation:"Personal information",
     gender:"Gender",
     birthdate:"Birthday",

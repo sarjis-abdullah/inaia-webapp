@@ -399,5 +399,7 @@ export default {
     nationality:'Staatsangehörigkeit',
     birthplace:'Geburtsort',
     go_to_login:"Go to login",
-    or:"Or"
+    or:"Or",
+    you_have_no_message_yet: "Sie haben noch keine Nachricht.",
+    you_have_no_support_ticket_yet: "Sie haben noch kein Support-Ticket."
 }

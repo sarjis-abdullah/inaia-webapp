@@ -1,5 +1,5 @@
 <template>
-    <ul role="list" class="border-t border-r border-l rounded-tl-md border-gray-200">
+    <ul role="list" class="border-t border-r border-l rounded-tl-md border-gray-200" :class="!hasTickets && !ticketLoading && noSupportTickets ? 'border-b' : ''">
         <li class="p-4 cursor-pointer">
             <button v-if="!createTicketProcessing" @click="openCreateTicketModal = !openCreateTicketModal"
                 class="flex justify-end gap-2 bg-[#0074d9] text-white px-2 py-2 rounded-md">
@@ -22,11 +22,12 @@
             </div>
         </li>
     </ul>
-    <ul v-else role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
+    <ul v-else-if="ticketLoading" role="list" class="divide-y divide-gray-200 rounded-md border border-gray-200">
         <li>
             <ListSkeleton />
         </li>
     </ul>
+    <p v-if="!hasTickets && !ticketLoading && noSupportTickets" class="flex items-center min-h-[70vh] mt-2 text-sm">{{ $t('you_have_no_support_ticket_yet') }}</p>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
     <Modal :open="openCreateTicketModal" @onClose="toggleCreateTicketModal" maxWidth="sm:max-w-2xl"
         :title="`${$t('new_ticket')}`">
@@ -95,6 +96,7 @@ const perPage = ref(7);
 const loadMore = ref(false);
 const moreToCome = ref(true);
 const errorText = ref("");
+const noSupportTickets = ref(true);
 
 //computed
 const notificationType = computed(() => NotificationTypes.sucess)
@@ -133,6 +135,8 @@ const loadData = async () => {
         moreToCome.value = data.currentPage < data.lastPage;
         if (data?.data?.length) {
             tickets.value = [...tickets.value, ...data.data]
+        }else{
+            noSupportTickets.value = true
         }
         errorText.value = ""
     } catch (error) {

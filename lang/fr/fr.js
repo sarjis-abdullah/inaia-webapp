@@ -338,5 +338,7 @@ export default {
     nationality:'Nationalité',
     birthplace:'Lieu de naissance',
     go_to_login:"Connectez-vous ici",
-    or:"Ou bien"
+    or:"Ou bien",
+    you_have_no_message_yet: "Vous n'avez pas encore de message.",
+    you_have_no_support_ticket_yet: "Vous n'avez pas encore de ticket de support."
 }
