@@ -1,6 +1,7 @@
 <template>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <a @click="goBack" class="cursor-pointer active:opacity-50"><ArrowSmallLeftIcon class="h-8 text-blue-500 font-bold"/></a>
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('createDepot') }}</h2>
             <img :src="target.avatar_base64 ?? target.avatar"  v-if="target" class="h-32 w-32 rounded-full mx-auto mb-4"/>
             <div class="text-center font-semibold my-3 text-gray-900">{{ depotName }}</div>
@@ -22,7 +23,7 @@
     <div class="mt-10">
                   <button type="submit"  @click.prevent="acceptConditions" :disabled="selectedConditions.length < conditions.length"
                      
-                      class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('accept') }}</button>
+                      :class="['flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',selectedConditions.length < conditions.length?'opacity-50':'opacity-100']">{{ $t('accept') }}</button>
                 </div>
         </div>
     </div>
@@ -35,6 +36,7 @@ import { ConditionService } from "~~/lib/services";
 import Switch  from '@/components/common/AppSwitch.vue';
 import { ArrowDownTrayIcon } from '@heroicons/vue/24/outline';
 import InLineApiError from "@/components/common/InLineApiError";
+import { ArrowSmallLeftIcon,ArrowSmallRightIcon } from '@heroicons/vue/24/solid';
 const props = defineProps({
     target:{
             type: Object as PropType<DepotTarget>
@@ -49,7 +51,8 @@ const props = defineProps({
          },
 });
 const emit = defineEmits<{
-  (e: 'onConditionsAccepted',ids:string): void
+  (e: 'onConditionsAccepted',ids:string): void;
+  (e:'goback'):void;
 }>()
 const conditions: Ref<Array<Condition>> = ref([]);
 const selectedConditions : Ref<Array<Condition>> = ref([]);
@@ -87,5 +90,8 @@ const checkCondition = (checked:boolean,c:Condition)=>{
 const acceptConditions = () =>{
     const ids = conditions.value.map(c=>c.id);
     emit('onConditionsAccepted',ids.join(','));
+}
+const goBack = ()=>{
+    emit('goback');
 }
 </script>

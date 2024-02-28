@@ -302,7 +302,7 @@ const createAreaSeries = (data:SpPerformanceData)=>{
         data:savingsSerie
     },
     {
-        name:t('retuns'),
+        name:t('returns'),
         data:returnsSerie
     }
 ]

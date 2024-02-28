@@ -62,7 +62,7 @@
               <div v-if="pAccount.is_default"
                 :class="'inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20 mr-3'">
                 {{ $t('default') }}</div>
-              <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" :disabled="isModfyingBankAccount" @click="()=>deleteBankAccount(pAccount.id)">{{ $t('delete') }}</button>
+              <button type="button" class="font-semibold text-red-400 hover:text-red-300" :disabled="isModfyingBankAccount" @click="()=>deleteBankAccount(pAccount.id)">{{ $t('delete') }}</button>
             </div>
           </li>
         </ul>
@@ -144,6 +144,7 @@ import UpdateProfile from '@/components/Profile/UserProfile.vue';
 import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount';
 import { BadInputException, MissingInformationException, ServerErrorException } from '@/lib/exceptions';
 import Confirmation from '@/components/common/Confirmation'; 
+import { formatIban } from '@/lib/Formatters';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
 const account: Ref<Account> = ref(null);
@@ -373,7 +374,7 @@ const formatPaymentAccountDisplay = (paymentAccount: PaymentAccount) => {
       bankName = spec.value;
     }
     if (spec.name == PaymentAccountSpecs.iban) {
-      iban = spec.value;
+      iban = formatIban(spec.value);
     }
   })
   return bankName + " " + iban;

@@ -137,7 +137,7 @@
           <DepotTargets v-if="currentStep == 1" @choose="setTarget"/>
           <DepotName v-if="currentStep == 2 && selectedDepotTarget" :target="selectedDepotTarget" @onSelectAvatar="handleOnSelectAvatar" @onNameSet="onNameSet"/>
           <ConfirmCreateDepot v-if="currentStep == 3 && !isConfirmingDepotConditions" :type="type" @onDepotCreated="onDepotCreation" @onSavingPlanSetup="setupSavingPlan"/>
-          <ConfirmDepotConditions v-if="currentStep == 3 && isConfirmingDepotConditions" :type="type" :target="selectedDepotTarget" :depotName="depotName" @onConditionsAccepted="saveDepot"/>
+          <ConfirmDepotConditions v-if="currentStep == 3 && isConfirmingDepotConditions" :type="type" :target="selectedDepotTarget" :depotName="depotName" @onConditionsAccepted="saveDepot" @goback="cancelCreatingDepot"/>
           <SetupSavingPlan v-if="currentStep == 4 && accountId" :accountId="accountId" :type="type" :target="selectedDepotTarget" @onContractDataSet="confirmSavingPlanContactData
           "/>
           <ConfirmSavingsPlanContract v-if="currentStep == 5"  :type="type" :target="selectedDepotTarget" :saveDepotRequest="saveDepotRequest" :totalAgio="totalAgio" @onConditionsAccepted="saveDepot"/>
@@ -305,6 +305,9 @@ const goToStep=(step:number)=>
     }
     currentStep.value = step;
   })
+}
+const cancelCreatingDepot = ()=>{
+  isConfirmingDepotConditions.value = false;
 }
 onMounted(()=>{
   accountId.value = AccountStorage.getAccountId();

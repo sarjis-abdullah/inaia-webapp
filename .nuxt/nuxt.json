@@ -1,7 +1,7 @@
 {
-  "_hash": "O5VwmeCXR5",
+  "_hash": "7fiZrD4ucQ",
   "project": {
-    "rootDir": "/home/sarjis/Inaia/inaia-webapp"
+    "rootDir": "/Users/mahdinjim/Documents/workspace/inaia/client/inaia-webapp"
   },
   "versions": {
     "nuxt": "3.0.0"

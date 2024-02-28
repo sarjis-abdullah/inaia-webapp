@@ -14,35 +14,35 @@
                   <div class="mt-3 text-center sm:mt-5">
                     <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">Trading</DialogTitle>
                     <div class="mt-2 grid grid-cols-1 divide-y">
-                        <a href="#" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
+                        <NuxtLink :to="'/'+lang+'/trading/buy'" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
                           <img src="./../assets/img/icons/gold_purchase.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
                           <div class="text-left">
-                            <div>Buy assets</div>
-                            <div class="text-sm text-gray-500">Place an order to purchase physical assets.</div>
+                            <div>{{ $t('buy_assets') }}</div>
+                            <div class="text-sm text-gray-500">{{ $t('buyGoldParagraph') }}</div>
                           </div>
-                        </a>
-                      <a href="#" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
+                        </NuxtLink>
+                      <NuxtLink :to="'/'+lang+'/trading/sell'" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
                         <img src="./../assets/img/icons/gold_sell.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
                         <div class="text-left">
-                          <div>Sell assets</div>
-                          <div class="text-sm text-gray-500">Place an order to sell physical assets.</div>
+                          <div>{{ $t('sell_assets') }}</div>
+                          <div class="text-sm text-gray-500">{{ $t('sellGoldParagraph') }}</div>
                         </div>
-                      </a>
-                    <a href="#" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
+                      </NuxtLink>
+                      <NuxtLink :to="'/'+lang+'/trading/delivery'" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
                       <img src="./../assets/img/icons/gold_delivery.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
                       <div class="text-left">
-                        <div>Gold delivery</div>
-                        <div class="text-sm text-gray-500">Deliver your assets physically to your home address.</div>
+                        <div>{{ $t('gold_delivery') }}</div>
+                        <div class="text-sm text-gray-500">{{ $t('goldDeliveryPhrase') }}</div>
                       </div>
-                    </a>
-                    <a href="#" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
-                      <img src="./../assets/img/icons/paymentout.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
+                      </NuxtLink>
+                      <NuxtLink :to="'/'+lang+'/trading/transfer'" class="text-gray-700 group flex items-start px-4 py-2 hover:bg-gray-200">
+                      <img src="./../assets/img/icons/gold_sel.png" class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
                       <div class="text-left">
-                        <div>Money transfer</div>
-                        <div class="text-sm text-gray-500">Send money via SEPA transfer.</div>
+                        <div>{{ $t('asset_transfer') }}</div>
+                        
                       </div>
                       
-                    </a>
+                      </NuxtLink>
                     </div>
                   </div>
                 </div>
@@ -59,7 +59,10 @@
   import { ref } from 'vue'
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { CheckIcon } from '@heroicons/vue/24/outline'
-  
+  const {locale} = useI18n();
+  const lang = computed(()=>{
+    return locale.value
+  });
   const props = defineProps({
     open:{
       default:false

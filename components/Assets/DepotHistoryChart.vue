@@ -135,7 +135,8 @@ const options = {
     },
     events: {
           mouseMove: (e, chartContext, config) => {
-            followChartValues(config)
+            debugger;
+            console.log(config);
           }
       }
 
@@ -298,7 +299,7 @@ onMounted(async ()=>{
 })
 </script>
 <style>
-    .apexcharts-tooltip { opacity: 0 !important; display: none !important;}
+    .apexcharts-tooltip { /*opacity: 0 !important; display: none !important;*/}
     .apexcharts-xaxistooltip-bottom {
         margin-top: 4px !important;
         padding: 4px 5px !important;

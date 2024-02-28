@@ -59,7 +59,7 @@
                     <div class="text-gray-900">{{ getAmountGram(order) > 0 ? $n(getAmountGram(order)/1000) +' g' : '-'}}</div>
                   </td>
                   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <a @click="()=>showTheDetails(order)" class="text-indigo-600 hover:text-indigo-900"
+                    <a @click="()=>showTheDetails(order)" class="text-blue-600 hover:text-blue-900 cursor-pointer"
                       >{{ $t('details') }}<span class="sr-only">, {{ order.id }}</span></a
                     >
                   </td>

@@ -32,5 +32,6 @@ export interface Order{
     unit:string,
     updated_at?:string,
     updated_by?:number,
-    reason_text?:string
+    reason_text?:string,
+    blocked_days?:number
 }

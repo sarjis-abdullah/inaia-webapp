@@ -7,11 +7,11 @@
                 <ListItem :title="$t('name')">{{ saveDepotRequest?.name }}</ListItem>
                 <ListItem :title="$t('savings_rate')">{{ saveDepotRequest?.interval_amount }} {{ currency }}</ListItem>
                 <ListItem :title="$t('duration')">{{ saveDepotRequest?.duration }} {{ $t('year')+(saveDepotRequest?.duration>1?'s':'') }}</ListItem>
-                <ListItem :title="$t('savings_sum')">{{ $n(saveDepotRequest?.interval_amount * 12 * saveDepotRequest?.duration) }} {{ currency }}</ListItem>
+                <ListItem :title="$t('savings')">{{ $n(saveDepotRequest?.interval_amount * 12 * saveDepotRequest?.duration) }} {{ currency }}</ListItem>
                 <ListItem :title="$t('agio')">{{ $n(totalAgio) }} {{ currency }}</ListItem>
                 <ListItem :title="$t('billing')">{{ $t(saveDepotRequest?.agio_payment_option) }}</ListItem>
                 <ListItem :title="$t('payment')">{{ $t(saveDepotRequest?.payment_method) }}</ListItem>
-                <ListItem :title="$t('start_date')">{{ $d(new Date(saveDepotRequest?.interval_startdate)) }}</ListItem>
+                <ListItem :title="$t('startdate')">{{ $d(new Date(saveDepotRequest?.interval_startdate)) }}</ListItem>
             </div>
             <div class="mt-10">
                 <InLineApiError :err="error"/>
