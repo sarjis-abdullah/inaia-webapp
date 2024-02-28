@@ -369,7 +369,18 @@ export const resolveNuxtI18nOptions = async (context) => {
   "savings_rate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sparbetrag"])};fn.source="Sparbetrag";return fn;})(),
   "accept": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Bestätigen"])};fn.source="Bestätigen";return fn;})(),
   "installment": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Installment"])};fn.source="Installment";return fn;})(),
-  "paymentPlan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tilgungsplan"])};fn.source="Tilgungsplan";return fn;})()
+  "paymentPlan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tilgungsplan"])};fn.source="Tilgungsplan";return fn;})(),
+  "creatingdepotpleasewait": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Creating depot, plase wait..."])};fn.source="Creating depot, plase wait...";return fn;})(),
+  "goToDashboard": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to dashbaord"])};fn.source="Go to dashbaord";return fn;})(),
+  "chooseSenderDepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose the depot you want to send from"])};fn.source="Choose the depot you want to send from";return fn;})(),
+  "please_verify_account_to_create_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please finish your identity check in order to start creating depots"])};fn.source="Please finish your identity check in order to start creating depots";return fn;})(),
+  "create_new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Currently you have no depots, please create new silver or gold depot to start."])};fn.source="Currently you have no depots, please create new silver or gold depot to start.";return fn;})(),
+  "you_have_no_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["You have no transactions"])};fn.source="You have no transactions";return fn;})(),
+  "personalInformation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Persönliche Daten"])};fn.source="Persönliche Daten";return fn;})(),
+  "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Anrede"])};fn.source="Anrede";return fn;})(),
+  "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsdatum"])};fn.source="Geburtsdatum";return fn;})(),
+  "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Staatsangehörigkeit"])};fn.source="Staatsangehörigkeit";return fn;})(),
+  "birthPlace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Geburtsort"])};fn.source="Geburtsort";return fn;})()
 },"en":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["January"])};fn.source="January";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["February"])};fn.source="February";return fn;})(),
@@ -726,7 +737,18 @@ export const resolveNuxtI18nOptions = async (context) => {
   "savings_rate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Savings rate"])};fn.source="Savings rate";return fn;})(),
   "accept": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Accept"])};fn.source="Accept";return fn;})(),
   "installment": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Installment"])};fn.source="Installment";return fn;})(),
-  "paymentPlan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Payment table"])};fn.source="Payment table";return fn;})()
+  "paymentPlan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Payment table"])};fn.source="Payment table";return fn;})(),
+  "creatingdepotpleasewait": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Creating depot, plase wait..."])};fn.source="Creating depot, plase wait...";return fn;})(),
+  "goToDashboard": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Go to dashbaord"])};fn.source="Go to dashbaord";return fn;})(),
+  "chooseSenderDepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choose the depot you want to send from"])};fn.source="Choose the depot you want to send from";return fn;})(),
+  "please_verify_account_to_create_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Please finish your identity check in order to start creating depots"])};fn.source="Please finish your identity check in order to start creating depots";return fn;})(),
+  "create_new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Currently you have no depots, please create new silver or gold depot to start."])};fn.source="Currently you have no depots, please create new silver or gold depot to start.";return fn;})(),
+  "you_have_no_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["You have no transactions"])};fn.source="You have no transactions";return fn;})(),
+  "personalInformation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Personal information"])};fn.source="Personal information";return fn;})(),
+  "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Gender"])};fn.source="Gender";return fn;})(),
+  "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthday"])};fn.source="Birthday";return fn;})(),
+  "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationality"])};fn.source="Nationality";return fn;})(),
+  "birthPlace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Birthplace"])};fn.source="Birthplace";return fn;})()
 },"fr":{
   "1": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Janvier"])};fn.source="Janvier";return fn;})(),
   "2": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Février"])};fn.source="Février";return fn;})(),
@@ -1053,7 +1075,18 @@ export const resolveNuxtI18nOptions = async (context) => {
   "savings_rate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Montant de l'épargne"])};fn.source="Montant de l'épargne";return fn;})(),
   "accept": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Accepter"])};fn.source="Accepter";return fn;})(),
   "installment": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Versement"])};fn.source="Versement";return fn;})(),
-  "paymentPlan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tableau des paiements"])};fn.source="Tableau des paiements";return fn;})()
+  "paymentPlan": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Tableau des paiements"])};fn.source="Tableau des paiements";return fn;})(),
+  "creatingdepotpleasewait": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Création du dépôt, veuillez patienter..."])};fn.source="Création du dépôt, veuillez patienter...";return fn;})(),
+  "goToDashboard": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Aller au tableau de bord"])};fn.source="Aller au tableau de bord";return fn;})(),
+  "chooseSenderDepot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Choisissez le dépôt à partir duquel vous souhaitez effectuer l'envoi"])};fn.source="Choisissez le dépôt à partir duquel vous souhaitez effectuer l'envoi";return fn;})(),
+  "please_verify_account_to_create_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Veuillez terminer votre vérification d'identité afin de pouvoir commencer à créer des dépôts."])};fn.source="Veuillez terminer votre vérification d'identité afin de pouvoir commencer à créer des dépôts.";return fn;})(),
+  "create_new_depot": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez actuellement aucun dépôt, veuillez créer un nouveau dépôt d'argent ou d'or pour commencer."])};fn.source="Vous n'avez actuellement aucun dépôt, veuillez créer un nouveau dépôt d'argent ou d'or pour commencer.";return fn;})(),
+  "you_have_no_transactions": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Vous n'avez aucune transaction"])};fn.source="Vous n'avez aucune transaction";return fn;})(),
+  "personalInformation": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Données personnelles"])};fn.source="Données personnelles";return fn;})(),
+  "gender": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Sexe"])};fn.source="Sexe";return fn;})(),
+  "birthdate": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Date de naissance"])};fn.source="Date de naissance";return fn;})(),
+  "nationality": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Nationalité"])};fn.source="Nationalité";return fn;})(),
+  "birthPlace": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["Lieu de naissance"])};fn.source="Lieu de naissance";return fn;})()
 },}),})
   nuxtI18nOptions.vueI18n = await vueI18nOptionsLoader(context)
   nuxtI18nOptions.locales = [Object({"name":"Deutsch","code":"de","iso":"de-DE","file":"de/de","img":"/assets/img/flags/germany-48.png","path":undefined}),Object({"name":"English","code":"en","iso":"en-GB","file":"en/en","img":"/assets/img/flags/great-britain-48.png","path":undefined}),Object({"name":"Français","code":"fr","iso":"fr-FR","file":"fr/fr","img":"/assets/img/flags/france-48.png","path":undefined})]

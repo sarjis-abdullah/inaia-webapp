@@ -19,7 +19,7 @@
                 </TransitionChild>
                 <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                   <div class="flex pt-8 justify-center">
-                    <img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+                    <a @click.prevent="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
                   </div>
                   <nav class="mt-8" aria-label="Progress">
                     <ol role="list" class="space-y-10">
@@ -75,7 +75,7 @@
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
           <div class="flex pt-8 justify-center">
-            <img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" />
+            <a @click.prevent="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
           </div>
   
             <nav class="flex justify-center mt-20" aria-label="Progress">
@@ -153,6 +153,8 @@
   import {Ref} from 'vue';
 import { StartKycRequest } from '~~/lib/requests';
 import { formatDate } from '~~/lib/Formatters';
+import { urlBuilder } from '~~/helpers/urlBuilder';
+import moment from 'moment';
   useHead({
       htmlAttrs: {
         class: 'h-full bg-gray-50'
@@ -167,14 +169,14 @@ definePageMeta({
 });
   const { t } = useI18n();
       const steps = ref([
-{ number:1,id: t('step')+' 1', name: t('personal_info'), status: SubscriptionSteps.current },
+{ number:1,id: t('step')+' 1', name: t('personalInformation'), status: SubscriptionSteps.current },
 
 
   { number:2,id: t('step')+' 2', name: t('address'), status: SubscriptionSteps.upcoming },
 ]);
 const currentStep = ref(1);
 const sidebarOpen = ref(false)
-const year = ref(4)
+const year = moment().get('year');
 const reachedStep = ref(1);
 const kycRequest : Ref<StartKycRequest> = ref(null);
 const name = ref(t('personal_info'));
@@ -194,6 +196,13 @@ onMounted(async ()=>{
     }
   }
 })
+const {locale} = useI18n();
+const goToDashboard = ()=>{
+
+  const url = urlBuilder(locale.value,'/dashboard');
+    
+  window.open(url,'_self');
+}
 const onInfoSet = (object:Object)=>{
   kycRequest.value = {}
   if(object){

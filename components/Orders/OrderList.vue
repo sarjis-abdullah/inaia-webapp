@@ -16,7 +16,7 @@
               <h6>{{ title }}</h6>
           </header>
             <div v-if="!props.loadingError && !props.isLoading">
-            <table class="min-w-full divide-y divide-gray-300" >
+            <table class="min-w-full divide-y divide-gray-300" v-if="orders && orders?.length > 0">
               <thead>
                 <tr>
                   <th scope="col" class="py-3.5 pl-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">{{ $t('type') }}</th>
@@ -66,7 +66,10 @@
                 </tr>
               </tbody>
             </table>
-            
+            <div v-else class="text-center py-10">
+              
+              <p class="text-xl text-gray-400">{{ $t('you_have_no_transactions') }}</p>
+            </div>
           </div>
             <div v-if="!props.loadingError && props.isLoading">
              <ListLoader/>

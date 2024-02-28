@@ -31,7 +31,7 @@
     </Menu>
   </div>
               </div>
-            <table class="min-w-full divide-y divide-gray-300" v-if="!loadingError && !isLoading">
+            <table class="min-w-full divide-y divide-gray-300" v-if="!loadingError && !isLoading && depots.length > 0">
               <thead>
                 <tr>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">{{ $t('depot_name') }}</th>
@@ -86,6 +86,10 @@
             </div>
             <div v-if="loadingError && !isLoading">
              <ListLoadingError :message="'cant_load_depot_list'"/>
+            </div>
+            <div v-if="depots.length==0" class="text-center py-10">
+              <p class="text-xl text-gray-400" v-if="!isVerified">{{ $t('please_verify_account_to_create_depot') }}</p>
+              <p class="text-xl text-gray-400" v-else>{{ $t('create_new_depot') }}</p>
             </div>
           </div>
         </div>

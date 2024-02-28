@@ -14,9 +14,9 @@
 
                         <input type="text" name="line1" id="line1" v-model="state.line1"
                         class="block  w-full 10 pl-3 py-2 rounded-md"
-                        :class="(state.line1.length>0)?inputStyle:inputErrorStyle"
+                        :class="(state.line1 && state.line1.length>0)?inputStyle:inputErrorStyle"
                             />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.line1.length==0">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.line1 && state.line1.length==0">
                             <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                         </div>
                     </div>
@@ -38,9 +38,9 @@
 
                         <input type="text" name="postal_code" id="postal_code" v-model="state.postal_code"
                         class="block  w-full 10 pl-3 py-2 rounded-md"
-                        :class="(state.postal_code.length>0)?inputStyle:inputErrorStyle"
+                        :class="(state.postal_code && state.postal_code.length>0)?inputStyle:inputErrorStyle"
                             />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.postal_code.length==0">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.postal_code && state.postal_code.length==0">
                             <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                         </div>
                     </div>
@@ -51,9 +51,9 @@
 
                   <input type="text" name="town" id="region" v-model="state.town"
                          class="block  w-full 10 pl-3 py-2 rounded-md"
-                         :class="(state.town.length>0)?inputStyle:inputErrorStyle"
+                         :class="(state.town && state.town.length>0)?inputStyle:inputErrorStyle"
                   />
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.town.length==0">
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="state.town && state.town.length==0">
                     <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                   </div>
                 </div>
@@ -143,7 +143,7 @@ watch(props,(currentValue)=>{
 })
 watch(state,(currentValue)=>{
 
-    if(state.country_id!=-1 && currentValue.line1.length>0 && currentValue.postal_code.length>0 && currentValue.town.length > 0)
+    if(state.country_id!=-1 && currentValue.line1 && currentValue.line1.length>0 && currentValue.postal_code && currentValue.postal_code.length>0 && currentValue.town && currentValue.town.length > 0)
     {
         saveActivated.value = true;
     }

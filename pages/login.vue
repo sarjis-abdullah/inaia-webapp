@@ -63,6 +63,7 @@ import { validateEmail,verifyIsAccountNumber } from '@/lib/utils/Validators';
 import {LoginStorage,AccountStorage } from '@/storage';
 import {AccountService,TokenService,LoginService} from '@/lib/services';
 import { ServerErrorException } from '@/lib/exceptions';
+import { urlBuilder } from '~~/helpers/urlBuilder';
 
   const state = reactive({
     email:'',
@@ -102,7 +103,7 @@ import { ServerErrorException } from '@/lib/exceptions';
         locale = s.value;
       }
     })
-      const url = "http://" + window.location.host + '/' +locale+'/dashboard';
+      const url = urlBuilder(locale,'/dashboard');
     
         window.open(url,'_self');
     }

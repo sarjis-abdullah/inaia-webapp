@@ -329,4 +329,12 @@ export default {
     creatingdepotpleasewait:'Création du dépôt, veuillez patienter...',
     goToDashboard:'Aller au tableau de bord',
     chooseSenderDepot:"Choisissez le dépôt à partir duquel vous souhaitez effectuer l'envoi",
+    please_verify_account_to_create_depot:"Veuillez terminer votre vérification d'identité afin de pouvoir commencer à créer des dépôts.",
+    create_new_depot:"Vous n'avez actuellement aucun dépôt, veuillez créer un nouveau dépôt d'argent ou d'or pour commencer.",
+    you_have_no_transactions:"Vous n'avez aucune transaction",
+    personalInformation:"Données personnelles",
+    gender:"Sexe",
+    birthdate:"Date de naissance",
+    nationality:'Nationalité',
+    birthplace:'Lieu de naissance',
 }

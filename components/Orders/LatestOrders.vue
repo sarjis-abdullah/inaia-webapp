@@ -19,7 +19,7 @@ const loadingError = ref(false)
 const loadMore = ref(false);
 const page = ref(1);
 const perPage = 5;
-const moreToCome = ref(true);
+const moreToCome = ref(false);
 const loadData = async()=>{
     let data = await OrderService.getLastestOrders({page:page.value,perPage:perPage});
     page.value = data.currentPage + 1;

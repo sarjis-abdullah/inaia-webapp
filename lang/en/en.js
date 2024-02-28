@@ -362,4 +362,12 @@ export default {
     creatingdepotpleasewait:'Creating depot, plase wait...',
     goToDashboard:'Go to dashbaord',
     chooseSenderDepot:'Choose the depot you want to send from',
+    please_verify_account_to_create_depot:'Please finish your identity check in order to start creating depots',
+    create_new_depot:"Currently you have no depots, please create new silver or gold depot to start.",
+    you_have_no_transactions:'You have no transactions',
+    personalInformation:"Personal information",
+    gender:"Gender",
+    birthdate:"Birthday",
+    nationality:'Nationality',
+    birthplace:'Birthplace',
 }

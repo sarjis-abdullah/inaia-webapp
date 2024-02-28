@@ -188,7 +188,7 @@ useHead({
     })
 definePageMeta({
   
-  middleware:['protected'],
+  middleware:['protected','verified'],
 });
 const { t,locale } = useI18n();
 const route = useRoute();

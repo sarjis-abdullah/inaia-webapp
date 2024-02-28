@@ -57,4 +57,11 @@ export class AssetTradingService{
         const json= await this.requester.post(url,this.headers,request);
         return json.data;
     }
+    public static async confirmTransfer(request:ConfirmOrderRequest):Promise<Order>{
+        const url = this.links.confirmOrder();
+        const token = TokenService.getToken();
+        this.headers.addAuthHeader(token);
+        const json= await this.requester.post(url,this.headers,request);
+        return json.data;
+    }
 }

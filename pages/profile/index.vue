@@ -49,7 +49,7 @@
         </dl>
       </div>
 
-      <div>
+      <div v-if="isVerified">
         <h2 class="text-base font-semibold leading-7 text-gray-900">{{ $t('bank_accounts') }}</h2>
 
 
@@ -295,9 +295,17 @@ const phoneChannel = computed(() => {
   }
   return e;
 })
+const isVerified = computed(()=>{
+  if(account.value){
+    return account.value.is_verified;
+  }
+  else{
+    return false;
+  }
+})
 const address = computed(() => {
-  let a = ''
-  if (account.value) {
+  let a = '-'
+  if (account.value && account.value.address && account.value.address.line1!=null && account.value.address.postal_code!=null && account.value.address.city!=null) {
 
     if (account.value.address) {
       if (account.value.address.line1 && account.value.address.line2 != "")
