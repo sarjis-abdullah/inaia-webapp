@@ -206,6 +206,7 @@ const goToDashboard = ()=>{
 const onInfoSet = (object:Object)=>{
   kycRequest.value = {}
   if(object){
+    debugger;
     kycRequest.value.birth_date =  formatDate(new Date(object.birthdate));
     kycRequest.value.birth_place = object.birthplace;
     kycRequest.value.name = object.name;

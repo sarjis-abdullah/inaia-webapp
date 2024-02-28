@@ -9,9 +9,9 @@
                     
                
             </div>
-            <div class="flex flex-col">
-                <span class="font-semibold text-xl">{{ balance }} {{ currency }}</span>
-                <span class="text-l text-gray-500">{{ balanceGramm }} g</span>
+            <div class="flex flex-col items-end">
+                <span class="font-semibold text-xl">{{ $n(balance) }} {{ currency }}</span>
+                <span class="text-l text-gray-500">{{ $n(balanceGramm) }} g</span>
             </div>
         </div>
     </a>

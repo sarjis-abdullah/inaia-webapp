@@ -33,6 +33,7 @@ import { OrderPreviewRequest } from './OrderPreviewRequest';
 import { PlaceOrderRequest } from './PlaceOrderRequest';
 import { ConfirmOrderRequest } from './ConfirmOrderRequest';
 import { TransferAssetRequest } from './TransferAssetRequest';
+import { ConfirmTransferRequest } from './ConfirmTransferRequest';
 export { ConditionsRequest };
 export { AccountInformationRequest };
 export { AddressRequest };
@@ -67,3 +68,4 @@ export {OrderPreviewRequest}
 export {PlaceOrderRequest}
 export {ConfirmOrderRequest}
 export {TransferAssetRequest}
+export {ConfirmTransferRequest}

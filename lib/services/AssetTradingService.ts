@@ -1,5 +1,5 @@
 import { ConfirmationMethod, Order, OrderPreview, PlaceOrderModel, TradeableAmount } from '../models';
-import { ConfirmOrderRequest, OrderPreviewRequest, PlaceOrderRequest, TransferAssetRequest } from '../requests';
+import { ConfirmOrderRequest, ConfirmTransferRequest, OrderPreviewRequest, PlaceOrderRequest, TransferAssetRequest } from '../requests';
 import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
@@ -57,8 +57,8 @@ export class AssetTradingService{
         const json= await this.requester.post(url,this.headers,request);
         return json.data;
     }
-    public static async confirmTransfer(request:ConfirmOrderRequest):Promise<Order>{
-        const url = this.links.confirmOrder();
+    public static async confirmTransfer(request:ConfirmTransferRequest):Promise<Order>{
+        const url = this.links.confirmTransferOrder();
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         const json= await this.requester.post(url,this.headers,request);

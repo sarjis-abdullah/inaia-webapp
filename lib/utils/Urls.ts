@@ -210,6 +210,9 @@ export class Urls{
     public transferAsset():string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'depots/transfer');
     }
+    public confirmTransferOrder():string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), 'depots/transfer/confirm');
+    }
     public getTradableAmount(depotId:number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/tradeable-amount?include=order_transactions,orders_payment_transactions,depot`);
     }
