@@ -4,10 +4,10 @@
    
     <div  v-if="!confirmed && !expired && !declined">
         <img src="~/assets/img/pageicons/pinscreen.jpg" alt="personal info" class="w-32 h-auto mb-5 mx-auto"/>
-        <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.payload.order_approval_method == ConfirmationMethods.mobilePin">{{ $t('confirmwithmobiletext') }}</h2>
-        <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.payload.order_approval_method == ConfirmationMethods.email">{{ $t('confirmwithemailtext') }}</h2>
-        <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.payload.order_approval_method == ConfirmationMethods.sms">{{ $t('confirmwithsmstext') }}</h2>
-        <div v-if="PlaceOrderInfo?.payload.order_approval_method == ConfirmationMethods.sms || PlaceOrderInfo?.payload.order_approval_method == ConfirmationMethods.email" class="flex flex-col items-center justify-items-center">
+        <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.mobilePin">{{ $t('confirmwithmobiletext') }}</h2>
+        <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.email">{{ $t('confirmwithemailtext') }}</h2>
+        <h2 class="text-center mb-8 text-xl" v-if="PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.sms">{{ $t('confirmwithsmstext') }}</h2>
+        <div v-if="PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.sms || PlaceOrderInfo?.order_approval_method.name_translation_key == ConfirmationMethods.email" class="flex flex-col items-center justify-items-center">
             <CodeInputs  @complete="confirmOrder" :length="4"/>
             <Loading class="mt-4" v-if="isSubmitting"/>
             <InLineApiError :err="confirmErr" />
@@ -62,7 +62,7 @@ import { PropType,Ref } from 'vue';
 import { ConfirmationMethod, Order, PlaceOrderModel } from '@/lib/models';
 import { ConfirmationMethods } from '@/lib/contants';
 import { AssetTradingService } from '@/lib/services';
-import { ConfirmOrderRequest, PlaceOrderRequest, TransferAssetRequest } from '@/lib/requests';
+import { ConfirmOrderRequest, ConfirmTransferRequest, PlaceOrderRequest, TransferAssetRequest } from '@/lib/requests';
 import  ConfirmationMethodSelect  from '@/components/Trading/ConfirmationMethodSelect'
 import InLineApiError from '@/components/common/InLineApiError';
 import { TransactionTypes } from '@/lib/contants';
@@ -114,7 +114,7 @@ const setExpirationTimeOut = (placedOrder:PlaceOrderModel)=>{
             expired.value = true
         }
     },300000)
-    if(placedOrder && placedOrder.payload.order_approval_method == ConfirmationMethods.mobilePin){
+    if(placedOrder && placedOrder?.order_approval_method.name_translation_key == ConfirmationMethods.mobilePin){
         interval.value = setInterval(async ()=>{
             if(!expired.value){
                 const data = await AssetTradingService.getPendingTradings();
@@ -148,12 +148,16 @@ const setNewConfirmationMethod = (value:ConfirmationMethod)=>{
 const confirmOrder= async (pin:number)=>{
     try{
         isSubmitting.value = true;
-        const request : ConfirmOrderRequest = {
+        const request : ConfirmOrderRequest | ConfirmTransferRequest = {
             ...PlaceOrderInfo.value.payload,
             pin:pin.toString(),
             approval_id:PlaceOrderInfo.value.approval_id
         }
-        await AssetTradingService.confirmOrder(request);
+        if(!props.isTransfer)
+            await AssetTradingService.confirmOrder(request);
+        else{
+            await AssetTradingService.confirmTransfer(request);
+        }
         confirmed.value = true;
         if(timeout.value){
             clearTimeout(timeout.value);

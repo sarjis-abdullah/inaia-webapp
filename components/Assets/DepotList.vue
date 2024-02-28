@@ -68,7 +68,7 @@
                     
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                    <div class="text-gray-900">{{ $n(((depot.gram_amount/1000) * getPrice(depot))) }} {{ currency }}</div>
+                    <div class="text-gray-900">{{ $n(parseFloat(((depot.gram_amount/1000) * getPrice(depot)).toFixed(2))) }} {{ currency }}</div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                     <div class="text-gray-900">{{ $n(depot.gram_amount/1000) }} g</div>

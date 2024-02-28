@@ -151,6 +151,10 @@ const state = reactive({
 const emit = defineEmits<{
   (e: 'onSave',info:Object): void
 }>()
+
+const  handleCountryChange =(counrty)=>{
+    state.nationality = counrty;
+}
 const onNameChanged=()=>{
     nameChanged.value = true;
 }

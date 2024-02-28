@@ -65,7 +65,7 @@
 </template>
 <script lang="ts" setup>
 import { Ref, ref, onMounted } from 'vue';
-import { Depot } from '@/lib/models';
+import { Account, Depot } from '@/lib/models';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon, ChevronDownIcon, InboxIcon } from '@heroicons/vue/24/outline';
 import DepotDetails from '@/components/Assets/DepotDetails';
@@ -82,14 +82,15 @@ const { t, locale } = useI18n();
 const route = useRoute();
 const id = route.params.id;
 const depot: Ref<Depot | null> = ref(null);
-const loadingData = ref(false)
+const loadingData = ref(false);
+const account :Ref<Account> = ref(null)
 const lang = computed(() => {
   return locale.value
 })
 const isVerified = computed(() => {
-  const account = AccountStorage.getAccount();
-  if (account) {
-    return account.is_verified;
+  
+  if (account?.value) {
+    return account.value.is_verified;
   }
   else {
     return false;
@@ -106,7 +107,7 @@ const tradeableAmount = computed(() => {
 onMounted(async () => {
   try {
     loadingData.value = true
-
+      account.value = AccountStorage.getAccount();
     depot.value = await AssetsService.getDepotDetails(id);
   }
   catch (err) {
