@@ -61,8 +61,8 @@ onMounted(() => {
 <template>
     <form @submit="updateProfileInformation" formId="updateProfileInfoForm">
         <div class="col-span-6 sm:col-span-4 z-[1]">
-            <SelectAvatar v-if="account?.avatar" :avatarUrl="defaultAvatar" @onSelectAvatar="handleOnSelectAvatar"/>
-            <Loading v-else className="rounded-full w-20 h-20"/>
+            <SelectAvatar iconClass="top-4" className="w-32 h-32 mx-auto" v-if="account?.avatar || defaultAvatar" :avatarUrl="defaultAvatar" @onSelectAvatar="handleOnSelectAvatar"/>
+            <Loading v-else className="rounded-full w-32 h-32 mx-auto !block" :width="128" :height="128"/>
 
             <div class="ml-4 mt-2" v-if="loading">
                 <Loading/>
