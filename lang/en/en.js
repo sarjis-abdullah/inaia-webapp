@@ -203,7 +203,7 @@ export default {
     oneOptionExplanationGold:'You pay the contractually agreed subscription fee immediately and get a 10% discount. The entire savings amount goes into the gold purchase right from the start.',
     oneOptionExplanationSilver:'You pay the contractually agreed subscription fee immediately and get a 10% discount. The entire savings amount goes into the silver purchase right from the start.',
     seeReamboursmentPlan:'Show payment table',
-    "1":'January',
+    "01":'January',
     "2":'February',
     "3":'March',
     "4":"April",

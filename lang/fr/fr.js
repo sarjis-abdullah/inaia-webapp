@@ -171,7 +171,7 @@ export default {
     oneOptionExplanationGold:"100 % de votre épargne est affectée à l'achat d'or dès le début, et vous bénéficiez d'une remise de 10 %.",
     oneOptionExplanationSilver:"100 % de votre épargne est affectée à l'achat d'argent dès le début, et vous bénéficiez d'une remise de 10 %.",
     seeReamboursmentPlan:'Afficher le tableau des paiements',
-    "1":'Janvier',
+    "01":'Janvier',
     "2":'Février',
     "3":'Mars',
     "4":"Avril",
