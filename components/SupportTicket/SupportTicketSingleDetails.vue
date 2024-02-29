@@ -1,5 +1,5 @@
 <template>
-    <section v-if="thisTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4 min-h-[60vh]">
+    <section v-if="thisTicket?.id" class="border-l md:border-l-0 border-t border-b border-r p-[.7rem] mb-4">
         <section class="flex justify-between">
             
             <section>
@@ -54,16 +54,16 @@
             </section>
         </section>
     </section>
-    <div v-if="!ticketLoading" class="m-4">
-        <div v-if="hasGroupMessages" class="grid gap-4 overflow-y-auto mesaageListToScrollTarget"
-            :class="shouldShowMessageBoxAndCloseTicket ? 'max-h-[40vh]' : 'max-h-[60vh]'" ref="mesaageListToScrollTarget">
+    <div v-if="!ticketLoading" class="md:m-4">
+        <div v-if="hasGroupMessages" class="grid gap-4 overflow-y-auto"
+            :class="shouldShowMessageBoxAndCloseTicket ? 'max-h-[40vh]' : 'max-h-[60vh]'" ref="messageList">
             <div v-for="(group, ind) in groupedMessages" :key="ind" class="">
 
                 <div class="flex justify-center items-center mb-4">
                     <div class="text-center">{{ isDateIsCurrentDay(group.date) ? $t('today') : group.date }}</div>
                 </div>
 
-                <ul class="grid gap-4">
+                <ul class="grid gap-4" >
                     <li v-for="(item, index) in group.messages" :key="index" :id="'message-' + item.id">
                         <section class="w-[60%] rounded-lg p-4"
                             :class="item.created_by == accountId ? 'bg-blue-100 ml-auto' : 'bg-gray-100 mr-auto'">
@@ -89,7 +89,7 @@
         </svg>
         <div>{{ $t('select_ticket') }}</div>
     </div>
-    <div v-if="ticketLoading" class="flex justify-center h-[50vh] items-center">
+    <div v-if="ticketLoading" class="flex justify-center md:h-[50vh] items-center">
         <Loading />
     </div>
     <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
@@ -103,11 +103,11 @@
                     class="px-2 py-1 border-gray-300 rounded-md bg-blue-400 text-white">
                     {{ $t('ok') }}
                 </button>
-                <Loading v-else />
+                <Loading v-else />yuyuy
             </div>
         </template>
     </Modal>
-    <form class="p-4 absolute bottom-0 w-full" v-if="shouldShowMessageBoxAndCloseTicket">
+    <form class="md:px-4 py-4 md:absolute bottom-0 w-full" v-if="shouldShowMessageBoxAndCloseTicket">
         <textarea type="text" class="bg-[#f5f5f5] w-full border-0" :placeholder="$t('write_answer')" rows="3"
             v-model="messageText"></textarea>
         <div class="flex justify-end">
@@ -127,7 +127,7 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed, watch, Ref, PropType } from 'vue'
+import { ref, computed, watch, Ref, PropType, nextTick } from 'vue'
 import moment from 'moment'
 import Loading from '@/components/common/Loading.vue'
 import Modal from '@/components/common/Modal.vue';
@@ -144,6 +144,7 @@ import { SupportTicket, SupportTicketMessage, SupportTicketStatus as SupportTick
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { NotificationTypes } from '@/constants/NotificationTypes';
 import { SupportTicketStatusList } from '@/lib/contants/index'
+
 const route = useRoute()
 
 //emits
@@ -164,11 +165,11 @@ interface GroupMessages {
 //data variables
 const groupedMessages: Ref<GroupMessages[]> = ref([])
 const ticketLoading = ref(false);
+const messageList = ref(null);
 const messageLoading = ref(false);
 const confirmWarningTicketModal = ref(false);
 const showSnackbar = ref(false);
 const statusLoading = ref(false);
-const mesaageListToScrollTarget = ref(null);
 const messageText = ref("");
 const errorText = ref("");
 const statusList: Ref<SupportTicketStatusModel[]> = ref([]);
@@ -330,19 +331,11 @@ const getOwnerName = (owner: any) => {
     return user?.fullName ?? ""
 }
 const scrollIntoView = () => {
-    if (hasGroupMessages && mesaageListToScrollTarget.value) {
-        const lastGroupMessage = groupedMessages.value[groupedMessages.value.length - 1]
-        if (lastGroupMessage && lastGroupMessage.messages) {
-            const messageLength = lastGroupMessage.messages.length
-            const lastMessage = lastGroupMessage.messages[messageLength - 1]
-            if (lastMessage && lastMessage.id) {
-                const messageArea = document.querySelector("#message-" + lastMessage.id.toString());
-                if (messageArea)
-                    messageArea.scrollIntoView();
-            }
+    nextTick(() => {
+        if (messageList.value) {
+            messageList.value.scrollTop = messageList.value.scrollHeight;
         }
-
-    }
+      });
 }
 
 const toggleTicketClosing = () => {
@@ -362,14 +355,8 @@ watch(props, () => {
     }
 }, { deep: true, immediate: true })
 
-watch(mesaageListToScrollTarget, () => {
-    scrollIntoView()
-}, { deep: false, immediate: true })
-
 watch(groupedMessages, () => {
-    setTimeout(() => {
-        scrollIntoView()
-    }, 100);
+    scrollIntoView()
 }, { deep: true, immediate: false })
 
 //mounted
