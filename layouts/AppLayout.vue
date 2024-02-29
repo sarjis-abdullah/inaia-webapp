@@ -339,7 +339,10 @@ const name = computed(() => {
   if (user.value) {
     name = user.value.name;
     if (user.value.person_data) {
-      name += ' ' + user.value.person_data.middlename ? user.value.person_data.middlename : '' + ' ' + user.value.person_data.surname;
+      if(user.value.person_data.middlename!=null && user.value.person_data.middlename!="" ){
+        name += ' '+ user.value.person_data.middlename;
+      }
+      name += ' '+ user.value.person_data.surname;
     }
   }
   return name;
