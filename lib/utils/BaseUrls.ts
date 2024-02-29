@@ -34,7 +34,7 @@ export class BaseUrls {
             return libConfig.baseUrls.production.bankBaseUrl;
         }
     }
-    public static getPaymentUrl(){
+    public static getPaymentUrl() : string{
         if(this.env == Envs.staging){
             return libConfig.baseUrls.staging.paymentsBaseUrl;
         }

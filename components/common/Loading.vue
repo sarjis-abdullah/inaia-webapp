@@ -1,5 +1,5 @@
 <template>
-    <span class="loading__anim" :style="{width : width + 'px',height: height+'px'}"></span>
+    <span class="loading__anim" :class="className" :style="{width : width + 'px',height: height+'px'}"></span>
 </template>
 <script setup lang="ts">
 const props = defineProps({
@@ -11,6 +11,10 @@ const props = defineProps({
              type:Number,
              default:35
          },
+         className: {
+            type: String,
+            default: ""
+         }
 })
 </script>
 <style scoped>

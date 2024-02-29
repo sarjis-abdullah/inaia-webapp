@@ -13,8 +13,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { CountryService } from '@/lib/services/CountryService';
-import { Country } from '@/lib/models/Country';
+import { CountryService } from '@/lib/services';
+import { Country } from '@/lib/models';
 import { ref, watch } from 'vue';
 import type { Ref } from 'vue'
 import Loading from '../common/Loading.vue';
@@ -23,7 +23,10 @@ const props = defineProps({
         type:String,
         default:null
     },
-
+    phoneNumber:{
+        type:String,
+        default:null
+    },
 })
 
 const emit = defineEmits<{
@@ -65,6 +68,14 @@ watch(props,(currentvalue,oldvalue)=>{
     if(sV){
       selected.value = sV;
     }
+  }
+  if(currentvalue.phoneNumber){
+    countries.value.forEach(c=>{
+      if(currentvalue.phoneNumber.startsWith(c.calling_code)){
+        selected.value = c;
+        emit("change",c.calling_code,c.id);
+      }
+    })
   }
 })
 </script>

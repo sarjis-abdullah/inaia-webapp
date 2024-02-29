@@ -1,3 +1,6 @@
+import { ConditionTypes } from "../contants";
+
 export interface ConditionsRequest{
-    countryId:number;
+    countryId?:number;
+    type?:ConditionTypes[];
 }

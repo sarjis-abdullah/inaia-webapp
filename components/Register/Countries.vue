@@ -1,6 +1,6 @@
 <template>
-  <Listbox as="div" v-model="selected">
-    <ListboxLabel class="block text-sm font-medium text-gray-700">{{ $t('your_country') }}</ListboxLabel>
+  <Listbox as="div" v-model="selected" :disabled="disabled">
+    <ListboxLabel class="block text-sm font-medium text-gray-700">{{ $t(label) }}</ListboxLabel>
     <div class="relative mt-1" v-if="!isLoading && !error">
       <ListboxButton
         class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm">
@@ -41,13 +41,14 @@
 </template>
 <script lang="ts" setup>
 
-import { CountryService } from '@/lib/services/CountryService';
-import { Country } from '@/lib/models/Country';
+import { CountryService } from '@/lib/services';
+import { Country } from '@/lib/models';
 import { ref, watch, onMounted } from 'vue';
 import type { Ref } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 import Loading from '../common/Loading.vue';
+const {t} = useI18n();
 const props = defineProps({
   all: {
     type: Boolean,
@@ -58,6 +59,12 @@ const props = defineProps({
   },
   selectedCountryId: {
     default: -1
+  },
+  label:{
+    default:'your_country'
+  },
+  disabled:{
+    default:false
   }
 })
 

@@ -8,7 +8,7 @@ const route = useRoute()
 const { locale } = useI18n();
 
 onMounted(()=>{
-  return navigateTo( locale.value+'/register' )
+  return navigateTo( '/' +locale.value+'/login' )
 })
 
 </script>

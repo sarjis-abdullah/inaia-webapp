@@ -21,9 +21,8 @@
 import { useRoute } from 'vue-router';
 const { t,locale } = useI18n();
 import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
-import { ResetPinService } from '@/lib/services/ResetPinService';
-import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
-import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
+import { ResetPinService } from '@/lib/services';
+import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
 const loading = ref(false);
 const token = ref('');

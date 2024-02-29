@@ -1,0 +1,278 @@
+{
+    "success": {
+        "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWQ0YTM4MjA4MjdiZGZjYTcyNzk1ZDQ4N2JlOTI1ODY5OTljMjM3Nzc5ZjdjMWM2ZTA3OTA2OTc2YjZlYTU1MGRkMTJjYWM5MjdkYTEzYzYiLCJpYXQiOjE2NzY5MjI2MzYuODcyOTcsIm5iZiI6MTY3NjkyMjYzNi44NzI5NzIsImV4cCI6MTY3OTUxNDYzNi44NTMzNDYsInN1YiI6IjE5MjYiLCJzY29wZXMiOltdfQ.edyt08eLiDKZWpV-xiWcmGdslXHUvBzc5GLg1f_RT8xQ-5LCZnXdxFHFetsJArcR4gpyPGQ7P7FvU3BuBvYqBepxISVGfdwDYkaaHut_xL5-SSSYLxCwmli4EuMzETpQc_prZijCKTBPx-odESo1FS0GyDAoSRRnLpfKkczCBjnREqT65nrP450mX1TAf61WRyD2qVe74x8w_JPrAr6o2EVzorgRDCUvvwwZnk5MjfpiCVkGNaiC6-6p5PgzvODLxaGpgRhASg67776MZGmjahhfSWvM-O8s9jVABWxSGVrV-7LS3lNK6nnvzkCR1ElvpVwqqXaNphOLaHT3OnCqXMxQAF8dIt1ZRxWIknDaUiJj3xXA8h2GffJL2EMZe_gp6_Nvcsgy8UXvnsyXLiGXA5k1_-I_oRHG1sATjwT6llNBBEAXpMwrX9N43PzuLsqjPXzehZ4Ht315-rpAZc1fXk9wHhhz2EfLLbu-Saq4RDyLd3mTOW7U5UkcgZUVFW4PBhx1xxjCqqVa987BDyu3Ca35vhFESabjJnqw9mGTgDUEatfmVOBml1tSmwgbRSHP1CkJpyLxupGdhdkNGwRHNiAuRw-YGZwjHos7_Jn6wws3mI8ZrW181A1Rk7t1FtQvSrhPmqac7MRyx5XJbbvRpB1nCU6KbW0eFHra_9POyzQ",
+        "account": {
+            "id": 392,
+            "type_id": 18,
+            "name": "Mahdi",
+            "is_active": 1,
+            "avatar": "https://s3.eu-central-1.amazonaws.com/staging-storage.inaia.cloud/profile/1643198170-Mahdi.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARXODEP55RFK2VQOH%2F20230220%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230220T195037Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Signature=93801485de9ee9272dd0b212d36ac7dd6bafc60dc039e62a811c08a48c157239",
+            "avatar_file": "profile/1643198170-Mahdi.jpg",
+            "is_verified": 1,
+            "aml_status_id": 1,
+            "aml_search_id": null,
+            "aml_status": {
+                "id": 1,
+                "name": "pending"
+            },
+            "created_at": "2022-01-24T20:19:18.000000Z",
+            "account": {
+                "id": 1926,
+                "contact_id": 392,
+                "type_id": 2,
+                "account_number": "GD6221926",
+                "username": "GD6221926",
+                "is_active": 1,
+                "is_locked": 0,
+                "referral_code": "n4yfut",
+                "has_pin": true,
+                "pin_length": 6,
+                "created_at": "2022-01-24T20:22:45.000000Z",
+                "settings": [
+                    {
+                        "id": 26,
+                        "account_id": 1926,
+                        "name_translation_key": "locale",
+                        "value": "en"
+                    }
+                ],
+                "plan_id": 2,
+                "plan": {
+                    "id": 2,
+                    "name": "Premium",
+                    "plan_fees": null,
+                    "countries": null
+                },
+                "plan_fee": null,
+                "new_support_ticket_answer_count": 0,
+                "new_inbox_message_count": 1,
+                "kyc_details": null,
+                "contact": 392,
+                "products": [
+                    {
+                        "id": 1,
+                        "name_translation_key": "product_name_golddinar",
+                        "product_specs": [
+                            {
+                                "id": 28,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "gold_transaction_fee",
+                                "translated_name": "Transaction fee",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 175,
+                                        "product_spec_id": 28,
+                                        "country_id": 82,
+                                        "value": "395",
+                                        "unit": "percentage"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 29,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "gold_buying_charge",
+                                "translated_name": "Buying charge",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 196,
+                                        "product_spec_id": 29,
+                                        "country_id": 82,
+                                        "value": "550",
+                                        "unit": "percentage"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 30,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "gold_selling_charge",
+                                "translated_name": "Selling charge",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 217,
+                                        "product_spec_id": 30,
+                                        "country_id": 82,
+                                        "value": "150",
+                                        "unit": "percentage"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 31,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "gold_delivery_charge",
+                                "translated_name": "gold_delivery_charge",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 238,
+                                        "product_spec_id": 31,
+                                        "country_id": 82,
+                                        "value": "1500",
+                                        "unit": "fiat"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 62,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "silver_transaction_fee",
+                                "translated_name": "silver_transaction_fee",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 889,
+                                        "product_spec_id": 62,
+                                        "country_id": 82,
+                                        "value": "395",
+                                        "unit": "percentage"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 63,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "silver_buying_charge",
+                                "translated_name": "silver_buying_charge",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 910,
+                                        "product_spec_id": 63,
+                                        "country_id": 82,
+                                        "value": "550",
+                                        "unit": "percentage"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 64,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "silver_selling_charge",
+                                "translated_name": "silver_selling_charge",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 931,
+                                        "product_spec_id": 64,
+                                        "country_id": 82,
+                                        "value": "150",
+                                        "unit": "percentage"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 65,
+                                "product_id": 1,
+                                "plan_id": 2,
+                                "name": "silver_delivery_charge",
+                                "translated_name": "silver_delivery_charge",
+                                "sort_order": 0,
+                                "hidden": 0,
+                                "product_spec_values": [
+                                    {
+                                        "id": 952,
+                                        "product_spec_id": 65,
+                                        "country_id": 82,
+                                        "value": "1500",
+                                        "unit": "fiat"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "type": null,
+            "person_data": {
+                "id": 222,
+                "contact_id": 392,
+                "contact": 392,
+                "middlename": null,
+                "surname": "Njim",
+                "birthdate": "1988-02-13",
+                "gender": "male",
+                "birth_place": "Sfax",
+                "nationality_id": null,
+                "nationality_details": null
+            },
+            "address": {
+                "id": 208,
+                "type_id": 30,
+                "contact_id": 392,
+                "line1": "Kkkk",
+                "line2": "Option",
+                "postal_code": "123456",
+                "city": "Gggg",
+                "region": "Hesssen",
+                "country_id": 82,
+                "country": {
+                    "id": 82,
+                    "alpha2_code": "DE",
+                    "alpha3_code": "DEU",
+                    "numeric_code": "276",
+                    "calling_code": "0049",
+                    "currency_code": "EUR",
+                    "currency_symbol": "€",
+                    "name_translation_key": "Germany",
+                    "currency_name_translation_key": "Euro",
+                    "nationality_translation_key": "German",
+                    "allow": 1
+                },
+                "is_primary": 1,
+                "is_active": 1
+            },
+            "channels": [
+                {
+                    "id": 375,
+                    "type_id": 23,
+                    "type": {
+                        "id": 23,
+                        "name_translation_key": "mobile_channel_type",
+                        "value": "mobile",
+                        "targets": "contact_channel"
+                    },
+                    "contact_id": 392,
+                    "value": "00491636809485",
+                    "is_primary": 1,
+                    "is_active": 1
+                },
+                {
+                    "id": 376,
+                    "type_id": 25,
+                    "type": {
+                        "id": 25,
+                        "name_translation_key": "email_channel_type",
+                        "value": "email",
+                        "targets": "contact_channel"
+                    },
+                    "contact_id": 392,
+                    "value": "mn@flexwork.io",
+                    "is_primary": 1,
+                    "is_active": 1
+                }
+            ]
+        },
+        "token_type": "Bearer",
+        "expires_in": 2592000,
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWQ0YTM4MjA4MjdiZGZjYTcyNzk1ZDQ4N2JlOTI1ODY5OTljMjM3Nzc5ZjdjMWM2ZTA3OTA2OTc2YjZlYTU1MGRkMTJjYWM5MjdkYTEzYzYiLCJpYXQiOjE2NzY5MjI2MzYuODcyOTcsIm5iZiI6MTY3NjkyMjYzNi44NzI5NzIsImV4cCI6MTY3OTUxNDYzNi44NTMzNDYsInN1YiI6IjE5MjYiLCJzY29wZXMiOltdfQ.edyt08eLiDKZWpV-xiWcmGdslXHUvBzc5GLg1f_RT8xQ-5LCZnXdxFHFetsJArcR4gpyPGQ7P7FvU3BuBvYqBepxISVGfdwDYkaaHut_xL5-SSSYLxCwmli4EuMzETpQc_prZijCKTBPx-odESo1FS0GyDAoSRRnLpfKkczCBjnREqT65nrP450mX1TAf61WRyD2qVe74x8w_JPrAr6o2EVzorgRDCUvvwwZnk5MjfpiCVkGNaiC6-6p5PgzvODLxaGpgRhASg67776MZGmjahhfSWvM-O8s9jVABWxSGVrV-7LS3lNK6nnvzkCR1ElvpVwqqXaNphOLaHT3OnCqXMxQAF8dIt1ZRxWIknDaUiJj3xXA8h2GffJL2EMZe_gp6_Nvcsgy8UXvnsyXLiGXA5k1_-I_oRHG1sATjwT6llNBBEAXpMwrX9N43PzuLsqjPXzehZ4Ht315-rpAZc1fXk9wHhhz2EfLLbu-Saq4RDyLd3mTOW7U5UkcgZUVFW4PBhx1xxjCqqVa987BDyu3Ca35vhFESabjJnqw9mGTgDUEatfmVOBml1tSmwgbRSHP1CkJpyLxupGdhdkNGwRHNiAuRw-YGZwjHos7_Jn6wws3mI8ZrW181A1Rk7t1FtQvSrhPmqac7MRyx5XJbbvRpB1nCU6KbW0eFHra_9POyzQ"
+    }
+}

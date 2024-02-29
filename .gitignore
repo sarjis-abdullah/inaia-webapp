@@ -6,7 +6,7 @@
 # Node artifact files
 node_modules/
 dist/
-
+.output/
 # Compiled Java class files
 *.class
 
@@ -41,10 +41,11 @@ Thumbs.db
 *.war
 
 # Large media files
-*.mp4
+
 *.tiff
 *.avi
 *.flv
 *.mov
 *.wmv
 
+.nuxt/

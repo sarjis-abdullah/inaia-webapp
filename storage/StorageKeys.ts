@@ -5,5 +5,17 @@ export enum StorageKeys{
     subscriptionStep='subscriptionStep',
     emailValidated='EmailValidated',
     phoneValidated='phoneValidated',
-    address='address'
+    token='token',
+    expirationDate="expirationDate",
+    refreshToken="refreshToken",
+    account="account",
+    secret='secret',
+    permanent='permanent',
+    accountId='account_id',
+    contact_id='contact_id',
+    address='address',
+    goldPrice='goldprice',
+    silverPrice='silverprice',
+    depotTypes = 'depottypes',
+    depotToTrade = 'depotToTrade'
 }

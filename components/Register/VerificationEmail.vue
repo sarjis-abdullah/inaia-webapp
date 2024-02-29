@@ -36,11 +36,9 @@ import CodeInputs from './CodeInputs';
 import Loading from '../common/Loading';
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
 import {ref,onMounted} from 'vue';
-import { EmailService } from '~~/lib/services/EmailService';
-import { SubscriptionService } from '~~/lib/services/SubscriptionService';
-import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
-import { MissingInformationException } from '~~/lib/exceptions/MissingInformationException';
-import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
+import { EmailService,SubscriptionService } from '@/lib/services';
+import { SubscriptionStorage } from '~~/storage';
+import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
 const { t,locale } = useI18n();
 const isVerifyingEmail = ref(false);
 

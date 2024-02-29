@@ -86,10 +86,10 @@ import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon
 
 import {ref,reactive,toRefs,watch,computed,onMounted} from 'vue';
 
-import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
-import { AddressRequest } from '~~/lib/requests/AddressRequest';
+import { SubscriptionStorage } from '@/storage';
+import { AddressRequest } from '@/lib/requests';
 import Countries from '@/components/Register/Countries';
-import { SubscriptionService } from '~~/lib/services/SubscriptionService';
+import { SubscriptionService } from '@/lib/services';
 
 const saveActivated = ref(false);
 const isSubmitting = ref(false);

@@ -156,8 +156,8 @@ import VerificationPhone from './Register/VerificationPhone';
 import ConditionList from './Register/ConditionList.vue';
 import { useI18n } from 'vue-i18n';
 import RegistrationSuccess from './Register/RegistrationSuccess.vue';
-import { SubscriptionStorage } from '~~/storage/SubscriptionStorage';
-import { SubscriptionService } from '~~/lib/services/SubscriptionService';
+import { SubscriptionStorage } from '@/storage';
+import { SubscriptionService } from '@/lib/services';
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/outline';
