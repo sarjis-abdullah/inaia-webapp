@@ -112,10 +112,59 @@
           </div>
           <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
-            <button type="button" @click="openTrading" v-if="isVerified"
-              class="inline-flex mr-4 items-center rounded-md border border-blue-900 bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              <PlusIcon class="h-6 w-6" aria-hidden="true" />Trading
-            </button>
+            <Menu as="div" class="relative inline-block text-left" v-if="isVerified">
+                  <div>
+                    <MenuButton
+                      class="text-white bg-blue-600 hover:bg-blue-500 hover:bg-opacity-75 px-3 py-3 rounded-md text-sm font-medium flex mr-3">
+                      <PlusIcon class=" mr-1 h-5 w-5" aria-hidden="true" />
+                      {{ $t('trading') }}
+                      
+                    </MenuButton>
+                  </div>
+
+                  <transition enter-active-class="transition ease-out duration-100"
+                    enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                    leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
+                    leave-to-class="transform opacity-0 scale-95">
+                    <MenuItems
+                      class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div class="py-1">
+                        <MenuItem v-slot="{ active }">
+                        <NuxtLink :to="'/'+lang+'/trading/buy'"
+                          :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'group flex items-center px-4 py-2 text-sm']">
+                          <img src="./../assets/img/icons/gold_purchase.png" class="h-5 w-5 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
+                          {{ $t('buy_assets') }}
+                        </NuxtLink>
+                        </MenuItem>
+                        <MenuItem v-slot="{ active }">
+                          <NuxtLink :to="'/'+lang+'/trading/sell'"
+                          :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'group flex items-center px-4 py-2 text-sm']">
+                          <img src="./../assets/img/icons/gold_sell.png" class="h-5 w-5 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
+                          {{ $t('sell_assets') }}
+                        </NuxtLink>
+                        </MenuItem>
+                        <MenuItem v-slot="{ active }">
+                          <NuxtLink :to="'/'+lang+'/trading/delivery'"
+                          :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'group flex items-center px-4 py-2 text-sm']">
+                          <img src="./../assets/img/icons/gold_delivery.png" class="h-5 w-5 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
+                          {{ $t('gold_delivery') }}
+                          </NuxtLink>
+                        </MenuItem>
+                      </div>
+                      <div class="py-1">
+
+                        <MenuItem v-slot="{ active }">
+                          <NuxtLink :to="'/'+lang+'/trading/transfer'"
+                          :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'group flex items-center px-4 py-2 text-sm']">
+                          <img src="./../assets/img/icons/gold_sell.png" class="h-5 w-5 flex-shrink-0 rounded-full bg-gray-300 mr-2"/>
+                          {{ $t('asset_transfer') }}
+                          </NuxtLink>
+                        </MenuItem>
+                      </div>
+
+                    </MenuItems>
+                  </transition>
+                </Menu>
             <DisclosureButton
               class="inline-flex items-center justify-center rounded-md bg-blue-600 p-2 text-blue-200 hover:bg-blue-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
               <span class="sr-only">Open main menu</span>

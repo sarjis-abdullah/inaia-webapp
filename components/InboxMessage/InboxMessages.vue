@@ -94,7 +94,7 @@ const loadData = async () => {
                 emit('emptyMessage',true);
             }
             if (messages.value?.length && !selectedMessage.value.id) {
-                setSelectedMessage(messages.value[0])
+                //setSelectedMessage(messages.value[0])
             }
         }
         errorText.value = ""

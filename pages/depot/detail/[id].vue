@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 gap-10 mt-10">
-      <div class="col-span-2">
+    <div class="grid md:grid-cols-3 md:gap-10 mt-3 md:mt-10" v-if="!loadingData">
+      <div class="md:col-span-2">
 
         <DepotHistoryChart :depot="depot" v-if="depot" />
 
       </div>
-      <div class="">
+      <div class="mt-6 md:mt-0">
         <SavingPlanDetail :depot="depot" class="mb-6" :isVerified="isVerified"/>
-        <div class="flex flex-row justify-between items-center rounded-lg bg-white shadow p-3" v-if="depot && isVerified">
+        <div class="flex flex-row justify-between items-center rounded-lg bg-white shadow p-3" v-if="depot && isVerified && !loadingData">
           <NuxtLink :to="'/' + lang + '/trading/buy/' + id"
             class="flex w-full cursor-pointer mx-1 justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
             {{ $t('buy') }}</NuxtLink>
@@ -60,7 +60,7 @@
       </div>
 
     </div>
-    <DepotOrders :depot="depot" v-if="depot" class="mt-6" />
+    <DepotOrders :depot="depot" v-if="depot && !loadingData" class="mt-6" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -82,7 +82,7 @@ const { t, locale } = useI18n();
 const route = useRoute();
 const id = route.params.id;
 const depot: Ref<Depot | null> = ref(null);
-const loadingData = ref(false);
+const loadingData = ref(true);
 const account :Ref<Account> = ref(null)
 const lang = computed(() => {
   return locale.value
@@ -109,6 +109,7 @@ onMounted(async () => {
     loadingData.value = true
       account.value = AccountStorage.getAccount();
     depot.value = await AssetsService.getDepotDetails(id);
+    loadingData.value = false
   }
   catch (err) {
     loadingData.value = false

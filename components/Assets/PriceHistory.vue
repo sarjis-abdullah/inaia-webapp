@@ -19,7 +19,7 @@
         </button>
       </div>
   </div>
-        <apexchart width="500" type="line" :options="options" :series="series"></apexchart>
+        <apexchart  type="line" :options="options" :series="series" height="300"></apexchart>
     </div>
 </template>
 <script lang="ts" setup>

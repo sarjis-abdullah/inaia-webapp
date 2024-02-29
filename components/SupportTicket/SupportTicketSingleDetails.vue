@@ -1,5 +1,5 @@
 <template>
-    <section v-if="thisTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4">
+    <section v-if="thisTicket?.id" class="border-t border-b border-r p-[.7rem] mb-4 min-h-[60vh]">
         <section class="flex justify-between">
             
             <section>

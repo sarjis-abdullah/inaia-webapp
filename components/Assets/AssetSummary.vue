@@ -3,7 +3,7 @@
       <div class="text-center text-sm text-gray-500">{{ $t('totalAmount') }}</div>
       <h1 class="text-center text-4xl">{{ $n(balance) }} €</h1>
       <Alert v-if="!isVerified" :kycDetails="kycDetails" class="my-3" :kycStatus="kycStatus"/>
-        <div  class="grid grid-cols-2 gap-10 mt-10">
+        <div  class="grid grid-cols-1 md:grid-cols-2 gap-10  mt-10 ">
           <div v-for="asset in assets" :key="asset.name">
           <AssetItem   :item="asset"/>
           <PriceHistory :type="asset.name" class="mt-6"/>
