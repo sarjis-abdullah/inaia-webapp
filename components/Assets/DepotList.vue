@@ -75,7 +75,7 @@
                     <div class="text-gray-900">{{ $n(depot.gram_amount/1000) }} g</div>
                   </td>
                   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <NuxtLink :to="'depot/detail/'+depot.id" class="text-indigo-600 hover:text-indigo-900"
+                    <NuxtLink :to="'/'+locale+'/depot/detail/'+depot.id" class="text-indigo-600 hover:text-indigo-900"
                       v-if="isVerified">{{ $t('details') }}<span class="sr-only">, {{ depot.name }}</span></NuxtLink
                     >
                   </td>
