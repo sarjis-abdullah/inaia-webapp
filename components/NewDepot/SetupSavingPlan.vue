@@ -455,7 +455,14 @@ function getMonths(startMonth=0)
 {
     months.value = [];
     for (let index = startMonth; index < (12); index++) {
-        months.value.push({option:index,name:t((index+1).toString())});
+        let monthName = '';
+        if(index==0){
+            monthName='01'
+        }
+        else{
+            monthName = (index+1).toString();
+        }
+        months.value.push({option:index,name:t(monthName)});
         
     }
 }
