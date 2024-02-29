@@ -1,5 +1,7 @@
 <template>
+  <div class="flex items-center">
     <span class="loading__anim" :class="className" :style="{width : width + 'px',height: height+'px'}"></span>
+  </div>
 </template>
 <script setup lang="ts">
 const props = defineProps({

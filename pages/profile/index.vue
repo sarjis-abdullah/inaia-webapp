@@ -19,7 +19,7 @@
             <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
               <div class="text-gray-900">{{ email }}</div>
               <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="openUpdateEmail">{{
-                $t('update') }}</button>
+                $t('edit') }}</button>
             </dd>
           </div>
           <div class="pt-6 sm:flex">
@@ -27,7 +27,7 @@
             <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
               <div class="text-gray-900">{{ phone }}</div>
               <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="openUpdatePhone">{{
-                $t('update') }}</button>
+                $t('edit') }}</button>
             </dd>
           </div>
           <div class="pt-6 sm:flex">
@@ -35,7 +35,7 @@
             <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
               <div class="text-gray-900">{{ address }}</div>
               <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="updateAddress">{{
-                $t('update') }}</button>
+                $t('edit') }}</button>
             </dd>
           </div>
           <div class="pt-6 sm:flex">
@@ -43,7 +43,7 @@
             <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
               <div class="text-gray-900">{{ '*******' }}</div>
               <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="editPassword">{{
-                $t('update') }}</button>
+                $t('edit') }}</button>
             </dd>
           </div>
         </dl>
@@ -110,7 +110,7 @@
     <Confirmation :show="showConfirmation" @cancel="cancelDelete" @confirm="confirmDelete" :title="$t('confirm_delete')" :text="$t('do_you_want_to_delete_bank_account')"/>
   </main>
 </template>
-  
+
 <script setup lang="ts">
 definePageMeta({
   layout: "app-layout",
@@ -143,7 +143,7 @@ import UpdateEmail from '@/components/Profile/UpdateEmail.vue';
 import UpdateProfile from '@/components/Profile/UserProfile.vue';
 import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount';
 import { BadInputException, MissingInformationException, ServerErrorException } from '@/lib/exceptions';
-import Confirmation from '@/components/common/Confirmation'; 
+import Confirmation from '@/components/common/Confirmation';
 import { formatIban } from '@/lib/Formatters';
 import  Alert  from '@/components/Kyc/Alert.vue';
 const switchLocalePath = useSwitchLocalePath();
@@ -170,7 +170,7 @@ const confirmDelete = async ()=>{
     await PaymentAccountService.deletePaymentAccount(selectedPaymentAccountToDelete.value);
     let index = paymentAccounts.value.findIndex(x=>x.id == selectedPaymentAccountToDelete.value);
     paymentAccounts.value.splice(index,1);
-    
+
 
   } catch (error) {
     notificationText.value = handleError(error);

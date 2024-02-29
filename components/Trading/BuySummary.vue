@@ -1,5 +1,5 @@
 <template>
-    
+
         <div>
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('orderOverview') }}</h2>
             <div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div>
-                <p class="text-sm font-thin text-gray-400">{{ $t('purshaseSellNote') }}</p>
+                <p class="text-sm font-thin text-gray-400">{{ $t('purchaseSellNote') }}</p>
                 <p class="text-sm font-thin text-gray-400 mt-3">{{ $t('buyingNoteOnExecutionDate') }}</p>
             </div>
             <div class="mt-8">
@@ -55,7 +55,7 @@
                         $t('confirm') }}</button>
                 <InLineApiError :err="submitErr" />
             </div>
-    
+
 </div></template>
 <script lang="ts" setup>
 import {ref,PropType} from 'vue';
@@ -135,7 +135,7 @@ const execute = async ()=>{
     }
     try{
         isSubmitting.value = true;
-        
+
         const PlaceOrderInfo : PlaceOrderModel = await AssetTradingService.placeOrder(request);
         emit("onPlace",{
             placedOrderinfo:PlaceOrderInfo,
@@ -162,7 +162,7 @@ const conditions = computed(()=>{
     return []
 })
 const payment = computed(()=>{
-   
+
     if(props.PaymentMethod == PaymentMethods.bankTranfer){
         return t(props.PaymentMethod);
     }else{
