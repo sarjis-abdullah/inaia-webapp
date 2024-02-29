@@ -70,7 +70,7 @@ onMounted(() => {
             </div>
             <div v-else-if="!loading && !newAvatarCreated" class="flex justify-center">
                 <button type="submit" v-show="photoPreview" class="font-semibold text-blue-600 hover:text-blue-500 mt-2 ml-3">{{
-                    $t('update') }}
+                    $t('edit') }}
                 </button>
             </div>
         </div>
