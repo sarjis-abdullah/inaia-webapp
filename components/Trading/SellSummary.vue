@@ -24,8 +24,8 @@
                     {{ $n(orderPreview?.gram_price_trading/100) }} {{ currency }}
                 </div>
             </div>
-            
-           
+
+
             <ListItem :title="$t('totalAmount')">{{ $n(orderPreview?.amount / 1000) }} g</ListItem>
         </div>
         <div class="relative flex items-start py-4" v-for="c in conditions" :key="c.id">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div>
-            <p class="text-sm font-thin text-gray-400">{{ $t('purshaseSellNote') }}</p>
+            <p class="text-sm font-thin text-gray-400">{{ $t('purchaseSellNote') }}</p>
             <p class="text-sm font-thin text-gray-400 mt-3">*) {{ $t('sellingNoteOnExecutionDate') }}</p>
         </div>
         <div class="mt-8">
@@ -118,10 +118,10 @@ const execute = async () => {
         unit: "gram",
         depot_id: props.depot?.id,
         conditions: checkedConditions.value.join(','),
-        
+
         order_approval_method: props.confirmationMethod
     };
-    
+
     try {
         isSubmitting.value = true;
 
