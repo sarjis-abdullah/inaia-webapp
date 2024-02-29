@@ -52,7 +52,7 @@ onMounted(()=>{
     }
     if(props.type == AssetTypes.gold){
         title.value = t('whyInvestInGold');
-        imgSrc.value = new URL('~/assets/img/icons/goldBars.png',import.meta.url).href;
+        imgSrc.value = new URL('~/assets/img/icons/goldbars.png',import.meta.url).href;
         benifits.value = t('advantagesOfGold');
         options.value = [
             {key:1,value:t('crisisResistant')},

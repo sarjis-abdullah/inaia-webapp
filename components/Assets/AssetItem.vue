@@ -32,7 +32,7 @@ const imgUrl = computed(()=>{
     if(props.item)
     {
         if(props.item.name == AssetTypes.gold){
-            return new URL('~/assets/img/icons/goldBars.png',import.meta.url).href;
+            return new URL('~/assets/img/icons/goldbars.png',import.meta.url).href;
         }
         if(props.item.name == AssetTypes.silver){
             return new URL('~/assets/img/icons/silverBars.png',import.meta.url).href;
