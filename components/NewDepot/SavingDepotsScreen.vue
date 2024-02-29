@@ -29,6 +29,7 @@ import { PropType } from "vue";
 import Loading from "@/components/common/Loading";
 import InLineApiError from "@/components/common/InLineApiError";
 import {  CheckCircleIcon, XCircleIcon} from '@heroicons/vue/20/solid';
+import { urlBuilder } from "~~/helpers/urlBuilder";
 const router = useRouter();
 const {locale} = useI18n();
 const props = defineProps({
@@ -47,8 +48,7 @@ const props = defineProps({
 })
 const goToDashboard = () => {
     const lang = locale.value;
-    const link = router.resolve("/"+lang+'/dashboard');
-    const url = "http://"+window.location.host+link.fullPath;
+    const url = urlBuilder(lang,'/dashboard');
     window.open(url,'_self');
 }
 </script>

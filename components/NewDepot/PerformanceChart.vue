@@ -30,16 +30,16 @@
         </div>
         <div class="mt-6" v-if="selectedDisplay == displays.table">
             <div class="grid grid-cols-4 gap-2 py-2 px-2 bg-gray-50 text-center">
-            <div>{{ $t('year') }}</div>
-            <div>{{ $t('deposit') }}</div>
-            <div>{{ $t('agio') }}</div>
-            <div>{{ $t('performance') }}</div>
+            <div class="truncate">{{ $t('year') }}</div>
+            <div class="truncate">{{ $t('deposit') }}</div>
+            <div class="truncate">{{ $t('agio') }}</div>
+            <div class="truncate">{{ $t('performance') }}</div>
         </div>
         <div class="grid grid-cols-4 gap-2 py-2 px-2" v-for="yearData in tableData" :key="yearData.year">
             <div>{{ yearData.year }}</div>
             <div>{{ $n(yearData.deposit) }} {{ currency }}</div>
             <div>{{ $n(yearData.agio) }} {{ currency }}</div>
-            <div>{{ $n(yearData.performance) }} {{ currency }}</div>
+            <div class="text-balance">{{ $n(yearData.performance) }} {{ currency }}</div>
         </div>
         </div>
     </div>
