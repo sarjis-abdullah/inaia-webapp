@@ -85,10 +85,12 @@
         <div class="pt-6 sm:flex">
             <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{{ $t('personalReferralCode') }}</dt>
             <dd class="mt-1 flex items-center gap-x-6 sm:mt-0 sm:flex-auto">
-              <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralCode">12345</button>
+              <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralCode">
+                {{ referralCode }}
+              </button>
               <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
                 <div v-show="copyingCode" class="text-sm text-gray-600">
-                  Copied
+                  {{ $t('copied')}}
                 </div>
               </transition>
             </dd>
@@ -101,7 +103,7 @@
                 </button>
                 <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
                   <div v-show="copyingLink" class="text-sm text-gray-600">
-                    Copied
+                    {{ $t('copied')}}
                   </div>
               </transition>
             </dd>
