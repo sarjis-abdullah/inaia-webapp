@@ -73,7 +73,43 @@
         </div>
       </div>
 
-
+      <article>
+        <h2 class="text-base leading-7 text-gray-900">
+          <span class="font-semibold">{{ $t('referralHeader') }}</span>
+          <span class="ml-2 text-sm">({{ $t('referralHeaderHints') }})</span>
+        </h2>
+        <div class="flex border-t border-gray-200 mt-4">
+          <p class="py-2">{{ $t('referralRecommendation') }}</p>
+        </div>
+        
+        <div class="pt-6 sm:flex">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{{ $t('personalReferralCode') }}</dt>
+            <dd class="mt-1 flex items-center gap-x-6 sm:mt-0 sm:flex-auto">
+              <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralCode">12345</button>
+              <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                <div v-show="copyingCode" class="text-sm text-gray-600">
+                  Copied
+                </div>
+              </transition>
+            </dd>
+        </div>
+        <div class="pt-6 sm:flex">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">{{ $t('registrationInstructions') }}</dt>
+            <dd class="mt-1 flex items-center gap-x-6 sm:mt-0 sm:flex-auto">
+                <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
+                  {{ $t('copyReferralLink') }}
+                </button>
+                <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                  <div v-show="copyingLink" class="text-sm text-gray-600">
+                    Copied
+                  </div>
+              </transition>
+            </dd>
+        </div>
+        <p class="text-xs mt-6">
+          {{ $t('savingsPlanCriteria') }}
+        </p>
+      </article>
 
       <div>
         <h2 class="text-base font-semibold leading-7 text-gray-900">{{ $t('language') }}</h2>
@@ -164,6 +200,8 @@ const addNewPaymentAcoount = ref(false);
 const showConfirmation = ref(false);
 const selectedPaymentAccountToDelete = ref(-1);
 const showPasswordUpdatePopup = ref(false);
+const copyingLink = ref(false);
+const copyingCode = ref(false);
 const confirmDelete = async ()=>{
   try {
     isModfyingBankAccount.value = true;
@@ -329,6 +367,8 @@ const language = computed(() => {
   }
   return l
 })
+const referralCode = computed(() => account.value?.account?.referral_code ?? "")
+const referralLink = computed(() => account.value?.account?.referral_link ?? "")
 const showAddPayment = ()=>{
   addNewPaymentAcoount.value = true
 }
@@ -430,7 +470,6 @@ const deleteBankAccount = async (bankAccountId:number)=>{
   showConfirmation.value = true;
 }
 const handleError = (value) => {
-  console.log(value.getRealMessage());
   if (value instanceof MissingInformationException || value instanceof BadInputException) {
     return value.getRealMessage();
   }
@@ -439,6 +478,27 @@ const handleError = (value) => {
   }
   else
     return t(value.getTranslationKey());
+}
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch($e) {
+    console.error($e)
+  }
+}
+const copyOnlyReferralLink = async() => {
+  copyingLink.value = true
+  setTimeout(() => {
+    copyingLink.value = false
+  }, 500);
+  copyToClipboard(referralLink.value)
+}
+const copyOnlyReferralCode = async() => {
+  copyingCode.value = true
+  setTimeout(() => {
+    copyingCode.value = false
+  }, 500);
+  copyToClipboard(referralCode.value)
 }
 onMounted(async () => {
   account.value = AccountStorage.getAccount();
