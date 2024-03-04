@@ -76,7 +76,7 @@
       <article>
         <h2 class="text-base leading-7 text-gray-900">
           <span class="font-semibold">{{ $t('referralHeader') }}</span>
-          <span class="ml-2 text-sm">({{ $t('referralHeaderHints') }})</span>
+          <span class="ml-2 text-sm">{{ $t('referralHeaderHints') }}</span>
         </h2>
         <div class="flex border-t border-gray-200 mt-4">
           <p class="py-2">{{ $t('referralRecommendation') }}</p>

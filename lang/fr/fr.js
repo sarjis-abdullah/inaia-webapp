@@ -349,7 +349,6 @@ export default {
     referralHeaderHints: "(Envoyez le code et gagnez un bonus)",
     referralRecommendation: "Recommandez INAIA à vos amis ! Pour chaque plan d'épargne* que vos amis mettent en place avec nous, vous recevrez un crédit de 50€ sur un dépôt de votre choix.",
     personalReferralCode: "Code de parrainage personnel",
-    referralCode: "12345",
     registrationInstructions: "Spécifiez simplement lors de l'inscription ou partagez le lien de recommandation",
     copyReferralLink: "Copier le lien de parrainage",
     savingsPlanCriteria: "* avec un volume d'épargne d'au moins 6000€ (par exemple 50€ euros / 10 ans)",
