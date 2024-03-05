@@ -46,7 +46,6 @@ const statAddingDepot = ()=>{
     emit('start');
 }
 onMounted(()=>{
-    
     if(props.type == AssetTypes.silver){
         title.value = t('whyInvestInSilver');
         imgSrc.value = new URL('~/assets/img/icons/silverBars.png',import.meta.url).href;
