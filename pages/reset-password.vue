@@ -48,7 +48,7 @@
               class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">{{ $t('confirm') }}</button>
             </div>
           </form>
-          <p class="mt-1 text-center text-sm text-red-500" v-if="error!=''">{{ error }}</p>
+          <InLineApiError :err="error"/>
           <div class="mt-1 flex items-center justify-center"  v-if="success!=''"><CheckCircleIcon class="h-6 w-6 text-green-500">
 
           </CheckCircleIcon>
@@ -71,14 +71,16 @@ import { MissingInformationException,ServerErrorException } from '@/lib/exceptio
 import {ResetPasswordService} from '@/lib/services';
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
 import { I18nN } from '@nuxtjs/i18n/dist/runtime/composables';
+import InLineApiError from '@/components/common/InLineApiError';
 const inputErrorStyle = "block w-full rounded-md border-0 py-1.5 text-red-900 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6";
 const passwordValidated = ref(true);
 const emailValidated = ref(true);
 const confirmedPasswordValidated = ref(true)
 const disabled = ref(true);
 const isSubmitting = ref(false);
+
 const token = ref('');
-const error = ref('');
+const error = ref(null);
 const success = ref('')
 const router = useRouter();
 const state = reactive({
@@ -131,12 +133,7 @@ async function commit() {
         success.value = t('password_reset_with_success');
     }
     catch(err){
-        if(err instanceof MissingInformationException){
-            error.value = err.getRealMessage();
-        }
-        else if(err instanceof ServerErrorException){
-            error.value = t(err.getTranslationKey());
-        }
+      error.value = err;
 
     }
     finally{
