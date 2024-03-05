@@ -22,9 +22,12 @@ import { CheckIcon } from '@heroicons/vue/24/outline';
 const { t,locale } = useI18n();
 const props = defineProps({
     type:{
-             type:String,
-             
-         },
+        type:String,
+    },
+    depotName:{
+        type:String,
+        defaut: ""
+    },
 })
 const options = ref([]);
 const title = ref('');
@@ -41,7 +44,6 @@ onMounted(()=>{
     if(props.type == AssetTypes.silver){
         title.value = t('whyInvestInSilver');
         imgSrc.value = new URL('~/assets/img/icons/silverBars.png',import.meta.url).href;
-        console.log(imgSrc.value);
         benifits.value = t('advantagesOfSilver');
         options.value = [
             {key:1,value:t('silverCrisisResistant')},

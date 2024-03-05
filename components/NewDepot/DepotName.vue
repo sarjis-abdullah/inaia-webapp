@@ -56,4 +56,8 @@ const setName = ()=>{
 const handleOnSelectAvatar = (base_64_url: string)=> {
     emit('onSelectAvatar', base_64_url);
 }
+const updateDepoName = (name: string)=> {
+    state.name = name
+}
+defineExpose({ updateDepoName })
 </script>

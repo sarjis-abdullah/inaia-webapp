@@ -1,6 +1,6 @@
 <template>
     <div class="h-full">
-      <TransitionRoot as="template" :show="sidebarOpen" v-if="!isSavingDepot">
+      <TransitionRoot as="template" :show="sidebarOpen" v-if="false && !isSavingDepot">
         <Dialog as="div" class="relative z-50 lg:hidden" @close="sidebarOpen = false">
           <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
             <div class="fixed inset-0 bg-gray-900/80" />
@@ -71,7 +71,64 @@
       </TransitionRoot>
   
       <!-- Static sidebar for desktop -->
-      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col" v-if="!isSavingDepot">
+        <div class="lg:border-b lg:border-t lg:border-gray-200">
+          <nav class="" aria-label="Progress">
+            <ol role="list" class="overflow-hidden rounded-md lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200">
+              <li v-for="(step, stepIdx) in steps" :key="step.name" class="relative overflow-hidden lg:flex-1">
+                <div :class="[stepIdx === 0 ? 'rounded-t-md border-b-0' : '', stepIdx === steps.length - 1 ? 'rounded-b-md border-t-0' : '', 'overflow-hidden border border-gray-200 lg:border-0']">
+                  <a v-if="step.status === 'complete'"  @click.prevent="navigateToStep(step.number)" class="group">
+                    <span class="absolute left-0 top-0 h-full w-1 bg-transparent group-hover:bg-gray-200 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full" aria-hidden="true" />
+                    <span :class="[stepIdx !== 0 ? 'lg:pl-9' : '', 'flex items-start px-6 py-5 text-sm font-medium']" class="items-center">
+                      <span class="flex-shrink-0">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600">
+                          <CheckCircleIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                        </span>
+                      </span>
+                      <span class="ml-4 mt-0.5 flex min-w-0 flex-col">
+                        <span class="text-sm font-medium">{{ step.name }}</span>
+                      </span>
+                    </span>
+                  </a>
+                  <a v-else-if="step.status === 'current'"  @click.prevent="navigateToStep(step.number)" aria-current="step">
+                    <span class="absolute left-0 top-0 h-full w-1 bg-indigo-600 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full" aria-hidden="true" />
+                    <span :class="[stepIdx !== 0 ? 'lg:pl-9' : '', 'flex items-start px-6 py-5 text-sm font-medium']" class="items-center">
+                      <span class="flex-shrink-0">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-indigo-600">
+                          <span class="text-indigo-600">{{ stepIdx + 1 }}</span>
+                        </span>
+                      </span>
+                      <span class="ml-4 mt-0.5 flex min-w-0 flex-col">
+                        <span class="text-sm font-medium text-indigo-600">{{ step.name }}</span>
+                      </span>
+                    </span>
+                  </a>
+                  <a v-else @click.prevent="navigateToStep(step.number)" class="group">
+                    <span class="absolute left-0 top-0 h-full w-1 bg-transparent group-hover:bg-gray-200 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full" aria-hidden="true" />
+                    <span :class="[stepIdx !== 0 ? 'lg:pl-9' : '', 'flex items-start px-6 py-5 text-sm font-medium']" class="items-center">
+                      <span class="flex-shrink-0">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-300">
+                          <span class="text-gray-500">{{ stepIdx + 1 }}</span>
+                        </span>
+                      </span>
+                      <span class="ml-4 mt-0.5 flex min-w-0 flex-col">
+                        <span class="text-sm font-medium text-gray-500">{{ step.name }}</span>
+                      </span>
+                    </span>
+                  </a>
+                  <template v-if="stepIdx !== 0">
+                    <!-- Separator -->
+                    <div class="absolute inset-0 left-0 top-0 hidden w-3 lg:block" aria-hidden="true">
+                      <svg class="h-full w-full text-gray-300" viewBox="0 0 12 82" fill="none" preserveAspectRatio="none">
+                        <path d="M0.5 0V31L10.5 41L0.5 51V82" stroke="currentcolor" vector-effect="non-scaling-stroke" />
+                      </svg>
+                    </div>
+                  </template>
+                </div>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col" v-if="false && !isSavingDepot">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
           <div class="flex pt-8 justify-center">
@@ -122,20 +179,17 @@
           </nav>
         </div>
       </div>
-  
-      <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden" v-if="!isSavingDepot">
+      <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden" v-if="false && !isSavingDepot">
         <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @click="sidebarOpen = true">
           <span class="sr-only">Open sidebar</span>
           <Bars3Icon class="h-6 w-6" aria-hidden="true" />
         </button>
         <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">{{ name }}</div>
       </div>
-  
-      <main class="py-10 lg:pl-72 w-full" v-if="!isSavingDepot">
-       
-          <Welcome v-if="currentStep == 0" :type="type" @start="startAdding"/>
+      <main class="py-4 w-full" v-if="!isSavingDepot">
+          <Welcome v-if="currentStep == 0" :depotName="depotName" :type="type" @start="startAdding"/>
           <DepotTargets v-if="currentStep == 1" @choose="setTarget"/>
-          <DepotName v-if="currentStep == 2 && selectedDepotTarget" :target="selectedDepotTarget" @onSelectAvatar="handleOnSelectAvatar" @onNameSet="onNameSet"/>
+          <DepotName ref="depotRef" v-if="currentStep == 2 && selectedDepotTarget" :target="selectedDepotTarget" @onSelectAvatar="handleOnSelectAvatar" @onNameSet="onNameSet"/>
           <ConfirmCreateDepot v-if="currentStep == 3 && !isConfirmingDepotConditions" :type="type" @onDepotCreated="onDepotCreation" @onSavingPlanSetup="setupSavingPlan"/>
           <ConfirmDepotConditions v-if="currentStep == 3 && isConfirmingDepotConditions" :type="type" :target="selectedDepotTarget" :depotName="depotName" @onConditionsAccepted="saveDepot" @goback="cancelCreatingDepot"/>
           <SetupSavingPlan v-if="currentStep == 4 && accountId" :accountId="accountId" :type="type" :target="selectedDepotTarget" @onContractDataSet="confirmSavingPlanContactData
@@ -170,7 +224,7 @@ import ConfirmDepotConditions from '@/components/NewDepot/ConfirmDepotConditions
 import SavingDepotsScreen from '@/components/NewDepot/SavingDepotsScreen';
 import SetupSavingPlan from '@/components/NewDepot/SetupSavingPlan';
 import ConfirmSavingsPlanContract from '@/components/NewDepot/ConfirmSavingsPlanContract';
-import {Ref} from 'vue'
+import {Ref, nextTick} from 'vue'
 import { DepotTarget, DepotType } from '~~/lib/models';
 useHead({
       htmlAttrs: {
@@ -181,7 +235,7 @@ useHead({
       }
     })
 definePageMeta({
-  
+  layout: "app-layout",
   middleware:['protected','verified'],
 });
 const { t,locale } = useI18n();
@@ -194,7 +248,7 @@ import { AccountStorage } from '~~/storage';
 import moment from 'moment';
 import { urlBuilder } from '~~/helpers/urlBuilder';
     const steps = ref([
-{ number:1,id: t('step')+' 1', name: t('choose_purpose'), status: SubscriptionSteps.upcoming },
+{ number:1,id: t('step')+' 1', name: t('choose_purpose'), status: SubscriptionSteps.current },
 
 
   { number:2,id: t('step')+' 2', name: t('set_the_name'), status: SubscriptionSteps.upcoming },
@@ -219,6 +273,7 @@ const saveDepotRequest : Ref<AddDepotRequest> = ref({});
 const successfullyCreated = ref(false);
 const accountId = ref(null);
 const name = ref(t('welcome'));
+const depotRef = ref();
 const goToDashboard = ()=>{
   const url = urlBuilder(locale.value,'/dashboard')
     
@@ -253,6 +308,11 @@ const navigateToStep = (step:number)=>{
     currentStep.value = step;
   }
 
+  nextTick(()=> {
+    if (depotName.value && step == 2 && depotRef.value) {
+      depotRef.value.updateDepoName(depotName.value)
+    }
+  })
 }
 const onDepotCreation = ()=>{
   isConfirmingDepotConditions.value = true;
@@ -265,6 +325,15 @@ const saveDepot = async (conditions:string) => {
     isSubmitting.value = true;
     await AddDepotService.saveTheDepot(saveDepotRequest.value);
     successfullyCreated.value = true;
+    steps.value = steps.value.map(item => {
+      if (item.number == reachedStep.value) {
+        return {
+          ...item,
+          status: SubscriptionSteps.complete
+        }
+      }
+      return item
+    })
   }
   catch(err){
     error.value = err;

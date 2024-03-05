@@ -77,7 +77,10 @@ const conditions: Ref<Array<Condition>> = ref([]);
 const selectedConditions : Ref<Array<Condition>> = ref([]);
 const currency = CurrencyService.getCurrencySymbol();
 const enableBtn  = computed(()=>{
-    return selectedConditions.value.length == conditions.value.length;
+    if (selectedConditions?.value?.length && conditions.value?.length) {
+        return selectedConditions.value.length == conditions.value.length
+    }
+    return false
 })
 
 const emit = defineEmits<{
