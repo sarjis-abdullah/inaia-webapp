@@ -345,4 +345,5 @@ export default {
     inboxMessages:'Boîte de réception',
     supportTickets:'Tickets de support',
     inaiaSupport:'Service client INAIA',
+    requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien : <a class="font-semibold cursor-pointer" href={{link}}>cliquez ici.</a>'
 }

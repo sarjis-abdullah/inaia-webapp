@@ -1,8 +1,8 @@
 <template>
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div v-if="!loading" class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 class="text-center mb-8 text-2xl font-bold">{{ title }}</h2>
-            <img :src="imgSrc" alt="asset" class="w-32 h-auto mb-5 mx-auto"/>
+            <img v-if="imgSrc" :src="imgSrc" alt="asset" class="w-32 h-auto mb-5 mx-auto"/>
             <h3 class="text-center mb-8 text-xl">{{ benifits }}</h3>
             <div class="inline-flex w-full items-center my-3" v-for="item in options" :key="item.key">
                 <CheckIcon class="w-5 mr-3"/>
@@ -15,21 +15,29 @@
                 </div>
         </div>
     </div>
+    <div v-if="loading" class="flex justify-center mt-28">
+        <Loading />
+    </div>
 </template>
 <script lang="ts" setup>
 import { AssetTypes } from "~~/lib/contants";
 import { CheckIcon } from '@heroicons/vue/24/outline';
+import Loading from '@/components/common/Loading.vue';
 const { t,locale } = useI18n();
 const props = defineProps({
     type:{
-             type:String,
-             
-         },
+        type:String,
+    },
+    depotName:{
+        type:String,
+        defaut: ""
+    },
 })
 const options = ref([]);
 const title = ref('');
 const imgSrc = ref('');
 const benifits = ref('')
+const loading = ref(true)
 
 const emit = defineEmits<{
   (e: 'start'): void
@@ -41,7 +49,6 @@ onMounted(()=>{
     if(props.type == AssetTypes.silver){
         title.value = t('whyInvestInSilver');
         imgSrc.value = new URL('~/assets/img/icons/silverBars.png',import.meta.url).href;
-        console.log(imgSrc.value);
         benifits.value = t('advantagesOfSilver');
         options.value = [
             {key:1,value:t('silverCrisisResistant')},
@@ -71,5 +78,6 @@ onMounted(()=>{
             {key:8,value:t('securedStorageGermany')},
         ])
     }
+    loading.value = false
 }) 
 </script>

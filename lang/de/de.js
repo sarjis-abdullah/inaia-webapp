@@ -377,5 +377,5 @@ export default {
     inboxMessages:'Inbox (virtuelles Postfach)',
     supportTickets:'Support-Tickets',
     inaiaSupport:'INAIA Kundenservice',
-
+    requestNewLink :'Der Link ist ungültig. <a class="font-semibold cursor-pointer" href={{link}}>Hier klicken</a> um einen neuen Link anzufordern.'
 }
