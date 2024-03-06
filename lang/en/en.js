@@ -378,4 +378,5 @@ export default {
     inboxMessages:'Inbox messages',
     supportTickets:'Support tickets',
     inaiaSupport:'INAIA Support',
+    requestNewLink :'Please request for a new link: <a class="font-semibold cursor-pointer" href={{link}}>click here</a>'
 }

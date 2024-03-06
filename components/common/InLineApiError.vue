@@ -1,11 +1,13 @@
 <template>
-    <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText">{{ errorText }}</p>
+    <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText" v-html="errorText"></p>
     <p v-else></p>
 </template>
 <script lang="ts" setup>
 import { BadInputException, MissingInformationException,ServerErrorException } from '@/lib/exceptions';
 import { PropType } from "nuxt/dist/app/compat/capi";
-const { t } = useI18n();
+import { ErrorCode } from '@/lib/contants';
+import { urlBuilder } from '~~/helpers/urlBuilder';
+const { t,locale } = useI18n();
 const errorText = ref(null);
 const props = defineProps({
     err:{
@@ -13,15 +15,26 @@ const props = defineProps({
     }
 })
 const handleError = (value)=>{
-    debugger;
-    if(value.err instanceof MissingInformationException || value.err instanceof BadInputException){
-            errorText.value = value.err.getRealMessage();
+        if(value.err instanceof MissingInformationException || value.err instanceof BadInputException){
+            if(value.err.getRealMessage() == ErrorCode.invalid_link)
+            {
+                const url = urlBuilder(locale.value,'/request-password');
+                errorText.value = t('requestNewLink',{link:url});
+                return;
+            }
+            else{
+                errorText.value = value.err.getRealMessage();
+            }
         }
         else if(value.err instanceof ServerErrorException){
             errorText.value = t(value.err.getTranslationKey());
         }
         else
+        {
+            
             errorText.value = value.message;
+            
+        }    
 }
 onMounted(()=>{
     if(props.err)

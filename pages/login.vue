@@ -45,9 +45,7 @@
               </span>
               {{ $t('signIn') }}
             </button>
-            <p class="text-center text-red-900 mt-4" v-if="error">
-                {{ $t(error) }}
-            </p>
+            <InLineApiError :err="error"/>
           </div>
         </form>
       </div>
@@ -64,7 +62,7 @@ import {LoginStorage,AccountStorage } from '@/storage';
 import {AccountService,TokenService,LoginService} from '@/lib/services';
 import { ServerErrorException } from '@/lib/exceptions';
 import { urlBuilder } from '~~/helpers/urlBuilder';
-
+import InLineApiError from '@/components/common/InLineApiError';
   const state = reactive({
     email:'',
     password:'',
@@ -109,15 +107,7 @@ import { urlBuilder } from '~~/helpers/urlBuilder';
     }
     catch(err){
        
-            if(err instanceof UnauthenticatedException || err instanceof BadInputException ){
-                error.value='check_creds'
-            }
-            else if(err instanceof ServerErrorException ){
-                error.value = err.getTranslationKey();
-            }
-            else{
-                console.log(err);
-            }
+        error.value=err;
         
     }
     finally{
