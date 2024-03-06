@@ -379,7 +379,7 @@ export default {
     supportTickets:'Support tickets',
     inaiaSupport:'INAIA Support',
     referralHeader: "Referral",
-    referralHeaderHints: "(Send the code and win a bonus)",
+    referralHeaderHints: "Send the code and win a bonus",
     referralRecommendation: "Recommend INAIA to your friends! For every savings plan* that your friends set up with us, you will receive a credit of 50€ to a deposit of your choice.",
     personalReferralCode: "Personal Referral Code",
     registrationInstructions: "Simply specify when registering or share the recommendation link",

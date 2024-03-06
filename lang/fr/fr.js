@@ -346,7 +346,7 @@ export default {
     supportTickets:'Tickets de support',
     inaiaSupport:'Service client INAIA',
     referralHeader: "Parrainage",
-    referralHeaderHints: "(Envoyez le code et gagnez un bonus)",
+    referralHeaderHints: "Envoyez le code et gagnez un bonus",
     referralRecommendation: "Recommandez INAIA à vos amis ! Pour chaque plan d'épargne* que vos amis mettent en place avec nous, vous recevrez un crédit de 50€ sur un dépôt de votre choix.",
     personalReferralCode: "Code de parrainage personnel",
     registrationInstructions: "Spécifiez simplement lors de l'inscription ou partagez le lien de recommandation",
