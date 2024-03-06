@@ -13,6 +13,7 @@ const props = defineProps({
     }
 })
 const handleError = (value)=>{
+    debugger;
     if(value.err instanceof MissingInformationException || value.err instanceof BadInputException){
             errorText.value = value.err.getRealMessage();
         }

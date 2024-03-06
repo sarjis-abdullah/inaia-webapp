@@ -5,7 +5,7 @@
                 <div class="my-10">
                     {{ $t('creatingdepotpleasewait') }}
                 </div>
-                <Loading height="40" width="40"/>
+                <Loading :height="40" :width="40"/>
             </div>
             <div class="text-center" v-if="!isLoading && error">
                 <XCircleIcon class="w-20 h-auto my-3 text-red-500 mx-auto"></XCircleIcon>
