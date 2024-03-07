@@ -37,7 +37,7 @@
 
                       @click.prevent="acceptConditions">{{ $t('accept') }}
                     </button>
-                    <p v-else class="text-center">
+                    <p v-else class="text-center text-sm font-medium text-blue-600">
                         {{ $t('already_a_savings_plan') }}
                     </p>
                 </div>
