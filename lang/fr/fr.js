@@ -345,5 +345,6 @@ export default {
     inboxMessages:'Boîte de réception',
     supportTickets:'Tickets de support',
     inaiaSupport:'Service client INAIA',
-    requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien : <a class="font-semibold cursor-pointer" href={{link}}>cliquez ici.</a>'
+    requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien : <a class="font-semibold cursor-pointer" href={{link}}>cliquez ici.</a>',
+    already_a_savings_plan: "Déjà un plan d'épargne"
 }
