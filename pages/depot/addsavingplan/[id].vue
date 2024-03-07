@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full">
+     <div class="h-full  bg-white p-6 sm:rounded-lg">
       <div class="lg:border-b lg:border-t lg:border-gray-200 max-w-lg mx-auto">
         <nav class="" aria-label="Progress">
           <ol role="list" class="overflow-hidden rounded-md lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200">
