@@ -29,13 +29,17 @@
                     
                 </div>
             <div class="mt-10">
-                  <button type="submit"
+                    <button v-if="depot?.is_savings_plan==0" type="submit"
                      
                         :disabled="!enableBtn"
                      :class="enableBtn?'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500':'bg-blue-300 focus:ring-blue-200'"
                       class="flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm  focus:outline-none focus:ring-2  focus:ring-offset-2"
 
-                      @click.prevent="acceptConditions">{{ $t('accept') }}</button>
+                      @click.prevent="acceptConditions">{{ $t('accept') }}
+                    </button>
+                    <p v-else class="text-center text-sm font-medium text-blue-600">
+                        {{ $t('already_a_savings_plan') }}
+                    </p>
                 </div>
         </div>
     </div>

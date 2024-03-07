@@ -386,5 +386,6 @@ export default {
     copyReferralLink: "Copy referral Link",
     savingsPlanCriteria: "* with a savings volume of at least 6000€ (e.g. 50€ euro / 10 Year)",
     copied: 'Copied',
-    requestNewLink :'Please request for a new link: <a class="font-semibold cursor-pointer" href={{link}}>click here</a>'
+    requestNewLink :'Please request for a new link: <a class="font-semibold cursor-pointer" href={{link}}>click here</a>',
+    already_a_savings_plan: "Already a savings plan"
 }
