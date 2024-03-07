@@ -81,11 +81,11 @@
           <div>
             <dd class="flex items-center gap-x-6 sm:flex-auto mt-4">
               <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                <div v-if="!showReferral" v-show="copyingCode || copyingLink" class="text-sm text-gray-600">
+                <div v-if="!showReferral" v-show="copyingLink" class="text-sm text-gray-600">
                   {{ $t('copied')}}
                 </div>
               </transition>
-              <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralCode">
+              <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralLink">
                 {{ referralCode }}
               </button>
               <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
@@ -133,7 +133,7 @@
         
         <div class="pt-6 text-center">
             <dt class="font-bold text-gray-900 text-xl">{{ $t('personalReferralCode') }}</dt>
-            <button class="bg-gray-200 mt-2 px-2 py-1 rounded-md text-xl font-bold focus-visible:outline-0" @click="copyOnlyReferralCode">
+            <button class="bg-gray-200 mt-2 px-2 py-1 rounded-md text-xl font-bold focus-visible:outline-0" @click="copyOnlyReferralLink">
                 {{ referralCode }}
             </button>
         </div>
@@ -148,7 +148,7 @@
           {{ $t('savingsPlanCriteria') }}
         </p>
         <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
-          <div v-show="copyingCode || copyingLink" class="text-sm  rounded-md text-center absolute bottom-[-28px] w-full">
+          <div v-show="copyingLink" class="text-sm  rounded-md text-center absolute bottom-[-28px] w-full">
             {{ $t('copied') }}
           </div>
         </transition>
@@ -226,7 +226,6 @@ const showConfirmation = ref(false);
 const selectedPaymentAccountToDelete = ref(-1);
 const showPasswordUpdatePopup = ref(false);
 const copyingLink = ref(false);
-const copyingCode = ref(false);
 const showReferral = ref(false);
 const confirmDelete = async ()=>{
   try {
@@ -521,13 +520,6 @@ const copyOnlyReferralLink = async() => {
     copyingLink.value = false
   }, 500);
   copyToClipboard(referralLink.value)
-}
-const copyOnlyReferralCode = async() => {
-  copyingCode.value = true
-  setTimeout(() => {
-    copyingCode.value = false
-  }, 500);
-  copyToClipboard(referralCode.value)
 }
 onMounted(async () => {
   account.value = AccountStorage.getAccount();
