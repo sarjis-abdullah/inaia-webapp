@@ -384,5 +384,6 @@ export default {
     registrationInstructions: "Geben Sie einfach bei der Registrierung an oder teilen Sie den Empfehlungslink",
     copyReferralLink: "Empfehlungslink kopieren",
     savingsPlanCriteria: "* mit einem Sparvolumen von mindestens 6000€ (z. B. 50€ Euro / 10 Jahre)",
-    copied: 'Kopiert'
+    copied: 'Kopiert',
+    requestNewLink :'Der Link ist ungültig. <a class="font-semibold cursor-pointer" href={{link}}>Hier klicken</a> um einen neuen Link anzufordern.'
 }

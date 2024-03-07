@@ -385,5 +385,6 @@ export default {
     registrationInstructions: "Simply specify when registering or share the recommendation link",
     copyReferralLink: "Copy referral Link",
     savingsPlanCriteria: "* with a savings volume of at least 6000€ (e.g. 50€ euro / 10 Year)",
-    copied: 'Copied'
+    copied: 'Copied',
+    requestNewLink :'Please request for a new link: <a class="font-semibold cursor-pointer" href={{link}}>click here</a>'
 }
