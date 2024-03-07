@@ -73,7 +73,31 @@
         </div>
       </div>
 
-
+      <article>
+        <header class="flex justify-between">
+          <h2 class="text-base leading-7 text-gray-900">
+            <span class="font-semibold">{{ $t('referralHeader') }}</span>
+          </h2>
+          <div>
+            <dd class="flex items-center gap-x-6 sm:flex-auto mt-4">
+              <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                <div v-if="!showReferral" v-show="copyingLink" class="text-sm text-gray-600">
+                  {{ $t('copied')}}
+                </div>
+              </transition>
+              <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralLink">
+                {{ referralCode }}
+              </button>
+              <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
+                  {{ $t('copyReferralLink') }}
+                </button>
+              <InformationCircleIcon @click="showReferral = !showReferral" class="w-6 h-6 rounded-full cursor-pointer" />
+            </dd>
+          </div>
+        </header>
+        <div class="flex border-t border-gray-200 mt-4"></div>
+        
+      </article>
 
       <div>
         <h2 class="text-base font-semibold leading-7 text-gray-900">{{ $t('language') }}</h2>
@@ -94,6 +118,42 @@
         </dl>
       </div>
     </div>
+    <Modal :open="showReferral" @onClose="closeReferralView" v-if="account">
+      <figure class="relative">
+        <h2 class="leading-7 text-gray-900 text-2xl font-bold max-w-[12rem] mx-auto mb-6 text-center">
+          {{ $t('referralHeaderHints') }}
+        </h2>
+        <picture>
+          <source src="~/assets/img/icon_referral.png">
+          <img src="~/assets/img/icon_referral.png" alt="referral info" class="w-32 h-auto mb-5 mx-auto"/>
+        </picture>
+        <div class="mt-4 text-center">
+          <p class="py-2">{{ $t('referralRecommendation') }}</p>
+        </div>
+        
+        <div class="pt-6 text-center">
+            <dt class="font-bold text-gray-900 text-xl">{{ $t('personalReferralCode') }}</dt>
+            <button class="bg-gray-200 mt-2 px-2 py-1 rounded-md text-xl font-bold focus-visible:outline-0" @click="copyOnlyReferralLink">
+                {{ referralCode }}
+            </button>
+        </div>
+        <div class="pt-6 text-center">
+            <dt class="font-medium text-gray-900">{{ $t('registrationInstructions') }}</dt>
+            <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
+                  {{ $t('copyReferralLink') }}
+            </button>
+        </div>
+        
+        <p class="text-xs mt-6 text-gray-500 text-center">
+          {{ $t('savingsPlanCriteria') }}
+        </p>
+        <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
+          <div v-show="copyingLink" class="text-sm  rounded-md text-center absolute bottom-[-28px] w-full">
+            {{ $t('copied') }}
+          </div>
+        </transition>
+      </figure>
+    </Modal>
     <Modal :open="showUpdateAddress" @onClose="closeUpdateAddress" v-if="account">
       <UpdateAddress :address="account.address" @onSave="onAddressUpdated" />
     </Modal>
@@ -127,6 +187,7 @@ import {
   UserCircleIcon,
   UsersIcon,
   XMarkIcon,
+  InformationCircleIcon
 } from '@heroicons/vue/24/outline';
 import { Account, Address, PaymentAccount } from '~~/lib/models';
 import { AccountStorage } from '~~/storage';
@@ -164,6 +225,8 @@ const addNewPaymentAcoount = ref(false);
 const showConfirmation = ref(false);
 const selectedPaymentAccountToDelete = ref(-1);
 const showPasswordUpdatePopup = ref(false);
+const copyingLink = ref(false);
+const showReferral = ref(false);
 const confirmDelete = async ()=>{
   try {
     isModfyingBankAccount.value = true;
@@ -227,6 +290,9 @@ const onNotificationClosed = () => {
 }
 const closeUpdateAddress = () => {
   showUpdateAddress.value = false;
+}
+const closeReferralView = () => {
+  showReferral.value = false;
 }
 const closeUpdatePassword = () => {
   showPasswordUpdatePopup.value = false;
@@ -329,6 +395,8 @@ const language = computed(() => {
   }
   return l
 })
+const referralCode = computed(() => account.value?.account?.referral_code ?? "")
+const referralLink = computed(() => account.value?.account?.referral_link ?? "")
 const showAddPayment = ()=>{
   addNewPaymentAcoount.value = true
 }
@@ -430,7 +498,6 @@ const deleteBankAccount = async (bankAccountId:number)=>{
   showConfirmation.value = true;
 }
 const handleError = (value) => {
-  console.log(value.getRealMessage());
   if (value instanceof MissingInformationException || value instanceof BadInputException) {
     return value.getRealMessage();
   }
@@ -439,6 +506,20 @@ const handleError = (value) => {
   }
   else
     return t(value.getTranslationKey());
+}
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch($e) {
+    console.error($e)
+  }
+}
+const copyOnlyReferralLink = async() => {
+  copyingLink.value = true
+  setTimeout(() => {
+    copyingLink.value = false
+  }, 500);
+  copyToClipboard(referralLink.value)
 }
 onMounted(async () => {
   account.value = AccountStorage.getAccount();

@@ -345,6 +345,14 @@ export default {
     inboxMessages:'Boîte de réception',
     supportTickets:'Tickets de support',
     inaiaSupport:'Service client INAIA',
+    referralHeader: "Parrainage",
+    referralHeaderHints: "Envoyez le code et gagnez un bonus",
+    referralRecommendation: "Recommandez INAIA à vos amis ! Pour chaque plan d'épargne* que vos amis mettent en place avec nous, vous recevrez un crédit de 50€ sur un dépôt de votre choix.",
+    personalReferralCode: "Code de parrainage personnel",
+    registrationInstructions: "Spécifiez simplement lors de l'inscription ou partagez le lien de recommandation",
+    copyReferralLink: "Copier le lien de parrainage",
+    savingsPlanCriteria: "* avec un volume d'épargne d'au moins 6000€ (par exemple 50€ euros / 10 ans)",
+    copied: 'Copié',
     requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien : <a class="font-semibold cursor-pointer" href={{link}}>cliquez ici.</a>',
     already_a_savings_plan: "Déjà un plan d'épargne"
 }
