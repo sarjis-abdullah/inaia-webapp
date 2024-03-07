@@ -172,7 +172,6 @@ const saveDepot = async (conditions:string) => {
     })
   }
   catch(err){
-    console.log(err, "error found", err.message);
     error.value = err;
   }
   finally{
