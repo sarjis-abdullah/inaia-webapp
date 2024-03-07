@@ -378,5 +378,14 @@ export default {
     inboxMessages:'Inbox messages',
     supportTickets:'Support tickets',
     inaiaSupport:'INAIA Support',
-    requestNewLink :'Please request for a new link: <a class="font-semibold cursor-pointer" href={{link}}>click here</a>'
+    referralHeader: "Referral",
+    referralHeaderHints: "Send the code and win a bonus",
+    referralRecommendation: "Recommend INAIA to your friends! For every savings plan* that your friends set up with us, you will receive a credit of 50€ to a deposit of your choice.",
+    personalReferralCode: "Personal Referral Code",
+    registrationInstructions: "Simply specify when registering or share the recommendation link",
+    copyReferralLink: "Copy referral Link",
+    savingsPlanCriteria: "* with a savings volume of at least 6000€ (e.g. 50€ euro / 10 Year)",
+    copied: 'Copied',
+    requestNewLink :'Please request for a new link: <a class="font-semibold cursor-pointer" href={{link}}>click here</a>',
+    already_a_savings_plan: "Already a savings plan"
 }

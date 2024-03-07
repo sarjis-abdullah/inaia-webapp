@@ -377,5 +377,14 @@ export default {
     inboxMessages:'Inbox (virtuelles Postfach)',
     supportTickets:'Support-Tickets',
     inaiaSupport:'INAIA Kundenservice',
-    requestNewLink :'Der Link ist ungültig. <a class="font-semibold cursor-pointer" href={{link}}>Hier klicken</a> um einen neuen Link anzufordern.'
+    referralHeader: "Empfehlung",
+    referralHeaderHints: "Senden Sie den Code und gewinnen Sie einen Bonus",
+    referralRecommendation: "Empfehlen Sie INAIA Ihren Freunden! Für jeden Sparplan*, den Ihre Freunde bei uns einrichten, erhalten Sie eine Gutschrift von 50€ auf eine Einzahlung Ihrer Wahl.",
+    personalReferralCode: "Persönlicher Empfehlungscode",
+    registrationInstructions: "Geben Sie einfach bei der Registrierung an oder teilen Sie den Empfehlungslink",
+    copyReferralLink: "Empfehlungslink kopieren",
+    savingsPlanCriteria: "* mit einem Sparvolumen von mindestens 6000€ (z. B. 50€ Euro / 10 Jahre)",
+    copied: 'Kopiert',
+    requestNewLink :'Der Link ist ungültig. <a class="font-semibold cursor-pointer" href={{link}}>Hier klicken</a> um einen neuen Link anzufordern.',
+    already_a_savings_plan: "Bereits ein Sparplan"
 }

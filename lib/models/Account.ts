@@ -32,6 +32,7 @@ export interface AccountData{
     is_active:boolean;
     is_locked:boolean;
     referral_code:string;
+    referral_link:string;
     has_pin:boolean;
     pin_length:number,
     created_at:string;
