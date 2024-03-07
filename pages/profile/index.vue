@@ -78,23 +78,24 @@
           <h2 class="text-base leading-7 text-gray-900">
             <span class="font-semibold">{{ $t('referralHeader') }}</span>
           </h2>
-          <InformationCircleIcon @click="showReferral = !showReferral" class="w-6 h-6 rounded-full cursor-pointer" />
-        </header>
-        <div class="flex border-t border-gray-200 mt-4">
-          <dd class="flex items-center gap-x-6 sm:flex-auto mt-4">
+          <div>
+            <dd class="flex items-center gap-x-6 sm:flex-auto mt-4">
+              <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                <div v-if="!showReferral" v-show="copyingCode || copyingLink" class="text-sm text-gray-600">
+                  {{ $t('copied')}}
+                </div>
+              </transition>
               <button class="bg-gray-200 text-white2 px-2 py-1 rounded-md text-sm" @click="copyOnlyReferralCode">
                 {{ referralCode }}
               </button>
               <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
                   {{ $t('copyReferralLink') }}
                 </button>
-              <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                <div v-if="!showReferral" v-show="copyingCode || copyingLink" class="text-sm text-gray-600">
-                  {{ $t('copied')}}
-                </div>
-              </transition>
+              <InformationCircleIcon @click="showReferral = !showReferral" class="w-6 h-6 rounded-full cursor-pointer" />
             </dd>
-        </div>
+          </div>
+        </header>
+        <div class="flex border-t border-gray-200 mt-4"></div>
         
       </article>
 
