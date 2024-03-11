@@ -15,11 +15,30 @@ import { AssetStorage } from './storage/AssetStorage';
 import { App } from './lib/app';
 import { UnauthenticatedListener } from './lib/listeners';
 import LogoutHelper from './helpers/LogoutHelper';
+import { appNames } from '@/lib/appNames';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter();
   const initApp =  async ()=>{
     const config = useRuntimeConfig();
     const runTimeEnv = config.URL_ENV;
+    let appName = appNames.inaiaEu;
+    const runTimeApp = config.CURRENT_APP;
+    if(runTimeApp){
+      switch (runTimeApp) {
+        case appNames.inaiaEu:
+          appName = appNames.inaiaEu;
+          break;
+        case appNames.getGreenGold:
+          appName = appNames.getGreenGold;
+          break;
+      
+        default:
+          appName = appNames.inaiaEu;
+          break;
+      }
+    }
+    
+    App.setAppName(appName);
     App.clearListeners();
     if(runTimeEnv && runTimeEnv == Envs.production)
       BaseUrls.setEnv(Envs.production);

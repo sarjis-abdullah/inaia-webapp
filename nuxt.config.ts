@@ -4,15 +4,37 @@ import EnvKeys from './config'
 import en from './lang/en/en';
 import de from './lang/de/de';
 import fr from './lang/fr/fr';
+import gggen from './lang/en/gggen';
+import gggde from './lang/de/gggde';
+import gggfr from './lang/fr/gggfr';
+const appNames = require('./appNames');
+let selectedEnglish = en;
+let selectedFrench = fr;
+let selectedGerman = de;
+let assetDirectory = "assets";
+if(process.env.CURRENT_APP){
+  if(process.env.CURRENT_APP==appNames.getGreenGold){
+    selectedEnglish = gggen;
+    selectedFrench = gggfr;
+    selectedGerman = gggde;
+    assetDirectory = "gggassets"
+  }
+}
+
+
 export default defineNuxtConfig({
     runtimeConfig : {
       public:{
-        URL_ENV:process.env.URL_ENV
+        URL_ENV:process.env.URL_ENV,
+        CURRENT_APP:process.env.CURRENT_APP
       }
       
     },
+    dir:{
+      assets:assetDirectory
+    },
     css: [
-        '@/assets/css/tailwind.css'
+      `@/${assetDirectory}/css/tailwind.css`
     ],
     postcss: {
         plugins: {
@@ -33,7 +55,7 @@ export default defineNuxtConfig({
           code: 'de',
           iso: 'de-DE',
           file: 'de/de',
-          img: '/assets/img/flags/germany-48.png',
+          img: `/${assetDirectory}/img/flags/germany-48.png`,
           // domain: 'inaia.de'
         },
         {
@@ -41,7 +63,7 @@ export default defineNuxtConfig({
           code: 'en',
           iso: 'en-GB',
           file: 'en/en',
-          img: '/assets/img/flags/great-britain-48.png',
+          img: `/${assetDirectory}/img/flags/great-britain-48.png`,
           // domain: 'getinaia.com'
         },
         {
@@ -49,7 +71,7 @@ export default defineNuxtConfig({
           code: 'fr',
           iso: 'fr-FR',
           file: 'fr/fr',
-          img: '/assets/img/flags/france-48.png',
+          img: `${assetDirectory}/img/flags/france-48.png`,
           // domain: 'inaia.fr'
         },
       ],
@@ -65,9 +87,9 @@ export default defineNuxtConfig({
           legacy:false,
           locale:'en',
           messages:{
-            de:de,
-            en:en,
-            fr:fr
+            de:selectedGerman,
+            en:selectedEnglish,
+            fr:selectedFrench
           }
         }
       },
