@@ -357,4 +357,5 @@ export default {
     already_a_savings_plan: "Déjà un plan d'épargne",
     pause:'pause',
     continue:'reprendre',
+    pauseWillNotEffectCurrentTransactions:"Veuillez noter que cette modification n'affectera pas les commandes d'achat déjà créées.",
 }

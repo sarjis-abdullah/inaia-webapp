@@ -390,4 +390,5 @@ export default {
     already_a_savings_plan: "Already a savings plan",
     continue:'continue',
     pause:'pause',
+    pauseWillNotEffectCurrentTransactions:'Please note that the change will not affect purchase orders that have already been created.',
 }

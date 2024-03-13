@@ -389,4 +389,5 @@ export default {
     already_a_savings_plan: "Bereits ein Sparplan",
     continue:'fortsetzen',
     pause:'pausieren',
+    pauseWillNotEffectCurrentTransactions:'Bitte beachte dass die Änderung keinen Einfluss auf bereits erstellte Kaufaufträge hat.',
 }

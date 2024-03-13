@@ -51,7 +51,7 @@
         </div>
         <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText" v-html="errorText"></p>
     </a>
-    <Modal :open="showPauseModal" @onClose="showPauseModal = false">
+    <Modal v-if="showPauseModal" :open="showPauseModal" @onClose="showPauseModal = false">
       <article class="relative">
         <h2 class="leading-7 text-gray-900 text-2xl font-bold max-w-[12rem] mx-auto mb-6 text-center">
           {{ $t('pauseSavingsPlan') }}
@@ -60,23 +60,29 @@
         <div class="pt-6 flex justify-between items-center">
             <span class="font-medium text-gray-900">{{ $t('endDate') }}</span>
             <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
-                  {{ '12-12-2023' }}
+                  {{ depotPauseEndDate }}
             </button>
         </div>
         <div class="flex justify-between items-center">
             <span class="font-medium text-gray-900">{{ $t('pausePeriod') }}</span>
             <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
-                  {{ '6months' }}
+                  {{monthSliderValue}}{{ monthSliderValue == 1 ? ' month' : ' months' }}
             </button>
+        </div>
+        <div class="flex justify-between items-center">
+            <input type="range" min="1" max="6" v-model="monthSliderValue" step="1" class="w-full mt-4" />
         </div>
         <div class="mt-4 text-center text-red-500">
           <p class="py-2">{{ $t('Please note that the change will not affect purchase orders that have already been created.') }}</p>
+        </div>
+        <div v-if="willStartNextMonth" class="mt-4 text-center text-red-500">
+          <p class="py-2">{{ $t('pauseWillNotEffectCurrentTransactions') }}</p>
         </div>
         <div v-if="errorText" class="mt-4 text-center text-red-500">
           <p class="py-2" v-html="errorText"></p>
         </div>
         <div class="">
-            <button v-if="!pending" @click="resumePlan" class="w-full rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
+            <button v-if="!pending" :disabled="disableDepotPause" @click="resumePlan" class="w-full rounded-md px-3 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
                   {{ $t('continue') }}
             </button>
             <Loading v-else/>
@@ -154,31 +160,50 @@ const depotStatusText = computed(()=>{
     }
     return t('pause');
 })
-const depotPauseEndDate = ref('')
+const monthSliderValue = ref(1)
+const waitPeriod = 7;
+const depotPauseEndDate = computed(()=> moment().format(moment().add(monthSliderValue.value,'M').format('yyyy-MM-DD')))
+const disableDepotPause = computed(()=> {
+    if(monthSliderValue.value > 0 && monthSliderValue.value < 7)
+        return false
+    return true
+})
+const willStartNextMonth = computed(() => {
+    const intervalDay = props?.depot?.interval_day;
+    if (intervalDay) {
+        let orderDay = null;
+        if(intervalDay == 15)
+            orderDay = moment().date(intervalDay);
+        if(intervalDay == 1)
+            orderDay = moment().month(moment().get('month')+1).date(intervalDay);
+        const lastDate = moment().date(intervalDay).subtract(waitPeriod,'d');
+        const now = moment();
+        if(now.isSameOrAfter(lastDate) && now.isSameOrBefore(orderDay)){
+            return true
+        }
+    }
+    return false
+})
 const showPauseModal = ref(false)
 const showContinueModal = ref(false)
+const depotStatusId = ref(null)
 const depotData = computed(()=> {
     if(!isDepotStatusPaused.value && depotPauseEndDate.value){
         return {
-            status_id: 5,
+            status_id: depotStatusId.value,
             end_date: depotPauseEndDate.value,
         }
     }
     return {
-        status_id: 1
+        status_id: depotStatusId.value
     }
 })
-const setPausePeriodValue = (value = 1)=>{
-    // setPausePeriod(value);
-    let date = moment().add(value,'M').format('yyyy-MM-DD');
-    depotPauseEndDate.value = date
-}
 const errorText = ref('')
 const pending = ref(false)
 const resumePlan = async()=>{
     try{
         pending.value = true
-        setPausePeriodValue(1)
+        await getDepotStatusList()
         if(props?.depot?.id){
             let result = await AddDepotService.updateDepotStatus(props.depot.id, depotData.value)
             emit('updateDepotStatus', result)
@@ -192,6 +217,28 @@ const resumePlan = async()=>{
         pending.value = false
         showPauseModal.value = false
         showContinueModal.value = false
+    }
+}
+const getDepotStatusList = async()=>{
+    try{
+        let result = await AddDepotService.getDepotStatusList()
+        if (result?.length) {
+            const found = result?.find(el => {
+            const status = isDepotStatusPaused.value ? DepotStatuses.active : DepotStatuses.paused
+                if (el.name_translation_key == status) {
+                    return el
+                }
+            });
+            depotStatusId.value = found?.id
+        }
+        return Promise.resolve(result)
+    }
+    catch(err)
+    {
+        errorText.value = err?.message;
+        return Promise.reject(err)
+    }
+    finally {
     }
 }
 </script>
