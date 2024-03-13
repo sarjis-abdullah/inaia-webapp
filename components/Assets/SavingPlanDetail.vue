@@ -44,15 +44,80 @@
                 </div>
             </div>
         </div>
+        <div class="text-center">
+            <button @click="!isDepotStatusPaused ? showPauseModal = true : showContinueModal = true" class="inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
+                {{depotStatusText}}
+            </button>
+        </div>
+        <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText" v-html="errorText"></p>
     </a>
+    <Modal :open="showPauseModal" @onClose="showPauseModal = false">
+      <article class="relative">
+        <h2 class="leading-7 text-gray-900 text-2xl font-bold max-w-[12rem] mx-auto mb-6 text-center">
+          {{ $t('pauseSavingsPlan') }}
+        </h2>
+        
+        <div class="pt-6 flex justify-between items-center">
+            <span class="font-medium text-gray-900">{{ $t('endDate') }}</span>
+            <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
+                  {{ '12-12-2023' }}
+            </button>
+        </div>
+        <div class="flex justify-between items-center">
+            <span class="font-medium text-gray-900">{{ $t('pausePeriod') }}</span>
+            <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
+                  {{ '6months' }}
+            </button>
+        </div>
+        <div class="mt-4 text-center text-red-500">
+          <p class="py-2">{{ $t('Please note that the change will not affect purchase orders that have already been created.') }}</p>
+        </div>
+        <div v-if="errorText" class="mt-4 text-center text-red-500">
+          <p class="py-2" v-html="errorText"></p>
+        </div>
+        <div class="">
+            <button v-if="!pending" @click="resumePlan" class="w-full rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
+                  {{ $t('continue') }}
+            </button>
+            <Loading v-else/>
+        </div>
+      </article>
+    </Modal>
+    <Modal :open="showContinueModal" @onClose="showContinueModal = false" title="Are you sure?">
+      <article class="relative">
+        <div v-if="errorText" class="mt-4 text-center text-red-500">
+          <p class="py-2" v-html="errorText"></p>
+        </div>
+      </article>
+      <template v-slot:footer>
+            <div class="flex justify-end gap-2 mt-4">
+                <button @click="showContinueModal = false" class="px-2 py-1 border-gray-300 rounded-md">
+                    {{ $t('cancel') }}
+                </button>
+                <button v-if="!pending" @click="resumePlan"
+                    class="px-2 py-1 border-gray-300 rounded-md bg-blue-400 text-white">
+                    {{ $t('ok') }}
+                </button>
+                <Loading v-else />
+            </div>
+        </template>
+    </Modal>
 </template>
 <script lang="ts" setup>
 import {ref,PropType,Ref} from 'vue';
 import { Depot } from '@/lib/models';
-import { CurrencyService } from '@/lib/services';
+import { AddDepotService, CurrencyService } from '@/lib/services';
 import ListItem from '@/components/common/ListItem';
 import DepotStatus from '@/components/Assets/DepotStatus';
 import { PlusIcon } from '@heroicons/vue/20/solid'
+import { DepotStatuses } from '@/lib/contants';
+import Modal from '@/components/common/Modal.vue';
+import Loading from '@/components/common/Loading.vue';
+import moment from 'moment'
+//emits
+const emit = defineEmits<{
+  updateDepotStatus: [Depot: {}],
+}>()
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
@@ -62,7 +127,7 @@ const props = defineProps({
     }
 })
 const line = ref(null);
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const currency = CurrencyService.getCurrencySymbol()
@@ -82,4 +147,51 @@ const lineWith = computed(()=>{
     }
     return 0;
 })
+const isDepotStatusPaused = computed(()=> !!(props.depot?.status?.name_translation_key == DepotStatuses.paused))
+const depotStatusText = computed(()=>{
+    if(isDepotStatusPaused.value){
+        return t('continue');
+    }
+    return t('pause');
+})
+const depotPauseEndDate = ref('')
+const showPauseModal = ref(false)
+const showContinueModal = ref(false)
+const depotData = computed(()=> {
+    if(!isDepotStatusPaused.value && depotPauseEndDate.value){
+        return {
+            status_id: 5,
+            end_date: depotPauseEndDate.value,
+        }
+    }
+    return {
+        status_id: 1
+    }
+})
+const setPausePeriodValue = (value = 1)=>{
+    // setPausePeriod(value);
+    let date = moment().add(value,'M').format('yyyy-MM-DD');
+    depotPauseEndDate.value = date
+}
+const errorText = ref('')
+const pending = ref(false)
+const resumePlan = async()=>{
+    try{
+        pending.value = true
+        setPausePeriodValue(1)
+        if(props?.depot?.id){
+            let result = await AddDepotService.updateDepotStatus(props.depot.id, depotData.value)
+            emit('updateDepotStatus', result)
+        }
+    }
+    catch(err)
+    {
+        errorText.value = err?.message;
+    }
+    finally {
+        pending.value = false
+        showPauseModal.value = false
+        showContinueModal.value = false
+    }
+}
 </script>

@@ -386,5 +386,7 @@ export default {
     savingsPlanCriteria: "* mit einem Sparvolumen von mindestens 6000€ (z. B. 50€ Euro / 10 Jahre)",
     copied: 'Kopiert',
     requestNewLink :'Der Link ist ungültig. <a class="font-semibold cursor-pointer" href={{link}}>Hier klicken</a> um einen neuen Link anzufordern.',
-    already_a_savings_plan: "Bereits ein Sparplan"
+    already_a_savings_plan: "Bereits ein Sparplan",
+    continue:'fortsetzen',
+    pause:'pausieren',
 }
