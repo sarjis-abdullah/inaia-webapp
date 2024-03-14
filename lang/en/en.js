@@ -391,4 +391,8 @@ export default {
     continue:'continue',
     pause:'pause',
     pauseWillNotEffectCurrentTransactions:'Please note that the change will not affect purchase orders that have already been created.',
+    pauseSavingsPlan:'Pause savings plan',
+    resumeSavingsPlan:'Continue savings plan',
+    areYouSureYouWantToResume:'Please confirm that you want to continue your savings plan.',
+    pausePeriod:'Pause period',
 }

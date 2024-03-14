@@ -358,4 +358,8 @@ export default {
     pause:'pause',
     continue:'reprendre',
     pauseWillNotEffectCurrentTransactions:"Veuillez noter que cette modification n'affectera pas les commandes d'achat déjà créées.",
+    pauseSavingsPlan:"Suspendre le plan d'épargne",
+    resumeSavingPlan : "Reprendre le plan d'épargne",
+    areYouSureYouWantToResume:"Veuillez confirmer que vous souhaitez reprendre votre plan d'épargne",
+    pausePeriod:'Période de suspension',
 }

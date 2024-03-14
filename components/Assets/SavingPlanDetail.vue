@@ -45,7 +45,9 @@
             </div>
         </div>
         <div class="text-center">
-            <button @click="!isDepotStatusPaused ? showPauseModal = true : showContinueModal = true" class="inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300">
+            <button @click="!isDepotStatusPaused ? showPauseModal = true : showContinueModal = true" class="inline-flex items-center rounded-md px-3 py-2 gap-2 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-600 text-white ring-blue-300">
+                <PauseIcon v-if="!isDepotStatusPaused" class="h-4 w-4" aria-hidden="true" />
+                <PlayIcon v-else class="h-4 w-4" aria-hidden="true" />
                 {{depotStatusText}}
             </button>
         </div>
@@ -58,53 +60,53 @@
         </h2>
         
         <div class="pt-6 flex justify-between items-center">
-            <span class="font-medium text-gray-900">{{ $t('endDate') }}</span>
-            <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
+            <span class="font-bold text-gray-900">{{ $t('endDate') }}</span>
+            <button class="leading-6 hover:text-blue-500">
                   {{ depotPauseEndDate }}
             </button>
         </div>
-        <div class="flex justify-between items-center">
-            <span class="font-medium text-gray-900">{{ $t('pausePeriod') }}</span>
-            <button @click="copyOnlyReferralLink" class="text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500 mt-4">
+        <div class="flex justify-between items-center mt-4">
+            <span class="font-bold text-gray-900">{{ $t('pausePeriod') }}</span>
+            <button class="leading-6 hover:text-blue-500">
                   {{monthSliderValue}}{{ monthSliderValue == 1 ? ' month' : ' months' }}
             </button>
         </div>
-        <div class="flex justify-between items-center">
-            <input type="range" min="1" max="6" v-model="monthSliderValue" step="1" class="w-full mt-4" />
+        <div class="flex justify-between items-center mt-4">
+            <input type="range" min="1" max="6" v-model="monthSliderValue" step="1" class="w-full" />
         </div>
-        <div class="mt-4 text-center text-red-500">
-          <p class="py-2">{{ $t('Please note that the change will not affect purchase orders that have already been created.') }}</p>
-        </div>
-        <div v-if="willStartNextMonth" class="mt-4 text-center text-red-500">
+        <div v-if="willStartNextMonth" class="text-sm mt-4 text-center text-red-500">
           <p class="py-2">{{ $t('pauseWillNotEffectCurrentTransactions') }}</p>
         </div>
         <div v-if="errorText" class="mt-4 text-center text-red-500">
           <p class="py-2" v-html="errorText"></p>
         </div>
         <div class="">
-            <button v-if="!pending" :disabled="disableDepotPause" @click="resumePlan" class="w-full rounded-md px-3 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
+            <button v-if="!pending" :disabled="disableDepotPause" @click="resumePlan" class="capitalize w-full rounded-md px-3 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
                   {{ $t('continue') }}
             </button>
             <Loading v-else/>
         </div>
       </article>
     </Modal>
-    <Modal :open="showContinueModal" @onClose="showContinueModal = false" title="Are you sure?">
+    <Modal :open="showContinueModal" @onClose="showContinueModal = false" :title="`<span class='font-bold'>${$t('resumeSavingsPlan')}</span>`">
       <article class="relative">
+        <div class="mt-4 max-w-[14rem]">
+          <p class="py-2" v-html="$t('areYouSureYouWantToResume')"></p>
+        </div>
         <div v-if="errorText" class="mt-4 text-center text-red-500">
           <p class="py-2" v-html="errorText"></p>
         </div>
       </article>
       <template v-slot:footer>
             <div class="flex justify-end gap-2 mt-4">
-                <button @click="showContinueModal = false" class="px-2 py-1 border-gray-300 rounded-md">
-                    {{ $t('cancel') }}
-                </button>
                 <button v-if="!pending" @click="resumePlan"
-                    class="px-2 py-1 border-gray-300 rounded-md bg-blue-400 text-white">
+                    class="px-2 py-1 border-gray-300 rounded-md uppercase text-sm">
                     {{ $t('ok') }}
                 </button>
                 <Loading v-else />
+                <button @click="showContinueModal = false" class="px-2 py-1 border-gray-300 rounded-md uppercase text-sm">
+                    {{ $t('cancel') }}
+                </button>
             </div>
         </template>
     </Modal>
@@ -115,7 +117,7 @@ import { Depot } from '@/lib/models';
 import { AddDepotService, CurrencyService } from '@/lib/services';
 import ListItem from '@/components/common/ListItem';
 import DepotStatus from '@/components/Assets/DepotStatus';
-import { PlusIcon } from '@heroicons/vue/20/solid'
+import { PlusIcon, PlayIcon, PauseIcon } from '@heroicons/vue/20/solid'
 import { DepotStatuses } from '@/lib/contants';
 import Modal from '@/components/common/Modal.vue';
 import Loading from '@/components/common/Loading.vue';
@@ -208,6 +210,7 @@ const resumePlan = async()=>{
             let result = await AddDepotService.updateDepotStatus(props.depot.id, depotData.value)
             emit('updateDepotStatus', result)
         }
+        errorText.value = ''
     }
     catch(err)
     {

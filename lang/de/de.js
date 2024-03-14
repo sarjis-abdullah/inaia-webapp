@@ -390,4 +390,8 @@ export default {
     continue:'fortsetzen',
     pause:'pausieren',
     pauseWillNotEffectCurrentTransactions:'Bitte beachte dass die Änderung keinen Einfluss auf bereits erstellte Kaufaufträge hat.',
+    pauseSavingsPlan:'Sparplan pausieren',
+    resumeSavingPlan : 'Sparplan fortsetzen',
+    areYouSureYouWantToResume:'Möchtest du deinen Sparplan wieder fortsetzen?',
+    pausePeriod:'Zeitraum',
 }
