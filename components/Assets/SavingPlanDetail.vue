@@ -47,8 +47,8 @@
     </a>
 </template>
 <script lang="ts" setup>
-import {ref,PropType,Ref} from 'vue';
-import { Depot } from '@/lib/models';
+import {ref,Ref} from 'vue';
+import { type Depot } from '@/lib/models';
 import { CurrencyService } from '@/lib/services';
 import ListItem from '@/components/common/ListItem';
 import DepotStatus from '@/components/Assets/DepotStatus';

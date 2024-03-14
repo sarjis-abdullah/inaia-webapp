@@ -140,7 +140,7 @@ import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import { AccountStorage } from '@/storage';
-import { SupportTicket, SupportTicketMessage, SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
+import { type SupportTicket, type SupportTicketMessage, type SupportTicketStatus as SupportTicketStatusModel } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { NotificationTypes } from '@/constants/NotificationTypes';
 import { SupportTicketStatusList } from '@/lib/contants/index'
@@ -302,6 +302,7 @@ const updateSupportTicketStatus = async () => {
         errorText.value = ""
     } catch (error: any) {
         errorText.value = error.message ?? getMessageFromError(error)
+        
     } finally {
         statusLoading.value = false
         confirmWarningTicketModal.value = false
@@ -321,6 +322,7 @@ const loadSupportStatusList = async () => {
         errorText.value = ""
     } catch (error: any) {
         errorText.value = error.message ?? getMessageFromError(error)
+        
     } finally {
         statusLoading.value = false
         confirmWarningTicketModal.value = false

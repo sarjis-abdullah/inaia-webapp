@@ -41,12 +41,12 @@
   
   <script setup lang="ts">
   import Loading from '@/components/common/Loading';
-  import { ref,Ref,PropType } from 'vue'
+  import { ref,Ref } from 'vue'
   import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
   import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
   import { PaginationResponse } from '@/lib/responses';
   import { AssetsService } from '@/lib/services';
-  import { Depot, DepotType } from '@/lib/models';
+  import { type Depot, type DepotType } from '@/lib/models';
   import { AssetTypes } from '@/lib/contants';
   const depots : Ref<Array<Depot>>=ref([])
     const isLoading = ref(true);
@@ -110,7 +110,7 @@ watch(props,()=>{
   }
   catch(err){
     loadingError.value = true;
-
+    useBugsnag().notify(err);
   }
   finally{
     isLoading.value = false;

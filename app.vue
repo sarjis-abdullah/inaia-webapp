@@ -16,6 +16,7 @@ import { App } from './lib/app';
 import { UnauthenticatedListener } from './lib/listeners';
 import LogoutHelper from './helpers/LogoutHelper';
 import { appNames } from '@/lib/appNames';
+import { ChannelTypes } from './lib/contants';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter();
   const initApp =  async ()=>{
@@ -56,9 +57,12 @@ const router = useRouter();
       LoginService.setIsLoggedIn(true);
       TokenService.init(token,expDate);
       let account = await AccountService.loadAccount(contactId);
-      
+      const emailChannel = account.channels.find(c=>c.type.name_translation_key==ChannelTypes.email);
+      if(emailChannel){
+        useBugsnag().setUser(account.account.id.toString(),emailChannel.value);
+      }
       AccountStorage.saveAccount(account);
-      
+      useBugsnag().notify(new Error("test with user"));
       
     }
   }

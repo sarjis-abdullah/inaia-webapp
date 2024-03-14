@@ -54,7 +54,6 @@
   
   <script lang="ts" setup>
   import { LockClosedIcon } from '@heroicons/vue/20/solid';
-import { stat } from 'fs';
   import { ref,reactive,watch } from 'vue';
 import { BadInputException,UnauthenticatedException } from '@/lib/exceptions';
 import { validateEmail,verifyIsAccountNumber } from '@/lib/utils/Validators';
@@ -90,6 +89,7 @@ import InLineApiError from '@/components/common/InLineApiError';
         AccountStorage.saveAccount(response.account);
         AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
         AccountService.setAccount(response.account);
+       
         if(state.keepMeSignedIn){
             LoginStorage.saveRefreshToken(response.refreshToken);
             LoginStorage.saveSecret(response.secret);

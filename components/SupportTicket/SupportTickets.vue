@@ -60,7 +60,7 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed, Ref, PropType } from 'vue'
+import { ref, computed, Ref} from 'vue'
 import ListSkeleton from '@/components/common/ListSkeleton.vue'
 import Loading from '@/components/common/Loading.vue'
 import Notification from '@/components/common/Notification.vue'
@@ -69,7 +69,7 @@ import Modal from '@/components/common/Modal.vue';
 import { SupportTicketService } from '@/lib/services/index';
 import { getMessageFromError } from '@/helpers/ApiErrorResponseHandler';
 import { AccountStorage } from '@/storage';
-import { SupportTicket } from '@/lib/models';
+import { type SupportTicket } from '@/lib/models';
 import { useUserInfo } from '@/hooks/useUserInfo';
 import { NotificationTypes } from '@/constants/NotificationTypes';
 //emits
@@ -141,7 +141,7 @@ const loadData = async () => {
         }
         errorText.value = ""
     } catch (error) {
-        console.error(error);
+        
         errorText.value = getMessageFromError(error)
     } finally {
         ticketLoading.value = false
@@ -166,7 +166,7 @@ const createSupportTicket = async () => {
         showSnackbar.value = true
         errorText.value = ""
     } catch (error) {
-        console.error(error);
+        
         errorText.value = getMessageFromError(error)
     } finally {
         toggleCreateTicketModal()

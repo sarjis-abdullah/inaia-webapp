@@ -6,8 +6,14 @@ export const getMessageFromError=(error:any)=>{
         return error.getRealMessage();
     }
     else if(error instanceof ServerErrorException){
+        useBugsnag().notify(error);
         return t(error.getTranslationKey());
+        
     }
     else
-         return t(error.getTranslationKey());
+    {
+        useBugsnag().notify(error);
+        return t(error.getTranslationKey());
+    }
+         
 }

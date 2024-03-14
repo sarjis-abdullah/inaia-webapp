@@ -26,10 +26,10 @@
 <script lang="ts" setup>
 import AssetItem from '@/components/Assets/AssetItem';
 import PriceHistory from '@/components/Assets/PriceHistory';
-import {Asset, KycDetail,KycStatus} from '@/lib/models';
+import {type Asset, type KycDetail,type KycStatus} from '@/lib/models';
 import { AssetsService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
-import { onMounted,Ref,ref,PropType } from 'vue';
+import { onMounted,Ref,ref } from 'vue';
 import {
   ContentLoader,
 } from 'vue-content-loader';
@@ -57,7 +57,7 @@ onMounted(async ()=>{
     assets.value = await AssetsService.getAssets(accountId);
   }
   catch(err){
-    
+    useBugsnag().notify(err);
   }
   finally{
     isLoadingAssets.value = false;

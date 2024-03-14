@@ -27,7 +27,7 @@ import { PaymentMethods } from '@/lib/contants/PaymentMethods';
 import PaymentAccountSelect from '@/components/PaymentAccount/PaymentAccountSelect';
 import Keyboard from '@/components/Trading/Keyboard';
 import InLineApiError from '@/components/common/InLineApiError'
-import { ConfirmationMethod, Depot,OrderPreview,PaymentAccount } from '@/lib/models';
+import { type ConfirmationMethod, type Depot,type OrderPreview,type PaymentAccount } from '@/lib/models';
 import {Ref} from 'vue'
 import { OrderPreviewRequest } from '~~/lib/requests';
 import { AssetTypes, OrderTypes, ChannelTypes,ConfirmationMethods,TradingMinimumAmounts} from '@/lib/contants';

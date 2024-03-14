@@ -40,12 +40,12 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import {  AssetTradingService } from "@/lib/services";
-import { ConfirmationMethod } from '@/lib/models';
+import { type ConfirmationMethod } from '@/lib/models';
 import { AccountStorage } from '@/storage';
 import { ChannelTypes, ConfirmationMethods } from '@/lib/contants'
 import { validatePhoneNumber,validateEmail} from '@/lib/utils/Validators'
 const selectedConfirmationMethod:Ref<ConfirmationMethod> = ref(null);
-import { Ref,PropType } from 'vue';
+import { Ref } from 'vue';
 const confirmationMethods : Ref<Array<ConfirmationMethod>> = ref([]);
 
 const emit = defineEmits<{
@@ -91,7 +91,7 @@ onMounted(async ()=>{
          }
         }
         catch(err){
-
+            useBugsnag().notify(err);
         }
 })
 </script>

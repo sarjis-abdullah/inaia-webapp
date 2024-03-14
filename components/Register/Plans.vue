@@ -41,7 +41,7 @@ import PlanCard from './PlanCard.vue';
 import Loading from '../common/Loading.vue';
 import {PlanService,SubscriptionService} from '@/lib/services';
 import { Ref,watch,onMounted } from 'vue';
-import { Plan } from '@/lib/models';
+import { type Plan } from '@/lib/models';
 import { PaymentCycles } from '@/lib/contants';
 import { useI18n } from 'vue-i18n';
 

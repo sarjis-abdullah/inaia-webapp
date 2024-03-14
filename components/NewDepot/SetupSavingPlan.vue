@@ -365,7 +365,7 @@ import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } f
 import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import { AccountService, AddDepotService, CurrencyService, PaymentAccountService } from "~~/lib/services";
 import { AssetTypes, PaymentAccountSpecs, ProductsSpec } from "~~/lib/contants";
-import { Ref,PropType } from 'vue';
+import { Ref } from 'vue';
 import { SpPerformanceData,DepotTarget, PaymentAccount, Depot } from '~~/lib/models';
 import { AgioPaymentsModels } from '~~/lib/contants/AgioPaymentsModels';
 import { PaymentMethods } from '~~/lib/contants/PaymentMethods';
@@ -501,7 +501,7 @@ watch(selectedPaymentMethod,async (newOne)=>{
          }
         }
         catch(err){
-
+            useBugsnag().notify(err);
         }
         
     }
@@ -602,7 +602,7 @@ onMounted(async ()=>{
             }
         })
     }catch(err){
-
+        useBugsnag().notify(err);
     }
 })
 </script>

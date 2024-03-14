@@ -48,7 +48,7 @@ import CodeInputs from '@/components/Register/CodeInputs';
 import Loading from '@/components/common/Loading';
 import PhoneCodes from '@/components/Register/PhoneCodes';
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
-import {ref,onMounted,reactive,watch,PropType} from 'vue';
+import {ref,onMounted,reactive,watch} from 'vue';
 import { AccountService, PhoneNumberService,SubscriptionService } from '@/lib/services';
 import { SubscriptionStorage } from '@/storage';
 import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
@@ -153,8 +153,11 @@ const handleError= (err:unknown)=>{
         }
         else if(err instanceof ServerErrorException){
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
         }
-        else
+        else{
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
+        }
 }
 </script>

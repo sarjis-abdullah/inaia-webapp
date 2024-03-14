@@ -25,7 +25,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from "vue";
+
 import Loading from "@/components/common/Loading";
 import InLineApiError from "@/components/common/InLineApiError";
 import {  CheckCircleIcon, XCircleIcon} from '@heroicons/vue/20/solid';

@@ -1,4 +1,4 @@
-import { ConfirmationMethod } from "./ConfirmationMethod"
+import { type ConfirmationMethod } from "./ConfirmationMethod"
 
 export interface PlaceOrderModel {
     approval_id:number,

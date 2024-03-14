@@ -28,7 +28,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from "vue";
+
 import { ExclamationCircleIcon } from '@heroicons/vue/20/solid';
 import { DepotTarget } from "~~/lib/models";
 import SelectAvatar from '@/components/common/SelectAvatar.vue';

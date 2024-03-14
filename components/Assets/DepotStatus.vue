@@ -2,8 +2,8 @@
     <div v-if="props && props.depot && props.depot.status" :class="theStyle">{{ $t(props.depot.status.name_translation_key) }}</div>
 </template>
 <script lang="ts" setup>
-import { PropType,computed,onMounted,ref,Ref } from 'vue';
-import { Depot } from '@/lib/models';
+import { computed,onMounted,ref,Ref } from 'vue';
+import { type Depot } from '@/lib/models';
 import { DepotStatuses } from '~~/lib/contants';
 const props = defineProps({
     depot:{

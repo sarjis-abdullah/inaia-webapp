@@ -94,8 +94,11 @@ const handleError= (err:unknown)=>{
         }
         else if(err instanceof ServerErrorException){
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
         }
-        else
+        else{
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
+        }
 }
 </script>

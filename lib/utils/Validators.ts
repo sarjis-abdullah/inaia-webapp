@@ -18,7 +18,7 @@ export function validatePassword(password:string):boolean{
 }
 export const sanitizeEmail = (email:string) => {
     if(email && email.replace)
-        return email. replace(/\s/g, '' );
+        return email.replace(/\s/g, '' );
     else{
         return '';
     }

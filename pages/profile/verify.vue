@@ -148,7 +148,7 @@
   import PersonalInfo from "@/components/Kyc/PersonalInfo.vue";
   import Address from "@/components/Kyc/Address.vue";
   import { AccountStorage } from '~~/storage';
-  import {Account} from '@/lib/models';
+  import {type Account} from '@/lib/models';
   import { AccountService, AssetsService } from '@/lib/services';
   import {Ref} from 'vue';
 import { StartKycRequest } from '~~/lib/requests';

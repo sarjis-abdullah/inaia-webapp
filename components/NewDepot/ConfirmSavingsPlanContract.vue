@@ -46,7 +46,7 @@
 </template>
 <script lang="ts" setup>
 import { DepotTarget, Condition, Depot } from "~~/lib/models";
-import { PropType,Ref } from "vue";
+import { Ref } from "vue";
 import { AddDepotRequest } from "~~/lib/requests";
 import { AssetTypes, ConditionTypes } from "~~/lib/contants";
 import { ConditionService, CurrencyService } from "~~/lib/services";
@@ -114,6 +114,7 @@ onMounted(async()=>{
     }
     catch(err){
         error.value = err;
+        useBugsnag().notify(err);
     }
     finally {
         loadingConditions.value = false;

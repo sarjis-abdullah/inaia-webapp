@@ -56,7 +56,7 @@ import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon
 import CodeInputs from '@/components/Register/CodeInputs';
 import Loading from '@/components/common/Loading';
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
-import {ref,onMounted,watch,PropType} from 'vue';
+import {ref,onMounted,watch} from 'vue';
 import { EmailService,AccountService } from '@/lib/services';
 import { SubscriptionStorage } from '~~/storage';
 import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
@@ -156,8 +156,11 @@ const handleError= (err:unknown)=>{
         }
         else if(err instanceof ServerErrorException){
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
         }
-        else
+        else{
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
+        }
 }
 </script>

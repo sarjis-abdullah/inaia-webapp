@@ -60,7 +60,7 @@ import Modal from '@/components/common/Modal';
 import Loading from '@/components/common/Loading';
 import { InformationCircleIcon, PlusCircleIcon,MinusCircleIcon } from '@heroicons/vue/24/outline';
 import InLineApiError from '@/components/common/InLineApiError'
-import { Depot, OrderPreview, TradeableAmount } from '@/lib/models';
+import { type Depot, type OrderPreview, type TradeableAmount } from '@/lib/models';
 import { Ref } from 'vue'
 import { OrderPreviewRequest } from '~~/lib/requests';
 import { AssetTypes, OrderTypes, ChannelTypes, ConfirmationMethods, TradingMinimumAmounts } from '@/lib/contants';
@@ -108,7 +108,7 @@ watch([selectedDepot], async () => {
         
     }
     catch(err){
-
+        useBugsnag().notify(err);
     }
     finally{
         loadTradeableAmount.value = false
@@ -228,6 +228,7 @@ const save = async () => {
     }
     catch (err: any) {
         submitErr.value = err;
+
     }
     finally {
         isSubmitting.value = false

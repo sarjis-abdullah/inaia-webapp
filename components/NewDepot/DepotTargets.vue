@@ -47,7 +47,7 @@ onMounted(async()=>{
         savinPlanTargets.value = await SavingPlanService.getSavinPlansTargets();
     }
     catch(err){
-
+        useBugsnag().notify(err);
     }
     finally{
         loading.value = false;

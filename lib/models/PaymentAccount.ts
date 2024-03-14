@@ -1,5 +1,5 @@
-import { PaymentAccountSpec } from "./PaymentAccountSpec";
-import { PaymentMethod } from "./PaymentMethod";
+import { type PaymentAccountSpec } from "./PaymentAccountSpec";
+import { type PaymentMethod } from "./PaymentMethod";
 
 export interface PaymentAccount{
     created_at?:string,

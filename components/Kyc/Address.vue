@@ -176,6 +176,7 @@ async function save() {
     catch(err){
         submittingError.value = true;
         errorText.value = err.message;
+        useBugsnag().notify(err);
     }
     finally{
         isSubmitting.value = false;

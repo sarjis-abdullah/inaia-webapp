@@ -95,6 +95,7 @@ async function save() {
     }
     catch (err) {
         submitErr.value = err;
+        useBugsnag().notify(err);
     }
     finally {
         isSubmitting.value = false;

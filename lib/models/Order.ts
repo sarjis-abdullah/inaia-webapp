@@ -1,8 +1,8 @@
-import { Depot } from "./Depot";
-import { OrderPaymentTransaction } from "./OrderPaymentTransaction";
-import { OrderStatus } from "./OrderStatus";
-import { OrderTransaction } from "./OrderTransaction";
-import { OrderType } from "./OrderType";
+import { type Depot } from "./Depot";
+import { type OrderPaymentTransaction } from "./OrderPaymentTransaction";
+import { type OrderStatus } from "./OrderStatus";
+import { type OrderTransaction } from "./OrderTransaction";
+import { type OrderType } from "./OrderType";
 
 export interface Order{
     action_date?:string,

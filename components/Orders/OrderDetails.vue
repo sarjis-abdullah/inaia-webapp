@@ -13,8 +13,8 @@
     </Modal>
 </template>
 <script lang="ts" setup>
-import {ref,PropType} from 'vue';
-import { Order } from '@/lib/models';
+import {ref} from 'vue';
+import { type Order } from '@/lib/models';
 import Modal from '@/components/common/Modal';
 import ListItem from '@/components/common/ListItem';
 import BuyOrder from '@/components/Orders/OrderDetails/BuyOrder';

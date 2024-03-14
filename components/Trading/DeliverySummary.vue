@@ -40,8 +40,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { ref, PropType } from 'vue';
-import { OrderPreview, Depot, Condition, PlaceOrderModel } from '@/lib/models';
+import { ref  } from 'vue';
+import { type OrderPreview, type Depot, type Condition, type PlaceOrderModel } from '@/lib/models';
 import ListItem from '@/components/common/ListItem';
 import { AssetTradingService, CurrencyService } from '~~/lib/services';
 import InLineApiError from '@/components/common/InLineApiError'
@@ -84,6 +84,7 @@ onMounted(()=>{
     }
     catch(err){
         console.log(err);
+        useBugsnag().notify(err);
     }
 })
 const deliveryAddress = ref('');

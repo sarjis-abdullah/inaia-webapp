@@ -49,7 +49,6 @@
   import { ServerErrorException } from '~~/lib/exceptions/ServerErrorException';
   import {ResetPasswordService} from '@/lib/services/ResetPasswordService';
   import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
-  import { I18nN } from '@nuxtjs/i18n/dist/runtime/composables';
   const inputErrorStyle = "block w-full rounded-md border-0 py-1.5 text-red-900 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6";
   const emailValidated = ref(true);
   const disabled = ref(true);

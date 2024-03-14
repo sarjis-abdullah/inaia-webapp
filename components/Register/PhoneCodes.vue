@@ -14,7 +14,7 @@
 </template>
 <script lang="ts" setup>
 import { CountryService } from '@/lib/services';
-import { Country } from '@/lib/models';
+import { type Country } from '@/lib/models';
 import { ref, watch } from 'vue';
 import type { Ref } from 'vue'
 import Loading from '../common/Loading.vue';
@@ -55,6 +55,7 @@ try{
 catch(err)
 {
   error.value = err;
+  useBugsnag().notify(err);
 }
 finally{
   isLoading.value= false;
