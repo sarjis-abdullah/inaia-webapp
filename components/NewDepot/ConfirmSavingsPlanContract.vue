@@ -29,7 +29,7 @@
                     
                 </div>
             <div class="mt-10">
-                    <button v-if="depot?.is_savings_plan==0" type="submit"
+                    <button  v-if="!depot || depot?.is_savings_plan == 0" type="submit"
                      
                         :disabled="!enableBtn"
                      :class="enableBtn?'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500':'bg-blue-300 focus:ring-blue-200'"

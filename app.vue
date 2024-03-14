@@ -56,13 +56,18 @@ const router = useRouter();
       const expDate = LoginStorage.getExpDate()
       LoginService.setIsLoggedIn(true);
       TokenService.init(token,expDate);
-      let account = await AccountService.loadAccount(contactId);
-      const emailChannel = account.channels.find(c=>c.type.name_translation_key==ChannelTypes.email);
-      if(emailChannel){
-        useBugsnag().setUser(account.account.id.toString(),emailChannel.value);
+      try{
+          let account = await AccountService.loadAccount(contactId);
+          const emailChannel = account.channels.find(c=>c.type.name_translation_key==ChannelTypes.email);
+          if(emailChannel){
+            useBugsnag().setUser(account.account.id.toString(),emailChannel.value);
+          }
+          AccountStorage.saveAccount(account);
       }
-      AccountStorage.saveAccount(account);
-      useBugsnag().notify(new Error("test with user"));
+      catch(err){
+        
+      }
+      
       
     }
   }
