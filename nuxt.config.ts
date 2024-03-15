@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const appEnv = process.env.NODE_ENV || 'development'
+const appEnv = process.env.URL_ENV || 'development'
 import EnvKeys from './config'
 import en from './lang/en/en';
 import de from './lang/de/de';

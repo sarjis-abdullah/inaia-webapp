@@ -21,9 +21,9 @@ const switchLocalePath = useSwitchLocalePath();
 const router = useRouter();
   const initApp =  async ()=>{
     const config = useRuntimeConfig();
-    const runTimeEnv = config.URL_ENV;
+    const runTimeEnv = config.public.URL_ENV;
     let appName = appNames.inaiaEu;
-    const runTimeApp = config.CURRENT_APP;
+    const runTimeApp = config.public.CURRENT_APP;
     if(runTimeApp){
       switch (runTimeApp) {
         case appNames.inaiaEu:
