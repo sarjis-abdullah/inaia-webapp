@@ -30,6 +30,9 @@ export default defineNuxtConfig({
     }
 
   },
+  routeRules:{
+    '/':{prerender:false}
+  },
   dir: {
     assets: assetDirectory
   },
