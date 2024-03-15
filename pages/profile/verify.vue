@@ -208,8 +208,8 @@ const onInfoSet = (object:Object)=>{
   if(object){
     kycRequest.value.birth_date =  formatDate(new Date(object.birthdate));
     kycRequest.value.birth_place = object.birthplace;
-    kycRequest.value.name = object.name;
-    kycRequest.value.surname = object.surname;
+    kycRequest.value.name = object.prename;
+    kycRequest.value.surname = object.name;
     kycRequest.value.gender = object.gender;
     kycRequest.value.nationality_id = object.nationality;
 
