@@ -101,7 +101,7 @@ export class HttpRequester{
         if(status == 401){
             const event = new UnauthenticatedEvent();
             
-            return new UnauthenticatedException(error);
+            //return new UnauthenticatedException(error);
         }
         if(status == 403)
         {

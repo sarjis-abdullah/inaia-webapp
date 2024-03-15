@@ -1,4 +1,4 @@
-import { Country } from './Country';
+import { type Country } from './Country';
 export interface Address{
     id:number;
     type_id:number;

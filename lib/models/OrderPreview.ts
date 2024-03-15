@@ -1,4 +1,4 @@
-import { Condition } from "./Condition"
+import { type Condition } from "./Condition"
 
 export interface OrderPreview {
     amount:number,

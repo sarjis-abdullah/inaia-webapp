@@ -57,7 +57,7 @@
 </template>
 <script lang="ts" setup>
 import {AssetTypes, PricePeriods} from '@/lib/contants';
-import { onMounted,Ref,ref,watch,PropType } from 'vue';
+import { onMounted,Ref,ref,watch } from 'vue';
 import { Depot, DepotHistoryValue, HistoricalPrice } from '~~/lib/models';
 import { UpdateDepotRequest } from '@/lib/requests/UpdateDepotRequest';
 import { CurrencyService, AssetsService, AddDepotService } from '@/lib/services';
@@ -230,6 +230,7 @@ const loadDepotValuesHistory = async ()=>{
     }
     catch(err){
         console.log(err);
+        useBugsnag().notify(err);
     }
     finally{
       isLoading.value = false;
@@ -282,7 +283,7 @@ const updateDepotAvatar = async() =>{
       await AddDepotService.updateDepotAvatar(props?.depot?.id, obj)
       onDepotAvatarUpdated()
   } catch (error) {
-    
+    useBugsnag().notify(error);
   }finally {
     loading.value = false
     photoPreview.value = ""

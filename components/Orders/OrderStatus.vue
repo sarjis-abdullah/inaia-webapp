@@ -5,8 +5,8 @@
 
 </template>
 <script lang="ts" setup>
-import { PropType,computed,onMounted,ref,Ref } from 'vue';
-import { Order } from '@/lib/models';
+import { computed,onMounted,ref,Ref } from 'vue';
+import { type Order } from '@/lib/models';
 import { OrderStatuses } from '@/lib/contants';
 const props = defineProps({
     order:{

@@ -17,21 +17,21 @@
         <div class="mt-8 flex flex-row justify-between items-center">
             <span class="text-blue-400 text-xl font-semibold">{{ numberOfTwenty }} X</span>
             <div class="flex justify-items-center items-center flex-col">
-                <a @click="onPlusPressed(20000)"><PlusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
+                <a @click="onPlusPressed(20000)" :disabled="!selectedDepot  || loadTradeableAmount"><PlusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
                 <span class="my-3 text-2xl font-bold">20 g</span>
-                <a @click="onMinusPressed(20000)" :disabled="numberOfTwenty==0"><MinusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
+                <a @click="onMinusPressed(20000)" :disabled="numberOfTwenty==0 || !selectedDepot || loadTradeableAmount"><MinusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
             </div>
             <span class="text-blue-400 text-xl font-semibold">{{ numberOfFifty }} X</span>
             <div class="flex justify-items-center items-center flex-col">
-                <a @click="onPlusPressed(50000)"><PlusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
+                <a @click="onPlusPressed(50000)" :disabled="!selectedDepot || loadTradeableAmount"><PlusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
                 <span class="my-3 text-2xl font-bold">50 g</span>
-                <a @click="onMinusPressed(50000)" :disabled="numberOfFifty==0"><MinusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
+                <a @click="onMinusPressed(50000)" :disabled="numberOfFifty==0 || !selectedDepot || loadTradeableAmount"><MinusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
             </div>
             <span class="text-blue-400 text-xl font-semibold">{{ numberOfHundred }} X</span>
             <div class="flex justify-items-center items-center flex-col">
-                <a @click="onPlusPressed(100000)"><PlusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
+                <a @click="onPlusPressed(100000)" :disabled="!selectedDepot || loadTradeableAmount"><PlusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
                 <span class="my-3 text-2xl font-bold">100 g</span>
-                <a @click="onMinusPressed(100000)" :disabled="numberOfHundred==0"><MinusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
+                <a @click="onMinusPressed(100000)" :disabled="numberOfHundred==0 || !selectedDepot || loadTradeableAmount"><MinusCircleIcon class="w-6 text-gray-400 cursor-pointer active:opacity-50"/></a>
             </div>
         </div>
         <p class="text-center mt-4 text-l text-red-400" v-show="emptyDepot">{{ $t('availableAmountNonZero') }}
@@ -60,7 +60,7 @@ import Modal from '@/components/common/Modal';
 import Loading from '@/components/common/Loading';
 import { InformationCircleIcon, PlusCircleIcon,MinusCircleIcon } from '@heroicons/vue/24/outline';
 import InLineApiError from '@/components/common/InLineApiError'
-import { Depot, OrderPreview, TradeableAmount } from '@/lib/models';
+import { type Depot, type OrderPreview, type TradeableAmount } from '@/lib/models';
 import { Ref } from 'vue'
 import { OrderPreviewRequest } from '~~/lib/requests';
 import { AssetTypes, OrderTypes, ChannelTypes, ConfirmationMethods, TradingMinimumAmounts } from '@/lib/contants';
@@ -99,7 +99,7 @@ watch([selectedDepot], async () => {
         loadTradeableAmount.value = true
         if(selectedDepot){
             tradeableAmount.value = await AssetTradingService.getTradeableAmount(selectedDepot.value.id);
-            if(tradeableAmount.value.tradeable_gram_amount == 0){
+            if(tradeableAmount.value && tradeableAmount.value.tradeable_gram_amount == 0){
                 emptyDepot.value = true;
             }else{
                 emptyDepot.value = false;
@@ -108,20 +108,20 @@ watch([selectedDepot], async () => {
         
     }
     catch(err){
-
+        useBugsnag().notify(err);
     }
     finally{
         loadTradeableAmount.value = false
     }
 })
-watch(amount,()=>{
+watch([amount,tradeableAmount],()=>{
     if(amount.value< TradingMinimumAmounts.minDeliveryAmount && tradeableAmount.value && tradeableAmount.value.tradeable_gram_amount >=TradingMinimumAmounts.minDeliveryAmount ){
         smallAmount.value = true
     }
     else{
         smallAmount.value = false
     }
-    if(tradeableAmount && tradeableAmount.value.tradeable_gram_amount < amount.value){
+    if(tradeableAmount.value && tradeableAmount.value.tradeable_gram_amount < amount.value){
         exceededAmount.value = true;
     }
     else{
@@ -228,6 +228,7 @@ const save = async () => {
     }
     catch (err: any) {
         submitErr.value = err;
+
     }
     finally {
         isSubmitting.value = false

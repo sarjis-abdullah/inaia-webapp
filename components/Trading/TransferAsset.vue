@@ -41,7 +41,7 @@ import Loading from '@/components/common/Loading';
 import { InformationCircleIcon } from '@heroicons/vue/24/outline';
 import Keyboard from '@/components/Trading/Keyboard';
 import InLineApiError from '@/components/common/InLineApiError'
-import { Depot, OrderPreview, TradeableAmount } from '@/lib/models';
+import { type Depot,type  TradeableAmount } from '@/lib/models';
 import { Ref } from 'vue'
 import { OrderPreviewRequest } from '~~/lib/requests';
 import { AssetTypes, OrderTypes, ChannelTypes, ConfirmationMethods, TradingMinimumAmounts } from '@/lib/contants';
@@ -91,7 +91,7 @@ watch([selectedDepot], async () => {
         
     }
     catch(err){
-
+        useBugsnag().notify(err);
     }
     finally{
         loadTradeableAmount.value = false

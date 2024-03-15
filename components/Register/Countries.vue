@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 
 import { CountryService } from '@/lib/services';
-import { Country } from '@/lib/models';
+import { type Country } from '@/lib/models';
 import { ref, watch, onMounted } from 'vue';
 import type { Ref } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
@@ -94,6 +94,7 @@ onMounted(async () => {
   catch (err) {
     console.log(err);
     error.value = err;
+    useBugsnag().notify(err);
   }
   finally {
     isLoading.value = false;

@@ -18,8 +18,8 @@
 </template>
 <script lang="ts" setup>
 import {AssetTypes} from '@/lib/contants';
-import { PropType,computed } from 'vue';
-import { Asset } from '@/lib/models';
+import { computed } from 'vue';
+import { type Asset } from '@/lib/models';
 import { CurrencyService } from '@/lib/services';
 const { t } = useI18n();
 const props = defineProps({

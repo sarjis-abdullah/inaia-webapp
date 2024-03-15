@@ -45,7 +45,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { PropType,watch } from "vue";
+import { watch } from "vue";
 import { DataItem, SpPerformanceData } from "~~/lib/models";
 import { ChartBarIcon,TableCellsIcon,PresentationChartLineIcon } from '@heroicons/vue/24/solid';
 import { CurrencyService } from "~~/lib/services";

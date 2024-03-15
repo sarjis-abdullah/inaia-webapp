@@ -1,4 +1,4 @@
-import { TransactionType } from "./TransactionType";
+import { type TransactionType } from "./TransactionType";
 
 export interface OrderTransaction{
     created_at:string,

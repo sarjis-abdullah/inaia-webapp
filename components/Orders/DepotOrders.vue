@@ -14,8 +14,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import {Ref,ref,onMounted,PropType} from 'vue';
-import { Depot, Order } from '@/lib/models';
+import {Ref,ref,onMounted} from 'vue';
+import { type Depot, type Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
 import OrderList from '@/components/Orders/OrderList.vue';
 import Pagination from '@/components/common/Pagination.vue';
@@ -100,7 +100,7 @@ const handleDownloadOrderStatement = async(params: statementDateParams) => {
             a.click();
             a.remove();
         } catch (error) {
-            console.error(error);
+            useBugsnag().notify(error);
         }
         finally{
             pdfLoading.value = false

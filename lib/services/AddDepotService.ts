@@ -92,7 +92,7 @@ export class AddDepotService {
                 prev = returnsData[index-2].value;
             
             let brute = monthlySavings*12+prev;
-            if(index<=agioData.length)
+            if(index<=agioData.length && agioPaymentModel != AgioPaymentsModels.onetime)
             {
             
                 brute = brute - agioData[index-1].value;

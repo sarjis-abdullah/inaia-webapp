@@ -15,11 +15,31 @@ import { AssetStorage } from './storage/AssetStorage';
 import { App } from './lib/app';
 import { UnauthenticatedListener } from './lib/listeners';
 import LogoutHelper from './helpers/LogoutHelper';
+import { appNames } from '@/lib/appNames';
+import { ChannelTypes } from './lib/contants';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter();
   const initApp =  async ()=>{
     const config = useRuntimeConfig();
     const runTimeEnv = config.URL_ENV;
+    let appName = appNames.inaiaEu;
+    const runTimeApp = config.CURRENT_APP;
+    if(runTimeApp){
+      switch (runTimeApp) {
+        case appNames.inaiaEu:
+          appName = appNames.inaiaEu;
+          break;
+        case appNames.getGreenGold:
+          appName = appNames.getGreenGold;
+          break;
+      
+        default:
+          appName = appNames.inaiaEu;
+          break;
+      }
+    }
+    
+    App.setAppName(appName);
     App.clearListeners();
     if(runTimeEnv && runTimeEnv == Envs.production)
       BaseUrls.setEnv(Envs.production);
@@ -36,9 +56,17 @@ const router = useRouter();
       const expDate = LoginStorage.getExpDate()
       LoginService.setIsLoggedIn(true);
       TokenService.init(token,expDate);
-      let account = await AccountService.loadAccount(contactId);
-      
-      AccountStorage.saveAccount(account);
+      try{
+          let account = await AccountService.loadAccount(contactId);
+          const emailChannel = account.channels.find(c=>c.type.name_translation_key==ChannelTypes.email);
+          if(emailChannel){
+            useBugsnag().setUser(account.account.id.toString(),emailChannel.value);
+          }
+          AccountStorage.saveAccount(account);
+      }
+      catch(err){
+        
+      }
       
       
     }

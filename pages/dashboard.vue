@@ -16,7 +16,7 @@ import AssetSummary from '@/components/Assets/AssetSummary';
 import DepotList from '@/components/Assets/DepotList';
 import LatestOrders from '@/components/Orders/LatestOrders';
 import { AccountStorage } from '~~/storage';
-  import {Account} from '@/lib/models';
+  import {type Account} from '@/lib/models';
   import { AccountService } from '@/lib/services';
   import {Ref} from 'vue';
 definePageMeta({

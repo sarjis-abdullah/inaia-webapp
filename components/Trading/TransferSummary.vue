@@ -25,8 +25,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { ref, PropType } from 'vue';
-import {  Depot, PlaceOrderModel } from '@/lib/models';
+import { ref } from 'vue';
+import { type  Depot, type PlaceOrderModel } from '@/lib/models';
 import ListItem from '@/components/common/ListItem';
 import { AssetTradingService, CurrencyService } from '~~/lib/services';
 import InLineApiError from '@/components/common/InLineApiError'

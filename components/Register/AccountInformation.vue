@@ -251,9 +251,13 @@ async function save() {
         }
         else if(err instanceof ServerErrorException){
             submittingErrorMessage.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
         }
-        else
+        else{
             submittingErrorMessage.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
+        }
+
     }
     finally{
         isSubmitting.value = false;

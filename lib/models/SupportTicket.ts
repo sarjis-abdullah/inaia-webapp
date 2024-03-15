@@ -1,6 +1,6 @@
-import {AccountData} from './Account'
-import {SupportTicketMessage} from './SupportTicketMessage'
-import {SupportTicketStatus} from './SupportTicketStatus'
+import {type AccountData} from './Account'
+import {type SupportTicketMessage} from './SupportTicketMessage'
+import {type SupportTicketStatus} from './SupportTicketStatus'
 
 export interface SupportTicket {
     id: number;

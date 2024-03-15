@@ -19,7 +19,7 @@
 import { ref, Ref } from 'vue'
 import SupportTickets from '@/components/SupportTicket/SupportTickets.vue'
 import SupportTicketSingleDetails from '@/components/SupportTicket/SupportTicketSingleDetails.vue'
-import { SupportTicket } from '@/lib/models';
+import { type SupportTicket } from '@/lib/models';
 import Modal from '@/components/common/Modal.vue';
 //data variables
 const selectedTicket: Ref<SupportTicket> = ref({} as SupportTicket)
