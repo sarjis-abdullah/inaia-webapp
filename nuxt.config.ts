@@ -8,6 +8,8 @@ import gggen from './lang/en/gggen';
 import gggde from './lang/de/gggde';
 import gggfr from './lang/fr/gggfr';
 const appNames = require('./appNames');
+let favIcon = '/favicon.ico';
+let pageTitle = "INAIA App";
 let selectedEnglish = en;
 let selectedFrench = fr;
 let selectedGerman = de;
@@ -17,7 +19,9 @@ if (process.env.CURRENT_APP) {
     selectedEnglish = gggen;
     selectedFrench = gggfr;
     selectedGerman = gggde;
-    assetDirectory = "gggassets"
+    assetDirectory = "gggassets";
+    pageTitle='GGG App';
+    favIcon = '/ggg-favicon.ico';
   }
 }
 
@@ -29,6 +33,15 @@ export default defineNuxtConfig({
       CURRENT_APP: process.env.CURRENT_APP
     }
 
+  },
+  app:{
+    head:{
+      title:pageTitle,
+      charset:'utf-8',
+      link:[
+        { rel: 'icon', type: 'image/x-icon', href: favIcon },
+      ]
+    }
   },
   routeRules:{
     '/':{prerender:false}
