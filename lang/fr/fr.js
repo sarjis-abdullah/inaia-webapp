@@ -353,6 +353,7 @@ export default {
     copyReferralLink: "Copier le lien de parrainage",
     savingsPlanCriteria: "* avec un volume d'épargne d'au moins 6000€ (par exemple 50€ euros / 10 ans)",
     copied: 'Copié',
-    //requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien : <a class="font-semibold cursor-pointer" href={link}>cliquez ici.</a>',
+    requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien :',
+    clickHere:"Cliquer ici",
     already_a_savings_plan: "Déjà un plan d'épargne"
 }

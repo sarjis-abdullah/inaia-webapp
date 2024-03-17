@@ -530,7 +530,11 @@ watch([agioPercentage,state],([newAgioPercentage,newState],[oldAgioPercentage,ol
     if(newAgioPercentage){
         totalAgio.value = AddDepotService.calculateTotalAgio(newAgioPercentage,newState.selectedPaymentOption.reduction,newState.numberOfYears,newState.monthlySaving);
         contractData.value = AddDepotService.calculateChartData(newState.numberOfYears,newState.monthlySaving,newState.performance,totalAgio.value,newState.selectedPaymentOption.name);
-        totalReturns.value =contractData.value.returnsData[contractData.value.returnsData.length-1].value;
+        if(contractData.value.returnsData)
+            totalReturns.value =contractData.value.returnsData[contractData.value.returnsData.length-1].value;
+        else{
+            totalReturns.value = 0;
+        }
     }
     
     
