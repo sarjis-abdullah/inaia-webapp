@@ -19,7 +19,7 @@ const handleError = (value)=>{
             if(value.err.getRealMessage() == ErrorCode.invalid_link)
             {
                 const url = urlBuilder(locale.value,'/request-password');
-                errorText.value = t('requestNewLink',{link:url});
+                errorText.value = t('requestNewLink')+' '+`<a class="font-semibold cursor-pointer" href="${url}"'>${t('clickHere')}</a>`;
                 return;
             }
             else{
