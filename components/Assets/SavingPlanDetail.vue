@@ -54,7 +54,7 @@
         <p class="mt-2 text-sm text-red-600 text-center" v-if="errorText" v-html="errorText"></p>
     </a>
     <Modal v-if="showPauseModal" :open="showPauseModal" @onClose="showPauseModal = false">
-      <article class="relative">
+      <article class="">
         <h2 class="leading-7 text-gray-900 text-2xl font-bold max-w-[12rem] mx-auto mb-6 text-center">
           {{ $t('pauseSavingsPlan') }}
         </h2>
@@ -88,8 +88,8 @@
         </div>
       </article>
     </Modal>
-    <Modal :open="showContinueModal" @onClose="closeConfirmationModal" :title="`<span class='font-bold'>${$t('resumeSavingsPlan')}</span>`">
-      <article class="relative">
+    <Modal v-if="showContinueModal" :open="showContinueModal" @onClose="closeConfirmationModal" :title="`<span class='font-bold'>${$t('resumeSavingsPlan')}</span>`">
+      <article class="">
         <div class="mt-4 max-w-[14rem]">
           <p class="py-2" v-html="$t('areYouSureYouWantToResume')"></p>
         </div>
@@ -110,8 +110,8 @@
             </div>
         </template>
     </Modal>
-    <Modal :open="pauseSavingsPlanConfirmation" @onClose="closeConfirmationModal" :title="`<span class='font-bold'>${$t('pauseSavingsPlan')}</span>`">
-      <article class="relative">
+    <Modal v-if="pauseSavingsPlanConfirmation" :open="pauseSavingsPlanConfirmation" @onClose="closeConfirmationModal" :title="`<span class='font-bold'>${$t('pauseSavingsPlan')}</span>`">
+      <article class="">
         <div class="mt-4 max-w-[14rem]">
           <p class="py-2" v-html="$t('pauseSavingsPlanConfirmation')"></p>
         </div>
@@ -177,6 +177,7 @@ const lineWith = computed(()=>{
     }
     return 0;
 })
+const pauseSavingsPlanConfirmation = ref(false)
 const isDepotStatusPaused = computed(()=> !!(props.depot?.status?.name_translation_key == DepotStatuses.paused))
 const depotStatusText = computed(()=>{
     if(isDepotStatusPaused.value){
@@ -267,14 +268,15 @@ const getDepotStatusList = async()=>{
     finally {
     }
 }
-const pauseSavingsPlanConfirmation = ref(false)
 const closeConfirmationModal = () => {
     showContinueModal.value = false
     pauseSavingsPlanConfirmation.value = false
 }
 const confirmSavingszPlanToPause = () => {
-    showPauseModal.value = false
-    showContinueModal.value = false
     pauseSavingsPlanConfirmation.value = true
+    nextTick(()=> {
+        showPauseModal.value = false
+    })
+    showContinueModal.value = false
 }
 </script>
