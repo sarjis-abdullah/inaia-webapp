@@ -40,9 +40,9 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import {  PaymentAccountService } from "@/lib/services";
-import { PaymentAccount } from '@/lib/models';
+import { type PaymentAccount } from '@/lib/models';
 const selectedPaymentAccount:Ref<PaymentAccount> = ref(null);
-import { Ref,PropType } from 'vue';
+import { Ref} from 'vue';
 import { PaymentAccountSpecs } from '~~/lib/contants';
 import { formatIban } from '@/lib/Formatters';
 const paymentAccounts : Ref<Array<PaymentAccount>> = ref([]);
@@ -83,7 +83,7 @@ onMounted(async ()=>{
          }
         }
         catch(err){
-
+            useBugsnag().notify(err);
         }
 })
 </script>

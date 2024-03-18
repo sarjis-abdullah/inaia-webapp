@@ -1,4 +1,4 @@
-import { Order } from "./Order";
+import { type Order } from "./Order";
 
 export interface TradeableAmount {
     total_blocked_gram_amount : number,

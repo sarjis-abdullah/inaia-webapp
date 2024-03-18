@@ -1,45 +1,29 @@
 import { Envs } from "./Envs";
 import libConfig from "../lib.config";
+import { appNames } from "../appNames";
 export class BaseUrls {
     private static env = Envs.staging;
+    private static appName = appNames.inaiaEu
     public static setEnv(env:Envs){
         this.env = env;
     }
+    public static setAppName(name:appNames){
+        this.appName = name;
+    }
     public static getCoreUrl() : string{
-        if(this.env == Envs.staging){
-            return libConfig.baseUrls.staging.coreBaseUrl;
-        }
-        if(this.env == Envs.production){
-            return  libConfig.baseUrls.production.coreBaseUrl;
-        }
+        const app = libConfig.baseUrls[this.appName]
+        return app[this.env].coreBaseUrl;
     }
     public static getGoldDinarUrl() : string{
-        if(this.env == Envs.staging){
-            
-            return libConfig.baseUrls.staging.goldDinarBaseUrl;
-            
-        }
-        if(this.env == Envs.production){
-            
-            return libConfig.baseUrls.production.goldDinarBaseUrl;
-        }
+        const app = libConfig.baseUrls[this.appName]
+        return app[this.env].goldDinarBaseUrl;
     }
     public static getBankingUrl(){
-        if(this.env == Envs.staging){
-         
-            return libConfig.baseUrls.staging.bankBaseUrl;
-        }
-        if(this.env == Envs.production){
-            
-            return libConfig.baseUrls.production.bankBaseUrl;
-        }
+        const app = libConfig.baseUrls[this.appName]
+        return app[this.env].bankBaseUrl;
     }
     public static getPaymentUrl() : string{
-        if(this.env == Envs.staging){
-            return libConfig.baseUrls.staging.paymentsBaseUrl;
-        }
-        if(this.env == Envs.production){
-            return libConfig.baseUrls.production.paymentsBaseUrl;
-        }
+        const app = libConfig.baseUrls[this.appName]
+        return app[this.env].paymentsBaseUrl;
     }
 }

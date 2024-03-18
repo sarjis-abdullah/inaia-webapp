@@ -33,7 +33,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { PropType, Ref, computed } from "vue";
+import {  Ref, computed } from "vue";
 import { AssetTypes, ConditionTypes } from "~~/lib/contants";
 import { Condition, DepotTarget } from "~~/lib/models";
 import { ConditionService } from "~~/lib/services";
@@ -82,6 +82,7 @@ onMounted(async()=>{
     }
     catch(err){
         error.value = err;
+        useBugsnag().notify(err);
     }
     finally {
         loadingConditions.value = false;

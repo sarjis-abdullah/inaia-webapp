@@ -1,7 +1,7 @@
-import { Account } from "./Account"
-import { DepotStatus } from "./DepotStatus"
-import { DepotType } from "./DepotType"
-import { SavingPlanTarget } from "./SavingPlanTarget"
+import { type Account } from "./Account"
+import { type DepotStatus } from "./DepotStatus"
+import { type DepotType } from "./DepotType"
+import { type SavingPlanTarget } from "./SavingPlanTarget"
 
 export interface Depot{
     account?:Account

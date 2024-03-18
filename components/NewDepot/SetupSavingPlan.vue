@@ -228,7 +228,7 @@
                             <a v-if="state.selectedPaymentOption.name == AgioPaymentsModels.installment"
                                 class="mt-3 text-blue-500 underline cursor-pointer" @click="openPaymentTable">{{ $t('seeReamboursmentPlan') }}</a>
                         </div>
-                        <div class="my-6">
+                        <div class="my-6" v-if="!isSimulation">
 
                             <Listbox as="div" v-model="selectedPaymentMethod">
                                 <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">{{
@@ -267,7 +267,7 @@
                             </Listbox>
                         </div>
                         <div class="my-6"
-                            v-if="selectedPaymentMethod == PaymentMethods.bankAccount && paymentAccounts.length > 0">
+                            v-if="selectedPaymentMethod == PaymentMethods.bankAccount && paymentAccounts.length > 0 && !isSimulation">
 
                             <Listbox as="div" v-model="selectedPaymentAccount">
                                 <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">{{
@@ -309,11 +309,11 @@
                 
             </div>
             <div class="md:col-span-2">
-                    <PerformanceChart :data="contractData"/>
+                    <PerformanceChart :data="contractData" v-if="contractData"/>
                 </div>
         </div>
-        <div class="mt-10">
-            <button v-if="depot?.is_savings_plan == 0" type="submit"
+        <div class="mt-10" v-if="!isSimulation">
+            <button v-if="!depot || depot?.is_savings_plan == 0" type="submit"
                     :disabled="!enableBtn"
                     :class="enableBtn?'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500':'bg-blue-300 focus:ring-blue-200'"
                     class="flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm  focus:outline-none focus:ring-2  focus:ring-offset-2"
@@ -365,13 +365,14 @@ import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } f
 import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import { AccountService, AddDepotService, CurrencyService, PaymentAccountService } from "~~/lib/services";
 import { AssetTypes, PaymentAccountSpecs, ProductsSpec } from "~~/lib/contants";
-import { Ref,PropType } from 'vue';
+import { Ref } from 'vue';
 import { SpPerformanceData,DepotTarget, PaymentAccount, Depot } from '~~/lib/models';
 import { AgioPaymentsModels } from '~~/lib/contants/AgioPaymentsModels';
 import { PaymentMethods } from '~~/lib/contants/PaymentMethods';
 import { formatDate, formatIban } from '~~/lib/Formatters';
 import PerformanceChart from '@/components/NewDepot/PerformanceChart';
 import Modal from '@/components/common/Modal';
+import simulator from '~/pages/simulator.vue';
 const {t} = useI18n();
 const performances = ref([
     {key:1,value:3},
@@ -395,6 +396,10 @@ const props = defineProps({
              type:String,
              
          },
+    isSimulation:{
+        type: Boolean,
+        default:false
+    },
 });
 const emit = defineEmits<{
   (e: 'onContractDataSet',data:object): void
@@ -501,7 +506,7 @@ watch(selectedPaymentMethod,async (newOne)=>{
          }
         }
         catch(err){
-
+            useBugsnag().notify(err);
         }
         
     }
@@ -525,7 +530,11 @@ watch([agioPercentage,state],([newAgioPercentage,newState],[oldAgioPercentage,ol
     if(newAgioPercentage){
         totalAgio.value = AddDepotService.calculateTotalAgio(newAgioPercentage,newState.selectedPaymentOption.reduction,newState.numberOfYears,newState.monthlySaving);
         contractData.value = AddDepotService.calculateChartData(newState.numberOfYears,newState.monthlySaving,newState.performance,totalAgio.value,newState.selectedPaymentOption.name);
-        totalReturns.value =contractData.value.returnsData[contractData.value.returnsData.length-1].value;
+        if(contractData.value.returnsData)
+            totalReturns.value =contractData.value.returnsData[contractData.value.returnsData.length-1].value;
+        else{
+            totalReturns.value = 0;
+        }
     }
     
     
@@ -581,6 +590,10 @@ onMounted(async ()=>{
             state.monthlySaving = props.target.interval_amount;
             state.numberOfYears = props.target.duration;
         }
+        else{
+            state.monthlySaving = 300;
+            state.numberOfYears = 10;
+        }
         if(props.depot && props.depot.target_type){
             state.monthlySaving = props.depot.target_type.interval_amount;
             state.numberOfYears = props.depot.target_type.duration;
@@ -594,15 +607,20 @@ onMounted(async ()=>{
         date.month = nextPossibleMonth;
         date.year = nextPossibleYear;
         setupMonths();
+        if(props.accountId){
+            const productSpecs = await AccountService.getAccountProductDetails(props.accountId);
+            productSpecs.forEach(spec=>{
+                if(spec.product_spec_name == ProductsSpec.gold_transaction_fee){
+                    agioPercentage.value = parseInt(spec.value)/100;
+                }
+            })
+        }
+        else{
+            agioPercentage.value = 5.95;
+        }
         
-        const productSpecs = await AccountService.getAccountProductDetails(props.accountId);
-        productSpecs.forEach(spec=>{
-            if(spec.product_spec_name == ProductsSpec.gold_transaction_fee){
-                agioPercentage.value = parseInt(spec.value)/100;
-            }
-        })
     }catch(err){
-
+        useBugsnag().notify(err);
     }
 })
 </script>

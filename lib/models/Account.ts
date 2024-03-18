@@ -1,10 +1,10 @@
-import { Address } from './Address';
-import { PersonData } from './PersonData';
-import { Product } from './Product';
-import { Fee } from './Plan';
-import { AccountSetting } from "./AccountSetting";
-import { Channel } from './Channel';
-import { KycStatus } from './KycStatus';
+import { type Address } from './Address';
+import { type PersonData } from './PersonData';
+import { type Product } from './Product';
+import { type Fee } from './Plan';
+import { type AccountSetting } from "./AccountSetting";
+import { type Channel } from './Channel';
+import { type KycStatus } from './KycStatus';
 
 interface AmlStatus{
     id:number;

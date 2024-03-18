@@ -152,7 +152,7 @@ async function save() {
         emit('onSave');
     }
     catch(err){
-
+        useBugsnag().notify(err);
     }
     finally{
         isSubmitting.value = false;

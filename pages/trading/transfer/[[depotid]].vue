@@ -31,7 +31,7 @@ import TransferAsset from '@/components/Trading/TransferAsset';
 import TransferSummary from '@/components/Trading/TransferSummary';
 import Confirmation from '@/components/Trading/Confirmation';
 import { Ref } from 'vue';
-import { Depot, OrderPreview, PlaceOrderModel } from '@/lib/models';
+import { type Depot, type OrderPreview, type PlaceOrderModel } from '@/lib/models';
 import { AssetTypes, TransactionTypes } from '@/lib/contants';
 import { PlaceOrderRequest } from '@/lib/requests';
 import { ArrowSmallLeftIcon,ArrowSmallRightIcon } from '@heroicons/vue/24/solid';

@@ -4,7 +4,7 @@
     <div class="relative mt-1" v-if="!isLoading && !error">
       <ListboxButton
         class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm">
-        <span class="block truncate">{{ selected.name_translation_key }}</span>
+        <span class="block truncate">{{ selected?selected.name_translation_key:$t('choose') }}</span>
         <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
@@ -19,7 +19,7 @@
             <li
               :class="[active ? 'text-white bg-blue-600' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
               <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{
-                country.name_translation_key
+                country?country.name_translation_key:''
               }}</span>
 
               <span v-if="selected"
@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 
 import { CountryService } from '@/lib/services';
-import { Country } from '@/lib/models';
+import { type Country } from '@/lib/models';
 import { ref, watch, onMounted } from 'vue';
 import type { Ref } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
@@ -94,6 +94,7 @@ onMounted(async () => {
   catch (err) {
     console.log(err);
     error.value = err;
+    useBugsnag().notify(err);
   }
   finally {
     isLoading.value = false;

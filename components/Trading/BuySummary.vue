@@ -58,8 +58,8 @@
 
 </div></template>
 <script lang="ts" setup>
-import {ref,PropType} from 'vue';
-import { OrderPreview,Depot, PaymentAccount, Condition, PlaceOrderModel, ConfirmationMethod } from '@/lib/models';
+import {ref} from 'vue';
+import { type OrderPreview,Depot, type PaymentAccount, type Condition, type PlaceOrderModel } from '@/lib/models';
 import ListItem from '@/components/common/ListItem';
 import { AssetTradingService, CurrencyService } from '~~/lib/services';
 import { PaymentMethods } from '~~/lib/contants/PaymentMethods';

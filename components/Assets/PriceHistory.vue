@@ -26,7 +26,7 @@
 import {AssetTypes, PricePeriods} from '@/lib/contants';
 import { invalid } from 'moment';
 import { onMounted,Ref,ref,watch } from 'vue';
-import { HistoricalPrice } from '~~/lib/models';
+import { type HistoricalPrice } from '~~/lib/models';
 import { CurrencyService, PricesHistoryService } from '~~/lib/services';
 import { AssetStorage } from '@/storage/AssetStorage';
 const options = {
@@ -187,7 +187,7 @@ const loadPriceHistory = async ()=>{
       
     }
     catch(err){
-
+      useBugsnag().notify(err);
     }
     finally{
       isLoading.value = false;
@@ -219,7 +219,7 @@ const loadPriceHistory = async ()=>{
       
     }
     catch(err){
-
+      useBugsnag().notify(err);
     }
     finally{
       isLoading.value = false;

@@ -16,7 +16,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import {ref, PropType} from 'vue'
+import {ref} from 'vue'
 import { SupportTicketStatusList } from '@/lib/contants/index'
 defineProps({
     status:{

@@ -8,21 +8,23 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^8.0.0-beta.9",
     "autoprefixer": "^10.4.13",
-    "nuxt": "3.0.0",
+    "@nuxtjs/i18n": "^8.1.1",
+    "nuxt": "^3.10.3",
     "postcss": "^8.4.19",
     "tailwindcss": "^3.2.4"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.8",
     "@heroicons/vue": "^2.0.13",
+    
     "@tailwindcss/forms": "^0.5.3",
     "apexcharts": "^3.42.0",
     "d3-array": "^3.2.4",
     "floating-vue": "^5.2.2",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
+    "nuxt-bugsnag": "^7.2.3",
     "vue-content-loader": "^2.0.1",
     "vue-country-flag-next": "^2.3.2",
     "vue3-apexcharts": "^1.4.4",

@@ -34,7 +34,7 @@
     </Modal>
 </template>
 <script lang="ts" setup>
-import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
+
 import Modal from '@/components/common/Modal';
 import InLineApiError from '@/components/common/InLineApiError'
 import { PaymentAccount } from '~~/lib/models';
@@ -102,6 +102,7 @@ const save = async()=>{
         emit('OnAdd',newPaymentAccount);
     } catch (err) {
         error.value = err;
+        useBugsnag().notify(err);
     }
     finally{
         isSubmitting.value = false

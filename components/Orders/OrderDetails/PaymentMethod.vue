@@ -5,8 +5,8 @@
 </template>
 <script lang="ts" setup>
 import ListItem from '@/components/common/ListItem';
-import {computed,PropType} from 'vue';
-import { Order } from '@/lib/models';
+import {computed} from 'vue';
+import { type Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
 const props = defineProps({
     order:{

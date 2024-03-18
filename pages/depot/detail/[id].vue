@@ -65,7 +65,7 @@
 </template>
 <script lang="ts" setup>
 import { Ref, ref, onMounted } from 'vue';
-import { Account, Depot } from '@/lib/models';
+import { type Account, type Depot } from '@/lib/models';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon, ChevronDownIcon, InboxIcon } from '@heroicons/vue/24/outline';
 import DepotDetails from '@/components/Assets/DepotDetails';

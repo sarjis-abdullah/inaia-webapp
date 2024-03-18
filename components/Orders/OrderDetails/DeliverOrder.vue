@@ -9,8 +9,8 @@
 </template>
 <script lang="ts" setup>
 import ListItem from '@/components/common/ListItem';
-import {ref,PropType,computed} from 'vue';
-import { Order } from '@/lib/models';
+import {ref,computed} from 'vue';
+import { type Order } from '@/lib/models';
 import { OrderStatuses } from '~~/lib/contants';
 import { OrderService,CurrencyService } from '@/lib/services';
 import OrderStatus from '@/components/Orders/OrderStatus';

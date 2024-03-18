@@ -103,8 +103,8 @@
   </div>
   </template>
   <script  lang="ts" setup>
-  import { PropType,computed,onMounted,ref,Ref } from 'vue';
-import { Depot, DepotType } from '@/lib/models';
+  import {computed,onMounted,ref,Ref } from 'vue';
+import { type Depot, type DepotType } from '@/lib/models';
 import { AssetsService,CurrencyService } from '~~/lib/services';
 import { AssetStorage } from '~~/storage/AssetStorage';
 import { AssetTypes } from '~~/lib/contants';
@@ -186,7 +186,7 @@ onMounted(async ()=>{
   }
   catch(err){
     loadingError.value = true;
-
+    useBugsnag().notify(err);
   }
   finally{
     isLoading.value = false;

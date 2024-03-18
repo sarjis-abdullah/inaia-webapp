@@ -270,7 +270,7 @@ export default {
     password_mismatch_alert: "Die eingegebenen Passwörter stimmen nicht überein.",
     depot_avatar_updated: "Depot-Avatar aktualisiert",
     profile_avatar_updated: "Profil-Avatar aktualisiert",
-    minimumAmountRequired:`Der Mindestbetrag beträgt 25 {{currency}}`,
+    minimumAmountRequired:`Der Mindestbetrag beträgt 25 {currency}`,
     showPreview:'Vorschau anzeigen',
     depotText:'Depot',
     purchaseSellNote:'Hinweis: Die hier aufgeführte Übersicht stellt keine verbindliche Auftragsannahme dar. Der Kauf- bzw. Verkaufsauftrag kommt erst mit Zusendung der Auftragsbestätigung per E-Mail zustande.\nEs gelten die Kauf- und Verkaufsintervalle in unseren Geschäftsbedingungen.',
@@ -306,7 +306,7 @@ export default {
     blockedAmount:'Ausstehend',
     tradeableAmount:'Verfügbar',
     pendingOrders:'Transaktionen ausstehend',
-    blockedAmountExplanation:`Die Menge von {{blockedAmount}} Gramm ist derzeit nicht handelbar. Dies kann an Widerrufsfristen, am SEPA-Lastschriftverfahren oder einem noch offenen Abschlussentgelt liegen. Sobald Sicherheitsfristen vorüber sind, wird die entsprechende Menge zum Handel freigegeben.`,
+    blockedAmountExplanation:`Die Menge von {blockedAmount} Gramm ist derzeit nicht handelbar. Dies kann an Widerrufsfristen, am SEPA-Lastschriftverfahren oder einem noch offenen Abschlussentgelt liegen. Sobald Sicherheitsfristen vorüber sind, wird die entsprechende Menge zum Handel freigegeben.`,
     tomorrow:"morgen",
     availableIn:'Verfügbar in',
     To:'Bis',
@@ -394,5 +394,8 @@ export default {
     resumeSavingPlan : 'Sparplan fortsetzen',
     areYouSureYouWantToResume:'Möchtest du deinen Sparplan wieder fortsetzen?',
     pausePeriod:'Zeitraum',
-    pauseSavingsPlanConfirmation: "Sind Sie sicher, dass Sie diesen Sparplan pausieren möchten?"
+    pauseSavingsPlanConfirmation: "Sind Sie sicher, dass Sie diesen Sparplan pausieren möchten?",
+    requestNewLink :'Der Link ist ungültig.',
+    clickHere:"Hier klicken",
+    already_a_savings_plan: "Bereits ein Sparplan"
 }

@@ -1,4 +1,4 @@
-import {AccountData} from './Account'
+import {type AccountData} from './Account'
 export interface SupportTicketMessage {
     id: number;
     message: string;

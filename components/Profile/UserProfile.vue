@@ -6,7 +6,7 @@ import defaultImage from '@/assets/img/defaultAvatar.png';
 import Loading from '@/components/common/Loading.vue';
 import InLineApiError from '@/components/common/InLineApiError.vue';
 import SelectAvatar from '@/components/common/SelectAvatar.vue';
-import { Account } from '@/lib/models';
+import { type Account } from '@/lib/models';
 
 //emits
 const emit = defineEmits<{
@@ -44,6 +44,7 @@ const updateProfileInformation = async (e: Event) => {
         emit('onUpdate')
     } catch (error) {
         submitErr.value = error
+        useBugsnag().notify(error);
     } finally {
         loading.value = false
     }

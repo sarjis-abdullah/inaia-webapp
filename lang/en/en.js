@@ -269,7 +269,7 @@ export default {
     password_mismatch_alert: "The passwords you entered don't match.",
     depot_avatar_updated: 'Depot avatar updated',
     profile_avatar_updated: 'Profile avatar updated',
-    minimumAmountRequired:`A minimum purchase amount of 25 {{currency}} is required`,
+    minimumAmountRequired:`A minimum purchase amount of 25 {currency} is required`,
     showPreview:'Preview',
     depotText:'Depot',
     buyingNoteOnExecutionDate:'The purchases in the third-party transaction (Wakalah transaction) will be executed promptly at the earliest possible time, but no later than within 2 business days after receipt of funds.',
@@ -305,7 +305,7 @@ export default {
     blockedAmount:'Outstanding',
     tradeableAmount:'Available',
     pendingOrders:'Pending orders',
-    blockedAmountExplanation:`The amount of {{blockedAmount}} grams is currently not available for trading. This can be due to cancellation periods, the SEPA direct debit procedure or an outstanding subscription fee. As soon as safety periods have passed, the corresponding quantity is free for trade.`,
+    blockedAmountExplanation:`The amount of {blockedAmount} grams is currently not available for trading. This can be due to cancellation periods, the SEPA direct debit procedure or an outstanding subscription fee. As soon as safety periods have passed, the corresponding quantity is free for trade.`,
     tomorrow:"Tomorrow",
     availableIn:'Available in',
     To:"to",
@@ -395,5 +395,8 @@ export default {
     resumeSavingsPlan:'Continue savings plan',
     areYouSureYouWantToResume:'Please confirm that you want to continue your savings plan.',
     pausePeriod:'Pause period',
-    pauseSavingsPlanConfirmation: "Are you sure you want to pause this savings plan?"
+    pauseSavingsPlanConfirmation: "Are you sure you want to pause this savings plan?",
+    requestNewLink :'Please request for a new link:',
+    clickHere:"Click here",
+    already_a_savings_plan: "Already a savings plan"
 }

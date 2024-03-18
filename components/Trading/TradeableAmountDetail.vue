@@ -35,8 +35,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from "vue";
-import { TradeableAmount,Order } from "@/lib/models";
+
+import { type TradeableAmount,type Order } from "@/lib/models";
 import ListItem from '@/components/common/ListItem';
 import { CurrencyService, OrderService } from "@/lib/services";
 import {InformationCircleIcon } from '@heroicons/vue/24/solid';

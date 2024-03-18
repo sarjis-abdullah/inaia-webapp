@@ -25,8 +25,8 @@
   
   <script lang="ts" setup>
   import { XCircleIcon,ArrowRightIcon } from '@heroicons/vue/20/solid';
-  import { PropType } from 'vue';
-  import {KycDetail, KycStatus} from '@/lib/models';
+
+  import {type KycDetail,type KycStatus} from '@/lib/models';
   import { KycStatuses } from '@/lib/contants';
   const props = defineProps({
     kycDetails:{

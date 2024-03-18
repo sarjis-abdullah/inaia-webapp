@@ -238,7 +238,7 @@ export default {
     password_mismatch_alert: "Les mots de passe que vous avez saisis ne correspondent pas.",
     depot_avatar_updated: "Avatar du dépôt mis à jour",
     profile_avatar_updated: "Avatar du profil mis à jour",
-    minimumAmountRequired:`Un montant minimum d'achat de 25 {{currency}} est requis`,
+    minimumAmountRequired:`Un montant minimum d'achat de 25 {currency} est requis`,
     showPreview:'Aperçu',
     depotText:'Dépôt',
     buyingNoteOnExecutionDate:"Les achats effectués dans le cadre d'une transaction pour le compte de tiers (Transaction Wakalah) sont exécutés sans délai, dès que possible et au plus tard dans les deux jours ouvrables suivant la réception des fonds.",
@@ -273,7 +273,7 @@ export default {
     blockedAmount:'Montant bloqué',
     tradeableAmount:'Montant disponible',
     pendingOrders:'Commandes en pause',
-    blockedAmountExplanation:`Le montant de {{blockedAmount}} grammes n'est actuellement pas disponible. Cela peut être dû à des délais d'annulation, à la procédure de prélèvement SEPA ou à des frais d'abonnement impayés. Dès que les délais de sécurité sont écoulés, la quantité correspondante est libérée pour la vente.`,
+    blockedAmountExplanation:`Le montant de {blockedAmount} grammes n'est actuellement pas disponible. Cela peut être dû à des délais d'annulation, à la procédure de prélèvement SEPA ou à des frais d'abonnement impayés. Dès que les délais de sécurité sont écoulés, la quantité correspondante est libérée pour la vente.`,
     tomorrow:"demain",
     availableIn:'Disponible en',
     To:"à",
@@ -362,5 +362,8 @@ export default {
     resumeSavingPlan : "Reprendre le plan d'épargne",
     areYouSureYouWantToResume:"Veuillez confirmer que vous souhaitez reprendre votre plan d'épargne",
     pausePeriod:'Période de suspension',
-    pauseSavingsPlanConfirmation: "Êtes-vous sûr de vouloir mettre en pause ce plan d'épargne ?"
+    pauseSavingsPlanConfirmation: "Êtes-vous sûr de vouloir mettre en pause ce plan d'épargne ?",
+    requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien :',
+    clickHere:"Cliquer ici",
+    already_a_savings_plan: "Déjà un plan d'épargne"
 }

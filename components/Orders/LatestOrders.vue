@@ -9,7 +9,7 @@
 </template>
 <script lang="ts" setup>
 import {Ref,ref,onMounted} from 'vue';
-import { Order } from '@/lib/models';
+import { type Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
 import OrderList from '@/components/Orders/OrderList';
 import Loading from '@/components/common/Loading';
@@ -37,7 +37,7 @@ const loadMoreTransaction = async ()=>{
         await loadData()
     }
     catch(err){
-        console.log(err);
+        useBugsnag().notify(err);
         loadingError.value = true;
     }
     finally{
@@ -51,8 +51,8 @@ onMounted(async()=>{
         await loadData();
     }
     catch(err){
-        console.log(err);
         loadingError.value = true;
+        useBugsnag().notify(err);
     }
     finally{
         loading.value = false

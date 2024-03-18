@@ -58,8 +58,8 @@
 <script lang="ts" setup>
 import CodeInputs from '@/components/Register/CodeInputs';
 import Loading from '@/components/common/Loading';
-import { PropType,Ref } from 'vue';
-import { ConfirmationMethod, Order, PlaceOrderModel } from '@/lib/models';
+import { Ref } from 'vue';
+import { type ConfirmationMethod, type Order, type PlaceOrderModel } from '@/lib/models';
 import { ConfirmationMethods } from '@/lib/contants';
 import { AssetTradingService } from '@/lib/services';
 import { ConfirmOrderRequest, ConfirmTransferRequest, PlaceOrderRequest, TransferAssetRequest } from '@/lib/requests';

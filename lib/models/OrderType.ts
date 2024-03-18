@@ -1,4 +1,4 @@
-import { OrderTypes } from './../contants/OrderTypes';
+import { type OrderTypes } from './../contants/OrderTypes';
 export interface OrderType{
     created_at?:string,
     deleted_at?:number,

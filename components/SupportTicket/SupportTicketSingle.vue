@@ -20,10 +20,10 @@
 </template>
   
 <script setup lang="ts">
-import { PropType, computed } from 'vue'
+import {computed } from 'vue'
 import SupportTicketStatus from '@/components/SupportTicket/SupportTicketStatus.vue';
 import { formatDateByMoment, dateFormat2 } from '@/lib/Formatters';
-import { SupportTicket } from '@/lib/models';
+import { type SupportTicket } from '@/lib/models';
 const {t,locale} = useI18n();
 const router = useRouter();
 const route = useRoute()

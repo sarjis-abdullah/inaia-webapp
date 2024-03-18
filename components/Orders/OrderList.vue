@@ -87,8 +87,8 @@
 import ListLoader from '@/components/common/ListLoader.vue';
 import ListLoadingError from '@/components/common/ListLoadingError.vue';
 import OrderStatus from '@/components/Orders/OrderStatus.vue';
-import {Ref,ref,onMounted,PropType,computed, watch} from 'vue'
-import { Order } from '@/lib/models';
+import {Ref,ref,onMounted,computed, watch} from 'vue'
+import { type Order } from '@/lib/models';
 import { OrderService,CurrencyService } from '@/lib/services';
 import { OrderStatuses } from '~~/lib/contants';
 import OrderDetails from '@/components/Orders/OrderDetails.vue';

@@ -35,7 +35,7 @@
 import { ArrowDownTrayIcon } from '@heroicons/vue/24/outline';
 import { ref,Ref } from 'vue';
 import { MissingInformationException,ServerErrorException } from '@/lib/exceptions';
-import { Condition } from '@/lib/models';
+import { type Condition } from '@/lib/models';
 import { ConditionService,SubscriptionService } from '@/lib/services';
 import { SubscriptionStorage } from '@/storage';
 import Switch  from '../common/AppSwitch.vue'
@@ -121,8 +121,11 @@ const handleError= (err:unknown)=>{
         }
         else if(err instanceof ServerErrorException){
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
         }
-        else
+        else{
             errorText.value = t(err.getTranslationKey());
+            useBugsnag().notify(err);
+        }
 }
 </script>
