@@ -395,4 +395,5 @@ export default {
     resumeSavingsPlan:'Continue savings plan',
     areYouSureYouWantToResume:'Please confirm that you want to continue your savings plan.',
     pausePeriod:'Pause period',
+    pauseSavingsPlanConfirmation: "Are you sure you want to pause this savings plan?"
 }

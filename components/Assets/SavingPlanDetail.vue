@@ -81,14 +81,14 @@
           <p class="py-2" v-html="errorText"></p>
         </div>
         <div class="">
-            <button v-if="!pending" :disabled="disableDepotPause" @click="resumePlan" class="capitalize w-full rounded-md px-3 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
+            <button v-if="!pending" :disabled="disableDepotPause" @click="confirmSavingszPlanToPause" class="capitalize w-full rounded-md px-3 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-500 text-white ring-blue-300 py-3 mt-4">
                   {{ $t('continue') }}
             </button>
             <Loading v-else/>
         </div>
       </article>
     </Modal>
-    <Modal :open="showContinueModal" @onClose="showContinueModal = false" :title="`<span class='font-bold'>${$t('resumeSavingsPlan')}</span>`">
+    <Modal :open="showContinueModal" @onClose="closeConfirmationModal" :title="`<span class='font-bold'>${$t('resumeSavingsPlan')}</span>`">
       <article class="relative">
         <div class="mt-4 max-w-[14rem]">
           <p class="py-2" v-html="$t('areYouSureYouWantToResume')"></p>
@@ -104,7 +104,29 @@
                     {{ $t('ok') }}
                 </button>
                 <Loading v-else />
-                <button @click="showContinueModal = false" class="px-2 py-1 border-gray-300 rounded-md uppercase text-sm">
+                <button @click="closeConfirmationModal" class="px-2 py-1 border-gray-300 rounded-md uppercase text-sm">
+                    {{ $t('cancel') }}
+                </button>
+            </div>
+        </template>
+    </Modal>
+    <Modal :open="pauseSavingsPlanConfirmation" @onClose="closeConfirmationModal" :title="`<span class='font-bold'>${$t('pauseSavingsPlan')}</span>`">
+      <article class="relative">
+        <div class="mt-4 max-w-[14rem]">
+          <p class="py-2" v-html="$t('pauseSavingsPlanConfirmation')"></p>
+        </div>
+        <div v-if="errorText" class="mt-4 text-center text-red-500">
+          <p class="py-2" v-html="errorText"></p>
+        </div>
+      </article>
+      <template v-slot:footer>
+            <div class="flex justify-end gap-2 mt-4">
+                <button v-if="!pending" @click="resumePlan"
+                    class="px-2 py-1 border-gray-300 rounded-md uppercase text-sm">
+                    {{ $t('ok') }}
+                </button>
+                <Loading v-else />
+                <button @click="closeConfirmationModal" class="px-2 py-1 border-gray-300 rounded-md uppercase text-sm">
                     {{ $t('cancel') }}
                 </button>
             </div>
@@ -220,6 +242,7 @@ const resumePlan = async()=>{
         pending.value = false
         showPauseModal.value = false
         showContinueModal.value = false
+        pauseSavingsPlanConfirmation.value = false
     }
 }
 const getDepotStatusList = async()=>{
@@ -243,5 +266,15 @@ const getDepotStatusList = async()=>{
     }
     finally {
     }
+}
+const pauseSavingsPlanConfirmation = ref(false)
+const closeConfirmationModal = () => {
+    showContinueModal.value = false
+    pauseSavingsPlanConfirmation.value = false
+}
+const confirmSavingszPlanToPause = () => {
+    showPauseModal.value = false
+    showContinueModal.value = false
+    pauseSavingsPlanConfirmation.value = true
 }
 </script>

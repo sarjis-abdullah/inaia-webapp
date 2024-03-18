@@ -394,4 +394,5 @@ export default {
     resumeSavingPlan : 'Sparplan fortsetzen',
     areYouSureYouWantToResume:'Möchtest du deinen Sparplan wieder fortsetzen?',
     pausePeriod:'Zeitraum',
+    pauseSavingsPlanConfirmation: "Sind Sie sicher, dass Sie diesen Sparplan pausieren möchten?"
 }

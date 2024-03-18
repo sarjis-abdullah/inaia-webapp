@@ -362,4 +362,5 @@ export default {
     resumeSavingPlan : "Reprendre le plan d'épargne",
     areYouSureYouWantToResume:"Veuillez confirmer que vous souhaitez reprendre votre plan d'épargne",
     pausePeriod:'Période de suspension',
+    pauseSavingsPlanConfirmation: "Êtes-vous sûr de vouloir mettre en pause ce plan d'épargne ?"
 }
