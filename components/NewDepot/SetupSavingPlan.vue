@@ -65,7 +65,7 @@
                         <vue3-slider v-model="state.numberOfYears" color="#0065D3" track-color="#E8ECEE" :min="1"
                             :max="45" />
 
-                        <div class="my-6">
+                        <div class="my-6" v-if="!isSimulation">
                             <span class="mb-3">{{ $t('startdate') }}</span>
                             <div class="flex flex-col">
                                 <Listbox as="div" v-model="date.day" class="mb-3">
@@ -527,10 +527,10 @@ watch([selectedPaymentMethod,selectedPaymentAccount],([newSelectedPaymentMethod,
     enableBtn.value = false;
 })
 watch([agioPercentage,state],([newAgioPercentage,newState],[oldAgioPercentage,oldState])=>{
-    if(newAgioPercentage){
+    if(newAgioPercentage && newState && newState.monthlySaving >0 && newState.numberOfYears>0 && !isNaN(newState.monthlySaving) && !isNaN(state.numberOfYears)){
         totalAgio.value = AddDepotService.calculateTotalAgio(newAgioPercentage,newState.selectedPaymentOption.reduction,newState.numberOfYears,newState.monthlySaving);
         contractData.value = AddDepotService.calculateChartData(newState.numberOfYears,newState.monthlySaving,newState.performance,totalAgio.value,newState.selectedPaymentOption.name);
-        if(contractData.value.returnsData)
+        if(contractData.value.returnsData && contractData.value.returnsData.length > 0)
             totalReturns.value =contractData.value.returnsData[contractData.value.returnsData.length-1].value;
         else{
             totalReturns.value = 0;
