@@ -187,7 +187,7 @@ watch(props,(currentValue)=>{
 watch(state,(currentValue)=>{
     
     birthdateValidated.value = validateBirthdate(new Date(currentValue.birthdate));
-    if(currentValue.name.length>0 && currentValue.prename.length>0 && birthdateValidated.value)
+    if(currentValue.name.length>0 && currentValue.prename.length>0 && birthdateValidated.value && currentValue.gender && currentValue.gender.length > 0 && currentValue.nationality!=null && currentValue.nationality > -1)
     {
         saveActivated.value = true;
     }
@@ -201,7 +201,7 @@ async function save() {
         name:state.name,
         prename: state.prename,
         gender: state.gender,
-        birthdate: state.birthdate,
+        birthdate: moment(state.birthdate).format('YYYY-MM-DD'),
         birthplace:state.birthplace,
         nationality:state.nationality
     });
