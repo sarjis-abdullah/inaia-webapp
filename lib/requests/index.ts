@@ -1,4 +1,4 @@
-import { SupportTicketStatus } from './../models/SupportTicketStatus';
+import { type VerifyResetPasswordTokenRequest } from './VerifyResetPasswordTokenRequest';
 import { AddPaymentAccountRequest } from './AppPaymentAccountRequest';
 import { UpdateAddressRequest } from './UpdateAddressRequest';
 import { ConditionsRequest } from './ConditionsRequest';
@@ -34,38 +34,39 @@ import { PlaceOrderRequest } from './PlaceOrderRequest';
 import { ConfirmOrderRequest } from './ConfirmOrderRequest';
 import { TransferAssetRequest } from './TransferAssetRequest';
 import { ConfirmTransferRequest } from './ConfirmTransferRequest';
-export { ConditionsRequest };
-export { AccountInformationRequest };
-export { AddressRequest };
-export { ChosenPlan };
-export { ConditionRequest };
-export { GetClientDepotsRequest };
-export { LoginRequest };
-export { NewPasswordRequest };
-export { PageRequest };
-export { RegistrationRequest };
-export { ResetPinRequest };
-export { SendEmailCodeRequest };
-export { SendPhoneCodeRequest };
-export { VerifyEmailRequest };
-export { VerifyPhonelRequest };
-export { PriceVariationRequest };
-export { DepotHistoryValuesRequest };
-export { AddDepotRequest };
-export { StartKycRequest };
-export { AddSavingsPlanRequest };
-export { UpdateAddressRequest };
-export {ChannelRequest};
-export {LocaleSettingRequest};
-export {AddPaymentAccountRequest};
-export {DateFilterRequest, StatementDateFilterRequest};
-export {PasswordUpdateRequest};
-export {SupportTicketStoreRequest};
-export {SupportTicketStatusUpdateRequest};
-export {SupportTicketMessageStoreRequest, SupportTicketMessageListRequest};
-export { UpdateDepotRequest };
-export {OrderPreviewRequest}
-export {PlaceOrderRequest}
-export {ConfirmOrderRequest}
-export {TransferAssetRequest}
-export {ConfirmTransferRequest}
+export { type ConditionsRequest };
+export { type AccountInformationRequest };
+export { type AddressRequest };
+export { type ChosenPlan };
+export { type ConditionRequest };
+export { type GetClientDepotsRequest };
+export { type LoginRequest };
+export { type NewPasswordRequest };
+export { type PageRequest };
+export { type RegistrationRequest };
+export { type ResetPinRequest };
+export { type SendEmailCodeRequest };
+export { type SendPhoneCodeRequest };
+export { type VerifyEmailRequest };
+export { type VerifyPhonelRequest };
+export { type PriceVariationRequest };
+export { type DepotHistoryValuesRequest };
+export { type AddDepotRequest };
+export { type StartKycRequest };
+export { type AddSavingsPlanRequest };
+export { type UpdateAddressRequest };
+export {type ChannelRequest};
+export {type LocaleSettingRequest};
+export {type AddPaymentAccountRequest};
+export {type DateFilterRequest, type StatementDateFilterRequest};
+export {type PasswordUpdateRequest};
+export {type SupportTicketStoreRequest};
+export {type SupportTicketStatusUpdateRequest};
+export {type SupportTicketMessageStoreRequest, type SupportTicketMessageListRequest};
+export { type UpdateDepotRequest };
+export {type OrderPreviewRequest}
+export {type PlaceOrderRequest}
+export {type ConfirmOrderRequest}
+export {type TransferAssetRequest}
+export {type ConfirmTransferRequest}
+export {type VerifyResetPasswordTokenRequest}
