@@ -142,7 +142,7 @@ onMounted(()=>{
 })
 watch(state,(currentValue)=>{
 
-    if(state.country_id!=-1 && currentValue.line1.length>0 && currentValue.postal_code.length>0 && currentValue.town.length > 0)
+    if(currentValue && state.country_id!=-1 && currentValue.line1 && currentValue.line1.length>0 && currentValue.postal_code && currentValue.postal_code.length>0 && currentValue.town && currentValue.town.length > 0)
     {
         saveActivated.value = true;
     }

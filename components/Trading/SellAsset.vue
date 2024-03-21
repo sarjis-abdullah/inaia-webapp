@@ -111,7 +111,7 @@ watch(amount,()=>{
     else{
         smallAmount.value = false
     }
-    if(tradeableAmount && tradeableAmount.value.tradeable_gram_amount < amount.value){
+    if(tradeableAmount.value && tradeableAmount.value.tradeable_gram_amount < amount.value){
         exceededAmount.value = true;
     }
     else{

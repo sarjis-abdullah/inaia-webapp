@@ -152,6 +152,12 @@ const getAmountMoney = (order:Order) => {
   return OrderService.getMoneyAmountOfAnOrder(order);
 }
 const getAmountGram = (order:Order) =>{
-  return OrderService.getGramAmountOfAnOrder(order);
+  try{
+    return OrderService.getGramAmountOfAnOrder(order);
+  }
+  catch(err){
+    return 0
+  }
+  
 }
 </script>

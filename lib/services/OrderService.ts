@@ -80,7 +80,7 @@ export class OrderService{
             ){
                 return order.amount;
             }
-            return null;
+            return 0;
     }
     public static getMoneyAmountOfAnOrder(order?:Order):number | null | undefined{
         if(order){
