@@ -1,1 +1,2 @@
 export const MINIMUM_PERIOD_TO_START_SAVING_PLAN = 14;
+export const WAIT_PERIOD = 7;
