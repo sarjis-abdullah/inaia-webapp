@@ -168,7 +168,7 @@ watch(state,(currentValue)=>{
 })
 const goToDashboard =()=>{
     const url = urlBuilder(locale.value,'/dashboard');
-    window.open(url);
+    window.open(url,'_self');
 }
 async function save() {
     isSubmitting.value = true;
