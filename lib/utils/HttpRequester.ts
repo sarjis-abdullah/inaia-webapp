@@ -75,7 +75,7 @@ export class HttpRequester{
         });
         if(response.ok)
         {
-            return await response.json();
+            return true
         }
         else{
             throw await this.handleError(response);

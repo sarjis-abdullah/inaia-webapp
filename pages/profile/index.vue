@@ -498,14 +498,20 @@ const deleteBankAccount = async (bankAccountId:number)=>{
   showConfirmation.value = true;
 }
 const handleError = (value) => {
+  
   if (value instanceof MissingInformationException || value instanceof BadInputException) {
     return value.getRealMessage();
   }
   else if (value instanceof ServerErrorException) {
+    useBugsnag().notify(value)
     return t(value.getTranslationKey());
   }
   else
-    return t(value.getTranslationKey());
+  {
+    useBugsnag().notify(value);
+    return value.message;
+  }
+    
 }
 const copyToClipboard = async (text: string) => {
   try {
