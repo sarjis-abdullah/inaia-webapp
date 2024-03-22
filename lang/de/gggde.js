@@ -388,5 +388,6 @@ export default {
     requestNewLink :'Der Link ist ungültig.',
     clickHere:"Hier klicken",
     already_a_savings_plan: "Bereits ein Sparplan",
-    checking:'Checking'
+    checking:'Checking',
+    accountIsAlreadyVerified:'Your account is already verified'
 }

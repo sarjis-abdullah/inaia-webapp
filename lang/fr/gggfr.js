@@ -356,5 +356,6 @@ export default {
     requestNewLink:'Le lien a expiré. Veuillez demander un nouveau lien :',
     clickHere:"Cliquer ici",
     already_a_savings_plan: "Déjà un plan d'épargne",
-    checking:'Vérification'
+    checking:'Vérification',
+    accountIsAlreadyVerified:'Votre compte a déjà été vérifié'
 }

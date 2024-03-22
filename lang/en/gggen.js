@@ -389,5 +389,6 @@ export default {
     requestNewLink :'Please request for a new link:',
     clickHere:"Click here",
     already_a_savings_plan: "Already a savings plan",
-    checking:'Checking'
+    checking:'Checking',
+    accountIsAlreadyVerified:'Your account is already verified'
 }

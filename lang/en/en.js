@@ -389,5 +389,6 @@ export default {
     requestNewLink :'The link is expired, please request a new link by:',
     clickHere:"Clicking here",
     already_a_savings_plan: "Already a savings plan",
-    checking:'Checking'
+    checking:'Checking',
+    accountIsAlreadyVerified:'Your account is already verified'
 }
