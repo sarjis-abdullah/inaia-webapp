@@ -1,6 +1,6 @@
 <template>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10" v-if="!isPending && !isVerified">
             <img src="~/assets/img/pageicons/adressIcon.png" alt="address" class="w-32 h-auto mb-5 mx-auto"/>
             <h2 class="text-center mb-8 text-2xl font-bold">{{ $t('enter_address') }}</h2>
             <form class="space-y-6" action="#" method="POST">
@@ -79,6 +79,14 @@
                 </div>
             </form>
         </div>
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10" v-else-if="isVerified">
+            <p class="text-center my-6">{{ $t('accountIsAlreadyVerified') }}</p>
+            <a class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" @click="goToDashboard">{{ $t('goToDashboard') }}</a>
+        </div>
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10" v-else-if="isPending">
+            <p class="text-center my-6">{{ $t('kycStatusIsPending') }}</p>
+            <a class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" @click="goToDashboard">{{ $t('goToDashboard') }}</a>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
@@ -86,11 +94,14 @@ import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon
 
 import {ref,reactive,toRefs,watch,computed,onMounted,PropType} from 'vue';
 
-import { SubscriptionStorage } from '@/storage';
+import { AccountStorage, SubscriptionStorage } from '@/storage';
 import { AddressRequest, StartKycRequest } from '@/lib/requests';
 import Countries from '@/components/Register/Countries';
-import { KycService, SubscriptionService } from '@/lib/services';
+import { AccountService, KycService, SubscriptionService } from '@/lib/services';
 import { Account } from '~~/lib/models';
+import { BadInputException } from '~/lib/exceptions';
+import { ErrorCode } from '~/lib/contants';
+import { urlBuilder } from '~/helpers/urlBuilder';
 const saveActivated = ref(false);
 const isSubmitting = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
@@ -98,7 +109,10 @@ const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm
 const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
 const errorText = ref('');
+const {t,locale} = useI18n();
 const submittingError = ref(false);
+const isPending = ref(false);
+const isVerified=ref(false);
 const state = reactive({
    country_id:-1,
    line1:'',
@@ -152,6 +166,10 @@ watch(state,(currentValue)=>{
     }
 
 })
+const goToDashboard =()=>{
+    const url = urlBuilder(locale.value,'/dashboard');
+    window.open(url,'_self');
+}
 async function save() {
     isSubmitting.value = true;
     try{
@@ -174,9 +192,20 @@ async function save() {
         }
     }
     catch(err){
-        submittingError.value = true;
-        errorText.value = err.message;
-        useBugsnag().notify(err);
+        if(err instanceof BadInputException && err.getRealMessage){
+            if(err.getRealMessage() ==  ErrorCode.already_verified){
+                isVerified.value = true;
+            }
+            if(err.getRealMessage() ==  ErrorCode.pending_kyc){
+                isPending.value = true;
+            }
+        }
+        else{
+            submittingError.value = true;
+            errorText.value = err.message;
+            useBugsnag().notify(err);
+        }
+        
     }
     finally{
         isSubmitting.value = false;
