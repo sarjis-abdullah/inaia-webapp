@@ -52,7 +52,7 @@
             </button>
         </div>
     </a>
-    <PauseSavingsPlan :depot="depot" :showPauseModal="showPauseModal" @updateDepotStatus="updateDepotStatus" @showPauseModal="showPauseModal = false" :showContinueModal="showContinueModal" @showContinueModal="showContinueModal=false" />
+    <SavingsPlanPauseResumeControl :depot="depot" :showPauseModal="showPauseModal" @updateDepotStatus="updateDepotStatus" @showPauseModal="showPauseModal = false" :showContinueModal="showContinueModal" @showContinueModal="showContinueModal=false" />
 </template>
 <script lang="ts" setup>
 import {ref,PropType} from 'vue';
@@ -62,7 +62,7 @@ import ListItem from '@/components/common/ListItem';
 import { PlusIcon, PlayIcon, PauseIcon } from '@heroicons/vue/20/solid'
 import DepotStatus from '@/components/Assets/DepotStatus';
 import { DepotStatuses } from '@/lib/contants';
-import PauseSavingsPlan from './PauseSavingsPlan.vue';
+import SavingsPlanPauseResumeControl from '@/components/Assets/SavingsPlanPauseResumeControl.vue';
 //emits
 const emit = defineEmits<{
   updateDepotStatus: [Depot: {}],
