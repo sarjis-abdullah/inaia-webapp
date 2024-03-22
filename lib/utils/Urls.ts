@@ -58,6 +58,9 @@ export class Urls{
     public resetPassword():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'password-reset/apply');
     }
+    public verfiyResetPasswordToken():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(),'password-reset/check');
+    }
     public resetPin():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'accounts/pin-reset');
     }

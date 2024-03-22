@@ -395,7 +395,9 @@ export default {
     areYouSureYouWantToResume:'Please confirm that you want to continue your savings plan.',
     pausePeriod:'Pause period',
     pauseSavingsPlanConfirmation: "Are you sure you want to pause this savings plan?",
-    requestNewLink :'Please request for a new link:',
+    requestNewLink :'The link is expired, please request a new link by:',
     clickHere:"Click here",
-    already_a_savings_plan: "Already a savings plan"
+    already_a_savings_plan: "Already a savings plan",
+    checking:'Checking',
+    accountIsAlreadyVerified:'Your account is already verified'
 }

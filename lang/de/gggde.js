@@ -387,5 +387,7 @@ export default {
     copied: 'Kopiert',
     requestNewLink :'Der Link ist ungültig.',
     clickHere:"Hier klicken",
-    already_a_savings_plan: "Bereits ein Sparplan"
+    already_a_savings_plan: "Bereits ein Sparplan",
+    checking:'Checking',
+    accountIsAlreadyVerified:'Your account is already verified'
 }
