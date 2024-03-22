@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="text-center">
+        <div v-if="depot && depot.is_savings_plan==1" class="text-center">
             <button @click="!isDepotStatusPaused ? showPauseModal = true : showContinueModal = true" class="inline-flex items-center rounded-md px-3 py-2 gap-2 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-600 text-white ring-blue-300">
                 <PauseIcon v-if="!isDepotStatusPaused" class="h-4 w-4" aria-hidden="true" />
                 <PlayIcon v-else class="h-4 w-4" aria-hidden="true" />
