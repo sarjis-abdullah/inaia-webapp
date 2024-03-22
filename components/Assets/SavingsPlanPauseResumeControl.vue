@@ -17,8 +17,8 @@
                   {{monthSliderValue}}{{ monthSliderValue == 1 ? ' month' : ' months' }}
             </button>
         </div>
-        <div class="flex justify-between items-center mt-4">
-            <input type="range" min="1" max="6" v-model="monthSliderValue" step="1" class="w-full" />
+        <div class="flex justify-between items-center mt-4 ">
+            <input type="range" min="1" max="6" v-model="monthSliderValue" step="1" class="w-full accent-blue-500" id="range" />
         </div>
         <div v-if="willStartNextMonth" class="text-sm mt-4 text-center text-red-500">
           <p class="py-2">{{ $t('pauseWillNotEffectCurrentTransactions') }}</p>
