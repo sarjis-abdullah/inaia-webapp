@@ -12,7 +12,7 @@
               
               <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 w-full text-left shadow-xl transition-all sm:my-8 w-min-full md:w-full sm:p-6" :class="[maxWidth,minWidth]">
                 <div class="flex justify-between mb-3">
-                  <span>{{ title }}</span>
+                  <span v-html="title"></span>
                   <a @click="onClose" class="cursor-pointer"><XMarkIcon class="w-6 h-6"/></a>
                 </div>
                 <slot />

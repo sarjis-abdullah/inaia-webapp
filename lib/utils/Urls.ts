@@ -219,6 +219,12 @@ export class Urls{
     public getTradableAmount(depotId:number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/tradeable-amount?include=order_transactions,orders_payment_transactions,depot`);
     }
+    public updateDepotStatus(depotId: number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/status`);
+    }
+    public getDepotStatusList(){
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),'depot-statuses');
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

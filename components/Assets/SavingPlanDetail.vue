@@ -44,15 +44,29 @@
                 </div>
             </div>
         </div>
+        <div v-if="depot && depot.is_savings_plan==1" class="text-center">
+            <button @click="!isDepotStatusPaused ? showPauseModal = true : showContinueModal = true" class="inline-flex items-center rounded-md px-3 py-2 gap-2 text-sm font-semibold shadow-sm ring-1 ring-inset bg-blue-600 text-white ring-blue-300">
+                <PauseIcon v-if="!isDepotStatusPaused" class="h-4 w-4" aria-hidden="true" />
+                <PlayIcon v-else class="h-4 w-4" aria-hidden="true" />
+                {{depotStatusText}}
+            </button>
+        </div>
     </a>
+    <SavingsPlanPauseResumeControl :depot="depot" :showPauseModal="showPauseModal" @updateDepotStatus="updateDepotStatus" @showPauseModal="showPauseModal = false" :showContinueModal="showContinueModal" @showContinueModal="showContinueModal=false" />
 </template>
 <script lang="ts" setup>
-import {ref,Ref} from 'vue';
+import {ref,PropType} from 'vue';
 import { type Depot } from '@/lib/models';
 import { CurrencyService } from '@/lib/services';
 import ListItem from '@/components/common/ListItem';
+import { PlusIcon, PlayIcon, PauseIcon } from '@heroicons/vue/20/solid'
 import DepotStatus from '@/components/Assets/DepotStatus';
-import { PlusIcon } from '@heroicons/vue/20/solid'
+import { DepotStatuses } from '@/lib/contants';
+import SavingsPlanPauseResumeControl from '@/components/Assets/SavingsPlanPauseResumeControl.vue';
+//emits
+const emit = defineEmits<{
+  updateDepotStatus: [Depot: {}],
+}>()
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
@@ -62,8 +76,7 @@ const props = defineProps({
     }
 })
 const line = ref(null);
-const { locale } = useI18n();
-const route = useRoute();
+const { locale, t } = useI18n();
 const router = useRouter();
 const currency = CurrencyService.getCurrencySymbol()
 const addSavingPlan = ()=>{
@@ -82,4 +95,16 @@ const lineWith = computed(()=>{
     }
     return 0;
 })
+const isDepotStatusPaused = computed(()=> !!(props.depot?.status?.name_translation_key == DepotStatuses.paused))
+const depotStatusText = computed(()=>{
+    if(isDepotStatusPaused.value){
+        return t('continue');
+    }
+    return t('pause');
+})
+const showPauseModal = ref(false)
+const showContinueModal = ref(false)
+const updateDepotStatus = (depot: Depot) => {
+    emit('updateDepotStatus', depot)
+}
 </script>
