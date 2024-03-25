@@ -389,5 +389,11 @@ export default {
     clickHere:"Hier klicken",
     already_a_savings_plan: "Bereits ein Sparplan",
     checking:'Checking',
-    accountIsAlreadyVerified:'Your account is already verified'
+    accountIsAlreadyVerified:'Your account is already verified',
+    transferMoneytoInaia:'Bitte überweise den Betrag auf das folgende Bankkonto:',
+    bankTranferMethod:'Du überweist Zahlungen auf das Bankkonto von INAIA. Offene Aufträge werden erst ausgeführt, nachdem wir deine Zahlung erhalten.',
+    noPaymentMethodSelectedForSavingPlan: 'Gib eine Zahlungsmethode an, damit wir deine wiederkehrenden Aufträge ausführen können.',
+    noBankAccountSelectedForSavingPlan:'Bitte wähle ein Bankkonto aus, wenn Lastschrift als Zahlungsmethode eingestellt ist.',
+    bank_name: 'Bank',
+    paymentMethods:'Payment methods',
 }

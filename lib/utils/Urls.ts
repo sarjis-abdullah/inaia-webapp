@@ -219,6 +219,9 @@ export class Urls{
     public getTradableAmount(depotId:number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/tradeable-amount?include=order_transactions,orders_payment_transactions,depot`);
     }
+    public detailPaymentAccount(id:number):string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-account/${id}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

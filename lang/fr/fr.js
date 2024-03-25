@@ -357,5 +357,11 @@ export default {
     clickHere:"Cliquer ici",
     already_a_savings_plan: "Déjà un plan d'épargne",
     checking:'Vérification',
-    accountIsAlreadyVerified:'Votre compte a déjà été vérifié'
+    accountIsAlreadyVerified:'Votre compte a déjà été vérifié',
+    transferMoneytoInaia:"Pour transférer de l'argent sur le compte bancaire de INAIA, utilisez l'IBAN suivant avec la raison suivante",
+    bankTranferMethod:'Virement bancaire',
+    noPaymentMethodSelectedForSavingPlan: 'Please provide us with payment information in order to be able to purchase your recurrent orders',
+    noBankAccountSelectedForSavingPlan:"Vous avez sélectionné un compte bancaire comme méthode de paiement mais aucun compte bancaire n'a été sélectionné, veuillez sélectionner un compte bancaire.",
+    bank_name: 'Bank',
+    paymentMethods:'Payment methods',
 }

@@ -26,7 +26,12 @@
                 <ListItem :title="$t('contract_term')"><span>{{ depot && depot.interval_startdate?$d(depot.interval_startdate):'' }} - {{ depot && depot.interval_enddate?$d(depot.interval_enddate):'' }}</span></ListItem>
                 <ListItem :title="$t('interval_day')"><span>{{ depot && depot.interval_day?$t(depot.interval_day.toString()):'' }}</span></ListItem>
                 <ListItem :title="$t('agio')"><span>{{ depot && depot.agio?$n(depot.agio/100):0 }} {{ currency }}</span></ListItem>
-                <ListItem :title="$t('payment_method')"><span>{{ depot && depot.payment_method?$t(depot.payment_method):'' }}</span></ListItem>
+                <ListItem :title="$t('payment_method')">
+                    <span class="flex gap-2 justify-end items-center cursor-pointer" @click="toggleDetailPaymentAccount">
+                        <span>{{ depot && depot.payment_method?$t(depot.payment_method):'' }}</span>
+                        <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
+                    </span>
+                </ListItem>
             </div>
         </div>
         <div v-if="depot && depot.is_savings_plan==0">
@@ -45,14 +50,19 @@
             </div>
         </div>
     </a>
+    <Modal :open="showDetailPaymentAccount" @on-close="toggleDetailPaymentAccount">
+        <PaymentMethodDetails :depot="depot"/>
+    </Modal>
 </template>
 <script lang="ts" setup>
 import {ref,Ref} from 'vue';
 import { type Depot } from '@/lib/models';
 import { CurrencyService } from '@/lib/services';
 import ListItem from '@/components/common/ListItem';
+import Modal from '@/components/common/Modal.vue';
 import DepotStatus from '@/components/Assets/DepotStatus';
-import { PlusIcon } from '@heroicons/vue/20/solid'
+import PaymentMethodDetails from '@/components/Assets/PaymentMethodDetails';
+import { PlusIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
@@ -62,6 +72,7 @@ const props = defineProps({
     }
 })
 const line = ref(null);
+const showDetailPaymentAccount = ref(false);
 const { locale } = useI18n();
 const route = useRoute();
 const router = useRouter();
@@ -82,4 +93,7 @@ const lineWith = computed(()=>{
     }
     return 0;
 })
+const toggleDetailPaymentAccount = () => {
+    showDetailPaymentAccount.value = !showDetailPaymentAccount.value
+}
 </script>

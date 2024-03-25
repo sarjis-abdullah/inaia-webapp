@@ -169,4 +169,16 @@ export class AddDepotService {
             throw err;
         }
     }
+    public static async detailPaymentAccount(id: number):Promise<Depot>{
+        try{
+            const url = this.links.detailPaymentAccount(id);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }
