@@ -1,4 +1,5 @@
 export interface UpdateDepotRequest {
+    id?:number;
     name?:string;
     account_id?:number;
     interval_id?:number;

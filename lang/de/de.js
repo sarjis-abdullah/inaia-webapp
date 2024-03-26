@@ -396,4 +396,7 @@ export default {
     noBankAccountSelectedForSavingPlan:'Bitte wähle ein Bankkonto aus, wenn Lastschrift als Zahlungsmethode eingestellt ist.',
     bank_name: 'Bank',
     paymentMethods:'Payment methods',
+    bank_transfer_paragraph:"Überweise den Betrag auf das Bankkonto von INAIA",
+    paymentMethodBankMessage:'Wähle ein Bankkonto für die Bezahlung per SEPA-Lastschrift.',
+    yourBankAccounts:"Bankverbindungen",
 }

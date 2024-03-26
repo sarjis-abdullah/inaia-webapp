@@ -222,6 +222,15 @@ export class Urls{
     public detailPaymentAccount(id:number):string{
         return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-account/${id}`);
     }
+    public paymentAccounts():string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-account/user-accounts`);
+    }
+    public paymentMethods():string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-methods`);
+    }
+    public updateDepotInfo(id:number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${id}`);
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

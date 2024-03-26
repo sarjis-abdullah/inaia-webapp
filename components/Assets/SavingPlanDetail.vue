@@ -51,7 +51,7 @@
         </div>
     </a>
     <Modal :open="showDetailPaymentAccount" @on-close="toggleDetailPaymentAccount">
-        <PaymentMethodDetails :depot="depot"/>
+        <PaymentMethodDetails :depot="depot" @on-close="showDetailPaymentAccount=false"/>
     </Modal>
 </template>
 <script lang="ts" setup>

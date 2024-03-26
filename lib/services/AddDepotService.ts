@@ -181,4 +181,40 @@ export class AddDepotService {
             throw err;
         }
     }
+    public static async getTheListOfPaymentAccounts():Promise<Depot>{
+        try{
+            const url = this.links.paymentAccounts();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async getTheListOfPaymentMethods():Promise<Depot>{
+        try{
+            const url = this.links.paymentMethods();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateDepotInfo(depotId: number, payload:UpdateDepotRequest):Promise<Depot>{
+        try{
+            const url = this.links.updateDepotInfo(depotId);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

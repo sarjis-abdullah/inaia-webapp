@@ -397,4 +397,7 @@ export default {
     noBankAccountSelectedForSavingPlan:'You selected bank account as payment method but no bank account was selected, please select a bank account.',
     bank_name: 'Bank',
     paymentMethods:'Payment methods',
+    bank_transfer_paragraph:"Send money to INAIA account via bank transfer",
+    paymentMethodBankMessage:'Add any of your bank account that can make or accept SEPA payments',
+    yourBankAccounts:"Your bank accounts",
 }
