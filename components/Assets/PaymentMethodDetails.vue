@@ -26,46 +26,48 @@
       <ul
         class="grid gap-4 mt-4"
         v-if="
-          currentPaymentMethod == PaymentMethods.bankTranfer && inaiaPaymentDetails
+          currentPaymentMethod == PaymentMethods.bankTranfer &&
+          inaiaPaymentDetails
         "
       >
-        <li
-          class="flex justify-between"
-        >
+        <li class="flex justify-between">
           <span>
-            {{ 'Account holder' }}
+            {{ "Account holder" }}
           </span>
           <span>
-            {{ 'INAIA GmbH' }}
+            {{ "INAIA GmbH" }}
           </span>
         </li>
-        <li
-          class="flex justify-between"
-        >
+        <li class="flex justify-between">
           <span>
-            {{ 'IBAN' }}
+            {{ "IBAN" }}
           </span>
-          <span>
-            {{ depot?.payment_details?.inaia_iban }}
-          </span>
+          <div
+            v-if="depot?.payment_details?.inaia_iban"
+            @click="copy(depot.payment_details.inaia_iban)"
+            class="flex gap-1 items-center cursor-pointer"
+          >
+            <span>{{ depot?.payment_details?.inaia_iban }}</span>
+            <ClipboardDocumentIcon class="h-5 w-5" />
+          </div>
         </li>
-        <li
-          class="flex justify-between"
-        >
+        <li class="flex justify-between">
           <span>
-            {{ 'Reference' }}
+            {{ "Reference" }}
           </span>
-          <span>
-            {{ depot?.payment_details?.reference }}
-          </span>
+          <div
+            v-if="depot?.payment_details?.reference"
+            @click="copy(depot.payment_details.reference)"
+            class="flex gap-1 items-center cursor-pointer"
+          >
+            <span>{{ depot.payment_details.reference }}</span>
+            <ClipboardDocumentIcon class="h-5 w-5" />
+          </div>
         </li>
       </ul>
       <ul
         class="grid gap-4"
-        v-if="
-          currentPaymentMethod ==
-          PaymentMethods.bankAccount
-        "
+        v-if="currentPaymentMethod == PaymentMethods.bankAccount"
       >
         <li
           v-for="(item, index) in bankInfoWhenPaymentMethodBankAccount"
@@ -81,9 +83,23 @@
         </li>
       </ul>
 
+      <transition
+        leave-active-class="transition ease-in duration-1000"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-show="copying"
+          class="text-sm rounded-md text-center absolute bottom-16 w-full"
+        >
+          {{ $t("copied") }}
+        </div>
+      </transition>
       <div class="mt-8 flex gap-2 absolute bottom-0 w-full">
         <button
-          v-if="newPaymentAccount || depot?.payment_method != currentPaymentMethod"
+          v-if="
+            newPaymentAccount || depot?.payment_method != currentPaymentMethod
+          "
           @click="cancel"
           type="button"
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -91,7 +107,11 @@
           Cancel
         </button>
         <button
-          v-if="(newPaymentAccount || depot?.payment_method != currentPaymentMethod) && !updateDepoLoading"
+          v-if="
+            (newPaymentAccount ||
+              depot?.payment_method != currentPaymentMethod) &&
+            !updateDepoLoading
+          "
           @click="updateDepotPaymentInformation"
           type="button"
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -99,7 +119,11 @@
           Update
         </button>
         <button
-          v-else-if="(newPaymentAccount || depot?.payment_method != currentPaymentMethod) && updateDepoLoading"
+          v-else-if="
+            (newPaymentAccount ||
+              depot?.payment_method != currentPaymentMethod) &&
+            updateDepoLoading
+          "
           disabled
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
@@ -107,8 +131,8 @@
         </button>
         <button
           v-else-if="
-            currentPaymentMethod == PaymentMethods.bankAccount || currentPaymentMethod ==
-            PaymentMethods.bankTranfer
+            currentPaymentMethod == PaymentMethods.bankAccount ||
+            currentPaymentMethod == PaymentMethods.bankTranfer
           "
           @click="editPaymentMethod"
           type="button"
@@ -237,33 +261,43 @@
         </li>
       </ul>
     </article>
+    <p v-if="errorText" class="text-red-500 text-center">{{ errorText }}</p>
   </section>
-  <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
+  <AddPaymentAcount
+    :showAddPaymentAccount="addNewPaymentAcoount"
+    :accountId="account.account.id"
+    v-if="account && account.account"
+    @onClose="closeAddPaymentAccount"
+    @OnAdd="onPaymentAccountAdded"
+  />
 </template>
 <script lang="ts" setup>
 import { ref, Ref } from "vue";
-import { PaymentAccount, PaymentDetails, type Depot, PaymentMethod } from "@/lib/models";
+import { copyToClipboard } from "@/helpers/clipboardHelper.ts";
+import {
+  PaymentAccount,
+  PaymentDetails,
+  type Depot,
+  PaymentMethod,
+} from "@/lib/models";
 import { CurrencyService, AddDepotService } from "@/lib/services";
 import ListItem from "@/components/common/ListItem.vue";
 import Modal from "@/components/common/Modal.vue";
 import Loading from "@/components/common/Loading.vue";
 import DepotStatus from "@/components/Assets/DepotStatus.vue";
-import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount.vue';
+import AddPaymentAcount from "@/components/PaymentAccount/AddPaymentAcount.vue";
 import {
   PlusIcon,
   ChevronRightIcon,
   ChevronLeftIcon,
+  ClipboardDocumentIcon,
 } from "@heroicons/vue/20/solid";
 import { PaymentMethods } from "~/lib/contants/PaymentMethods";
 import { UpdateDepotRequest } from "~/lib/requests";
 import { AccountStorage } from "@/storage";
 const { t, locale } = useI18n();
-// const emit = defineEmits<{
-//   (e: "onClose"): void;
-//   (e: "updateDepoProps"): void;
-// }>();
 const emit = defineEmits<{
-  onClose: [any: {}];
+  onClose: [];
   updateDepoProps: [Depot];
 }>();
 const { depot, isVerified } = defineProps({
@@ -275,13 +309,14 @@ const { depot, isVerified } = defineProps({
   },
 });
 interface ExtendedPaymentMethod extends PaymentMethod {
-  description?: string
+  description?: string;
 }
 const editMode = ref(false);
 const errorText = ref("");
-const currentPaymentAccount: Ref<PaymentAccount|null> = ref(null);
-const currentPaymentMethod: Ref<string|null> = ref(null);
-const inaiaPaymentDetails:Ref<PaymentDetails|null> = ref(null);
+const copying = ref(false);
+const currentPaymentAccount: Ref<PaymentAccount | null> = ref(null);
+const currentPaymentMethod: Ref<string | null> = ref(null);
+const inaiaPaymentDetails: Ref<PaymentDetails | null> = ref(null);
 const displayPragraph = computed(() => {
   if (
     currentPaymentMethod.value == PaymentMethods.bankTranfer &&
@@ -323,7 +358,7 @@ const bankInfoWhenPaymentMethodBankAccount = computed(() => {
   }
   return null;
 });
-const initialLoading = ref(false)
+const initialLoading = ref(false);
 const loadInfo = async () => {
   try {
     initialLoading.value = true;
@@ -345,7 +380,7 @@ const loadInfo = async () => {
 };
 const init = () => {
   if (depot) {
-    currentPaymentMethod.value =  depot.payment_method
+    currentPaymentMethod.value = depot.payment_method;
     if (depot?.payment_details) {
       inaiaPaymentDetails.value = depot.payment_details;
     }
@@ -359,7 +394,6 @@ const init = () => {
   } else {
     currentPaymentAccount.value = null;
   }
-  console.log(12345, depot);
 };
 
 const methodLoading = ref(false);
@@ -395,10 +429,10 @@ const loadPaymentMethod = async () => {
 };
 const showBankAccounts = ref(false);
 const accountLoading = ref(false);
-const bankAccounts = ref([]);
+const bankAccounts: Ref<PaymentAccount|[]> = ref([]);
 const loadBankAccounts = async (method: PaymentMethod) => {
   if (!method.has_payment_accounts) {
-    currentPaymentMethod.value =  method.name_translation_key
+    currentPaymentMethod.value = method.name_translation_key;
     editMode.value = false;
     return;
   }
@@ -419,7 +453,7 @@ const loadBankAccounts = async (method: PaymentMethod) => {
       });
     }
   } catch (error) {
-    console.log("object");
+    errorText.value = err.message;
   } finally {
     accountLoading.value = false;
   }
@@ -427,26 +461,10 @@ const loadBankAccounts = async (method: PaymentMethod) => {
 const editPaymentMethod = () => {
   editMode.value = true;
   loadPaymentMethod();
-  // showDetailPaymentAccount.value = !showDetailPaymentAccount.value
 };
 const formatIban = (iban) => {
   const lastDigits = iban.substr(iban.length - 4);
   return "**** " + lastDigits;
-};
-const selectPOptions = (option) => {
-  // if (option.is_verified) {
-  //   if (!isEdit) {
-  //     dispatch(setPaymentOption(option));
-  //     navigation.goBack();
-  //   } else {
-  //     setSelectedOption(option);
-  //     setShowMarkAsFavorite(true);
-  //   }
-  // } else {
-  //   dispatch(setPaymentAccountToActivate(option));
-  //   navigation.navigate(screensName.activatePaymentAccountScreen);
-  //   //setShowVerify(true);
-  // }
 };
 const cancel = () => {
   emit("onClose");
@@ -454,7 +472,6 @@ const cancel = () => {
   newPaymentAccount.value = false;
   showBankAccounts.value = false;
 };
-// 01841685885
 const updateDepoLoading = ref(false);
 const updateDepotPaymentInformation = async () => {
   if (depot?.id) {
@@ -465,16 +482,18 @@ const updateDepotPaymentInformation = async () => {
     if (currentPaymentMethod.value) {
       newData.payment_method = currentPaymentMethod.value;
     }
-    if (currentPaymentMethod.value == PaymentMethods.bankAccount, currentPaymentAccount.value?.id) {
-      newData.payment_account_id = undefined,
-      newData.payment_account_id = currentPaymentAccount.value.id;
+    if (
+      (currentPaymentMethod.value == PaymentMethods.bankAccount,
+      currentPaymentAccount.value?.id)
+    ) {
+      (newData.payment_account_id = undefined),
+        (newData.payment_account_id = currentPaymentAccount.value.id);
     }
     try {
       updateDepoLoading.value = true;
       const res = await AddDepotService.updateDepotInfo(depot.id, newData);
-      emit("updateDepoProps", {...newData, payment_method: res.payment_method});
+      emit("updateDepoProps", res);
     } catch (err) {
-      console.log(err);
       errorText.value = err.message;
     } finally {
       updateDepoLoading.value = false;
@@ -485,24 +504,23 @@ const updateDepotPaymentInformation = async () => {
 const newPaymentAccount = ref(false);
 const selectNewBankAccount = (account) => {
   showBankAccounts.value = false;
-  currentPaymentMethod.value = PaymentMethods.bankAccount
+  currentPaymentMethod.value = PaymentMethods.bankAccount;
   if (account?.id != currentPaymentAccount.value?.id) {
     newPaymentAccount.value = true;
   }
   currentPaymentAccount.value = account;
   editMode.value = false;
 };
-const updatePaymentMethod = async() => {
+const updatePaymentMethod = async () => {
   try {
     updateDepoLoading.value = true;
     const newData = {
       id: depot?.id,
-      payment_method: PaymentMethods.bankTranfer
-    }
+      payment_method: PaymentMethods.bankTranfer,
+    };
     const res = await AddDepotService.updateDepotInfo(depot.id, newData);
-    emit("updateDepoProps", {...newData, payment_method: res.payment_method});
+    emit("updateDepoProps", res);
   } catch (err) {
-    console.log(err);
     errorText.value = err.message;
   } finally {
     updateDepoLoading.value = false;
@@ -510,15 +528,26 @@ const updatePaymentMethod = async() => {
   }
 };
 
-const addNewPaymentAcoount = ref(false)
+const addNewPaymentAcoount = ref(false);
 const closeAddPaymentAccount = () => {
-  addNewPaymentAcoount.value = false
-}
-const onPaymentAccountAdded = () => {
+  addNewPaymentAcoount.value = false;
+};
+const onPaymentAccountAdded = (paymentAccount:PaymentAccount) => {
+  if (paymentAccount && bankAccounts.value?.length) {
+    bankAccounts.value.unshift(paymentAccount)
+    selectNewBankAccount(paymentAccount)
+  }
+  addNewPaymentAcoount.value = false;
+};
+const copy = (text: string) => {
+  copyToClipboard(text);
+  copying.value = true;
+  setTimeout(() => {
+    copying.value = false;
+  }, 500);
+};
 
-}
-
-const account = ref(null)
+const account = ref(null);
 onMounted(() => {
   init();
   account.value = AccountStorage.getAccount();

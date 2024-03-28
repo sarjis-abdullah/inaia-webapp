@@ -64,7 +64,7 @@ import DepotStatus from '@/components/Assets/DepotStatus';
 import PaymentMethodDetails from '@/components/Assets/PaymentMethodDetails';
 import { PlusIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
 const emit = defineEmits<{
-  updateDepoProps : [number]
+  updateDepoProps : [Depot]
 }>()
 const props = defineProps({
     depot:{

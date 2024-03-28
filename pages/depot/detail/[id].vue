@@ -92,21 +92,19 @@ const isVerified = computed(() => {
   if (account?.value) {
     return account.value.is_verified;
   }
-  else {
-    return false;
-  }
+  return false;
 })
 const tradeableAmount = computed(() => {
   if (depot.value) {
     return depot.value.gram_amount - depot.value.gram_amount_pending_orders
   }
-  else {
-    return 0
-  }
+  return 0
 })
-const updateDepoProps = (depot: Depot) => {
+const updateDepoProps = (updatedDepot: Depot) => {
   if (depot.value) {
-    depot.value.payment_account_id = depot.payment_account_id
+    depot.value.payment_account_id = updatedDepot.payment_account_id
+    depot.value.payment_method = updatedDepot.payment_method
+    depot.value.payment_details = updatedDepot.payment_details
   }
 }
 onMounted(async () => {
