@@ -237,8 +237,11 @@
       <div v-if="accountLoading" class="flex justify-center">
         <Loading />
       </div>
-      <div>
-        <button @click="addNewPaymentAcoount = true">Add</button>
+      <div class="flex justify-between items-center text-sm leading-6 border-b px-2 pb-2">
+        <span>New bank account</span>
+        <button class="opacity-100 flex justify-center rounded-md border border-transparent bg-blue-600 py-1 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none" @click="addNewPaymentAcoount = true">
+          Add
+        </button>
       </div>
       <ul
         role="list"
@@ -252,7 +255,6 @@
           @click="selectNewBankAccount(account)"
         >
           <div class="text-base flex gap-2 items-start justify-between">
-            <!-- @click="selectBankAccount(account)" -->
             <div class="font-semibold">
               {{ account.bank_name }}
             </div>
@@ -300,13 +302,10 @@ const emit = defineEmits<{
   onClose: [];
   updateDepoProps: [Depot];
 }>();
-const { depot, isVerified } = defineProps({
+const { depot } = defineProps({
   depot: {
     type: Object as PropType<Depot>,
-  },
-  isVerified: {
-    type: Boolean,
-  },
+  }
 });
 interface ExtendedPaymentMethod extends PaymentMethod {
   description?: string;
@@ -397,7 +396,6 @@ const init = () => {
 };
 
 const methodLoading = ref(false);
-const getTheListOfPaymentAccounts = () => {};
 const paymentMethods = ref([]);
 const loadPaymentMethod = async () => {
   try {
@@ -414,17 +412,10 @@ const loadPaymentMethod = async () => {
         return obj;
       });
     }
-
-    //   unwrapResult(result);
-    //   setDisplayError(false);
     methodLoading.value = false;
   } catch (err) {
     methodLoading.value = false;
-    // BugSnagService.addBreadCumb("Load bank accounts");
-    // BugSnagService.notify(err);
-    // setDisplayError(true);
-    // setIsLoading(false);
-    // setError(err.message);
+    errorText.value = err.message
   }
 };
 const showBankAccounts = ref(false);
