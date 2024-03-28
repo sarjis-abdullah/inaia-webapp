@@ -51,7 +51,7 @@
         </div>
     </a>
     <Modal :open="showDetailPaymentAccount" @on-close="toggleDetailPaymentAccount">
-        <PaymentMethodDetails :depot="depot" @on-close="showDetailPaymentAccount=false"/>
+        <PaymentMethodDetails :depot="depot" @update-depo-props="updateDepoProps" @on-close="showDetailPaymentAccount=false"/>
     </Modal>
 </template>
 <script lang="ts" setup>
@@ -63,6 +63,9 @@ import Modal from '@/components/common/Modal.vue';
 import DepotStatus from '@/components/Assets/DepotStatus';
 import PaymentMethodDetails from '@/components/Assets/PaymentMethodDetails';
 import { PlusIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
+const emit = defineEmits<{
+  updateDepoProps : [number]
+}>()
 const props = defineProps({
     depot:{
         type: Object as PropType<Depot>
@@ -95,5 +98,8 @@ const lineWith = computed(()=>{
 })
 const toggleDetailPaymentAccount = () => {
     showDetailPaymentAccount.value = !showDetailPaymentAccount.value
+}
+const updateDepoProps = (depot: Depot) => {
+    emit('updateDepoProps', depot)
 }
 </script>

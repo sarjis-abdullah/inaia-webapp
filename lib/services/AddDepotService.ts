@@ -1,6 +1,6 @@
 import { AgioPaymentsModels } from '../contants/AgioPaymentsModels';
 import { AgioPaymentsPercentages, MINIMUM_PERIOD_TO_START_SAVING_PLAN, SavingPlanPaymentIntervals } from '../contants';
-import { DataItem, Depot, NextPossibleDate, SavingsPlanPaymentInterval, SpPerformanceData } from '../models';
+import { DataItem, Depot, NextPossibleDate, PaymentAccount, PaymentMethod, SavingsPlanPaymentInterval, SpPerformanceData } from '../models';
 import { AddDepotRequest, AddSavingsPlanRequest, UpdateDepotRequest } from '../requests';
 import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
@@ -169,7 +169,7 @@ export class AddDepotService {
             throw err;
         }
     }
-    public static async detailPaymentAccount(id: number):Promise<Depot>{
+    public static async detailPaymentAccount(id: number):Promise<PaymentAccount>{
         try{
             const url = this.links.detailPaymentAccount(id);
             const token = TokenService.getToken();
@@ -193,7 +193,7 @@ export class AddDepotService {
             throw err;
         }
     }
-    public static async getTheListOfPaymentMethods():Promise<Depot>{
+    public static async getTheListOfPaymentMethods():Promise<PaymentMethod>{
         try{
             const url = this.links.paymentMethods();
             const token = TokenService.getToken();
