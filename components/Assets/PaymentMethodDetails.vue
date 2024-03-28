@@ -5,7 +5,7 @@
         <h2
           v-if="currentPaymentMethod"
           class="leading-7 text-gray-900 text-2xl font-bold max-w-[12rem] mx-auto mb-6 text-center"
-          v-html="$t(currentPaymentMethod.name_translation_key)"
+          v-html="$t(currentPaymentMethod)"
         ></h2>
         <span></span>
       </header>
@@ -17,14 +17,16 @@
           class="w-32 h-auto mb-5 mx-auto"
         />
       </picture>
-      <div class="mt-4 text-center">
+      <div v-if="initialLoading" class="flex justify-center">
+        <Loading />
+      </div>
+      <div v-else class="mt-4 text-center">
         <p class="py-2">{{ displayPragraph }}</p>
       </div>
       <ul
         class="grid gap-4 mt-4"
         v-if="
-          currentPaymentMethod?.name_translation_key ==
-          PaymentMethods.bankTranfer && inaiaPaymentDetails
+          currentPaymentMethod == PaymentMethods.bankTranfer && inaiaPaymentDetails
         "
       >
         <li
@@ -61,7 +63,7 @@
       <ul
         class="grid gap-4"
         v-if="
-          currentPaymentMethod?.name_translation_key ==
+          currentPaymentMethod ==
           PaymentMethods.bankAccount
         "
       >
@@ -81,7 +83,7 @@
 
       <div class="mt-8 flex gap-2 absolute bottom-0 w-full">
         <button
-          v-if="newPaymentAccount"
+          v-if="newPaymentAccount || depot?.payment_method != currentPaymentMethod"
           @click="cancel"
           type="button"
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -89,7 +91,7 @@
           Cancel
         </button>
         <button
-          v-if="newPaymentAccount && !updateDepoLoading"
+          v-if="(newPaymentAccount || depot?.payment_method != currentPaymentMethod) && !updateDepoLoading"
           @click="updateDepotPaymentInformation"
           type="button"
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -97,7 +99,7 @@
           Update
         </button>
         <button
-          v-else-if="newPaymentAccount && updateDepoLoading"
+          v-else-if="(newPaymentAccount || depot?.payment_method != currentPaymentMethod) && updateDepoLoading"
           disabled
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
@@ -105,8 +107,7 @@
         </button>
         <button
           v-else-if="
-            currentPaymentMethod?.name_translation_key ==
-            PaymentMethods.bankAccount || currentPaymentMethod?.name_translation_key ==
+            currentPaymentMethod == PaymentMethods.bankAccount || currentPaymentMethod ==
             PaymentMethods.bankTranfer
           "
           @click="editPaymentMethod"
@@ -136,7 +137,7 @@
         <h2 class="leading-7 text-gray-900 text-2xl font-bold mb-6 text-center">
           {{ $t("paymentMethods") }}
         </h2>
-        <span></span>
+        <span class="h-6 w-6"></span>
       </header>
       <div v-if="methodLoading" class="flex justify-center">
         <Loading />
@@ -183,7 +184,7 @@
             </div>
             <div>
               <div class="font-semibold">
-                {{ t(method.name_translation_key) }}
+                {{ t(method?.name_translation_key) }}
               </div>
               <div>{{ method.description }}</div>
             </div>
@@ -207,10 +208,13 @@
         <h2 class="leading-7 text-gray-900 text-2xl font-bold mb-6 text-center">
           {{ $t("yourBankAccounts") }}
         </h2>
-        <span></span>
+        <span class="h-6 w-6"></span>
       </header>
       <div v-if="accountLoading" class="flex justify-center">
         <Loading />
+      </div>
+      <div>
+        <button @click="addNewPaymentAcoount = true">Add</button>
       </div>
       <ul
         role="list"
@@ -234,6 +238,7 @@
       </ul>
     </article>
   </section>
+  <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
 </template>
 <script lang="ts" setup>
 import { ref, Ref } from "vue";
@@ -243,6 +248,7 @@ import ListItem from "@/components/common/ListItem.vue";
 import Modal from "@/components/common/Modal.vue";
 import Loading from "@/components/common/Loading.vue";
 import DepotStatus from "@/components/Assets/DepotStatus.vue";
+import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount.vue';
 import {
   PlusIcon,
   ChevronRightIcon,
@@ -250,6 +256,7 @@ import {
 } from "@heroicons/vue/20/solid";
 import { PaymentMethods } from "~/lib/contants/PaymentMethods";
 import { UpdateDepotRequest } from "~/lib/requests";
+import { AccountStorage } from "@/storage";
 const { t, locale } = useI18n();
 // const emit = defineEmits<{
 //   (e: "onClose"): void;
@@ -273,19 +280,17 @@ interface ExtendedPaymentMethod extends PaymentMethod {
 const editMode = ref(false);
 const errorText = ref("");
 const currentPaymentAccount: Ref<PaymentAccount|null> = ref(null);
-const currentPaymentMethod: Ref<PaymentMethod|null> = ref(null);
+const currentPaymentMethod: Ref<string|null> = ref(null);
 const inaiaPaymentDetails:Ref<PaymentDetails|null> = ref(null);
 const displayPragraph = computed(() => {
   if (
-    currentPaymentMethod.value &&
-    currentPaymentMethod.value?.name_translation_key == PaymentMethods.bankTranfer &&
+    currentPaymentMethod.value == PaymentMethods.bankTranfer &&
     inaiaPaymentDetails.value
   ) {
     return t("transferMoneytoInaia");
   }
   if (
-    currentPaymentMethod.value &&
-    currentPaymentMethod.value?.name_translation_key == PaymentMethods.bankTranfer &&
+    currentPaymentMethod.value == PaymentMethods.bankTranfer &&
     !inaiaPaymentDetails.value
   ) {
     return t("bankTranferMethod");
@@ -294,8 +299,7 @@ const displayPragraph = computed(() => {
     return t("noPaymentMethodSelectedForSavingPlan");
   }
   if (
-    currentPaymentMethod.value &&
-    currentPaymentMethod.value?.name_translation_key == PaymentMethods.bankAccount &&
+    currentPaymentMethod.value == PaymentMethods.bankAccount &&
     !currentPaymentAccount.value
   ) {
     return t("noBankAccountSelectedForSavingPlan");
@@ -319,9 +323,10 @@ const bankInfoWhenPaymentMethodBankAccount = computed(() => {
   }
   return null;
 });
+const initialLoading = ref(false)
 const loadInfo = async () => {
   try {
-    Loading.value = true;
+    initialLoading.value = true;
     if (depot?.payment_account_id) {
       const details = await AddDepotService.detailPaymentAccount(
         depot.payment_account_id
@@ -335,14 +340,12 @@ const loadInfo = async () => {
       errorText.value = err.message;
     }
   } finally {
-    Loading.value = false;
+    initialLoading.value = false;
   }
 };
 const init = () => {
   if (depot) {
-    currentPaymentMethod.value.name_translation_key = {
-      name_translation_key: depot.payment_method,
-    };
+    currentPaymentMethod.value =  depot.payment_method
     if (depot?.payment_details) {
       inaiaPaymentDetails.value = depot.payment_details;
     }
@@ -393,11 +396,9 @@ const loadPaymentMethod = async () => {
 const showBankAccounts = ref(false);
 const accountLoading = ref(false);
 const bankAccounts = ref([]);
-const loadBankAccounts = async (method) => {
+const loadBankAccounts = async (method: PaymentMethod) => {
   if (!method.has_payment_accounts) {
-    currentPaymentMethod.value = {
-      name_translation_key: method.name_translation_key,
-    };
+    currentPaymentMethod.value =  method.name_translation_key
     editMode.value = false;
     return;
   }
@@ -461,10 +462,10 @@ const updateDepotPaymentInformation = async () => {
       id: depot.id,
       payment_method: "",
     };
-    if (currentPaymentMethod.value?.name_translation_key) {
-      newData.payment_method = currentPaymentMethod.value.name_translation_key;
+    if (currentPaymentMethod.value) {
+      newData.payment_method = currentPaymentMethod.value;
     }
-    if (currentPaymentMethod.value?.name_translation_key == PaymentMethods.bankAccount, currentPaymentAccount.value?.id) {
+    if (currentPaymentMethod.value == PaymentMethods.bankAccount, currentPaymentAccount.value?.id) {
       newData.payment_account_id = undefined,
       newData.payment_account_id = currentPaymentAccount.value.id;
     }
@@ -484,7 +485,7 @@ const updateDepotPaymentInformation = async () => {
 const newPaymentAccount = ref(false);
 const selectNewBankAccount = (account) => {
   showBankAccounts.value = false;
-  currentPaymentMethod.value.name_translation_key = PaymentMethods.bankAccount
+  currentPaymentMethod.value = PaymentMethods.bankAccount
   if (account?.id != currentPaymentAccount.value?.id) {
     newPaymentAccount.value = true;
   }
@@ -509,7 +510,17 @@ const updatePaymentMethod = async() => {
   }
 };
 
+const addNewPaymentAcoount = ref(false)
+const closeAddPaymentAccount = () => {
+  addNewPaymentAcoount.value = false
+}
+const onPaymentAccountAdded = () => {
+
+}
+
+const account = ref(null)
 onMounted(() => {
   init();
+  account.value = AccountStorage.getAccount();
 });
 </script>
