@@ -399,4 +399,5 @@ export default {
     bank_transfer_paragraph:"Überweise den Betrag auf das Bankkonto von INAIA",
     paymentMethodBankMessage:'Wähle ein Bankkonto für die Bezahlung per SEPA-Lastschrift.',
     yourBankAccounts:"Bankverbindungen",
+    reference: 'Referenz',
 }

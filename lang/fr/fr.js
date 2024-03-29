@@ -367,4 +367,5 @@ export default {
     paymentMethodBankMessage:'Ajouter un de vos comptes bancaires qui peut effectuer ou accepter des paiements SEPA.',
     bank_transfer_paragraph:"Envoyez de l'argent sur le compte de l'INAIA par virement bancaire",
     yourBankAccounts:"Vos comptes bancaires",
+    reference: 'Référence',
 }

@@ -400,4 +400,5 @@ export default {
     bank_transfer_paragraph:"Send money to INAIA account via bank transfer",
     paymentMethodBankMessage:'Add any of your bank account that can make or accept SEPA payments',
     yourBankAccounts:"Your bank accounts",
+    reference: 'Reference',
 }

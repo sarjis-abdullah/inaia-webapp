@@ -32,7 +32,7 @@
       >
         <li class="flex justify-between">
           <span>
-            {{ "Account holder" }}
+            {{ $t('accountHolder') }}
           </span>
           <span>
             {{ "INAIA GmbH" }}
@@ -40,7 +40,7 @@
         </li>
         <li class="flex justify-between">
           <span>
-            {{ "IBAN" }}
+            {{ $t('iban') }}
           </span>
           <div
             v-if="depot?.payment_details?.inaia_iban"
@@ -53,7 +53,7 @@
         </li>
         <li class="flex justify-between">
           <span>
-            {{ "Reference" }}
+            {{ $t('reference') }}
           </span>
           <div
             v-if="depot?.payment_details?.reference"
@@ -116,7 +116,7 @@
           type="button"
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          Update
+          {{ $t('update') }}
         </button>
         <button
           v-else-if="
@@ -138,7 +138,7 @@
           type="button"
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none"
         >
-          Edit
+        {{ $t('edit') }}
         </button>
         <button
           v-else
@@ -147,7 +147,9 @@
           class="opacity-100 flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none"
         >
           <Loading v-if="updateDepoLoading" :height="20" :width="20" />
-          <span v-else>Update</span>
+          <span v-else>
+            {{ $t('update') }}
+          </span>
         </button>
       </div>
     </article>
@@ -297,6 +299,7 @@ import {
 import { PaymentMethods } from "~/lib/contants/PaymentMethods";
 import { UpdateDepotRequest } from "~/lib/requests";
 import { AccountStorage } from "@/storage";
+import { PaymentAccountSpecs } from "~/lib/contants";
 const { t, locale } = useI18n();
 const emit = defineEmits<{
   onClose: [];
@@ -349,7 +352,7 @@ const bankInfoWhenPaymentMethodBankAccount = computed(() => {
   ) {
     return currentPaymentAccount.value.payment_account_specs
       .filter((element) => {
-        if (element.name == "bank_name" || element.name == "iban") {
+        if (element.name == PaymentAccountSpecs.bank_name || element.name == PaymentAccountSpecs.iban) {
           return element;
         }
       })
@@ -436,9 +439,9 @@ const loadBankAccounts = async (method: PaymentMethod) => {
         return {
           ...item,
           bank_name: item?.payment_account_specs?.find(
-            (spec) => spec.name == "bank_name"
+            (spec: string) => spec?.name == PaymentAccountSpecs.bank_name
           )?.value,
-          iban: item?.payment_account_specs?.find((spec) => spec.name == "iban")
+          iban: item?.payment_account_specs?.find((spec: string) => spec?.name == PaymentAccountSpecs.iban)
             .value,
         };
       });
