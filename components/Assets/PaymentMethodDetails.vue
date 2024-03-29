@@ -270,7 +270,7 @@
   <AddPaymentAcount
     :showAddPaymentAccount="addNewPaymentAcoount"
     :accountId="account.account.id"
-    v-if="account && account.account"
+    v-if="addNewPaymentAcoount && account && account.account"
     @onClose="closeAddPaymentAccount"
     @OnAdd="onPaymentAccountAdded"
   />
