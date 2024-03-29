@@ -400,4 +400,6 @@ export default {
     paymentMethodBankMessage:'Wähle ein Bankkonto für die Bezahlung per SEPA-Lastschrift.',
     yourBankAccounts:"Bankverbindungen",
     reference: 'Referenz',
+    new_bank_account: 'Neues Bankkonto',
+    add: 'Hinzufügen',
 }

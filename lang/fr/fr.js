@@ -368,4 +368,6 @@ export default {
     bank_transfer_paragraph:"Envoyez de l'argent sur le compte de l'INAIA par virement bancaire",
     yourBankAccounts:"Vos comptes bancaires",
     reference: 'Référence',
+    new_bank_account: 'Nouveau compte bancaire',
+    add: 'Ajouter',
 }

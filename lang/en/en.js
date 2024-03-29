@@ -401,4 +401,6 @@ export default {
     paymentMethodBankMessage:'Add any of your bank account that can make or accept SEPA payments',
     yourBankAccounts:"Your bank accounts",
     reference: 'Reference',
+    new_bank_account: 'New bank account',
+    add: 'Add',
 }

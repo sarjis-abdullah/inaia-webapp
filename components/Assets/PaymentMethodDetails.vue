@@ -239,10 +239,10 @@
       <div v-if="accountLoading" class="flex justify-center">
         <Loading />
       </div>
-      <div class="flex justify-between items-center text-sm leading-6 border-b px-2 pb-2">
-        <span>New bank account</span>
+      <div v-if="!accountLoading" class="flex justify-between items-center text-sm leading-6 border-b px-2 pb-2">
+        <span>{{ $t('new_bank_account') }}</span>
         <button class="opacity-100 flex justify-center rounded-md border border-transparent bg-blue-600 py-1 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none" @click="addNewPaymentAcoount = true">
-          Add
+          {{$t('add')}}
         </button>
       </div>
       <ul
@@ -300,6 +300,7 @@ import { PaymentMethods } from "~/lib/contants/PaymentMethods";
 import { UpdateDepotRequest } from "~/lib/requests";
 import { AccountStorage } from "@/storage";
 import { PaymentAccountSpecs } from "~/lib/contants";
+import { Account } from '@/lib/models/Account';
 const { t, locale } = useI18n();
 const emit = defineEmits<{
   onClose: [];
@@ -541,7 +542,7 @@ const copy = (text: string) => {
   }, 500);
 };
 
-const account = ref(null);
+const account: Ref<Account|null> = ref(null);
 onMounted(() => {
   init();
   account.value = AccountStorage.getAccount();
