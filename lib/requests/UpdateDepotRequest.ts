@@ -15,4 +15,5 @@ export interface UpdateDepotRequest {
     duration?:number;
     payment_method?:string;
     payment_account_id?:number
+    status_id?:number
 }

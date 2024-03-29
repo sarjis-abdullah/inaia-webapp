@@ -169,6 +169,18 @@ export class AddDepotService {
             throw err;
         }
     }
+    public static async updateDepotStatus(depotId: number, payload:UpdateDepotRequest):Promise<Depot>{
+        try{
+            const url = this.links.updateDepotStatus(depotId);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
     public static async detailPaymentAccount(id: number):Promise<PaymentAccount>{
         try{
             const url = this.links.detailPaymentAccount(id);
@@ -211,6 +223,18 @@ export class AddDepotService {
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async getDepotStatusList():Promise<Depot>{
+        try{
+            const url = this.links.getDepotStatusList();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
             return json.data;
         }
         catch(err){

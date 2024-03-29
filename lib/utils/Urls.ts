@@ -231,6 +231,12 @@ export class Urls{
     public updateDepotInfo(id:number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${id}`);
     }
+    public updateDepotStatus(depotId: number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/status`);
+    }
+    public getDepotStatusList(){
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),'depot-statuses');
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }
