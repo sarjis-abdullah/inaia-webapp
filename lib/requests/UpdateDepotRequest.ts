@@ -1,4 +1,5 @@
 export interface UpdateDepotRequest {
+    id?:number;
     name?:string;
     account_id?:number;
     interval_id?:number;
@@ -14,4 +15,5 @@ export interface UpdateDepotRequest {
     duration?:number;
     payment_method?:string;
     payment_account_id?:number
+    status_id?:number
 }

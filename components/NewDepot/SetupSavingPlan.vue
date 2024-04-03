@@ -62,7 +62,7 @@
                             {{ $t('years') }}
                         </div>
 
-                        <vue3-slider v-model="state.numberOfYears" color="#0065D3" track-color="#E8ECEE" :min="1"
+                        <vue3-slider v-model="state.numberOfYears" color="#0065D3" track-color="#E8ECEE" :min="2"
                             :max="45" />
 
                         <div class="my-6" v-if="!isSimulation">
@@ -446,7 +446,7 @@ const paymentTableData = ref([]);
 const state = reactive({
     performance:9,
     monthlySaving:25,
-    numberOfYears:1,
+    numberOfYears:2,
     selectedPaymentOption:billingMethods[0],
     
 })
@@ -527,6 +527,12 @@ watch([selectedPaymentMethod,selectedPaymentAccount],([newSelectedPaymentMethod,
     enableBtn.value = false;
 })
 watch([agioPercentage,state],([newAgioPercentage,newState],[oldAgioPercentage,oldState])=>{
+    if(state.numberOfYears <2){
+        state.numberOfYears = 2;
+    }
+    if(state.numberOfYears > 45){
+        state.numberOfYears = 45
+    }
     if(newAgioPercentage && newState && newState.monthlySaving >0 && newState.numberOfYears>0 && !isNaN(newState.monthlySaving) && !isNaN(state.numberOfYears)){
         totalAgio.value = AddDepotService.calculateTotalAgio(newAgioPercentage,newState.selectedPaymentOption.reduction,newState.numberOfYears,newState.monthlySaving);
         contractData.value = AddDepotService.calculateChartData(newState.numberOfYears,newState.monthlySaving,newState.performance,totalAgio.value,newState.selectedPaymentOption.name);

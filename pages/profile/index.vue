@@ -177,6 +177,7 @@ definePageMeta({
   middleware: ['protected'],
 });
 import { Ref, ref } from 'vue'
+import { copyToClipboard } from '@/helpers/clipboardHelper.ts';
 import { Dialog, DialogPanel, Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import { Bars3Icon } from '@heroicons/vue/20/solid'
 import {
@@ -512,13 +513,6 @@ const handleError = (value) => {
     return value.message;
   }
     
-}
-const copyToClipboard = async (text: string) => {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch($e) {
-    console.error($e)
-  }
 }
 const copyOnlyReferralLink = async() => {
   copyingLink.value = true

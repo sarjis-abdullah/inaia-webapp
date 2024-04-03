@@ -219,6 +219,24 @@ export class Urls{
     public getTradableAmount(depotId:number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/tradeable-amount?include=order_transactions,orders_payment_transactions,depot`);
     }
+    public detailPaymentAccount(id:number):string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-account/${id}`);
+    }
+    public paymentAccounts():string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-account/user-accounts`);
+    }
+    public paymentMethods():string{
+        return this.buildUrl(BaseUrls.getPaymentUrl(), `payment-methods`);
+    }
+    public updateDepotInfo(id:number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${id}`);
+    }
+    public updateDepotStatus(depotId: number):string{
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/${depotId}/status`);
+    }
+    public getDepotStatusList(){
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),'depot-statuses');
+    }
     private buildUrl(baseUrl:string,path:string):string{
         return baseUrl + path;
     }

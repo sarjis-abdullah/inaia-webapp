@@ -1,6 +1,6 @@
 import { AgioPaymentsModels } from '../contants/AgioPaymentsModels';
 import { AgioPaymentsPercentages, MINIMUM_PERIOD_TO_START_SAVING_PLAN, SavingPlanPaymentIntervals } from '../contants';
-import { DataItem, Depot, NextPossibleDate, SavingsPlanPaymentInterval, SpPerformanceData } from '../models';
+import { DataItem, Depot, NextPossibleDate, PaymentAccount, PaymentMethod, SavingsPlanPaymentInterval, SpPerformanceData } from '../models';
 import { AddDepotRequest, AddSavingsPlanRequest, UpdateDepotRequest } from '../requests';
 import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
@@ -163,6 +163,78 @@ export class AddDepotService {
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateDepotStatus(depotId: number, payload:UpdateDepotRequest):Promise<Depot>{
+        try{
+            const url = this.links.updateDepotStatus(depotId);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async detailPaymentAccount(id: number):Promise<PaymentAccount>{
+        try{
+            const url = this.links.detailPaymentAccount(id);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async getTheListOfPaymentAccounts():Promise<Depot>{
+        try{
+            const url = this.links.paymentAccounts();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async getTheListOfPaymentMethods():Promise<PaymentMethod>{
+        try{
+            const url = this.links.paymentMethods();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async updateDepotInfo(depotId: number, payload:UpdateDepotRequest):Promise<Depot>{
+        try{
+            const url = this.links.updateDepotInfo(depotId);
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.put(url,this.headers, payload);
+            return json.data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async getDepotStatusList():Promise<Depot>{
+        try{
+            const url = this.links.getDepotStatusList();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            const json = await this.requester.get(url,this.headers);
             return json.data;
         }
         catch(err){

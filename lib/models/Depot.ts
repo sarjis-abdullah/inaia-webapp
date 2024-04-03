@@ -3,6 +3,10 @@ import { type DepotStatus } from "./DepotStatus"
 import { type DepotType } from "./DepotType"
 import { type SavingPlanTarget } from "./SavingPlanTarget"
 
+export interface PaymentDetails {
+    inaia_iban: string;
+    reference: string;
+}
 export interface Depot{
     account?:Account
     account_id:number,
@@ -49,5 +53,6 @@ export interface Depot{
     target_type:SavingPlanTarget,
     target_type_id?:number,
     updated_at?:string,
-    updated_by?:number
+    updated_by?:number,
+    payment_details?: PaymentDetails
 }

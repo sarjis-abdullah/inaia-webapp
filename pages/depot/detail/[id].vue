@@ -7,7 +7,7 @@
 
       </div>
       <div class="mt-6 md:mt-0">
-        <SavingPlanDetail :depot="depot" class="mb-6" :isVerified="isVerified"/>
+        <SavingPlanDetail @updateDepotStatus="updateDepotStatus" @updateDepoProps="updateDepoProps" :depot="depot" class="mb-6" :isVerified="isVerified"/>
         <div class="flex flex-row justify-between items-center rounded-lg bg-white shadow p-3" v-if="depot && isVerified && !loadingData">
           <NuxtLink :to="'/' + lang + '/trading/buy/' + id"
             class="flex w-full cursor-pointer mx-1 justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
@@ -92,18 +92,24 @@ const isVerified = computed(() => {
   if (account?.value) {
     return account.value.is_verified;
   }
-  else {
-    return false;
-  }
+  return false;
 })
 const tradeableAmount = computed(() => {
   if (depot.value) {
     return depot.value.gram_amount - depot.value.gram_amount_pending_orders
   }
-  else {
-    return 0
-  }
+  return 0
 })
+const updateDepoProps = (updatedDepot: Depot) => {
+  if (depot.value) {
+    depot.value.payment_account_id = updatedDepot.payment_account_id
+    depot.value.payment_method = updatedDepot.payment_method
+    depot.value.payment_details = updatedDepot.payment_details
+  }
+}
+const updateDepotStatus = (updatedDepo: Depot)=> {
+  depot.value = {...depot.value, status: updatedDepo.status}
+}
 onMounted(async () => {
   try {
     loadingData.value = true
