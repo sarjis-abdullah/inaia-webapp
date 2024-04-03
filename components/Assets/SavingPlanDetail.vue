@@ -26,7 +26,12 @@
                 <ListItem :title="$t('contract_term')"><span>{{ depot && depot.interval_startdate?$d(depot.interval_startdate):'' }} - {{ depot && depot.interval_enddate?$d(depot.interval_enddate):'' }}</span></ListItem>
                 <ListItem :title="$t('interval_day')"><span>{{ depot && depot.interval_day?$t(depot.interval_day.toString()):'' }}</span></ListItem>
                 <ListItem :title="$t('agio')"><span>{{ depot && depot.agio?$n(depot.agio/100):0 }} {{ currency }}</span></ListItem>
-                <ListItem :title="$t('payment_method')"><span>{{ depot && depot.payment_method?$t(depot.payment_method):'' }}</span></ListItem>
+                <ListItem :title="$t('payment_method')">
+                    <span class="flex gap-2 justify-end items-center cursor-pointer" @click="toggleDetailPaymentAccount">
+                        <span>{{ depot && depot.payment_method?$t(depot.payment_method):'' }}</span>
+                        <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
+                    </span>
+                </ListItem>
             </div>
         </div>
         <div v-if="depot && depot.is_savings_plan==0">
@@ -52,6 +57,9 @@
             </button>
         </div>
     </a>
+    <Modal :open="showDetailPaymentAccount" @on-close="toggleDetailPaymentAccount">
+        <PaymentMethodDetails :depot="depot" @update-depo-props="updateDepoProps" @on-close="showDetailPaymentAccount=false"/>
+    </Modal>
     <SavingsPlanPauseResumeControl :depot="depot" :showPauseModal="showPauseModal" @updateDepotStatus="updateDepotStatus" @showPauseModal="showPauseModal = false" :showContinueModal="showContinueModal" @showContinueModal="showContinueModal=false" />
 </template>
 <script lang="ts" setup>
@@ -59,7 +67,9 @@ import {ref,PropType} from 'vue';
 import { type Depot } from '@/lib/models';
 import { CurrencyService } from '@/lib/services';
 import ListItem from '@/components/common/ListItem';
-import { PlusIcon, PlayIcon, PauseIcon } from '@heroicons/vue/20/solid'
+import Modal from '@/components/common/Modal.vue';
+import PaymentMethodDetails from '@/components/Assets/PaymentMethodDetails';
+import { PlusIcon, PlayIcon, PauseIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
 import DepotStatus from '@/components/Assets/DepotStatus';
 import { DepotStatuses } from '@/lib/contants';
 import SavingsPlanPauseResumeControl from '@/components/Assets/SavingsPlanPauseResumeControl.vue';
@@ -76,6 +86,8 @@ const props = defineProps({
     }
 })
 const line = ref(null);
+const showDetailPaymentAccount = ref(false);
+const route = useRoute();
 const { locale, t } = useI18n();
 const router = useRouter();
 const currency = CurrencyService.getCurrencySymbol()
@@ -95,6 +107,12 @@ const lineWith = computed(()=>{
     }
     return 0;
 })
+const toggleDetailPaymentAccount = () => {
+    showDetailPaymentAccount.value = !showDetailPaymentAccount.value
+}
+const updateDepoProps = (depot: Depot) => {
+    emit('updateDepoProps', depot)
+}
 const isDepotStatusPaused = computed(()=> !!(props.depot?.status?.name_translation_key == DepotStatuses.paused))
 const depotStatusText = computed(()=>{
     if(isDepotStatusPaused.value){

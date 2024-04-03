@@ -399,5 +399,17 @@ export default {
     clickHere:"Click here",
     already_a_savings_plan: "Already a savings plan",
     checking:'Checking',
-    accountIsAlreadyVerified:'Your account is already verified'
+    accountIsAlreadyVerified:'Your account is already verified',
+    transferMoneytoInaia:'In order transfer money to INAIA bank account use the following iban with the following reason',
+    bankTranferMethod:'With bank transfer method, you can transfer money to INAIA bank account to complete pending orders.',
+    noPaymentMethodSelectedForSavingPlan: 'Please provide us with payment information in order to be able to purchase your recurrent orders',
+    noBankAccountSelectedForSavingPlan:'You selected bank account as payment method but no bank account was selected, please select a bank account.',
+    bank_name: 'Bank',
+    paymentMethods:'Payment methods',
+    bank_transfer_paragraph:"Send money to INAIA account via bank transfer",
+    paymentMethodBankMessage:'Add any of your bank account that can make or accept SEPA payments',
+    yourBankAccounts:"Your bank accounts",
+    reference: 'Reference',
+    new_bank_account: 'New bank account',
+    add: 'Add',
 }
