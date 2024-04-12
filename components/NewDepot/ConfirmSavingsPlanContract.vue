@@ -95,7 +95,8 @@ onMounted(async()=>{
         let type = [];
         if(props.depot){
             type = [ConditionTypes.goldSavingPlan];
-            if(props.type == AssetTypes.silver){
+            console.log(props.depot.depot_type)
+            if(props.depot.depot_type?.name_translation_key.toUpperCase() == AssetTypes.silver.toUpperCase()){
                 type = [ConditionTypes.silverSavingPlan];
             }
         }
