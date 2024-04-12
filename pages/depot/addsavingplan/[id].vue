@@ -156,6 +156,7 @@ const saveDepot = async (conditions:string) => {
 
   try{
     saveDepotRequest.value.conditions = conditions
+    saveDepotRequest.value.interval_amount = saveDepotRequest.value.interval_amount * 100;
     isSavingDepot.value = true;
     isSubmitting.value = true;
     await AddDepotService.saveTheSavingPlan(depot.value.id,saveDepotRequest.value);

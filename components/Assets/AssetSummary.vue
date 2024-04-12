@@ -5,8 +5,10 @@
       <Alert v-if="!isVerified" :kycDetails="kycDetails" class="my-3" :kycStatus="kycStatus"/>
         <div  class="grid grid-cols-1 md:grid-cols-2 gap-10  mt-10 ">
           <div v-for="asset in assets" :key="asset.name">
-          <AssetItem   :item="asset"/>
-          <PriceHistory :type="asset.name" class="mt-6"/>
+           
+              <AssetItem   :item="asset" v-if="asset.name.toUpperCase() == AssetTypes.gold.toUpperCase() || asset.name.toUpperCase() == AssetTypes.silver.toUpperCase()"/>
+              <PriceHistory :type="asset.name" class="mt-6" v-if="asset.name.toUpperCase() == AssetTypes.gold.toUpperCase() || asset.name.toUpperCase() == AssetTypes.silver.toUpperCase()"/>
+            
           </div>
         </div>
       </div>
