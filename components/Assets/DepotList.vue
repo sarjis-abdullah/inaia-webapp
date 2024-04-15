@@ -107,7 +107,7 @@
 import { type Depot, type DepotType } from '@/lib/models';
 import { AssetsService,CurrencyService } from '~~/lib/services';
 import { AssetStorage } from '~~/storage/AssetStorage';
-import { AssetTypes } from '~~/lib/contants';
+import { AssetTypes, DepotStatuses } from '~~/lib/contants';
 import DepotStatus from '@/components/Assets/DepotStatus';
 import { PaginationResponse } from '~~/lib/responses';
 import ListLoader from '@/components/common/ListLoader';
@@ -178,8 +178,8 @@ onMounted(async ()=>{
         perPage:100,
         depot_type_id :props.type?props.type.id:undefined
       });
-
-      depots.value = response.data.sort((a:Depot,b:Depot)=>(a.depot_type?.name_translation_key >= b.depot_type?.name_translation_key)?1:-1);
+      const cleanedData = response.data.filter(d=>d && d.status && d.status.name_translation_key!=DepotStatuses.canceled)
+      depots.value = cleanedData.sort((a:Depot,b:Depot)=>(a.depot_type?.name_translation_key >= b.depot_type?.name_translation_key)?1:-1);
       if(response.currentPage)
           page.value = response.currentPage;
     
