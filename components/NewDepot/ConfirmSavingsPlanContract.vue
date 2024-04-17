@@ -5,7 +5,7 @@
             <img :src="target.avatar"  v-if="target" class="h-32 w-32 rounded-full mx-auto mb-4"/>
             <div class="divide-y" v-if="saveDepotRequest">
                 <ListItem :title="$t('name')">{{ saveDepotRequest?.name }}</ListItem>
-                <ListItem :title="$t('savings_rate')">{{ saveDepotRequest?.interval_amount }} {{ currency }}</ListItem>
+                <ListItem :title="$t('savings_rate')">{{ saveDepotRequest?.interval_amount/100 }} {{ currency }}</ListItem>
                 <ListItem :title="$t('duration')">{{ saveDepotRequest?.duration }} {{ $t('year')+(saveDepotRequest?.duration>1?'s':'') }}</ListItem>
                 <ListItem :title="$t('savings')">{{ $n(saveDepotRequest?.interval_amount * 12 * saveDepotRequest?.duration) }} {{ currency }}</ListItem>
                 <ListItem :title="$t('agio')">{{ $n(totalAgio) }} {{ currency }}</ListItem>
