@@ -208,7 +208,7 @@ const setupSavingPlan = ()=>{
 }
 const confirmSavingPlanContactData = (object:Object)=>{
   saveDepotRequest.value.agio_payment_option = object.agio_payment_option;
-  saveDepotRequest.value.interval_amount = object.interval_amount;
+  saveDepotRequest.value.interval_amount = object.interval_amount*100;
   saveDepotRequest.value.interval_day = object.interval_day;
   saveDepotRequest.value.duration = object.duration;
   saveDepotRequest.value.interval_startdate = object.interval_startdate;
