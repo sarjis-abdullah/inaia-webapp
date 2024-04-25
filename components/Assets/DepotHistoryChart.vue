@@ -31,7 +31,7 @@
     </div>
     </div>
     <div class="ml-4 mt-4 flex flex-shrink-0">
-        <button type="button" @click="changePeriod(PricePeriods.month)" class="relative inline-flex items-center rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset" :class="isActive(PricePeriods.month)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
+        <button type="button" @click="changePeriod(PricePeriods.month)" class="relative inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset" :class="isActive(PricePeriods.month)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
           <span>{{ $t('month') }}</span>
         </button>
         <button type="button" @click="changePeriod(PricePeriods.year)" class="relative ml-1 inline-flex items-center rounded-md px-3 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset " :class="isActive(PricePeriods.year)?'bg-blue-500 text-white ring-blue-300':'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50'">
