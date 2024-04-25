@@ -173,7 +173,7 @@ export default {
     industryDemanded:'High demand by industries',
     storageInSwitzerland:'Stored in Switzerland',
     tvaExempted:'VAT exempt (19%) through storage in a duty-free warehouse in Switzerland.',
-    choose_purpose:'The purose of the depot',
+    choose_purpose:'Savings target',
     set_the_name:'Depot name',
     savings_plan_contract:'Set the saving plan contract',
     savings_plan_summary:'Confirm saving plan contract',
