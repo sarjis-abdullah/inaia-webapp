@@ -178,8 +178,7 @@ onMounted(async ()=>{
         perPage:100,
         depot_type_id :props.type?props.type.id:undefined
       });
-      const cleanedData = response.data.filter(d=>d && d.status && d.status.name_translation_key!=DepotStatuses.canceled)
-      depots.value = cleanedData.sort((a:Depot,b:Depot)=>(a.depot_type?.name_translation_key >= b.depot_type?.name_translation_key)?1:-1);
+      depots.value = response.data.sort((a:Depot,b:Depot)=>(a.depot_type?.name_translation_key >= b.depot_type?.name_translation_key)?1:-1);
       if(response.currentPage)
           page.value = response.currentPage;
     
