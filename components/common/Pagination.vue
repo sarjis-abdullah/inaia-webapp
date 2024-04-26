@@ -7,19 +7,16 @@
       <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p class="text-sm text-gray-700">
-            {{ $t('showing') }}
             {{ ' ' }}
             <span class="font-medium">{{ (currentPage-1)*perPage+1 }}</span>
             {{ ' ' }}
-            {{ $t('To') }}
+            -
             {{ ' ' }}
             <span class="font-medium">{{ (currentPage-1)*perPage + totalPerPage }}</span>
             {{ ' ' }}
             {{$t('of')}}
             {{ ' ' }}
             <span class="font-medium">{{ total }}</span>
-            {{ ' ' }}
-            {{ $t('results') }}
           </p>
         </div>
         <div>
@@ -29,7 +26,7 @@
               <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
             </a>
             <a v-for="page in pages" :key="page" @click.prevent="navigate(page)" :class="page==currentPage?'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600':'relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex'">{{ page }}</a>
-          
+
             <a @click="next" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
               <span class="sr-only">Next</span>
               <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
@@ -39,7 +36,7 @@
       </div>
     </div>
   </template>
-  
+
   <script lang="ts" setup>
   import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid';
 
@@ -65,7 +62,7 @@
     pages.value = [];
     for (let index = 1; index <= currentValue.lastPage; index++) {
       pages.value.push(index);
-      
+
     }
   })
   const currentPage = ref(1);
@@ -73,7 +70,7 @@
     pages.value = [];
     for (let index = 1; index <= props.lastPage; index++) {
       pages.value.push(index);
-      
+
     }
   })
   const prev = ()=>{
@@ -93,4 +90,3 @@
     }
   }
   </script>
-  

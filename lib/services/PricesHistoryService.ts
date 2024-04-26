@@ -23,7 +23,7 @@ export class PricesHistoryService{
         const token = TokenService.getToken();
         this.headers.addAuthHeader(token);
         let json = await this.requester.get(url,this.headers);
-        let response : HistoricalPrice[] = json.data.reverse();
+        let response : HistoricalPrice[] = json.data;
         return response;
     }
 }
