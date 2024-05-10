@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="px-0 py-2 flex justify-between">
+        <div v-if="paymentMethodName" class="px-0 py-2 flex justify-between">
             <div class="px-0 justify-center font-semibold">{{$t('payment_method')}}</div>
             <div class="px-0 text-sm flex items-center gap-1">
                 <span>{{$t(paymentMethodName)}}</span>
@@ -11,12 +11,17 @@
             </div>
         </div>
         <div v-if="showPaymentDetails && order?.payment_details" class="ml-2">
-            <ListItem :title="$t('iban')" v-if="paymentMethodName">
+            <ListItem :title="$t('accountHolder')">
+                <span class="pl-2">
+                    {{ "INAIA GmbH" }}
+                </span>
+            </ListItem>
+            <ListItem :title="$t('iban')">
                 <span class="pl-2">
                     {{ order.payment_details.inaia_iban }}
                 </span>
             </ListItem>
-            <ListItem :title="$t('reference')" v-if="paymentMethodName">
+            <ListItem :title="$t('reference')">
                 <span>
                     {{ order.payment_details.reference }}
                 </span>
