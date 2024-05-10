@@ -31,12 +31,10 @@
 </template>
 <script lang="ts" setup>
 import ListItem from '@/components/common/ListItem';
-import { ChevronDownIcon } from '@heroicons/vue/24/outline';
-import { ChevronUpIcon } from '@heroicons/vue/24/outline';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/outline';
 import {computed, ref} from 'vue';
 import { type Order } from '@/lib/models';
 import { OrderService } from '@/lib/services';
-const showPaymentDetails = ref(false)
 const props = defineProps({
     order:{
         type: Object as PropType<Order>
@@ -45,7 +43,7 @@ const props = defineProps({
 const paymentMethodName = computed(()=>{
     return OrderService.getPaymentMethodName(props.order);
 })
-
+const showPaymentDetails = ref(false)
 const toggle = () => {
     showPaymentDetails.value = !showPaymentDetails.value
 }
