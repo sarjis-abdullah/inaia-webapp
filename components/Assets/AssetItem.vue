@@ -6,7 +6,7 @@
                
                     
                     <span class="text-xl text-gray-500">{{ name }}</span>
-                    
+                
                
             </div>
             <div class="flex flex-col items-end">
