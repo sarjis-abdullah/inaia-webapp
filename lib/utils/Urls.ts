@@ -109,7 +109,7 @@ export class Urls{
     }
     public getDepotOrders(depot_id:number,request:PageRequest):string{
         const queryParams = objectToQueryString(request);
-        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions&${queryParams}`);
+        return this.buildUrl(BaseUrls.getGoldDinarUrl(),`orders/depot-orders/${depot_id}?include=order_transactions,orders_payment_transactions,payment_details&${queryParams}`);
     }
     public getDepotOrderStament(depot_id:number, request: StatementDateFilterRequest):string{
         const queryParams = objectToQueryString(request);
