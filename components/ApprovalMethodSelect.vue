@@ -1,12 +1,13 @@
 <template>
   <Listbox as="div" v-model="selectedApprovalMethod">
-    <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900 mt-4"
-      >{{ $t("Approval method for two-factor authentication") }}
-    </ListboxLabel>
+    
     <div class="relative mt-2">
       <ListboxButton
-        class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
+        class="flex items-center gap-2 relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
       >
+      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900"
+      >{{ $t("Approval Method:") }}
+    </ListboxLabel>
         <span class="block truncate">{{
           selectedApprovalMethod
             ? selectedApprovalMethod.translated_name

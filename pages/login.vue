@@ -54,7 +54,10 @@
         <div v-else class="text-center">
           <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div class="flex flex-row w-full">
-              <a @click="showCodeInput = false" class="cursor-pointer"><svg
+              <a @click="()=> {
+                showCodeInput = false
+                error = null
+              }" class="cursor-pointer"><svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -85,6 +88,11 @@
               </div>
               <CodeInputs @complete="mfaVerify" :length="4" />
             </div>
+            <div class="mt-4 flex justify-center">
+              <Loading v-if="isSubmitting"/>
+              <InLineApiError v-else :err="error"/>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -94,25 +102,26 @@
   <script lang="ts" setup>
   import { LockClosedIcon } from '@heroicons/vue/20/solid';
   import { ref,reactive,watch, Ref } from 'vue';
-import { BadInputException,UnauthenticatedException } from '@/lib/exceptions';
-import { validateEmail,verifyIsAccountNumber } from '@/lib/utils/Validators';
-import {LoginStorage,AccountStorage } from '@/storage';
-import {AccountService,TokenService,LoginService} from '@/lib/services';
-import { ServerErrorException } from '@/lib/exceptions';
-import { urlBuilder } from '~~/helpers/urlBuilder';
-import InLineApiError from '@/components/common/InLineApiError';
-import ApprovalMethodSelect from '@/components/ApprovalMethodSelect.vue';
-import CodeInputs from '@/components/Register/CodeInputs';
+  import { BadInputException,UnauthenticatedException } from '@/lib/exceptions';
+  import { validateEmail,verifyIsAccountNumber } from '@/lib/utils/Validators';
+  import {LoginStorage,AccountStorage } from '@/storage';
+  import {AccountService,TokenService,LoginService} from '@/lib/services';
+  import { ServerErrorException } from '@/lib/exceptions';
+  import { urlBuilder } from '~~/helpers/urlBuilder';
+  import InLineApiError from '@/components/common/InLineApiError';
+  import Loading from '@/components/common/Loading';
+  import ApprovalMethodSelect from '@/components/ApprovalMethodSelect.vue';
+  import CodeInputs from '@/components/Register/CodeInputs';
 
-type LoginResponse = {
-  message: string;
-  messageType: string;
-  status: string;
-  method: string;
-  tempBearerToken: string;
-  confirmation_url: string;
-  approval_id: number;
-};
+  type LoginResponse = {
+    message: string;
+    messageType: string;
+    status: string;
+    method: string;
+    tempBearerToken: string;
+    confirmation_url: string;
+    approval_id: number;
+  };
   const state = reactive({
     email:'',
     password:'',
@@ -141,11 +150,14 @@ type LoginResponse = {
         error.value = null;
         isSubmitting.value = true;
         const response = await LoginService.mfaVerify({code}, primaryResponse.value.tempBearerToken);
+        console.log(response, 'response');
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
         AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
         AccountStorage.saveAccount(response.account);
-        AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
+        if(response.account && response.account.account && response.account.account.id){
+          AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
+        }
         AccountService.setAccount(response.account);
        
         if(state.keepMeSignedIn){
@@ -154,25 +166,23 @@ type LoginResponse = {
         }
         const link = router.resolve('/dashboard');
         let locale = 'en'
-        response.account.account.settings.forEach(s => {
-      if (s.name_translation_key == 'locale') {
-        locale = s.value;
-      }
-    })
-      const url = urlBuilder(locale,'/dashboard');
-    
+        if(response.account && response.account.account && response.account.account.settings && response.account.account.settings.length){
+          response.account.account.settings.forEach(s => {
+            if (s.name_translation_key == 'locale') {
+              locale = s.value;
+            }
+          })
+        }
+        const url = urlBuilder(locale,'/dashboard');
         window.open(url,'_self');
       }
     }
     catch(err){
-       
         error.value=err;
-        
     }
     finally{
         isSubmitting.value = false
     }
-    
   }
   const primaryResponse: Ref<LoginResponse|null> = ref(null)
   const initialLogin = async()=>{
@@ -184,36 +194,13 @@ type LoginResponse = {
         if (response) {
           primaryResponse.value = response
         }
-        
-        // LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
-        // TokenService.init(response.accessToken.token,response.accessToken.expire);
-        // AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
-        // AccountStorage.saveAccount(response.account);
-        // AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
-        // AccountService.setAccount(response.account);
-       
-        // if(state.keepMeSignedIn){
-        //     LoginStorage.saveRefreshToken(response.refreshToken);
-        //     LoginStorage.saveSecret(response.secret);
-        // }
-        // const link = router.resolve('/dashboard');
-        // let locale = 'en'
-        // response.account.account.settings.forEach(s => {
-        //   if (s.name_translation_key == 'locale') {
-        //     locale = s.value;
-        //   }
-        // })
-        // const url = urlBuilder(locale,'/dashboard');
-        // window.open(url,'_self');
     }
     catch(err){
         error.value=err;
-        
     }
     finally{
         isSubmitting.value = false
     }
-    
   }
   watch(state,(currentValue)=>{
     emailValidated.value = validateEmail(currentValue.email) || verifyIsAccountNumber(currentValue.email);
