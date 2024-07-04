@@ -77,7 +77,7 @@
                   <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
-              <CodeInputs @complete="mfaVerify" :length="4" />
+              <CodeInputs @complete="verifyMfa" :length="4" />
               <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
                 <p>{{ $t('choose_other_confirming_method') }}</p>
                 <ul>
@@ -150,12 +150,12 @@
     }
   })
   const primaryResponse: Ref<LoginResponse|null> = ref(null)
-  const mfaVerify = async(code: string)=>{
+  const verifyMfa = async(code: string)=>{
     try{
       if (primaryResponse?.value?.tempBearerToken) {
         error.value = null;
         isSubmitting.value = true;
-        const response = await LoginService.mfaVerify({code}, primaryResponse.value.tempBearerToken);
+        const response = await LoginService.verifyMfa({code}, primaryResponse.value.tempBearerToken);
         primaryResponse.value = null
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
@@ -180,7 +180,7 @@
           })
         }
         const url = urlBuilder(locale,'/dashboard');
-        window.open(url,'_self');
+        router.push('/' + locale + '/dashboard')
       }
     }
     catch(err){

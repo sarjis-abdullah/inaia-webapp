@@ -14,7 +14,7 @@ export class LoginService{
     public static async login(request:LoginRequest){
         return await this.requester.post(this.links.login(),this.headers,request);
     }
-    public static async mfaVerify(request:MfaVerificationRequest, tempToken: string){
+    public static async verifyMfa(request:MfaVerificationRequest, tempToken: string){
         try {
             this.headers.addXpiKeyHeader(tempToken);
             const json = await this.requester.post(this.links.verifyMfa(),this.headers,request);
