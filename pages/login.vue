@@ -113,19 +113,9 @@
   import Loading from '@/components/common/Loading';
   import CodeInputs from '@/components/Register/CodeInputs';
   import ListItem from '@/components/common/ListItem.vue';
+  import { InitialLoginResponse } from '@/lib/responses';
   const { t } = useI18n();
 
-
-  type LoginResponse = {
-    message: string;
-    messageType: string;
-    status: string;
-    method: string;
-    tempBearerToken: string;
-    confirmation_url: string;
-    approval_id: number;
-    alternativeMethods: [];
-  };
   const METHOD = "2fa"
   const state = reactive({
     email:'',
@@ -149,7 +139,7 @@
       method:state.method,
     }
   })
-  const primaryResponse: Ref<LoginResponse|null> = ref(null)
+  const primaryResponse: Ref<InitialLoginResponse|null> = ref(null)
   const verifyMfa = async(code: string)=>{
     try{
       if (primaryResponse?.value?.tempBearerToken) {
