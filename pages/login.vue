@@ -170,7 +170,7 @@
           })
         }
         const url = urlBuilder(locale,'/dashboard');
-        router.push('/' + locale + '/dashboard')
+        window.open(url,'_self');
       }
     }
     catch(err){
