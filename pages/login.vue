@@ -27,9 +27,6 @@
               :class="passwordValidated?normalBorder:errorBorder"
               />
             </div>
-            <div>
-              <ApprovalMethodSelect v-model:approvalMethod="state.method" />
-            </div>
           </div>
   
           <div class="flex items-center justify-end">
@@ -77,18 +74,22 @@
               <div>
                 <img src="~/assets/img/pageicons/pinscreen.jpg" alt="personal info" class="w-32 h-auto mb-5 mx-auto"/>
                 <h2 class="text-center mb-8 text-xl">
-                  In order to verify your account please confirm it using the
-                  code that was sent 
-                  <span v-if="state.method == 'email'">to your email</span>
-                  <span v-if="state.method == '2fa'">to your authenticator</span>
-                  <span v-if="state.method == 'pin'">to your mobile</span>
-                  <span v-if="state.method == 'sms'">through sms</span>
-                  
+                  <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
               <CodeInputs @complete="mfaVerify" :length="4" />
+              <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
+                <p>{{ $t('choose_other_confirming_method') }}</p>
+                <ul>
+                  <li v-for="(method, index) in alternativeMethods" :key="index" 
+                      @click="selectAlternativeMethod(method)" 
+                      class="cursor-pointer underline text-blue-500">
+                    {{ getMethod(method) }}
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="mt-4 flex justify-center">
+            <div class="mt-8 flex justify-center">
               <Loading v-if="isSubmitting"/>
               <InLineApiError v-else :err="error"/>
             </div>
@@ -107,11 +108,13 @@
   import {LoginStorage,AccountStorage } from '@/storage';
   import {AccountService,TokenService,LoginService} from '@/lib/services';
   import { ServerErrorException } from '@/lib/exceptions';
-  import { urlBuilder } from '~~/helpers/urlBuilder';
+  import { urlBuilder } from '@/helpers/urlBuilder';
   import InLineApiError from '@/components/common/InLineApiError';
   import Loading from '@/components/common/Loading';
-  import ApprovalMethodSelect from '@/components/ApprovalMethodSelect.vue';
   import CodeInputs from '@/components/Register/CodeInputs';
+  import ListItem from '@/components/common/ListItem.vue';
+  const { t } = useI18n();
+
 
   type LoginResponse = {
     message: string;
@@ -121,11 +124,13 @@
     tempBearerToken: string;
     confirmation_url: string;
     approval_id: number;
+    alternativeMethods: [];
   };
+  const METHOD = "2fa"
   const state = reactive({
     email:'',
     password:'',
-    method:'',
+    method:METHOD,
     keepMeSignedIn:false
   })
   const errorBorder='focus:border-red-500';
@@ -144,13 +149,14 @@
       method:state.method,
     }
   })
+  const primaryResponse: Ref<LoginResponse|null> = ref(null)
   const mfaVerify = async(code: string)=>{
     try{
       if (primaryResponse?.value?.tempBearerToken) {
         error.value = null;
         isSubmitting.value = true;
         const response = await LoginService.mfaVerify({code}, primaryResponse.value.tempBearerToken);
-        console.log(response, 'response');
+        primaryResponse.value = null
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
         AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
@@ -184,7 +190,13 @@
         isSubmitting.value = false
     }
   }
-  const primaryResponse: Ref<LoginResponse|null> = ref(null)
+  const alternativeMethods = computed(()=> {
+      if(primaryResponse.value?.alternativeMethods?.length){
+        return primaryResponse.value?.alternativeMethods
+      }
+      return []
+    }
+  )
   const initialLogin = async()=>{
     try{
         error.value = null;
@@ -200,6 +212,34 @@
     }
     finally{
         isSubmitting.value = false
+    }
+  }
+  const selectAlternativeMethod = (method: string) => {
+    state.method = method
+    initialLogin()
+  }
+  const getMethod = (method: string) => {
+    switch(method){
+      case 'mobile-pin':
+        return "Mobile PIN";
+      case 'email':
+        return "Email";
+      case 'sms':
+        return "SMS";
+      default:
+      return "2FA"
+    }
+  }
+  const getMethodWiseText = (method: string) => {
+    switch(method){
+      case 'mobile-pin':
+        return t('mobile_pin_verify_able_message');
+      case 'email':
+        return t('email_verify_able_message');
+      case 'sms':
+        return t('sms_verify_able_message');
+      default:
+        return t('two_fa_verify_able_message')
     }
   }
   watch(state,(currentValue)=>{
