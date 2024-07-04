@@ -410,4 +410,9 @@ export default {
     reference: 'Referenz',
     new_bank_account: 'Neues Bankkonto',
     add: 'Hinzufügen',
+    choose_other_confirming_method: "Wählen Sie eine andere Bestätigungsmethode:",
+    email_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihre E-Mail gesendet wurde",
+    sms_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der per SMS gesendet wurde",
+    mobile_pin_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihr Mobiltelefon gesendet wurde",
+    two_fa_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihren Authenticator gesendet wurde"
 }

@@ -410,4 +410,9 @@ export default {
     reference: 'Reference',
     new_bank_account: 'New bank account',
     add: 'Add',
+    choose_other_confirming_method: 'Choose other confirming method:',
+    email_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your email',
+    sms_verify_able_message: 'In order to verify your account please confirm it using the code that was sent through sms',
+    mobile_pin_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your mobile',
+    two_fa_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your authenticator',
 }
