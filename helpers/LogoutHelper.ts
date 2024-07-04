@@ -7,12 +7,13 @@ export default function(router:any){
     LoginService.setIsLoggedIn(false);
         const account = AccountStorage.getAccount();
         let lang = "en";
-        if(account)
+        if(account && account.account && account.account.settings){
             account.account.settings.forEach(s => {
                 if (s.name_translation_key == 'locale') {
                     lang = s.value;
                 }
             })
+        }
         AccountStorage.clearStorage();
         LoginStorage.clearStorage();
         
