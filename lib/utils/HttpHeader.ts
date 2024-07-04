@@ -41,7 +41,7 @@ export class HttpHeader{
         return this;
     }
     public addXpiKeyHeader(key:string):HttpHeader{
-        const headerKey = "x-api-key"
+        const headerKey = "X-api-key"
         const doExists = this.headers.findIndex(header=>header.key == headerKey);
         if(doExists > -1){
             this.headers.splice(doExists,1)
