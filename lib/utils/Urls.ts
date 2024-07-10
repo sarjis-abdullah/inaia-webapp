@@ -195,6 +195,9 @@ export class Urls{
     public updateProfile(contactId: number):string{
         return this.buildUrl(BaseUrls.getCoreUrl(), `contacts/update-avatar/${contactId}`);
     }
+    public enableTwoFA():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), `mfa/init`);
+    }
     public updateDepotAvatar(depotId: number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/update-avatar/${depotId}`);
     }
