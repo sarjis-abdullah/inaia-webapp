@@ -114,9 +114,9 @@
   import CodeInputs from '@/components/Register/CodeInputs';
   import ListItem from '@/components/common/ListItem.vue';
   import { InitialLoginResponse } from '@/lib/responses';
+  import { CODE_INPUT_LENGTH_FOUR, CODE_INPUT_LENGTH_SIX, TWO_FA_METHOD } from '@/lib/contants/Constants';
   const { t } = useI18n();
 
-  const TWO_FA_METHOD = "2fa"
   const state = reactive({
     email:'',
     password:'',
@@ -197,9 +197,9 @@
         if (response) {
           primaryResponse.value = response
           if(response.method == TWO_FA_METHOD){
-            codeInputLength.value = 6
+            codeInputLength.value = CODE_INPUT_LENGTH_SIX
           }else {
-            codeInputLength.value = 4
+            codeInputLength.value = CODE_INPUT_LENGTH_FOUR
           }
         }
     }

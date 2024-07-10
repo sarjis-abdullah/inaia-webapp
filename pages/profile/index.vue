@@ -227,6 +227,7 @@ import { BadInputException, MissingInformationException, ServerErrorException } 
 import Confirmation from '@/components/common/Confirmation';
 import { formatIban } from '@/lib/Formatters';
 import  Alert  from '@/components/Kyc/Alert.vue';
+import { MFA_SECRET_TRANSLATION_KEY } from '@/lib/contants/Constants';
 
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
@@ -323,7 +324,7 @@ const disableTwoFA = () => {
   twoFaEnabled.value = false
   if (account.value?.account?.settings?.length) {
     console.log(account.value.account.settings, 11222);
-    const settings = account.value.account.settings.filter(item => item.name_translation_key != 'mfaSecret')
+    const settings = account.value.account.settings.filter(item => item.name_translation_key != MFA_SECRET_TRANSLATION_KEY)
     console.log(settings, 2223333);
     account.value.account.settings = settings
   } 
@@ -444,8 +445,8 @@ const hasTwoFaEnabled = computed(() => {
   if (twoFaEnabled.value) {
     return true
   }
-  if (account.value && account.value.account && account.value.account.settings && account.value.account.settings.length) {
-    return account.value.account.settings.some(s => s.name_translation_key == 'mfaSecret')
+  if (account.value?.account?.settings?.length) {
+    return account.value.account.settings.some(s => s.name_translation_key == MFA_SECRET_TRANSLATION_KEY)
   }
   return false
 })
