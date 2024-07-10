@@ -46,6 +46,18 @@
                 $t('edit') }}</button>
             </dd>
           </div>
+          <div class="pt-6 sm:flex">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-2">Two Factor Authentication</dt>
+            <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <div class="text-gray-900">
+                <span v-if="hasTwoFaEnabled">Two Factor Authentication (2FA) is enabled.</span>
+                <span v-else>Two Factor Authentication (2FA) is not enabled yet!</span>
+              </div>
+              <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="showTwoFaConfirmation = !showTwoFaConfirmation">
+                {{ hasTwoFaEnabled ? $t('Disable 2FA') : $t('Enable 2FA') }}
+              </button>
+            </dd>
+          </div>
         </dl>
       </div>
 
@@ -168,6 +180,7 @@
     </Modal>
     <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
     <Confirmation :show="showConfirmation" @cancel="cancelDelete" @confirm="confirmDelete" :title="$t('confirm_delete')" :text="$t('do_you_want_to_delete_bank_account')"/>
+    <TwoFaConfirmation :hasTwoFaEnabled="hasTwoFaEnabled" :show="showTwoFaConfirmation" @cancel="toggleTwoFaConfirmationModal" @enable="enableTwoFA" />
   </main>
 </template>
 
@@ -203,11 +216,13 @@ import { NotificationTypes } from '~~/constants/NotificationTypes';
 import UpdatePhoneNumber from '@/components/Profile/UpdatePhoneNumber';
 import UpdateEmail from '@/components/Profile/UpdateEmail.vue';
 import UpdateProfile from '@/components/Profile/UserProfile.vue';
+import TwoFaConfirmation from '@/components/Profile/TwoFaConfirmation.vue';
 import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount';
 import { BadInputException, MissingInformationException, ServerErrorException } from '@/lib/exceptions';
 import Confirmation from '@/components/common/Confirmation';
 import { formatIban } from '@/lib/Formatters';
 import  Alert  from '@/components/Kyc/Alert.vue';
+
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
 const account: Ref<Account> = ref(null);
@@ -285,6 +300,20 @@ const updateAddress = () => {
 const editPassword = () => {
   showPasswordUpdatePopup.value = true;
 }
+const showTwoFaConfirmation = ref(false)
+const twoFaEnabled = ref(false)
+const toggleTwoFaConfirmationModal = (account = {}) => {
+  showTwoFaConfirmation.value = false;
+  if (account.id) {
+    twoFaEnabled.value = true
+    account.value = account
+    console.log(account.value);
+  }
+}
+const enableTwoFA = (account = {}) => {
+  toggleTwoFaConfirmationModal(account)
+}
+
 const onNotificationClosed = () => {
 
   showSuccessNotification.value = false;
@@ -396,6 +425,15 @@ const language = computed(() => {
   }
   return l
 })
+const hasTwoFaEnabled = computed(() => {
+  if (twoFaEnabled.value) {
+    return true
+  }
+  if (account.value && account.value.account && account.value.account.settings && account.value.account.settings.length) {
+    return account.value.account.settings.some(s => s.name_translation_key == 'mfaSecret')
+  }
+  return false
+})
 const referralCode = computed(() => account.value?.account?.referral_code ?? "")
 const referralLink = computed(() => account.value?.account?.referral_link ?? "")
 const showAddPayment = ()=>{
@@ -409,6 +447,7 @@ const onPaymentAccountAdded = (paymentAccount:PaymentAccount)=>{
   addNewPaymentAcoount.value = false
 }
 const onChannelUpdated = async () => {
+  alert(123)
   let acc = await AccountService.loadAccount(account.value.id);
   account.value = acc;
   AccountStorage.saveAccount(acc);
