@@ -415,4 +415,13 @@ export default {
     sms_verify_able_message: 'In order to verify your account please confirm it using the code that was sent through sms',
     mobile_pin_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your mobile',
     two_fa_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your authenticator',
+    "confirm_disable_two_factor_authentication": "Confirm Disable Two-Factor Authentication",
+    "confirm_enable_two_factor_authentication": "Confirm Enable Two-Factor Authentication",
+    "do_you_want_to_disable_two_factor_authentication?": "Do you want to disable two-factor authentication?",
+    "do_you_want_to_enable_two_factor_authentication?": "Do you want to enable two-factor authentication?",
+    "scan_the_qr_code_below_with_your_authenticator_app": "Scan the QR code below with your authenticator app (e.g., Google Authenticator, Authy).",
+    "two_factor_authentication_enabled_success": "Two-Factor Authentication has been enabled successfully!",
+    "enter_6_digit_code_prompt": "Each time you log in, you will be prompted to enter a 6-digit code from your authenticator app to complete the login process.",
+    "keep_mobile_device_secure": "Keep your mobile device secure, as it will be required to generate the authentication codes. If you lose access to your authenticator app, you may need to contact support for assistance."
+
 }

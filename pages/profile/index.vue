@@ -225,7 +225,7 @@ import  Alert  from '@/components/Kyc/Alert.vue';
 
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
-const account: Ref<Account> = ref(null);
+const account: Ref<Account|null> = ref(null);
 const paymentAccounts: Ref<PaymentAccount[]> = ref([])
 const { t, locale } = useI18n();
 const errorLoadingBankAccount = ref(null);
@@ -302,15 +302,15 @@ const editPassword = () => {
 }
 const showTwoFaConfirmation = ref(false)
 const twoFaEnabled = ref(false)
-const toggleTwoFaConfirmationModal = (account = {}) => {
+const toggleTwoFaConfirmationModal = (account: Account) => {
   showTwoFaConfirmation.value = false;
-  if (account.id) {
+  if (account?.id) {
     twoFaEnabled.value = true
     account.value = account
     console.log(account.value);
   }
 }
-const enableTwoFA = (account = {}) => {
+const enableTwoFA = (account: Account) => {
   toggleTwoFaConfirmationModal(account)
 }
 

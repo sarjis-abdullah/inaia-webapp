@@ -46,13 +46,18 @@
                       as="h3"
                       class="text-base font-semibold leading-6 text-gray-900"
                       >{{
-                        $t("Confirm Enable Two-Factor Authentication")
+                        hasTwoFaEnabled ? $t("confirm_enable_two_factor_authentication") : $t("confirm_enable_two_factor_authentication")
                       }}</DialogTitle
                     >
                     <div class="mt-2">
-                      <p class="text-sm text-gray-500">
+                      <p class="text-sm text-gray-500" v-if="hasTwoFaEnabled">
                         {{
-                          $t("do_you_want_to_enable_two_Factor_authentication?")
+                          $t("do_you_want_to_disable_two_factor_authentication?")
+                        }}
+                      </p>
+                      <p class="text-sm text-gray-500" v-else>
+                        {{
+                          $t("do_you_want_to_enable_two_factor_authentication?")
                         }}
                       </p>
                     </div>
@@ -66,8 +71,7 @@
                   class="flex justify-center items-center flex-col gap-2 px-8"
                 >
                   <p class="text-sm text-gray-500">
-                    Scan the QR code below with your authenticator app (e.g.,
-                    Google Authenticator, Authy).
+                    {{ $t('scan_the_qr_code_below_with_your_authenticator_app') }}
                   </p>
 
                   <picture>
@@ -81,19 +85,14 @@
                         aria-hidden="true"
                       />
                       <h2 class="text-sm font-medium text-gray-900">
-                        Two-Factor Authentication has been enabled successfully!
+                        {{ $t('two_factor_authentication_enabled_success') }}
                       </h2>
                     </header>
                     <p class="text-sm text-gray-500">
-                      Each time you log in, you will be prompted to enter a
-                      6-digit code from your authenticator app to complete the
-                      login process.
+                      {{ $t('enter_6_digit_code_prompt') }}
                     </p>
                     <p class="text-sm text-gray-500">
-                      Keep your mobile device secure, as it will be required to
-                      generate the authentication codes. If you lose access to
-                      your authenticator app, you may need to contact support
-                      for assistance.
+                      {{ $t('keep_mobile_device_secure') }}
                     </p>
                   </div>
                 </figcaption>
@@ -146,6 +145,7 @@ import {
 import { AccountService } from "~/lib/services";
 import Loading from "@/components/common/Loading.vue";
 import { AccountStorage } from "~/storage";
+import { Account } from '@/lib/models';
 
 const props = defineProps({
   show: {
@@ -158,11 +158,11 @@ const props = defineProps({
   confirm: {},
 });
 const emit = defineEmits<{
-  cancel: [{}];
-  enable: [{}];
-}>();
+  cancel: [Account: {}],
+  enable: [Account: {}],
+}>()
 const accountId = computed(() => AccountStorage.getContactId());
-const account = ref({});
+const account: Ref<Account|null> = ref(null);
 const svgContent = ref("");
 
 const cancel = () => {

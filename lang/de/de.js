@@ -414,5 +414,12 @@ export default {
     email_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihre E-Mail gesendet wurde",
     sms_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der per SMS gesendet wurde",
     mobile_pin_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihr Mobiltelefon gesendet wurde",
-    two_fa_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihren Authenticator gesendet wurde"
+    two_fa_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihren Authenticator gesendet wurde",
+    "confirm_enable_two_factor_authentication": "Bestätigen Sie die Aktivierung der Zwei-Faktor-Authentifizierung",
+    "do_you_want_to_disable_two_factor_authentication?": "Möchten Sie die Zwei-Faktor-Authentifizierung deaktivieren?",
+    "do_you_want_to_enable_two_factor_authentication?": "Möchten Sie die Zwei-Faktor-Authentifizierung aktivieren?",
+    "scan_the_qr_code_below_with_your_authenticator_app": "Scannen Sie den unten stehenden QR-Code mit Ihrer Authentifizierungs-App (z.B. Google Authenticator, Authy).",
+    "two-factor_authentication_enabled_success": "Die Zwei-Faktor-Authentifizierung wurde erfolgreich aktiviert!",
+    "enter_6_digit_code_prompt": "Jedes Mal, wenn Sie sich einloggen, werden Sie aufgefordert, einen 6-stelligen Code aus Ihrer Authentifizierungs-App einzugeben, um den Login-Vorgang abzuschließen.",
+    "keep_mobile_device_secure": "Halten Sie Ihr mobiles Gerät sicher, da es erforderlich ist, die Authentifizierungscodes zu generieren. Wenn Sie den Zugang zu Ihrer Authentifizierungs-App verlieren, müssen Sie möglicherweise den Support kontaktieren, um Hilfe zu erhalten."
 }
