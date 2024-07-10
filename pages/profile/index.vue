@@ -53,7 +53,7 @@
                 <span v-if="hasTwoFaEnabled">Two Factor Authentication (2FA) is enabled.</span>
                 <span v-else>Two Factor Authentication (2FA) is not enabled yet!</span>
               </div>
-              <button type="button" class="font-semibold text-blue-600 hover:text-blue-500" @click="showTwoFaConfirmation = !showTwoFaConfirmation">
+              <button type="button" class="font-semibold text-blue-600 hover:text-blue-500 outline-none focus:outline-0" @click="showTwoFaConfirmation = !showTwoFaConfirmation">
                 {{ hasTwoFaEnabled ? $t('Disable 2FA') : $t('Enable 2FA') }}
               </button>
             </dd>
@@ -180,7 +180,12 @@
     </Modal>
     <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
     <Confirmation :show="showConfirmation" @cancel="cancelDelete" @confirm="confirmDelete" :title="$t('confirm_delete')" :text="$t('do_you_want_to_delete_bank_account')"/>
-    <TwoFaConfirmation :hasTwoFaEnabled="hasTwoFaEnabled" :show="showTwoFaConfirmation" @cancel="toggleTwoFaConfirmationModal" @enable="enableTwoFA" />
+    <TwoFaConfirmation 
+    :hasTwoFaEnabled="hasTwoFaEnabled" 
+    :show="showTwoFaConfirmation" 
+    @disable="disableTwoFA"
+    @cancel="toggleTwoFaConfirmationModal" 
+    @enable="enableTwoFA" />
   </main>
 </template>
 
@@ -312,6 +317,16 @@ const toggleTwoFaConfirmationModal = (account: Account) => {
 }
 const enableTwoFA = (account: Account) => {
   toggleTwoFaConfirmationModal(account)
+}
+const disableTwoFA = () => {
+  showTwoFaConfirmation.value = false;
+  twoFaEnabled.value = false
+  if (account.value?.account?.settings?.length) {
+    console.log(account.value.account.settings, 11222);
+    const settings = account.value.account.settings.filter(item => item.name_translation_key != 'mfaSecret')
+    console.log(settings, 2223333);
+    account.value.account.settings = settings
+  } 
 }
 
 const onNotificationClosed = () => {

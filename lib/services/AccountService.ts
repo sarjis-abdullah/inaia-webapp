@@ -4,7 +4,7 @@ import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
 import { TokenService } from './TokenService';
 import { Address, ProductFee, AccountData, ContactAvatar } from '../models';
-import { ChannelRequest, UpdateAddressRequest } from '../requests';
+import { ChannelRequest, MfaVerificationRequest, UpdateAddressRequest } from '../requests';
 import { SettingRequest } from '../requests/SettingRequest';
 import { LocaleSettingRequest, PasswordUpdateRequest } from '../requests';
 import { MfaInitResponse } from '../responses';
@@ -117,6 +117,17 @@ export class AccountService{
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             return await this.requester.post(url,this.headers, {});
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async disableTwoFA(request: MfaVerificationRequest):Promise<MfaInitResponse>{
+        try{
+            const url = this.links.disableTwoFA();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            return await this.requester.post(url,this.headers, request);
         }
         catch(err){
             throw err;

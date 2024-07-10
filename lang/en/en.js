@@ -415,6 +415,8 @@ export default {
     sms_verify_able_message: 'In order to verify your account please confirm it using the code that was sent through sms',
     mobile_pin_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your mobile',
     two_fa_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your authenticator',
+    "enter_6_digit_code_to_confirm_disable_two_fa": "Please enter the 6-digit code from your authenticator app to confirm the disable.",
+    "two_fa_disable_warning_message": "Disabling two-factor authentication will reduce the security of your account. Are you sure you want to proceed?",
     "confirm_disable_two_factor_authentication": "Confirm Disable Two-Factor Authentication",
     "confirm_enable_two_factor_authentication": "Confirm Enable Two-Factor Authentication",
     "do_you_want_to_disable_two_factor_authentication?": "Do you want to disable two-factor authentication?",

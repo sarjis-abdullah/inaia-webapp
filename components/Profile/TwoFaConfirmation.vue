@@ -46,13 +46,17 @@
                       as="h3"
                       class="text-base font-semibold leading-6 text-gray-900"
                       >{{
-                        hasTwoFaEnabled ? $t("confirm_enable_two_factor_authentication") : $t("confirm_enable_two_factor_authentication")
+                        hasTwoFaEnabled
+                          ? $t("confirm_disable_two_factor_authentication")
+                          : $t("confirm_enable_two_factor_authentication")
                       }}</DialogTitle
                     >
                     <div class="mt-2">
                       <p class="text-sm text-gray-500" v-if="hasTwoFaEnabled">
                         {{
-                          $t("do_you_want_to_disable_two_factor_authentication?")
+                          $t(
+                            "do_you_want_to_disable_two_factor_authentication?"
+                          )
                         }}
                       </p>
                       <p class="text-sm text-gray-500" v-else>
@@ -71,7 +75,9 @@
                   class="flex justify-center items-center flex-col gap-2 px-8"
                 >
                   <p class="text-sm text-gray-500">
-                    {{ $t('scan_the_qr_code_below_with_your_authenticator_app') }}
+                    {{
+                      $t("scan_the_qr_code_below_with_your_authenticator_app")
+                    }}
                   </p>
 
                   <picture>
@@ -85,28 +91,45 @@
                         aria-hidden="true"
                       />
                       <h2 class="text-sm font-medium text-gray-900">
-                        {{ $t('two_factor_authentication_enabled_success') }}
+                        {{ $t("two_factor_authentication_enabled_success") }}
                       </h2>
                     </header>
                     <p class="text-sm text-gray-500">
-                      {{ $t('enter_6_digit_code_prompt') }}
+                      {{ $t("enter_6_digit_code_prompt") }}
                     </p>
                     <p class="text-sm text-gray-500">
-                      {{ $t('keep_mobile_device_secure') }}
+                      {{ $t("keep_mobile_device_secure") }}
                     </p>
                   </div>
                 </figcaption>
-                <div v-else-if="serverErrorMsg">
-                  <p class="text-sm text-red-500">{{ serverErrorMsg }}</p>
-                </div>
+                <section
+                  v-if="hasTwoFaEnabled && !isLoading"
+                  class="flex flex-col items-center mt-8 mb-12 px-8"
+                >
+                  <div class="grid gap-2 mb-8">
+                    <p class="text-sm text-gray-500">
+                      {{ $t("enter_6_digit_code_to_confirm_disable_two_fa") }}
+                    </p>
+                  </div>
+                  <CodeInputs @complete="confirmDisableTwofa" :length="6" />
+                  <div class="grid gap-2 mt-8">
+                    <p class="text-sm text-gray-500">
+                      {{ $t("two_fa_disable_warning_message") }}
+                    </p>
+                  </div>
+                </section>
               </figure>
+              <div v-if="serverErrorMsg" class="flex justify-center">
+                <p class="text-sm text-red-500">{{ serverErrorMsg }}</p>
+              </div>
 
               <div
                 class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
               >
                 <button
+                  v-if="!hasTwoFaEnabled"
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                  class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto outline-none focus:outline-0"
                   @click="svgContent ? enable() : confrim()"
                 >
                   {{ svgContent ? $t("ok") : $t("confirm") }}
@@ -114,7 +137,7 @@
                 <button
                   v-if="!svgContent"
                   type="button"
-                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto outline-none focus:outline-0"
                   @click="cancel"
                   ref="cancelButtonRef"
                 >
@@ -145,7 +168,8 @@ import {
 import { AccountService } from "~/lib/services";
 import Loading from "@/components/common/Loading.vue";
 import { AccountStorage } from "~/storage";
-import { Account } from '@/lib/models';
+import { Account } from "@/lib/models";
+import CodeInputs from "@/components/Register/CodeInputs";
 
 const props = defineProps({
   show: {
@@ -158,11 +182,12 @@ const props = defineProps({
   confirm: {},
 });
 const emit = defineEmits<{
-  cancel: [Account: {}],
-  enable: [Account: {}],
-}>()
+  cancel: [Account: {}];
+  enable: [Account: {}];
+  disable: [];
+}>();
 const accountId = computed(() => AccountStorage.getContactId());
-const account: Ref<Account|null> = ref(null);
+const account: Ref<Account | null> = ref(null);
 const svgContent = ref("");
 
 const cancel = () => {
@@ -188,7 +213,20 @@ const confrim = async () => {
     isLoading.value = true;
     const res = await AccountService.enableTwoFA();
     svgContent.value = res.qrCode;
-    await loadAccount()
+    await loadAccount();
+  } catch (error) {
+    serverErrorMsg.value = error.message ?? "";
+  } finally {
+    isLoading.value = false;
+  }
+};
+const confirmDisableTwofa = async (code: string) => {
+  try {
+    isLoading.value = true;
+    const obj = { code };
+    const res = await AccountService.disableTwoFA(obj);
+    svgContent.value = res.qrCode;
+    emit("disable");
   } catch (error) {
     serverErrorMsg.value = error.message ?? "";
   } finally {

@@ -198,6 +198,9 @@ export class Urls{
     public enableTwoFA():string{
         return this.buildUrl(BaseUrls.getCoreUrl(), `mfa/init`);
     }
+    public disableTwoFA():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(), `mfa/reset`);
+    }
     public updateDepotAvatar(depotId: number):string{
         return this.buildUrl(BaseUrls.getGoldDinarUrl(), `depots/update-avatar/${depotId}`);
     }
