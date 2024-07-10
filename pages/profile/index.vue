@@ -447,7 +447,6 @@ const onPaymentAccountAdded = (paymentAccount:PaymentAccount)=>{
   addNewPaymentAcoount.value = false
 }
 const onChannelUpdated = async () => {
-  alert(123)
   let acc = await AccountService.loadAccount(account.value.id);
   account.value = acc;
   AccountStorage.saveAccount(acc);
