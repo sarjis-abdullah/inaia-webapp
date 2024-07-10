@@ -77,7 +77,7 @@
                   <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
-              <CodeInputs @complete="verifyMfa" :length="4" />
+              <CodeInputs @complete="verifyMfa" :length="codeInputLength" />
               <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
                 <p>{{ $t('choose_other_confirming_method') }}</p>
                 <ul>
@@ -116,11 +116,11 @@
   import { InitialLoginResponse } from '@/lib/responses';
   const { t } = useI18n();
 
-  const METHOD = "2fa"
+  const TWO_FA_METHOD = "2fa"
   const state = reactive({
     email:'',
     password:'',
-    method:METHOD,
+    method:TWO_FA_METHOD,
     keepMeSignedIn:false
   })
   const errorBorder='focus:border-red-500';
@@ -130,6 +130,7 @@
   const isSubmitting = ref(false);
   const showCodeInput = ref(false);
   const activateSignin=ref(false);
+  const codeInputLength=ref(4);
   const error = ref(null);
   const router = useRouter();
   const loginData = computed(()=> {
@@ -195,6 +196,11 @@
         showCodeInput.value = true
         if (response) {
           primaryResponse.value = response
+          if(response.method == TWO_FA_METHOD){
+            codeInputLength.value = 6
+          }else {
+            codeInputLength.value = 4
+          }
         }
     }
     catch(err){
