@@ -313,7 +313,6 @@ const toggleTwoFaConfirmationModal = (account: Account) => {
   if (account?.id) {
     twoFaEnabled.value = true
     account.value = account
-    console.log(account.value);
   }
 }
 const enableTwoFA = (account: Account) => {
@@ -323,9 +322,7 @@ const disableTwoFA = () => {
   showTwoFaConfirmation.value = false;
   twoFaEnabled.value = false
   if (account.value?.account?.settings?.length) {
-    console.log(account.value.account.settings, 11222);
     const settings = account.value.account.settings.filter(item => item.name_translation_key != MFA_SECRET_TRANSLATION_KEY)
-    console.log(settings, 2223333);
     account.value.account.settings = settings
   } 
 }
