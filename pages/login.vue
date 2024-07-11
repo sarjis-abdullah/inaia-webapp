@@ -4,7 +4,7 @@
         <div>
           <img class="mx-auto h-12 w-auto" src="~/assets/img/logo/logo.png" alt="Your Company" />
           <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">{{ $t('signin') }}</h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
+          <p v-if="!showCodeInput" class="mt-2 text-center text-sm text-gray-600">
             {{ $t('or') }}
             {{ ' ' }}
             <NuxtLink to="register" class="font-medium text-blue-600 hover:text-blue-500">{{ $t('register') }}</NuxtLink>
@@ -77,7 +77,7 @@
                   <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
-              <CodeInputs @complete="verifyMfa" :length="4" />
+              <CodeInputs v-if="primaryResponse?.method != CONFIRMATION_METHOD_MOBILE_PIN" @complete="verifyMfa" :length="4" />
               <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
                 <p>{{ $t('choose_other_confirming_method') }}</p>
                 <ul>
@@ -114,6 +114,7 @@
   import CodeInputs from '@/components/Register/CodeInputs';
   import ListItem from '@/components/common/ListItem.vue';
   import { InitialLoginResponse } from '@/lib/responses';
+  import { CONFIRMATION_METHOD_EMAIL, CONFIRMATION_METHOD_MOBILE_PIN, CONFIRMATION_METHOD_SMS } from '~/lib/contants/Constants';
   const { t } = useI18n();
 
   const METHOD = "2fa"
@@ -210,11 +211,11 @@
   }
   const getMethod = (method: string) => {
     switch(method){
-      case 'mobile-pin':
+      case CONFIRMATION_METHOD_MOBILE_PIN:
         return "Mobile PIN";
-      case 'email':
+      case CONFIRMATION_METHOD_EMAIL:
         return "Email";
-      case 'sms':
+      case CONFIRMATION_METHOD_SMS:
         return "SMS";
       default:
       return "2FA"
@@ -222,11 +223,11 @@
   }
   const getMethodWiseText = (method: string) => {
     switch(method){
-      case 'mobile-pin':
+      case CONFIRMATION_METHOD_MOBILE_PIN:
         return t('mobile_pin_verify_able_message');
-      case 'email':
+      case CONFIRMATION_METHOD_EMAIL:
         return t('email_verify_able_message');
-      case 'sms':
+      case CONFIRMATION_METHOD_SMS:
         return t('sms_verify_able_message');
       default:
         return t('two_fa_verify_able_message')
