@@ -415,6 +415,8 @@ export default {
     sms_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der per SMS gesendet wurde",
     mobile_pin_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihr Mobiltelefon gesendet wurde",
     two_fa_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihren Authenticator gesendet wurde",
+    "enable_2fa": "2FA aktivieren",
+    "disable_2fa": "2FA deaktivieren",
     "enter_6_digit_code_to_confirm_disable_two_fa": "Bitte geben Sie den 6-stelligen Code aus Ihrer Authentifizierungs-App ein, um die Deaktivierung zu bestätigen.",
     "two_fa_disable_warning_message": "Das Deaktivieren der Zwei-Faktor-Authentifizierung verringert die Sicherheit Ihres Kontos. Sind Sie sicher, dass Sie fortfahren möchten?",    
     "confirm_enable_two_factor_authentication": "Bestätigen Sie die Aktivierung der Zwei-Faktor-Authentifizierung",

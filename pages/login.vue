@@ -77,7 +77,7 @@
                   <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
-              <CodeInputs @complete="verifyMfa" :length="codeInputLength" />
+              <CodeInputs v-if="!hideCodeInput" @complete="verifyMfa" :length="codeInputLength" />
               <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
                 <p>{{ $t('choose_other_confirming_method') }}</p>
                 <ul>
@@ -130,6 +130,7 @@
   const isSubmitting = ref(false);
   const showCodeInput = ref(false);
   const activateSignin=ref(false);
+  const hideCodeInput=ref(false);
   const codeInputLength=ref(4);
   const error = ref(null);
   const router = useRouter();
@@ -143,6 +144,7 @@
   const primaryResponse: Ref<InitialLoginResponse|null> = ref(null)
   const verifyMfa = async(code: string)=>{
     try{
+      hideCodeInput.value = true
       if (primaryResponse?.value?.tempBearerToken) {
         error.value = null;
         isSubmitting.value = true;
@@ -175,7 +177,8 @@
       }
     }
     catch(err){
-        error.value=err;
+      hideCodeInput.value = false
+      error.value=err;
     }
     finally{
         isSubmitting.value = false

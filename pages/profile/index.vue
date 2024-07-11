@@ -54,7 +54,7 @@
                 <span v-else>Two Factor Authentication (2FA) is not enabled yet!</span>
               </div>
               <button type="button" class="font-semibold text-blue-600 hover:text-blue-500 outline-none focus:outline-0" @click="showTwoFaConfirmation = !showTwoFaConfirmation">
-                {{ hasTwoFaEnabled ? $t('Disable 2FA') : $t('Enable 2FA') }}
+                {{ hasTwoFaEnabled ? $t('disable_2fa') : $t('enable_2fa') }}
               </button>
             </dd>
           </div>
@@ -181,6 +181,7 @@
     <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
     <Confirmation :show="showConfirmation" @cancel="cancelDelete" @confirm="confirmDelete" :title="$t('confirm_delete')" :text="$t('do_you_want_to_delete_bank_account')"/>
     <TwoFaConfirmation 
+    v-if="showTwoFaConfirmation"
     :hasTwoFaEnabled="hasTwoFaEnabled" 
     :show="showTwoFaConfirmation" 
     @disable="disableTwoFA"

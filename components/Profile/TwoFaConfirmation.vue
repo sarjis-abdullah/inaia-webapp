@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="show">
-    <Dialog as="div" class="relative z-10" @close="cancel">
+    <Dialog as="div" class="relative z-10">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -103,7 +103,7 @@
                   </div>
                 </figcaption>
                 <section
-                  v-if="hasTwoFaEnabled && !isLoading"
+                  v-if="hasTwoFaEnabled && !isLoading && showCodeInput"
                   class="flex flex-col items-center mt-8 mb-12 px-8"
                 >
                   <div class="grid gap-2 mb-8">
@@ -189,6 +189,7 @@ const emit = defineEmits<{
 const accountId = computed(() => AccountStorage.getContactId());
 const account: Ref<Account | null> = ref(null);
 const svgContent = ref("");
+const showCodeInput = ref(true);
 
 const cancel = () => {
   emit("cancel", account.value);
@@ -211,6 +212,7 @@ const serverErrorMsg = ref("");
 const confrim = async () => {
   try {
     isLoading.value = true;
+    showCodeInput.value = false;
     const res = await AccountService.enableTwoFA();
     svgContent.value = res.qrCode;
     await loadAccount();

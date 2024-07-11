@@ -382,6 +382,8 @@ export default {
     sms_verify_able_message: "Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé par SMS.",
     mobile_pin_verify_able_message: "Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé à votre mobile.",
     two_fa_verify_able_message: "Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé à votre application d'authentification.",
+    "enable_2fa": "Activer 2FA",
+    "disable_2fa": "Désactiver 2FA",
     "enter_6_digit_code_to_confirm_disable_two_fa": "Veuillez entrer le code à 6 chiffres de votre application d'authentification pour confirmer la désactivation.",
     "two_fa_disable_warning_message": "Désactiver l'authentification à deux facteurs réduira la sécurité de votre compte. Êtes-vous sûr de vouloir continuer ?",
     "confirm_disable_two_factor_authentication": "Confirmer la désactivation de l'authentification à deux facteurs",
