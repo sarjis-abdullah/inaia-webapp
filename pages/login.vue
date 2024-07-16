@@ -77,7 +77,7 @@
                   <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
-              <CodeInputs v-if="primaryResponse?.method != CONFIRMATION_METHOD_MOBILE_PIN" @complete="verifyMfa" :length="4" />
+              <CodeInputs v-if="primaryResponse?.method != CONFIRMATION_METHOD_MOBILE_PIN" @complete="verifyMfa" :length="codeInputLength" />
               <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
                 <p>{{ $t('choose_other_confirming_method') }}</p>
                 <ul>
@@ -114,14 +114,13 @@
   import CodeInputs from '@/components/Register/CodeInputs';
   import ListItem from '@/components/common/ListItem.vue';
   import { InitialLoginResponse } from '@/lib/responses';
-  import { CONFIRMATION_METHOD_EMAIL, CONFIRMATION_METHOD_MOBILE_PIN, CONFIRMATION_METHOD_SMS } from '~/lib/contants/Constants';
+  import { CODE_INPUT_LENGTH_FOUR, CODE_INPUT_LENGTH_SIX, CONFIRMATION_METHOD_EMAIL, CONFIRMATION_METHOD_MOBILE_PIN, CONFIRMATION_METHOD_SMS, CONFIRMATION_METHOD_TWO_FA } from '~/lib/contants/Constants';
   const { t } = useI18n();
 
-  const METHOD = "2fa"
   const state = reactive({
     email:'',
     password:'',
-    method:METHOD,
+    method:CONFIRMATION_METHOD_TWO_FA,
     keepMeSignedIn:false
   })
   const errorBorder='focus:border-red-500';
@@ -132,6 +131,7 @@
   const showCodeInput = ref(false);
   const activateSignin=ref(false);
   const error = ref(null);
+  const interval = ref(null);
   const router = useRouter();
   const loginData = computed(()=> {
     return {
@@ -141,12 +141,20 @@
     }
   })
   const primaryResponse: Ref<InitialLoginResponse|null> = ref(null)
+  const isMobilePin = computed(()=> primaryResponse.value?.method === CONFIRMATION_METHOD_MOBILE_PIN)
   const verifyMfa = async(code: string)=>{
     try{
       if (primaryResponse?.value?.tempBearerToken) {
         error.value = null;
         isSubmitting.value = true;
-        const response = await LoginService.verifyMfa({code}, primaryResponse.value.tempBearerToken);
+        let mfaRequest = {}
+        if(code){
+          mfaRequest.pin = code
+        }else {
+          const {approval_id} = primaryResponse.value
+          mfaRequest.approval_id = approval_id
+        }
+        const response = await LoginService.verifyMfa(mfaRequest, primaryResponse.value.tempBearerToken);
         primaryResponse.value = null
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
@@ -170,12 +178,16 @@
             }
           })
         }
+        if(interval.value){
+          clearInterval(interval.value)
+        }
         const url = urlBuilder(locale,'/dashboard');
         window.open(url,'_self');
       }
     }
     catch(err){
-        error.value=err;
+      console.log(err, 123456);
+      error.value=err;
     }
     finally{
         isSubmitting.value = false
@@ -188,6 +200,7 @@
       return []
     }
   )
+  const codeInputLength = ref(CODE_INPUT_LENGTH_FOUR)
   const initialLogin = async()=>{
     try{
         error.value = null;
@@ -196,6 +209,16 @@
         showCodeInput.value = true
         if (response) {
           primaryResponse.value = response
+          if(response.method == CONFIRMATION_METHOD_TWO_FA){
+            codeInputLength.value = CODE_INPUT_LENGTH_SIX
+          }else{
+            codeInputLength.value = CODE_INPUT_LENGTH_FOUR
+          }
+          if(response.method == CONFIRMATION_METHOD_MOBILE_PIN){
+            interval.value = setInterval(() => {
+              verifyMfa()
+            }, 5000);
+          }
         }
     }
     catch(err){
@@ -237,5 +260,9 @@
     emailValidated.value = validateEmail(currentValue.email) || verifyIsAccountNumber(currentValue.email);
     passwordValidated.value = currentValue.password!="";
     activateSignin.value = (emailValidated.value && passwordValidated.value);
+  })
+  onUnmounted(()=>{
+    if(interval.value)
+      clearInterval(interval.value);
   })
   </script>
