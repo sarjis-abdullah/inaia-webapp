@@ -51,10 +51,7 @@
         <div v-else class="text-center">
           <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div class="flex flex-row w-full">
-              <a @click="()=> {
-                showCodeInput = false
-                error = null
-              }" class="cursor-pointer"><svg
+              <a @click="closeMfa" class="cursor-pointer"><svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -188,7 +185,6 @@
       }
     }
     catch(err){
-      console.log(err, 123456);
       error.value=err;
     }
     finally{
@@ -259,6 +255,11 @@
       default:
         return t('two_fa_verify_able_message')
     }
+  }
+  const closeMfa = ()=> {
+    showCodeInput.value = false
+    error.value = null
+    clearThisInterval()
   }
   watch(state,(currentValue)=>{
     emailValidated.value = validateEmail(currentValue.email) || verifyIsAccountNumber(currentValue.email);
