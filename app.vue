@@ -24,6 +24,7 @@ const router = useRouter();
     const runTimeEnv = config.public.URL_ENV;
     let appName = appNames.inaiaEu;
     const runTimeApp = config.public.CURRENT_APP;
+    console.log(runTimeApp);
     if(runTimeApp){
       switch (runTimeApp) {
         case appNames.inaiaEu:
@@ -31,6 +32,9 @@ const router = useRouter();
           break;
         case appNames.getGreenGold:
           appName = appNames.getGreenGold;
+          break;
+        case appNames.inaiaUk:
+          appName = appNames.inaiaUk;
           break;
       
         default:
