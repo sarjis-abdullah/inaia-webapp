@@ -413,6 +413,6 @@ export default {
     choose_other_confirming_method: 'Choose other confirming method:',
     email_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your email',
     sms_verify_able_message: 'In order to verify your account please confirm it using the code that was sent through sms',
-    mobile_pin_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your mobile',
-    two_fa_verify_able_message: 'In order to verify your account please confirm it using the code that was sent to your authenticator',
+    mobile_pin_verify_able_message: 'Please open the INAIA App on your mobile phone and confirm the login request with your mobile PIN.',
+    two_fa_verify_able_message: "Please open your Authenticator App and confirm the login request with a valid code.",
 }

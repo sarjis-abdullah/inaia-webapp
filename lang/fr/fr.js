@@ -377,4 +377,9 @@ export default {
     reference: 'Référence',
     new_bank_account: 'Nouveau compte bancaire',
     add: 'Ajouter',
+    choose_other_confirming_method: 'Choisissez une autre méthode de confirmation :',
+    email_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé à votre adresse e-mail',
+    sms_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé par SMS',
+    mobile_pin_verify_able_message: "Ouvrez l'application INAIA sur votre téléphone mobile et confirmez la connexion avec votre code PIN mobile.",
+    two_fa_verify_able_message: "Ouvrez l'application Authenticator et confirmez la connexion avec un code valide.",
 }
