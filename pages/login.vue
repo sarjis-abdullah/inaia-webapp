@@ -142,6 +142,10 @@
   })
   const primaryResponse: Ref<InitialLoginResponse|null> = ref(null)
   const isMobilePin = computed(()=> primaryResponse.value?.method === CONFIRMATION_METHOD_MOBILE_PIN)
+  const clearThisInterval = ()=> {
+    if(interval.value)
+      clearInterval(interval.value);
+  }
   const verifyMfa = async(code: string)=>{
     try{
       if (primaryResponse?.value?.tempBearerToken) {
@@ -178,9 +182,7 @@
             }
           })
         }
-        if(interval.value){
-          clearInterval(interval.value)
-        }
+        clearThisInterval()
         const url = urlBuilder(locale,'/dashboard');
         window.open(url,'_self');
       }
@@ -218,6 +220,8 @@
             interval.value = setInterval(() => {
               verifyMfa()
             }, 5000);
+          }else {
+            clearThisInterval()
           }
         }
     }
@@ -262,7 +266,6 @@
     activateSignin.value = (emailValidated.value && passwordValidated.value);
   })
   onUnmounted(()=>{
-    if(interval.value)
-      clearInterval(interval.value);
+    clearThisInterval()
   })
   </script>
