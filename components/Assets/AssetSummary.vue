@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isLoadingAssets">
       <div class="text-center text-sm text-gray-500">{{ $t('totalAmount') }}</div>
-      <h1 class="text-center text-4xl">{{ $n(balance) }} €</h1>
+      <h1 class="text-center text-4xl">{{ $n(balance) }} {{ currency }}</h1>
       <Alert v-if="!isVerified" :kycDetails="kycDetails" class="my-3" :kycStatus="kycStatus"/>
         <div  class="grid grid-cols-1 md:grid-cols-2 gap-10  mt-10 ">
           <div v-for="asset in assets" :key="asset.name">
@@ -29,9 +29,10 @@
 import AssetItem from '@/components/Assets/AssetItem';
 import PriceHistory from '@/components/Assets/PriceHistory';
 import {type Asset, type KycDetail,type KycStatus} from '@/lib/models';
-import { AssetsService } from '@/lib/services';
+import { AssetsService,CurrencyService } from '@/lib/services';
 import { AccountStorage } from '@/storage';
 import { onMounted,Ref,ref } from 'vue';
+const currency = CurrencyService.getCurrencySymbol();
 import {
   ContentLoader,
 } from 'vue-content-loader';
