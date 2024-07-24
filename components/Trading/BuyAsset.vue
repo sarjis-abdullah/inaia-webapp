@@ -136,7 +136,7 @@ const save = async ()=>{
     const request : OrderPreviewRequest = {
         order_type:type,
         amount:amount.value,
-        unit:"EUR",
+        unit:CurrencyService.getCurrencyCode(),
         depot_id:selectedDepot.value.id
     };
     try{
