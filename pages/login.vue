@@ -261,6 +261,46 @@
     error.value = null
     clearThisInterval()
   }
+  const doTheLogin = async()=>{
+    try{
+        error.value = null;
+        isSubmitting.value = true;
+        const response = await LoginService.login({
+            password:state.password,
+            username:state.email
+        });
+        LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
+        TokenService.init(response.accessToken.token,response.accessToken.expire);
+        AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
+        AccountStorage.saveAccount(response.account);
+        AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
+        AccountService.setAccount(response.account);
+       
+        if(state.keepMeSignedIn){
+            LoginStorage.saveRefreshToken(response.refreshToken);
+            LoginStorage.saveSecret(response.secret);
+        }
+        const link = router.resolve('/dashboard');
+        let locale = 'en'
+        response.account.account.settings.forEach(s => {
+      if (s.name_translation_key == 'locale') {
+        locale = s.value;
+      }
+    })
+      const url = urlBuilder(locale,'/dashboard');
+    
+        window.open(url,'_self');
+    }
+    catch(err){
+       
+        error.value=err;
+        
+    }
+    finally{
+        isSubmitting.value = false
+    }
+    
+  }
   watch(state,(currentValue)=>{
     emailValidated.value = validateEmail(currentValue.email) || verifyIsAccountNumber(currentValue.email);
     passwordValidated.value = currentValue.password!="";
