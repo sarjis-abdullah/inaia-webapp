@@ -12,6 +12,23 @@ export class LoginService{
     private static headers = new HttpHeader();
     private static isLogged:boolean = false;
     public static async login(request:LoginRequest){
+        let json = await this.requester.post(this.links.login(),this.headers,request);
+        let expireDate = moment().add(json.success.expires_in,'s').format();
+        let accessToken:AccessToken = {
+            token:json.success.access_token,
+            expire:expireDate
+        };
+        let refreshToken:string = json.success.refresh_token;
+        let secret:string = json.success.secret;
+        let account:Account = json.success.account;
+        return {
+            accessToken:accessToken,
+            refreshToken:refreshToken,
+            secret:secret,
+            account:account
+        }
+    }
+    public static async initialLogin(request:LoginRequest){
         return await this.requester.post(this.links.login(),this.headers,request);
     }
     public static async initialLogin(request:LoginRequest){
