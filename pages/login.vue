@@ -4,7 +4,7 @@
         <div>
           <img class="mx-auto h-12 w-auto" src="~/assets/img/logo/logo.png" alt="Your Company" />
           <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">{{ $t('signin') }}</h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
+          <p v-if="!showCodeInput" class="mt-2 text-center text-sm text-gray-600">
             {{ $t('or') }}
             {{ ' ' }}
             <NuxtLink to="register" class="font-medium text-blue-600 hover:text-blue-500">{{ $t('register') }}</NuxtLink>
@@ -38,7 +38,7 @@
           </div>
   
           <div>
-            <button @click.prevent="initialLogin"
+            <button @click.prevent="isStaging ? doTheLogin() : initialLogin()"
             class="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" :disabled="isSubmitting || !activateSignin" :class="(isSubmitting || !activateSignin)?'opacity-50':'opacity-100'">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                 <LockClosedIcon class="h-5 w-5 text-blue-500 group-hover:text-blue-400" aria-hidden="true" />
@@ -51,10 +51,7 @@
         <div v-else class="text-center">
           <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div class="flex flex-row w-full">
-              <a @click="()=> {
-                showCodeInput = false
-                error = null
-              }" class="cursor-pointer"><svg
+              <a @click="closeMfa" class="cursor-pointer"><svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -77,7 +74,7 @@
                   <span v-if="primaryResponse?.method">{{getMethodWiseText(primaryResponse.method)}}</span>
                 </h2>              
               </div>
-              <CodeInputs v-if="!hideCodeInput" @complete="verifyMfa" :length="codeInputLength" />
+              <CodeInputs v-if="primaryResponse?.method != CONFIRMATION_METHOD_MOBILE_PIN" @complete="verifyMfa" :length="codeInputLength" />
               <div v-if="alternativeMethods?.length && !isSubmitting" class="mt-8">
                 <p>{{ $t('choose_other_confirming_method') }}</p>
                 <ul>
@@ -114,13 +111,14 @@
   import CodeInputs from '@/components/Register/CodeInputs';
   import ListItem from '@/components/common/ListItem.vue';
   import { InitialLoginResponse } from '@/lib/responses';
-  import { CODE_INPUT_LENGTH_FOUR, CODE_INPUT_LENGTH_SIX, TWO_FA_METHOD } from '@/lib/contants/Constants';
+  import { CODE_INPUT_LENGTH_FOUR, CODE_INPUT_LENGTH_SIX, CONFIRMATION_METHOD_EMAIL, CONFIRMATION_METHOD_MOBILE_PIN, CONFIRMATION_METHOD_SMS, CONFIRMATION_METHOD_TWO_FA } from '~/lib/contants/Constants';
+import { Envs } from '~/lib/utils/Envs';
   const { t } = useI18n();
 
   const state = reactive({
     email:'',
     password:'',
-    method:TWO_FA_METHOD,
+    method:CONFIRMATION_METHOD_TWO_FA,
     keepMeSignedIn:false
   })
   const errorBorder='focus:border-red-500';
@@ -130,26 +128,159 @@
   const isSubmitting = ref(false);
   const showCodeInput = ref(false);
   const activateSignin=ref(false);
-  const hideCodeInput=ref(false);
-  const codeInputLength=ref(4);
   const error = ref(null);
+  const interval = ref(null);
   const router = useRouter();
+  const isStaging = computed(()=> {
+    const config = useRuntimeConfig();
+    const env = config.public.URL_ENV;
+    return env === Envs.staging
+  })
   const loginData = computed(()=> {
-    return {
+    const obj = {
       password:state.password,
-      username:state.email,
-      method:state.method,
+      username:state.email
     }
+    if(!isStaging.value){
+      obj.method = state.method
+    }
+    return obj
   })
   const primaryResponse: Ref<InitialLoginResponse|null> = ref(null)
+  const isMobilePin = computed(()=> primaryResponse.value?.method === CONFIRMATION_METHOD_MOBILE_PIN)
+  const clearThisInterval = ()=> {
+    if(interval.value)
+      clearInterval(interval.value);
+  }
   const verifyMfa = async(code: string)=>{
     try{
-      hideCodeInput.value = true
       if (primaryResponse?.value?.tempBearerToken) {
         error.value = null;
         isSubmitting.value = true;
-        const response = await LoginService.verifyMfa({code}, primaryResponse.value.tempBearerToken);
+        let mfaRequest = {}
+        if(code){
+          mfaRequest.pin = code
+        }else {
+          const {approval_id} = primaryResponse.value
+          mfaRequest.approval_id = approval_id
+        }
+        const response = await LoginService.verifyMfa(mfaRequest, primaryResponse.value.tempBearerToken);
         primaryResponse.value = null
+        LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
+        TokenService.init(response.accessToken.token,response.accessToken.expire);
+        AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
+        AccountStorage.saveAccount(response.account);
+        if(response.account && response.account.account && response.account.account.id){
+          AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
+        }
+        AccountService.setAccount(response.account);
+       
+        if(state.keepMeSignedIn){
+            LoginStorage.saveRefreshToken(response.refreshToken);
+            LoginStorage.saveSecret(response.secret);
+        }
+        const link = router.resolve('/dashboard');
+        let locale = 'en'
+        if(response.account && response.account.account && response.account.account.settings && response.account.account.settings.length){
+          response.account.account.settings.forEach(s => {
+            if (s.name_translation_key == 'locale') {
+              locale = s.value;
+            }
+          })
+        }
+        clearThisInterval()
+        const url = urlBuilder(locale,'/dashboard');
+        window.open(url,'_self');
+        return Promise.resolve(response)
+      }
+    }
+    catch(err){
+      error.value=err;
+      return Promise.reject(err)
+    }
+    finally{
+        isSubmitting.value = false
+    }
+  }
+  const alternativeMethods = computed(()=> {
+      if(primaryResponse.value?.alternativeMethods?.length){
+        return primaryResponse.value?.alternativeMethods
+      }
+      return []
+    }
+  )
+  const codeInputLength = ref(CODE_INPUT_LENGTH_FOUR)
+  const initialLogin = async()=>{
+    try{
+        error.value = null;
+        isSubmitting.value = true;
+        const response = await LoginService.login(loginData.value);
+        showCodeInput.value = true
+        if (response) {
+          primaryResponse.value = response
+          if(response.method == CONFIRMATION_METHOD_TWO_FA){
+            codeInputLength.value = CODE_INPUT_LENGTH_SIX
+          }else{
+            codeInputLength.value = CODE_INPUT_LENGTH_FOUR
+          }
+          if(response.method == CONFIRMATION_METHOD_MOBILE_PIN){
+            interval.value = setInterval(() => {
+              verifyMfa()
+            }, 5000);
+          }else {
+            clearThisInterval()
+          }
+        }
+    }
+    catch(err){
+        error.value=err;
+    }
+    finally{
+        isSubmitting.value = false
+    }
+  }
+  const selectAlternativeMethod = (method: string) => {
+    state.method = method
+    initialLogin()
+  }
+  const getMethod = (method: string) => {
+    switch(method){
+      case CONFIRMATION_METHOD_MOBILE_PIN:
+        return "Mobile PIN";
+      case CONFIRMATION_METHOD_EMAIL:
+        return "Email";
+      case CONFIRMATION_METHOD_SMS:
+        return "SMS";
+      default:
+      return "2FA"
+    }
+  }
+  const getMethodWiseText = (method: string) => {
+    switch(method){
+      case CONFIRMATION_METHOD_MOBILE_PIN:
+        return t('mobile_pin_verify_able_message');
+      case CONFIRMATION_METHOD_EMAIL:
+        return t('email_verify_able_message');
+      case CONFIRMATION_METHOD_SMS:
+        return t('sms_verify_able_message');
+      default:
+        return t('two_fa_verify_able_message')
+    }
+  }
+  const closeMfa = ()=> {
+    showCodeInput.value = false
+    error.value = null
+    clearThisInterval()
+  }
+  const doTheLogin = async()=>{
+    try{
+        error.value = null;
+        isSubmitting.value = true;
+        const result = await LoginService.login({
+            password:state.password,
+            username:state.email
+        });
+        const response = result.success
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
         AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
@@ -174,76 +305,23 @@
         }
         const url = urlBuilder(locale,'/dashboard');
         window.open(url,'_self');
-      }
     }
     catch(err){
-      hideCodeInput.value = false
-      error.value=err;
-    }
-    finally{
-        isSubmitting.value = false
-    }
-  }
-  const alternativeMethods = computed(()=> {
-      if(primaryResponse.value?.alternativeMethods?.length){
-        return primaryResponse.value?.alternativeMethods
-      }
-      return []
-    }
-  )
-  const initialLogin = async()=>{
-    try{
-        error.value = null;
-        isSubmitting.value = true;
-        const response = await LoginService.login(loginData.value);
-        showCodeInput.value = true
-        if (response) {
-          primaryResponse.value = response
-          if(response.method == TWO_FA_METHOD){
-            codeInputLength.value = CODE_INPUT_LENGTH_SIX
-          }else {
-            codeInputLength.value = CODE_INPUT_LENGTH_FOUR
-          }
-        }
-    }
-    catch(err){
+       
         error.value=err;
+        
     }
     finally{
         isSubmitting.value = false
     }
-  }
-  const selectAlternativeMethod = (method: string) => {
-    state.method = method
-    initialLogin()
-  }
-  const getMethod = (method: string) => {
-    switch(method){
-      case 'mobile-pin':
-        return "Mobile PIN";
-      case 'email':
-        return "Email";
-      case 'sms':
-        return "SMS";
-      default:
-      return "2FA"
-    }
-  }
-  const getMethodWiseText = (method: string) => {
-    switch(method){
-      case 'mobile-pin':
-        return t('mobile_pin_verify_able_message');
-      case 'email':
-        return t('email_verify_able_message');
-      case 'sms':
-        return t('sms_verify_able_message');
-      default:
-        return t('two_fa_verify_able_message')
-    }
+    
   }
   watch(state,(currentValue)=>{
     emailValidated.value = validateEmail(currentValue.email) || verifyIsAccountNumber(currentValue.email);
     passwordValidated.value = currentValue.password!="";
     activateSignin.value = (emailValidated.value && passwordValidated.value);
+  })
+  onUnmounted(()=>{
+    clearThisInterval()
   })
   </script>

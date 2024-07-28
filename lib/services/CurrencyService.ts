@@ -2,8 +2,8 @@ import { Currencies } from './../contants';
 
 export class CurrencyService{
     private static currency = Currencies[0];
-    public static setCurrency(){
-        
+    public static setCurrency(currency:any){
+        this.currency = currency;
     }
     public static getCurrency(){
         return this.currency;

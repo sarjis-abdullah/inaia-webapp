@@ -61,7 +61,7 @@
         </dl>
       </div>
 
-      <div v-if="isVerified">
+      <div v-if="isVerified && showBankAccounts">
         <h2 class="text-base font-semibold leading-7 text-gray-900">{{ $t('bank_accounts') }}</h2>
 
 
@@ -212,7 +212,7 @@ import {
 import { Account, Address, PaymentAccount } from '~~/lib/models';
 import { AccountStorage } from '~~/storage';
 import InLineApiError from '@/components/common/InLineApiError';
-import { AccountService, PaymentAccountService } from '~~/lib/services';
+import { AccountService, PaymentAccountService, PaymentMethodsService } from '~~/lib/services';
 import { PaymentAccountSpecs } from '~~/lib/contants';
 import UpdateAddress from '@/components/Profile/UpdateAddress.vue';
 import UpdatePassword from '@/components/Profile/UpdatePassword.vue';
@@ -229,7 +229,7 @@ import Confirmation from '@/components/common/Confirmation';
 import { formatIban } from '@/lib/Formatters';
 import  Alert  from '@/components/Kyc/Alert.vue';
 import { MFA_SECRET_TRANSLATION_KEY } from '@/lib/contants/Constants';
-
+import { PaymentMethods } from '~/lib/contants/PaymentMethods';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
 const account: Ref<Account|null> = ref(null);
@@ -250,6 +250,7 @@ const selectedPaymentAccountToDelete = ref(-1);
 const showPasswordUpdatePopup = ref(false);
 const copyingLink = ref(false);
 const showReferral = ref(false);
+const showBankAccounts = ref(false);
 const confirmDelete = async ()=>{
   try {
     isModfyingBankAccount.value = true;
@@ -582,12 +583,18 @@ onMounted(async () => {
       }
     })
   }
-  try {
+  const addpaymentMethods = await PaymentMethodsService.getTheListOfPaymentMethods();
+  const bankAccountMethod = addpaymentMethods.find(x=>x.name_translation_key==PaymentMethods.bankAccount);
+  if(bankAccountMethod){
+    try {
     paymentAccounts.value = await PaymentAccountService.getClientPaymentAccounts();
+    showBankAccounts.value = true;
   }
-  catch (err) {
-    errorLoadingBankAccount.value = err;
+    catch (err) {
+      errorLoadingBankAccount.value = err;
+    }
   }
+  
 
 })
 </script>

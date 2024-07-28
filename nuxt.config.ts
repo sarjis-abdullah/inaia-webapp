@@ -7,6 +7,9 @@ import fr from './lang/fr/fr';
 import gggen from './lang/en/gggen';
 import gggde from './lang/de/gggde';
 import gggfr from './lang/fr/gggfr';
+import ukde from './lang/de/ukde';
+import uken from './lang/en/uken';
+import ukfr from './lang/fr/ukfr';
 const appNames = require('./appNames');
 let favIcon = '/favicon.ico';
 let pageTitle = "INAIA App";
@@ -14,6 +17,7 @@ let selectedEnglish = en;
 let selectedFrench = fr;
 let selectedGerman = de;
 let assetDirectory = "assets";
+
 if (process.env.CURRENT_APP) {
   if (process.env.CURRENT_APP == appNames.getGreenGold) {
     selectedEnglish = gggen;
@@ -22,6 +26,14 @@ if (process.env.CURRENT_APP) {
     assetDirectory = "gggassets";
     pageTitle='GGG App';
     favIcon = '/ggg-favicon.ico';
+  }
+  if (process.env.CURRENT_APP == appNames.inaiaUk) {
+    selectedEnglish = uken;
+    selectedFrench = ukfr;
+    selectedGerman = ukde;
+    assetDirectory = "assets";
+    pageTitle='INAIA UK';
+    favIcon = '/favicon.ico';
   }
 }
 

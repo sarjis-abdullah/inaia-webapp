@@ -17,6 +17,7 @@ const updateProfileAvatarProvider = inject('updateProfileAvatarProvider', () => 
 const photoPreview: Ref<string|null> = ref(null);
 const account: Ref<Account|null> = ref(null);
 const loading = ref(false);
+
 const newAvatarCreated = ref(false);
 const submitErr: Ref<string> = ref("");
 const contactId = computed(() => AccountStorage.getContactId());
@@ -57,6 +58,7 @@ const handleOnSelectAvatar = (base_64_url: string)=> {
 
 onMounted(() => {
     account.value = AccountStorage.getAccount();
+
 })
 </script>
 
