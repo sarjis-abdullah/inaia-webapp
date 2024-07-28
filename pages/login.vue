@@ -38,7 +38,7 @@
           </div>
   
           <div>
-            <button @click.prevent="initialLogin"
+            <button @click.prevent="isStaging ? doTheLogin() : initialLogin()"
             class="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" :disabled="isSubmitting || !activateSignin" :class="(isSubmitting || !activateSignin)?'opacity-50':'opacity-100'">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                 <LockClosedIcon class="h-5 w-5 text-blue-500 group-hover:text-blue-400" aria-hidden="true" />
@@ -112,6 +112,7 @@
   import ListItem from '@/components/common/ListItem.vue';
   import { InitialLoginResponse } from '@/lib/responses';
   import { CODE_INPUT_LENGTH_FOUR, CODE_INPUT_LENGTH_SIX, CONFIRMATION_METHOD_EMAIL, CONFIRMATION_METHOD_MOBILE_PIN, CONFIRMATION_METHOD_SMS, CONFIRMATION_METHOD_TWO_FA } from '~/lib/contants/Constants';
+import { Envs } from '~/lib/utils/Envs';
   const { t } = useI18n();
 
   const state = reactive({
@@ -130,12 +131,20 @@
   const error = ref(null);
   const interval = ref(null);
   const router = useRouter();
+  const isStaging = computed(()=> {
+    const config = useRuntimeConfig();
+    const env = config.public.URL_ENV;
+    return env === Envs.staging
+  })
   const loginData = computed(()=> {
-    return {
+    const obj = {
       password:state.password,
-      username:state.email,
-      method:state.method,
+      username:state.email
     }
+    if(!isStaging.value){
+      obj.method = state.method
+    }
+    return obj
   })
   const primaryResponse: Ref<InitialLoginResponse|null> = ref(null)
   const isMobilePin = computed(()=> primaryResponse.value?.method === CONFIRMATION_METHOD_MOBILE_PIN)
@@ -265,15 +274,18 @@
     try{
         error.value = null;
         isSubmitting.value = true;
-        const response = await LoginService.login({
+        const result = await LoginService.login({
             password:state.password,
             username:state.email
         });
+        const response = result.success
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
         AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
         AccountStorage.saveAccount(response.account);
-        AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
+        if(response.account && response.account.account && response.account.account.id){
+          AccountStorage.saveAccountId(response.account.account.id,response.accessToken.expire);
+        }
         AccountService.setAccount(response.account);
        
         if(state.keepMeSignedIn){
@@ -282,13 +294,14 @@
         }
         const link = router.resolve('/dashboard');
         let locale = 'en'
-        response.account.account.settings.forEach(s => {
-      if (s.name_translation_key == 'locale') {
-        locale = s.value;
-      }
-    })
-      const url = urlBuilder(locale,'/dashboard');
-    
+        if(response.account && response.account.account && response.account.account.settings && response.account.account.settings.length){
+          response.account.account.settings.forEach(s => {
+            if (s.name_translation_key == 'locale') {
+              locale = s.value;
+            }
+          })
+        }
+        const url = urlBuilder(locale,'/dashboard');
         window.open(url,'_self');
     }
     catch(err){
