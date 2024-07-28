@@ -212,7 +212,7 @@ import { Envs } from '~/lib/utils/Envs';
     try{
         error.value = null;
         isSubmitting.value = true;
-        const response = await LoginService.login(loginData.value);
+        const response = await LoginService.initialLogin(loginData.value);
         showCodeInput.value = true
         if (response) {
           primaryResponse.value = response
@@ -274,11 +274,10 @@ import { Envs } from '~/lib/utils/Envs';
     try{
         error.value = null;
         isSubmitting.value = true;
-        const result = await LoginService.login({
+        const response = await LoginService.login({
             password:state.password,
             username:state.email
         });
-        const response = result.success
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
         AccountStorage.saveContactId(response.account.id,response.accessToken.expire);
