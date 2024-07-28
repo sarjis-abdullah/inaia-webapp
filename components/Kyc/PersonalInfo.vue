@@ -40,7 +40,7 @@
               </div>
 
               <div class="md:grid md:grid-cols-2 md:gap-8">
-                <div v-if="enableAll || (account && account.person_data && !account.person_data.gender)">
+                <div v-if="enableAll || (account && account.person_data)">
                   <label for="gender" class="block text-sm font-medium text-gray-700">{{ $t('gender') }}</label>
                   <select id="gender" name="gender" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   v-model="state.gender"
@@ -49,7 +49,7 @@
                         
                 </select>
                 </div>
-                <div v-if="enableAll || (account && account.person_data && !account.person_data.birthdate)">
+                <div v-if="enableAll || (account && account.person_data)">
                     <label for="birtdate" class="block text-sm font-medium text-gray-700">{{ $t('birthdate') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         
@@ -63,7 +63,7 @@
                 </div>
               </div>
               <div class="md:grid md:grid-cols-2 md:gap-8">
-                <div v-if="enableAll || (account && account.person_data && !account.person_data.birth_place)">
+                <div v-if="enableAll || (account && account.person_data )">
                     <label for="birthplace" class="block text-sm font-medium text-gray-700">{{ $t('birthplace') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="enableAll || (account && account.person_data && !account.person_data.nationality_id)">
+                <div v-if="enableAll || (account && account.person_data)">
                     
                     
                         

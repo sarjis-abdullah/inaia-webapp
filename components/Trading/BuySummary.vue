@@ -97,7 +97,7 @@ const props = defineProps({
 })
 
 const activateConfirmation = computed(()=>{
-    if(checkedConditions.value.length == conditions.value.length){
+    if(conditions.value && checkedConditions.value.length == conditions.value.length){
         return true
     }else{
         return false;
@@ -124,7 +124,7 @@ const execute = async ()=>{
     const request : PlaceOrderRequest = {
         order_type_id:props.orderPreview?.order_type_id.toString(),
         amount:props.orderPreview?.amount.toString(),
-        unit:"EUR",
+        unit:CurrencyService.getCurrencyCode(),
         depot_id:props.depot?.id.toString(),
         conditions:checkedConditions.value.join(','),
         payment_method:props.PaymentMethod,
