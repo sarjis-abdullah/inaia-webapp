@@ -65,7 +65,7 @@ export class Urls{
         return this.buildUrl(BaseUrls.getCoreUrl(),'accounts/pin-reset');
     }
     public login():string{
-        return this.buildUrl(BaseUrls.getCoreUrl(),'authenticate');
+        return this.buildUrl(BaseUrls.getCoreUrl(),'authenticate?'+ACCOUNT_INCLUDES);
     }
     public verifyMfa():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'mfa/login/verify?' + ACCOUNT_INCLUDES);
