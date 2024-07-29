@@ -49,7 +49,7 @@
           </div>
         </form>
         <div v-else class="text-center">
-          <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div v-if="!showOnlyLoading" class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div class="flex flex-row w-full">
               <a @click="closeMfa" class="cursor-pointer"><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +92,7 @@
             </div>
             
           </div>
+          <div v-else class="mt-16 flex justify-center"><Loading /></div>
         </div>
       </div>
     </div>
@@ -153,6 +154,7 @@ import { Envs } from '~/lib/utils/Envs';
       clearInterval(interval.value);
   }
   const isRequestInProgress = ref(false)
+  const showOnlyLoading = ref(false)
   const verifyMfa = async(code: string)=>{
     if(isRequestInProgress.value){
       return
@@ -170,6 +172,7 @@ import { Envs } from '~/lib/utils/Envs';
           mfaRequest.approval_id = approval_id
         }
         const response = await LoginService.verifyMfa(mfaRequest, primaryResponse.value.tempBearerToken);
+        showOnlyLoading.value = true
         primaryResponse.value = null
         LoginStorage.saveToken(response.accessToken,state.keepMeSignedIn);
         TokenService.init(response.accessToken.token,response.accessToken.expire);
