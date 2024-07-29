@@ -50,8 +50,8 @@
             <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-2">Two Factor Authentication</dt>
             <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
               <div class="text-gray-900">
-                <span v-if="hasTwoFaEnabled">Two Factor Authentication (2FA) is enabled.</span>
-                <span v-else>Two Factor Authentication (2FA) is not enabled yet!</span>
+                <span v-if="hasTwoFaEnabled">{{$t('two_fa_enabled_message')}}</span>
+                <span v-else>{{$t('two_fa_disabled_message')}}</span>
               </div>
               <button type="button" class="font-semibold text-blue-600 hover:text-blue-500 outline-none focus:outline-0" @click="showTwoFaConfirmation = !showTwoFaConfirmation">
                 {{ hasTwoFaEnabled ? $t('disable_2fa') : $t('enable_2fa') }}

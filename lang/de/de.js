@@ -425,5 +425,7 @@ export default {
     "enter_6_digit_code_prompt": "Jedes Mal, wenn Sie sich einloggen, werden Sie aufgefordert, einen 6-stelligen Code aus Ihrer Authentifizierungs-App einzugeben, um den Login-Vorgang abzuschließen.",
     "keep_mobile_device_secure": "Halten Sie Ihr mobiles Gerät sicher, da es erforderlich ist, die Authentifizierungscodes zu generieren. Wenn Sie den Zugang zu Ihrer Authentifizierungs-App verlieren, müssen Sie möglicherweise den Support kontaktieren, um Hilfe zu erhalten.",
     mobile_pin_verify_able_message: "Öffne die INAIA App auf deinem Mobiltelefon und bestätige die Anmeldung mit deiner Mobile-PIN.",
-    two_fa_verify_able_message:  "Öffne deine Authenticator-App und bestätige die Anmeldung mit einem gültigen Code."
+    two_fa_verify_able_message:  "Öffne deine Authenticator-App und bestätige die Anmeldung mit einem gültigen Code.",
+    two_fa_enabled_message: 'Die Zwei-Faktor-Authentifizierung (2FA) ist aktiviert.',
+    two_fa_disabled_message: 'Die Zwei-Faktor-Authentifizierung (2FA) ist noch nicht aktiviert!'
 }
