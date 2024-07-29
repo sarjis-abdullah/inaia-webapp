@@ -152,8 +152,13 @@ import { Envs } from '~/lib/utils/Envs';
     if(interval.value)
       clearInterval(interval.value);
   }
+  const isRequestInProgress = ref(false)
   const verifyMfa = async(code: string)=>{
+    if(isRequestInProgress.value){
+      return
+    }
     try{
+      isRequestInProgress.value = true
       if (primaryResponse?.value?.tempBearerToken) {
         error.value = null;
         isSubmitting.value = true;
@@ -179,6 +184,7 @@ import { Envs } from '~/lib/utils/Envs';
             LoginStorage.saveRefreshToken(response.refreshToken);
             LoginStorage.saveSecret(response.secret);
         }
+        isRequestInProgress.value = false
         const link = router.resolve('/dashboard');
         let locale = 'en'
         if(response.account && response.account.account && response.account.account.settings && response.account.account.settings.length){
@@ -195,6 +201,7 @@ import { Envs } from '~/lib/utils/Envs';
     }
     catch(err){
       error.value=err;
+      isRequestInProgress.value = false
     }
     finally{
         isSubmitting.value = false
@@ -208,6 +215,7 @@ import { Envs } from '~/lib/utils/Envs';
     }
   )
   const codeInputLength = ref(CODE_INPUT_LENGTH_FOUR)
+  const timeIntervalInSec = ref(5000)
   const initialLogin = async()=>{
     try{
         error.value = null;
@@ -224,7 +232,7 @@ import { Envs } from '~/lib/utils/Envs';
           if(response.method == CONFIRMATION_METHOD_MOBILE_PIN){
             interval.value = setInterval(() => {
               verifyMfa()
-            }, 5000);
+            }, timeIntervalInSec.value);
           }else {
             clearThisInterval()
           }
