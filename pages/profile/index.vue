@@ -310,15 +310,15 @@ const editPassword = () => {
 }
 const showTwoFaConfirmation = ref(false)
 const twoFaEnabled = ref(false)
-const toggleTwoFaConfirmationModal = (account: Account) => {
+const toggleTwoFaConfirmationModal = (data: Account) => {
   showTwoFaConfirmation.value = false;
-  if (account?.id) {
+  if (data?.id) {
     twoFaEnabled.value = true
-    account.value = account
+    account.value = data
   }
 }
-const enableTwoFA = (account: Account) => {
-  toggleTwoFaConfirmationModal(account)
+const enableTwoFA = (data: Account) => {
+  toggleTwoFaConfirmationModal(data)
 }
 const disableTwoFA = () => {
   showTwoFaConfirmation.value = false;
