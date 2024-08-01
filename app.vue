@@ -7,7 +7,7 @@
   </template>
   <script lang="ts" setup>
   import {onBeforeMount,ref} from 'vue';
-import { AccountService,LoginService,TokenService,AssetsService } from './lib/services';
+import { AccountService,LoginService,TokenService,CurrencyService } from './lib/services';
 import { AccountStorage,LoginStorage } from './storage';
 import { BaseUrls } from "./lib/utils/BaseUrls";
 import { Envs } from "./lib/utils/Envs";
@@ -16,7 +16,8 @@ import { App } from './lib/app';
 import { UnauthenticatedListener } from './lib/listeners';
 import LogoutHelper from './helpers/LogoutHelper';
 import { appNames } from '@/lib/appNames';
-import { ChannelTypes } from './lib/contants';
+import { ChannelTypes, Currencies } from './lib/contants';
+import { inaiaUk } from './appNames';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter();
   const initApp =  async ()=>{
@@ -24,6 +25,7 @@ const router = useRouter();
     const runTimeEnv = config.public.URL_ENV;
     let appName = appNames.inaiaEu;
     const runTimeApp = config.public.CURRENT_APP;
+    console.log(runTimeApp);
     if(runTimeApp){
       switch (runTimeApp) {
         case appNames.inaiaEu:
@@ -31,6 +33,9 @@ const router = useRouter();
           break;
         case appNames.getGreenGold:
           appName = appNames.getGreenGold;
+          break;
+        case appNames.inaiaUk:
+          appName = appNames.inaiaUk;
           break;
       
         default:
@@ -45,6 +50,12 @@ const router = useRouter();
       BaseUrls.setEnv(Envs.production);
     else {
       BaseUrls.setEnv(Envs.staging);
+    }
+    if(appName == appNames.inaiaUk){
+     CurrencyService.setCurrency(Currencies[1]);
+    }
+    else{
+      CurrencyService.setCurrency(Currencies[0]);
     }
     const token = LoginStorage.getToken();
     const contactId = AccountStorage.getContactId();
