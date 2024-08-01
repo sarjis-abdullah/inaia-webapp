@@ -34,7 +34,7 @@
 </template>
 <script lang="ts" setup>
 import {  Ref, computed } from "vue";
-import { AssetTypes, ConditionTypes } from "~~/lib/contants";
+import { AssetTypes, ConditionCountryIds, ConditionTypes } from "~~/lib/contants";
 import { Condition, DepotTarget } from "~~/lib/models";
 import { ConditionService } from "~~/lib/services";
 import Switch  from '@/components/common/AppSwitch.vue';
@@ -75,9 +75,11 @@ onMounted(async()=>{
             type = [ConditionTypes.depotSilver];
         }
         loadingConditions.value = true;
+        const countryId = ConditionCountryIds.getCountryId();
+       
         conditions.value = await ConditionService.getDepotAndSavingPlanCondition({
             type:type
-        })
+        },countryId)
         error.value = null;
     }
     catch(err){
