@@ -17,7 +17,7 @@
                   </div>
                  <div class="mt-3 text-center">
                     <Loading v-if="isVerifyingSms"/>
-                  <a class="text-xs text-blue-600 cursor-pointer" @click.prevent="resendSms" v-else :disabled="isVerifyingSms || !isPhoneNumberValid">
+                  <a class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer" @click.prevent="resendSms" v-else :disabled="isVerifyingSms || !isPhoneNumberValid">
                         <span v-if="!smsSent">{{ $t('send_phone_code') }}</span>
                         <span v-else>{{ $t('resend_phone_code') }}</span>
 
@@ -38,14 +38,14 @@
 
                 </div>
             </div>
-            <p class="mt-2 text-sm text-red-600 text-center" id="email-error" v-if="submittingError">{{ errorText }}</p>
-            
+            <InLineApiError v-if="error" :err="error"/>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
 import CodeInputs from '@/components/Register/CodeInputs';
 import Loading from '@/components/common/Loading';
+import InLineApiError from "@/components/common/InLineApiError";
 import PhoneCodes from '@/components/Register/PhoneCodes';
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
 import {ref,onMounted,reactive,watch} from 'vue';
@@ -58,11 +58,10 @@ import { ChannelRequest } from '~~/lib/requests';
 const { t,locale } = useI18n();
 const isVerifyingSms = ref(false);
 const smsVerified = ref(false);
-const submittingError=ref(false);
-const errorText = ref('');
 const phoneChanged =ref(false);
 const smsSent = ref(false);
 const isPhoneNumberValid = ref(false);
+const error: Ref<unknown> = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
 const props = defineProps({
@@ -95,9 +94,8 @@ const emit = defineEmits<{
   (e: 'onSave'): void
 }>()
 const  verifySmsCode= async(code:string)=>{
-    errorText.value = "";
-    submittingError.value = false;
     try{
+        error.value = null;
         isVerifyingSms.value = true;
         let phoneNumber = state.phoneCode + sanitizePhoneNumber(state.phone)
         await PhoneNumberService.validatePhone(locale.value,{
@@ -130,8 +128,6 @@ const  verifySmsCode= async(code:string)=>{
     }
 }
 const resendSms = async ()=>{
-    errorText.value = "";
-    submittingError.value = false;
     try{
         isVerifyingSms.value = true;
         let phoneNumber = state.phoneCode + sanitizePhoneNumber(state.phone)
@@ -146,18 +142,12 @@ const resendSms = async ()=>{
     }
 }
 const handleError= (err:unknown)=>{
-    submittingError.value = true;
-
-        if(err instanceof MissingInformationException){
-            errorText.value = err.getRealMessage();
-        }
-        else if(err instanceof ServerErrorException){
-            errorText.value = t(err.getTranslationKey());
-            useBugsnag().notify(err);
-        }
-        else{
-            errorText.value = t(err.getTranslationKey());
-            useBugsnag().notify(err);
-        }
+    error.value = err;
+    if(err instanceof ServerErrorException){
+        useBugsnag().notify(err);
+    }
+    else{
+        useBugsnag().notify(err);
+    }
 }
 </script>
