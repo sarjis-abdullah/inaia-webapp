@@ -1,5 +1,5 @@
 <template>
-    <div class="sm:mx-auto bg-white sm:w-full sm:max-w-2xl min-w-[50%] p-10 shadow sm:rounded-lg">
+    <div class="sm:mx-auto bg-white sm:w-full sm:max-w-2xl min-w-[50%] p-6 shadow sm:rounded-lg">
         <div class="flex flex-col mx-auto">
             <img src="~/assets/img/pageicons/emailVerif.png" alt="email verification" class="w-32 h-auto mb-5 mx-auto"/>
             <h2 class="text-center mb-5 font-bold text-2xl">{{ $t('update_email') }}</h2>
@@ -21,9 +21,9 @@
                     </div>
                     <div class="mt-6 text-center">
                         
-                          <a class="text-xs text-blue-600 cursor-pointer" @click.prevent="resendEmail">
+                          <a class="flex w-full justify-center cursor-pointer rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" @click.prevent="resendEmail">
                             <span  v-if="emailSent">{{ $t('resend_email_code') }}</span>
-                            <span  v-else>{{ $t('send_email_code') }}</span>
+                            <span  v-else>{{ $t('send_email_verification_code') }}</span>
                         </a>
                         </div>
                 </div>
@@ -45,8 +45,8 @@
                 </div>
             </div>
 
-            <p class="mt-2 text-sm text-red-600 text-center" id="email-error" v-if="submittingError">{{ errorText }}</p>
-            <Loading v-else-if="isVerifyingEmail" class="mx-auto"/>
+            <InLineApiError v-if="error" :err="error"/>
+            <Loading v-if="isVerifyingEmail" class="mx-auto mt-4"/>
             
         </div>
     </div>
@@ -55,6 +55,7 @@
 import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon } from '@heroicons/vue/24/outline'
 import CodeInputs from '@/components/Register/CodeInputs';
 import Loading from '@/components/common/Loading';
+import InLineApiError from "@/components/common/InLineApiError";
 import {  CheckCircleIcon } from '@heroicons/vue/20/solid';
 import {ref,onMounted,watch} from 'vue';
 import { EmailService,AccountService } from '@/lib/services';
@@ -69,13 +70,12 @@ const isVerifyingEmail = ref(false);
 
 const emailVerified = ref(false);
 const email = ref('');
-const submittingError=ref(false);
-const errorText = ref('');
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
 const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
 const emailValidated = ref(false);
+const error: Ref<unknown> = ref(null);
 const props = defineProps({
     channel: {
         type : Object as PropType<Channel>
@@ -100,9 +100,8 @@ watch(props,(currentValue)=>{
     }
 })
 const  verifyEmailCode= async(code:string)=>{
-    errorText.value =  "";
-    submittingError.value = false;
     try{
+        error.value =  null;
         isVerifyingEmail.value = true;
         await EmailService.validateEmail(locale.value,{
             email:email.value,
@@ -134,8 +133,7 @@ const  verifyEmailCode= async(code:string)=>{
     }
 }
 const resendEmail = async ()=>{
-    errorText.value =  "";
-    submittingError.value = false;
+    error.value =  null;
     try{
         isVerifyingEmail.value = true;
         await EmailService.sendEmailCode(locale.value,{email:email.value});
@@ -149,17 +147,12 @@ const resendEmail = async ()=>{
     }
 }
 const handleError= (err:unknown)=>{
-    submittingError.value = true;
-
-        if(err instanceof MissingInformationException){
-            errorText.value = err.getRealMessage();
-        }
-        else if(err instanceof ServerErrorException){
-            errorText.value = t(err.getTranslationKey());
+        emailVerified.value = false;
+        error.value = err
+        if(err instanceof ServerErrorException){
             useBugsnag().notify(err);
         }
         else{
-            errorText.value = t(err.getTranslationKey());
             useBugsnag().notify(err);
         }
 }

@@ -377,4 +377,7 @@ export default {
     reference: 'Référence',
     new_bank_account: 'Nouveau compte bancaire',
     add: 'Ajouter',
+    "update_email": "Mettre à jour l'email",
+    "send_email_verification_code": "Envoyer le code de vérification par email",
+    "send_phone_code": "Envoyer le code par téléphone"
 }
