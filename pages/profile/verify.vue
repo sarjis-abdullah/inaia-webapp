@@ -1,59 +1,5 @@
 <template>
-    <div class="h-full">
-      
-  
-      <!-- Static sidebar for desktop -->
-      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col" v-if="false && !isSavingDepot">
-        <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
-          <div class="flex pt-8 justify-center">
-            <a @click.prevent="goToDashboard"><img class="w-36 h-auto" src="~/assets/img/logo/logo.png" alt="INAIA GmbH" /></a>
-          </div>
-  
-            <nav class="flex justify-center mt-20" aria-label="Progress">
-          <ol role="list" class="space-y-10">
-            <li v-for="step in steps" :key="step.name">
-              <a v-if="step.status === 'complete'"  @click.prevent="navigateToStep(step.number)" class="group cursor-pointer">
-                <span class="flex items-start">
-                  <span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
-                    <CheckCircleIcon class="h-full w-full text-blue-600 group-hover:text-blue-800" aria-hidden="true" />
-                  </span>
-                  <span class="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900">{{ step.name }}</span>
-                </span>
-              </a>
-              <a v-else-if="step.status === 'current'"  @click.prevent="navigateToStep(step.number)" class="flex items-start cursor-pointer" aria-current="step">
-                <span class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center" aria-hidden="true">
-                  <span class="absolute h-4 w-4 rounded-full bg-blue-200" />
-                  <span class="relative block h-2 w-2 rounded-full bg-blue-600" />
-                </span>
-                <span class="ml-3 text-sm font-medium text-blue-600">{{ step.name }}</span>
-              </a>
-              <a v-else @click.prevent="navigateToStep(step.number)" class="group cursor-pointer">
-                <div class="flex items-start">
-                  <div class="relative flex h-5 w-5 flex-shrink-0 items-center justify-center" aria-hidden="true">
-                    <div class="h-2 w-2 rounded-full bg-gray-300 group-hover:bg-gray-400" />
-                  </div>
-                  <p class="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900">{{ step.name }}</p>
-                </div>
-              </a>
-            </li>
-          </ol>
-          </nav>
-          <nav class="flex justify-center absolute inset-x-0 bottom-2 mb-5">
-            <ul role="list" class="space-y-3">
-              <li class="text-center text-xs text-stone-800">
-                <a>© {{ year }} INAIA GmbH</a>
-              </li>
-              <li class="text-center text-xs">
-                <a href="https://www.inaia.de/datenschutz" target="_blank" class="flex justify-center cursor-pointer text-gray-400 hover:text-blue-600">{{$t('privacy')}}<ArrowTopRightOnSquareIcon class="h-3 w-3 ml-1" /></a>
-              </li>
-              <li class="text-center text-xs">
-                <a href="https://www.inaia.de/impressum" target="_blank" class="flex justify-center cursor-pointer text-gray-400 hover:text-blue-600">{{$t('imprint')}}<ArrowTopRightOnSquareIcon class="h-3 w-3 ml-1" /></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
+    <div class="h-full p-6 sm:rounded-lg">
       <div class="lg:border-b lg:border-t lg:border-gray-200 max-w-lg mx-auto">
         <nav class="" aria-label="Progress">
           <ol role="list" class="overflow-hidden rounded-md lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200">
@@ -120,7 +66,7 @@
       </div> -->
   
       <main class="py-10 w-full" >
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="lg:px-8">
           <PersonalInfo v-if="currentStep == 1"  :account="account" @on-save="onInfoSet" :enableAll="enableAll"/>
           <Address v-if="currentStep == 2"  :account="account" :request="kycRequest" />
         </div>
