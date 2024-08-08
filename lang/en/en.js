@@ -410,4 +410,5 @@ export default {
     reference: 'Reference',
     new_bank_account: 'New bank account',
     add: 'Add',
+    personal_info: 'Personal information',
 }
