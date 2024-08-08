@@ -74,19 +74,20 @@
                 <p class="mt-0 pt-0 text-sm text-red-600 text-center" v-if="submittingError || error">{{ $t('account_info_error') }}</p>
 
                 <div class="mt-8">
-                  <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
-                      :class="(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'"
-                      class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{{ $t('start') }}</button>
+                    <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
+                      :class="`${submitButtonStyle} ${(!saveActivated || isSubmitting)?'opacity-50':'opacity-100'}`">
+                      {{ $t('save') }}
+                    </button>
                 </div>
             </form>
         </div>
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10" v-else-if="isVerified">
             <p class="text-center my-6">{{ $t('accountIsAlreadyVerified') }}</p>
-            <a class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" @click="goToDashboard">{{ $t('goToDashboard') }}</a>
+            <a :class="submitButtonStyle" @click="goToDashboard">{{ $t('goToDashboard') }}</a>
         </div>
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10" v-else-if="isPending">
             <p class="text-center my-6">{{ $t('kycStatusIsPending') }}</p>
-            <a class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" @click="goToDashboard">{{ $t('goToDashboard') }}</a>
+            <a :class="submitButtonStyle" @click="goToDashboard">{{ $t('goToDashboard') }}</a>
         </div>
     </div>
 </template>
@@ -107,6 +108,7 @@ const saveActivated = ref(false);
 const isSubmitting = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
+const submitButtonStyle = 'flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer'
 const errorIconColor = 'text-red-900';
 const iconColor = 'text-gray-400';
 const errorText = ref('');
