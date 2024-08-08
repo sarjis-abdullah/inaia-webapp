@@ -71,7 +71,7 @@
                 </div>
 
                 <InlineApiError :err="error" />
-                <p class="mt-2 text-sm text-red-600" v-if="submittingError">{{ $t('account_info_error') }}</p>
+                <p class="mt-0 pt-0 text-sm text-red-600 text-center" v-if="submittingError || error">{{ $t('account_info_error') }}</p>
 
                 <div class="mt-8">
                   <button type="submit" :disabled="!saveActivated || isSubmitting" @click.prevent="save"
