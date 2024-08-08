@@ -70,6 +70,7 @@
                     </div>
                 </div>
 
+                <InlineApiError :err="error" />
                 <p class="mt-2 text-sm text-red-600" v-if="submittingError">{{ $t('account_info_error') }}</p>
 
                 <div class="mt-8">
@@ -93,7 +94,7 @@
 import { EnvelopeIcon,ExclamationCircleIcon, UserIcon,LockClosedIcon,HashtagIcon } from '@heroicons/vue/20/solid';
 
 import {ref,reactive,toRefs,watch,computed,onMounted,PropType} from 'vue';
-
+import InlineApiError from '@/components/common/InLineApiError.vue';
 import { AccountStorage, SubscriptionStorage } from '@/storage';
 import { AddressRequest, StartKycRequest } from '@/lib/requests';
 import Countries from '@/components/Register/Countries';
@@ -113,6 +114,7 @@ const {t,locale} = useI18n();
 const submittingError = ref(false);
 const isPending = ref(false);
 const isVerified=ref(false);
+const error: Ref<unknown>=ref(null);
 const state = reactive({
    country_id:-1,
    line1:'',
@@ -172,6 +174,7 @@ const goToDashboard =()=>{
 }
 async function save() {
     isSubmitting.value = true;
+    error.value = null
     try{
         const url = await KycService.startKycProcess(props.account?.account.id,{
             name:props.request?.name,
@@ -192,6 +195,7 @@ async function save() {
         }
     }
     catch(err){
+        error.value = err
         if(err instanceof BadInputException && err.getRealMessage){
             if(err.getRealMessage() ==  ErrorCode.already_verified){
                 isVerified.value = true;
