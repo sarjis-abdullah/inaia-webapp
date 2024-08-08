@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      <div class="lg:border-b lg:border-t lg:border-gray-200" v-if="!isSavingDepot">
+      <div class="lg:border-b lg:border-t lg:border-gray-200 max-w-lg mx-auto">
         <nav class="" aria-label="Progress">
           <ol role="list" class="overflow-hidden rounded-md lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200">
             <li v-for="(step, stepIdx) in steps" :key="step.name" class="relative overflow-hidden lg:flex-1">
@@ -119,7 +119,7 @@
         <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">{{ name }}</div>
       </div> -->
   
-      <main class="py-10 lg:pl-72 w-full" >
+      <main class="py-10 w-full" >
         <div class="px-4 sm:px-6 lg:px-8">
           <PersonalInfo v-if="currentStep == 1"  :account="account" @on-save="onInfoSet" :enableAll="enableAll"/>
           <Address v-if="currentStep == 2"  :account="account" :request="kycRequest" />
@@ -132,7 +132,7 @@
   </template>
   <script lang="ts" setup>
   import { SubscriptionSteps } from '@/constants';
-  import { CheckCircleIcon, XMarkIcon } from '@heroicons/vue/20/solid';
+  import { CheckCircleIcon, XMarkIcon, ArrowTopRightOnSquareIcon } from '@heroicons/vue/20/solid';
   import PersonalInfo from "@/components/Kyc/PersonalInfo.vue";
   import Address from "@/components/Kyc/Address.vue";
   import { AccountStorage } from '~~/storage';
