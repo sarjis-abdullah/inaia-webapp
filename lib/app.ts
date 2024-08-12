@@ -1,4 +1,5 @@
 import { appNames } from "./appNames";
+import { ConditionCountryIds } from "./contants";
 import { EventRegistry } from "./events";
 import { IListener } from "./listeners/IListener";
 import { BaseUrls } from "./utils/BaseUrls";
@@ -16,6 +17,7 @@ export class App {
     }
     public static setAppName(name:appNames){
         BaseUrls.setAppName(name);
+        ConditionCountryIds.setAppName(name);
         this.appName = name;
     }
     public static getAppName(name:appNames){

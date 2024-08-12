@@ -414,5 +414,6 @@ export default {
     email_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der an Ihre E-Mail gesendet wurde",
     sms_verify_able_message: "Um Ihr Konto zu verifizieren, bestätigen Sie es bitte mit dem Code, der per SMS gesendet wurde",
     mobile_pin_verify_able_message: "Öffne die INAIA App auf deinem Mobiltelefon und bestätige die Anmeldung mit deiner Mobile-PIN.",
-    two_fa_verify_able_message:  "Öffne deine Authenticator-App und bestätige die Anmeldung mit einem gültigen Code."
+    two_fa_verify_able_message:  "Öffne deine Authenticator-App und bestätige die Anmeldung mit einem gültigen Code.",
+    personal_info: 'Persönliche Informationen'
 }

@@ -40,8 +40,9 @@ import { ConditionService,SubscriptionService } from '@/lib/services';
 import { SubscriptionStorage } from '@/storage';
 import Switch  from '../common/AppSwitch.vue'
 import Loading from '../common/Loading.vue';
+import { ConditionCountryIds } from '~/lib/contants';
 const { t,locale } = useI18n();
-const countryId = 82;
+const countryId = ConditionCountryIds.getCountryId();
 const conditions:Ref<Array<Condition>> = ref([]);
 const isLoading = ref(false);
 const isError = ref(false);

@@ -9,7 +9,7 @@
                     <label for="name" class="block text-sm font-medium text-gray-700">{{ $t('name') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <UserIcon class="h-4 w-4" :class="(prenameChanged && state.prename.length==0)?errorIconColor:iconColor" />
+                            <UserIcon class="h-4 w-4" :class="prenameChanged && state.prename.length==0  ? errorIconColor : iconColor" ></UserIcon>
                         </div>
                         <input type="text" name="name" id="name" v-model="state.prename" required
                         class="block  w-full 10 pl-10 py-2 rounded-md"
@@ -25,7 +25,7 @@
                     <label for="surname" class="block text-sm font-medium text-gray-700">{{ $t('surname') }}</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <UserIcon class="h-4 w-4" :class="(nameChanged && state.name.length==0)?errorIconColor:iconColor"/>
+                            <UserIcon class="h-4 w-4" :class="nameChanged && state.name.length==0 ? errorIconColor : iconColor"></UserIcon>
                         </div>
                         <input type="text" name="surname" id="surname" v-model="state.name" required
                         class="block  w-full 10 pl-10 py-2 rounded-md"
@@ -69,26 +69,18 @@
                         
                         <input type="text" name="birthplace" id="birthplace" v-model="state.birthplace" required
                         class="block  w-full 10 pl-3 py-2 rounded-md"
-                        :class="(prenameChanged && state.prename.length==0)?inputErrorStyle:inputStyle"
-                        @change="onPrenameChanged"
+                        :class="(birthplaceChanged && state.birthplace.length==0) ? inputErrorStyle : inputStyle"
+                        @change="onBirthplaceChanged"
                             />
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="prenameChanged && state.prename.length==0">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" v-if="birthplaceChanged && state.birthplace.length==0">
                             <ExclamationCircleIcon class="h-4 w-4 text-red-500" />
                         </div>
                     </div>
                 </div>
                 <div v-if="enableAll || (account && account.person_data)">
-                    
-                    
-                        
-                        <Countries :all="true" :label="'nationality'" class="self-center" @change="handleCountryChange"  :selectedCountryId="state.nationality"/>
-                            
-                    
+                    <Countries :all="true" :label="'nationality'" class="self-center" @change="handleCountryChange"  :selectedCountryId="state.nationality"/>
                 </div>
               </div>
-                
-
-                <p class="mt-2 text-sm text-red-600" id="email-error" v-if="submittingError">{{ submittingErrorMessage==null?$t('account_info_error'):submittingErrorMessage }}</p>
 
                 <div>
                   <div class="mt-8">
@@ -120,6 +112,7 @@ const birthdateValidated = ref(false);
 const saveActivated = ref(false);
 const isSubmitting = ref(false);
 const prenameChanged = ref(false);
+const birthplaceChanged = ref(false);
 const nameChanged = ref(false);
 const inputErrorStyle = 'border-red-300   text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm';
 const inputStyle = 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm';
@@ -161,6 +154,9 @@ const onNameChanged=()=>{
 const onPrenameChanged=()=>{
     prenameChanged.value = true;
 }
+const onBirthplaceChanged=()=>{
+    birthplaceChanged.value = true;
+}
 const nextBtnClicked = false;
 const initData = (account:Account)=>{
     if(account){
@@ -187,7 +183,7 @@ watch(props,(currentValue)=>{
 watch(state,(currentValue)=>{
     
     birthdateValidated.value = validateBirthdate(new Date(currentValue.birthdate));
-    if(currentValue.name.length>0 && currentValue.prename.length>0 && birthdateValidated.value && currentValue.gender && currentValue.gender.length > 0 && currentValue.nationality!=null && currentValue.nationality > -1)
+    if(currentValue.name.length>0 && currentValue.prename.length>0 && birthdateValidated.value && currentValue.gender && currentValue.gender.length > 0 && currentValue.nationality!=null && currentValue.nationality > -1 && currentValue.birthplace && currentValue.birthplace.length>0)
     {
         saveActivated.value = true;
     }

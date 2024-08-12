@@ -48,7 +48,7 @@
 import { DepotTarget, Condition, Depot } from "~~/lib/models";
 import { Ref } from "vue";
 import { AddDepotRequest } from "~~/lib/requests";
-import { AssetTypes, ConditionTypes } from "~~/lib/contants";
+import { AssetTypes, ConditionCountryIds, ConditionTypes } from "~~/lib/contants";
 import { ConditionService, CurrencyService } from "~~/lib/services";
 import Switch  from '@/components/common/AppSwitch.vue';
 import { ArrowDownTrayIcon } from '@heroicons/vue/24/outline';
@@ -107,9 +107,10 @@ onMounted(async()=>{
         }
         
         loadingConditions.value = true;
+        const countryId = ConditionCountryIds.getCountryId();
         conditions.value = await ConditionService.getDepotAndSavingPlanCondition({
             type:type
-        })
+        },countryId)
         error.value = null;
     }
     catch(err){
