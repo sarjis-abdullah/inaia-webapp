@@ -429,5 +429,8 @@ export default {
     two_fa_verify_able_message: "Please open your Authenticator App and confirm the login request with a valid code.",
     two_fa_enabled_message: 'Two Factor Authentication (2FA) is enabled.',
     two_fa_disabled_message: 'Two Factor Authentication (2FA) is not enabled yet!',
+    update_email: 'Update email',
+    send_email_verification_code: "Send email verification code",
+    send_phone_code: "Send phone code",
     personal_info: 'Personal information',
 }

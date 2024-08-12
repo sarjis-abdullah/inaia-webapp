@@ -428,5 +428,8 @@ export default {
     two_fa_verify_able_message:  "Öffne deine Authenticator-App und bestätige die Anmeldung mit einem gültigen Code.",
     two_fa_enabled_message: 'Die Zwei-Faktor-Authentifizierung (2FA) ist aktiviert.',
     two_fa_disabled_message: 'Die Zwei-Faktor-Authentifizierung (2FA) ist noch nicht aktiviert!',
+    update_email: "E-Mail aktualisieren",
+    send_email_verification_code: "E-Mail-Bestätigungscode senden",
+    send_phone_code: "Telefoncode senden",
     personal_info: 'Persönliche Informationen'
 }
