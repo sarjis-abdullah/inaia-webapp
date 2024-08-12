@@ -379,5 +379,6 @@ export default {
     add: 'Ajouter',
     "update_email": "Mettre à jour l'email",
     "send_email_verification_code": "Envoyer le code de vérification par email",
-    "send_phone_code": "Envoyer le code par téléphone"
+    "send_phone_code": "Envoyer le code par téléphone",
+    personal_info: 'Informations personnelles'
 }

@@ -412,5 +412,6 @@ export default {
     add: 'Add',
     update_email: 'Update email',
     "send_email_verification_code": "Send email verification code",
-    "send_phone_code": "Send phone code"
+    "send_phone_code": "Send phone code",
+    personal_info: 'Personal information',
 }
