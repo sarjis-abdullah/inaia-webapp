@@ -115,6 +115,7 @@ const  verifyEmailCode= async(code:string)=>{
             request.value = email.value;
             request.is_active = props.channel.is_active;
             request.is_primary = props.channel.is_primary;
+            request.type_id = props.channel.type_id;
         }
         else{
             request.contact_id = props.account.id;
