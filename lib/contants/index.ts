@@ -18,6 +18,7 @@ import { ConfirmationMethods } from "./ConfirmationMethods";
 import { ChannelTypes } from "./ChannelTypes";
 import { TradingMinimumAmounts } from "./TradingMinimumAmounts";
 import SupportedLanguages from "./SupportedLanguages";
+import { ConditionCountryIds } from "./ConditionCountryIds";
 import { KycStatuses } from "./KycStatuses";
 import { ErrorCode } from "./ErrorCode";
 import { WAIT_PERIOD } from "./Constants";
@@ -44,3 +45,4 @@ export {SupportedLanguages};
 export {KycStatuses};
 export {ErrorCode};
 export {WAIT_PERIOD};
+export {ConditionCountryIds}

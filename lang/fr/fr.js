@@ -395,5 +395,8 @@ export default {
     email_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé à votre adresse e-mail',
     sms_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé par SMS',
     two_fa_enabled_message: 'L’authentification à deux facteurs (2FA) est activée.',
-    two_fa_disabled_message: 'L’authentification à deux facteurs (2FA) n’est pas encore activée !'
+    two_fa_disabled_message: 'L’authentification à deux facteurs (2FA) n’est pas encore activée !',
+    mobile_pin_verify_able_message: "Ouvrez l'application INAIA sur votre téléphone mobile et confirmez la connexion avec votre code PIN mobile.",
+    two_fa_verify_able_message: "Ouvrez l'application Authenticator et confirmez la connexion avec un code valide.",
+    personal_info: 'Informations personnelles'
 }

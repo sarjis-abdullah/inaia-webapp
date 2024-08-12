@@ -428,5 +428,6 @@ export default {
     mobile_pin_verify_able_message: 'Please open the INAIA App on your mobile phone and confirm the login request with your mobile PIN.',
     two_fa_verify_able_message: "Please open your Authenticator App and confirm the login request with a valid code.",
     two_fa_enabled_message: 'Two Factor Authentication (2FA) is enabled.',
-    two_fa_disabled_message: 'Two Factor Authentication (2FA) is not enabled yet!'
+    two_fa_disabled_message: 'Two Factor Authentication (2FA) is not enabled yet!',
+    personal_info: 'Personal information',
 }
