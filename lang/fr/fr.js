@@ -377,4 +377,5 @@ export default {
     reference: 'Référence',
     new_bank_account: 'Nouveau compte bancaire',
     add: 'Ajouter',
+    personal_info: 'Informations personnelles'
 }
