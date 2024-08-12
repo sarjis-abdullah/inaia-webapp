@@ -15,7 +15,7 @@
                           class="block w-full rounded-md border-gray-300 pl-28 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                            v-model="state.phone" :class="(!phoneChanged || isPhoneNumberValid)?inputStyle:inputErrorStyle" @change="onPhoneChanged"/>
                   </div>
-                 <div class="mt-3 text-center">
+                 <div class="flex justify-center mt-3 text-center">
                     <Loading v-if="isVerifyingSms"/>
                   <a class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer" @click.prevent="resendSms" v-else :disabled="isVerifyingSms || !isPhoneNumberValid">
                         <span v-if="!smsSent">{{ $t('send_phone_code') }}</span>
@@ -110,6 +110,7 @@ const  verifySmsCode= async(code:string)=>{
             request.value = phoneNumber;
             request.is_active = props.channel.is_active;
             request.is_primary = props.channel.is_primary;
+            request.type_id = props.channel.type_id;
         }
         else{
             request.contact_id = props.account.id;
@@ -129,6 +130,7 @@ const  verifySmsCode= async(code:string)=>{
 }
 const resendSms = async ()=>{
     try{
+        error.value = null;
         isVerifyingSms.value = true;
         let phoneNumber = state.phoneCode + sanitizePhoneNumber(state.phone)
         await PhoneNumberService.sendPhoneCode(locale.value,{phone_number:phoneNumber});
