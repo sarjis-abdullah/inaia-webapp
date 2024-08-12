@@ -183,7 +183,7 @@ watch(props,(currentValue)=>{
 watch(state,(currentValue)=>{
     
     birthdateValidated.value = validateBirthdate(new Date(currentValue.birthdate));
-    if(currentValue.name.length>0 && currentValue.prename.length>0 && birthdateValidated.value && currentValue.gender && currentValue.gender.length > 0 && currentValue.nationality!=null && currentValue.nationality > -1 && currentValue.birthplace)
+    if(currentValue.name.length>0 && currentValue.prename.length>0 && birthdateValidated.value && currentValue.gender && currentValue.gender.length > 0 && currentValue.nationality!=null && currentValue.nationality > -1 && currentValue.birthplace && currentValue.birthplace.length>0)
     {
         saveActivated.value = true;
     }
