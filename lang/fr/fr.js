@@ -392,8 +392,6 @@ export default {
     "two-factor_authentication_enabled_success": "L'authentification à deux facteurs a été activée avec succès !",
     "enter_6_digit_code_prompt": "Chaque fois que vous vous connectez, il vous sera demandé de saisir un code à 6 chiffres de votre application d'authentification pour terminer le processus de connexion.",
     "keep_mobile_device_secure": "Gardez votre appareil mobile en sécurité, car il sera nécessaire pour générer les codes d'authentification. Si vous perdez l'accès à votre application d'authentification, vous devrez peut-être contacter le support pour obtenir de l'aide.",
-    email_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé à votre adresse e-mail',
-    sms_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé par SMS',
     two_fa_enabled_message: 'L’authentification à deux facteurs (2FA) est activée.',
     two_fa_disabled_message: 'L’authentification à deux facteurs (2FA) n’est pas encore activée !',
     mobile_pin_verify_able_message: "Ouvrez l'application INAIA sur votre téléphone mobile et confirmez la connexion avec votre code PIN mobile.",
