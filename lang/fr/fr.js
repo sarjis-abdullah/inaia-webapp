@@ -382,5 +382,8 @@ export default {
     sms_verify_able_message: 'Pour vérifier votre compte, veuillez le confirmer en utilisant le code qui a été envoyé par SMS',
     mobile_pin_verify_able_message: "Ouvrez l'application INAIA sur votre téléphone mobile et confirmez la connexion avec votre code PIN mobile.",
     two_fa_verify_able_message: "Ouvrez l'application Authenticator et confirmez la connexion avec un code valide.",
+    update_email: "Mettre à jour l'email",
+    send_email_verification_code: "Envoyer le code de vérification par email",
+    send_phone_code: "Envoyer le code par téléphone",
     personal_info: 'Informations personnelles'
 }
