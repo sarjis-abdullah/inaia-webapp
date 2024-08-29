@@ -534,15 +534,13 @@ onMounted(async () => {
   }
   const addpaymentMethods = await PaymentMethodsService.getTheListOfPaymentMethods();
   const bankAccountMethod = addpaymentMethods.find(x=>x.name_translation_key==PaymentMethods.bankAccount);
-  if(bankAccountMethod){
-    try {
+  try {
     paymentAccounts.value = await PaymentAccountService.getClientPaymentAccounts();
     showBankAccounts.value = true;
   }
     catch (err) {
       errorLoadingBankAccount.value = err;
     }
-  }
   
 
 })
