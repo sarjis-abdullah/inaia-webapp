@@ -410,5 +410,8 @@ export default {
     reference: 'Referenz',
     new_bank_account: 'Neues Bankkonto',
     add: 'Hinzufügen',
+    update_email: "E-Mail aktualisieren",
+    send_email_verification_code: "E-Mail-Bestätigungscode senden",
+    send_phone_code: "Telefoncode senden",
     personal_info: 'Persönliche Informationen'
 }
