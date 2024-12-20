@@ -1,4 +1,4 @@
 export interface MfaVerificationRequest{
-    code?:string;
+    pin?:string;
     approval_id?:string;
 }

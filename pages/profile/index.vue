@@ -46,6 +46,18 @@
                 $t('edit') }}</button>
             </dd>
           </div>
+          <div class="pt-6 sm:flex">
+            <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-2">Two Factor Authentication</dt>
+            <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+              <div class="text-gray-900">
+                <span v-if="hasTwoFaEnabled">{{$t('two_fa_enabled_message')}}</span>
+                <span v-else>{{$t('two_fa_disabled_message')}}</span>
+              </div>
+              <button type="button" class="font-semibold text-blue-600 hover:text-blue-500 outline-none focus:outline-0" @click="showTwoFaConfirmation = !showTwoFaConfirmation">
+                {{ hasTwoFaEnabled ? $t('disable_2fa') : $t('enable_2fa') }}
+              </button>
+            </dd>
+          </div>
         </dl>
       </div>
 
@@ -168,6 +180,13 @@
     </Modal>
     <AddPaymentAcount :showAddPaymentAccount="addNewPaymentAcoount" :accountId="account.account.id" v-if="account && account.account" @onClose="closeAddPaymentAccount" @OnAdd="onPaymentAccountAdded"/>
     <Confirmation :show="showConfirmation" @cancel="cancelDelete" @confirm="confirmDelete" :title="$t('confirm_delete')" :text="$t('do_you_want_to_delete_bank_account')"/>
+    <TwoFaConfirmation 
+    v-if="showTwoFaConfirmation"
+    :hasTwoFaEnabled="hasTwoFaEnabled" 
+    :show="showTwoFaConfirmation" 
+    @disable="disableTwoFA"
+    @cancel="toggleTwoFaConfirmationModal" 
+    @enable="enableTwoFA" />
   </main>
 </template>
 
@@ -203,15 +222,17 @@ import { NotificationTypes } from '~~/constants/NotificationTypes';
 import UpdatePhoneNumber from '@/components/Profile/UpdatePhoneNumber';
 import UpdateEmail from '@/components/Profile/UpdateEmail.vue';
 import UpdateProfile from '@/components/Profile/UserProfile.vue';
+import TwoFaConfirmation from '@/components/Profile/TwoFaConfirmation.vue';
 import AddPaymentAcount from '@/components/PaymentAccount/AddPaymentAcount';
 import { BadInputException, MissingInformationException, ServerErrorException } from '@/lib/exceptions';
 import Confirmation from '@/components/common/Confirmation';
 import { formatIban } from '@/lib/Formatters';
 import  Alert  from '@/components/Kyc/Alert.vue';
+import { MFA_SECRET_TRANSLATION_KEY } from '@/lib/contants/Constants';
 import { PaymentMethods } from '~/lib/contants/PaymentMethods';
 const switchLocalePath = useSwitchLocalePath();
 const router = useRouter()
-const account: Ref<Account> = ref(null);
+const account: Ref<Account|null> = ref(null);
 const paymentAccounts: Ref<PaymentAccount[]> = ref([])
 const { t, locale } = useI18n();
 const errorLoadingBankAccount = ref(null);
@@ -287,6 +308,27 @@ const updateAddress = () => {
 const editPassword = () => {
   showPasswordUpdatePopup.value = true;
 }
+const showTwoFaConfirmation = ref(false)
+const twoFaEnabled = ref(false)
+const toggleTwoFaConfirmationModal = (data: Account) => {
+  showTwoFaConfirmation.value = false;
+  if (data?.id) {
+    twoFaEnabled.value = true
+    account.value = data
+  }
+}
+const enableTwoFA = (data: Account) => {
+  toggleTwoFaConfirmationModal(data)
+}
+const disableTwoFA = () => {
+  showTwoFaConfirmation.value = false;
+  twoFaEnabled.value = false
+  if (account.value?.account?.settings?.length) {
+    const settings = account.value.account.settings.filter(item => item.name_translation_key != MFA_SECRET_TRANSLATION_KEY)
+    account.value.account.settings = settings
+  } 
+}
+
 const onNotificationClosed = () => {
 
   showSuccessNotification.value = false;
@@ -397,6 +439,15 @@ const language = computed(() => {
     })
   }
   return l
+})
+const hasTwoFaEnabled = computed(() => {
+  if (twoFaEnabled.value) {
+    return true
+  }
+  if (account.value?.account?.settings?.length) {
+    return account.value.account.settings.some(s => s.name_translation_key == MFA_SECRET_TRANSLATION_KEY)
+  }
+  return false
 })
 const referralCode = computed(() => account.value?.account?.referral_code ?? "")
 const referralLink = computed(() => account.value?.account?.referral_link ?? "")
