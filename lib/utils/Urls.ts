@@ -67,6 +67,9 @@ export class Urls{
     public login():string{
         return this.buildUrl(BaseUrls.getCoreUrl(),'authenticate?'+ACCOUNT_INCLUDES);
     }
+    public verifyMfa():string{
+        return this.buildUrl(BaseUrls.getCoreUrl(),'mfa/login/verify?' + ACCOUNT_INCLUDES);
+    }
     public getProfileUrl(id:number):string{
         return this.buildUrl(BaseUrls.getCoreUrl(),`contacts/${id}?${ACCOUNT_INCLUDES}`);
     }

@@ -1,6 +1,7 @@
 import { Account } from './../models/Account';
 import { AccessToken } from './../models/AccessToken';
 import { LoginRequest } from './../requests/LoginRequest';
+import { MfaVerificationRequest } from './../requests/MfaVerificationRequest';
 import { HttpHeader } from '../utils/HttpHeader';
 import { HttpRequester } from '../utils/HttpRequester';
 import { Urls } from "../utils/Urls";
@@ -25,6 +26,31 @@ export class LoginService{
             refreshToken:refreshToken,
             secret:secret,
             account:account
+        }
+    }
+    public static async initialLogin(request:LoginRequest){
+        return await this.requester.post(this.links.login(),this.headers,request);
+    }
+    public static async verifyMfa(request:MfaVerificationRequest, tempToken: string){
+        try {
+            this.headers.addXpiKeyHeader(tempToken);
+            const json = await this.requester.post(this.links.verifyMfa(),this.headers,request);
+            const expireDate = moment().add(json.success.expires_in,'s').format();
+            const accessToken:AccessToken = {
+                token:json.success.access_token,
+                expire:expireDate
+            };
+            const refreshToken:string = json.success.refresh_token;
+            const secret:string = json.success.secret;
+            const account:Account = json.success.account;
+            return {
+                accessToken:accessToken,
+                refreshToken:refreshToken,
+                secret:secret,
+                account:account
+            }
+        } catch (error) {
+          return Promise.reject(error)  
         }
     }
     public static isLoggedIn():boolean{

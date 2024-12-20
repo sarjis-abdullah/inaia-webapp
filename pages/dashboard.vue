@@ -36,7 +36,9 @@ onMounted(async ()=>{
   }
   if(account.value){
     isVerified.value = account.value.is_verified;
-    kycDetails.value = account.value.account.kyc_details;
+    if (account.value.account && account.value.account.kyc_details) {
+      kycDetails.value = account.value.account.kyc_details;
+    }
     kycStatus.value = account.value.kyc_status
   }
 })
