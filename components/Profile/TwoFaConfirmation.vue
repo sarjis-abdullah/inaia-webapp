@@ -88,15 +88,15 @@
 
                   <div class="grid gap-2">
                     <header class="flex items-center justify-center gap-2">
-                      <h2 class="text-sm font-medium text-gray-900">
+                      <h2 class="text-sm font-medium text-gray-900 text-center">
                         {{ $t("two_fa_confirmation") }}
                       </h2>
                     </header>
                     <div class="text-center my-4"><CodeInputs v-if="confirmed" @complete="submit" :length="6" /></div>
-                    <p class="text-sm text-gray-500">
+                    <p class="text-sm text-gray-500 text-center">
                       {{ $t("enter_6_digit_code_prompt") }}
                     </p>
-                    <p class="text-sm text-gray-500">
+                    <p class="text-sm text-gray-500 text-center">
                       {{ $t("keep_mobile_device_secure") }}
                     </p>
                   </div>
@@ -106,13 +106,13 @@
                   class="flex flex-col items-center mt-8 mb-12 px-8"
                 >
                   <div class="grid gap-2 mb-8">
-                    <p class="text-sm text-gray-500">
+                    <p class="text-sm text-gray-500 text-center">
                       {{ $t("enter_6_digit_code_to_confirm_disable_two_fa") }}
                     </p>
                   </div>
                   <CodeInputs @complete="confirmDisableTwofa" :length="6" />
                   <div class="grid gap-2 mt-8">
-                    <p class="text-sm text-gray-500">
+                    <p class="text-sm text-gray-500 text-center">
                       {{ $t("two_fa_disable_warning_message") }}
                     </p>
                   </div>

@@ -431,5 +431,6 @@ export default {
     update_email: "E-Mail aktualisieren",
     send_email_verification_code: "E-Mail-Bestätigungscode senden",
     send_phone_code: "Telefoncode senden",
-    personal_info: 'Persönliche Informationen'
+    personal_info: 'Persönliche Informationen',
+    two_fa_confirmation: 'Nachdem Sie den QR-Code gescannt haben, geben Sie den 6-stelligen Code aus Ihrer Authentifizierungs-App ein, um die Einrichtung zu bestätigen.',
 }

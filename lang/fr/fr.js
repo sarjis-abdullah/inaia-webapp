@@ -390,7 +390,6 @@ export default {
     "do_you_want_to_enable_two_factor_authentication?": "Voulez-vous activer l'authentification à deux facteurs ?",
     "scan_the_qr_code_below_with_your_authenticator_app": "Scannez le code QR ci-dessous avec votre application d'authentification (par exemple, Google Authenticator, Authy).",
     "two-factor_authentication_enabled_success": "L'authentification à deux facteurs a été activée avec succès !",
-    "enter_6_digit_code_prompt": "Chaque fois que vous vous connectez, il vous sera demandé de saisir un code à 6 chiffres de votre application d'authentification pour terminer le processus de connexion.",
     "keep_mobile_device_secure": "Gardez votre appareil mobile en sécurité, car il sera nécessaire pour générer les codes d'authentification. Si vous perdez l'accès à votre application d'authentification, vous devrez peut-être contacter le support pour obtenir de l'aide.",
     two_fa_enabled_message: 'L’authentification à deux facteurs (2FA) est activée.',
     two_fa_disabled_message: 'L’authentification à deux facteurs (2FA) n’est pas encore activée !',
@@ -399,5 +398,7 @@ export default {
     update_email: "Mettre à jour l'email",
     send_email_verification_code: "Envoyer le code de vérification par email",
     send_phone_code: "Envoyer le code par téléphone",
-    personal_info: 'Informations personnelles'
+    personal_info: 'Informations personnelles',
+    two_fa_confirmation: 'Nachdem Sie den QR-Code gescannt haben, geben Sie den 6-stelligen Code aus Ihrer Authentifizierungs-App ein, um die Einrichtung zu bestätigen.',
+    enter_6_digit_code_prompt: "Lors des prochaines connexions, vous devrez entrer le code à 6 chiffres depuis votre application d’authentification pour terminer la connexion.",
 }
