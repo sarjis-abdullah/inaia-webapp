@@ -111,9 +111,9 @@ export class AccountService{
             throw err;
         }
     }
-    public static async enableTwoFA():Promise<MfaInitResponse>{
+    public static async initTwoFA():Promise<MfaInitResponse>{
         try{
-            const url = this.links.enableTwoFA();
+            const url = this.links.initTwoFA();
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             return await this.requester.post(url,this.headers, {});
@@ -125,6 +125,17 @@ export class AccountService{
     public static async disableTwoFA(request: MfaVerificationRequest):Promise<MfaInitResponse>{
         try{
             const url = this.links.disableTwoFA();
+            const token = TokenService.getToken();
+            this.headers.addAuthHeader(token);
+            return await this.requester.post(url,this.headers, request);
+        }
+        catch(err){
+            throw err;
+        }
+    }
+    public static async verifyTwoFA(request: MfaVerificationRequest):Promise<MfaInitResponse>{
+        try{
+            const url = this.links.verifyTwoFA();
             const token = TokenService.getToken();
             this.headers.addAuthHeader(token);
             return await this.requester.post(url,this.headers, request);

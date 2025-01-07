@@ -423,7 +423,6 @@ export default {
     "do_you_want_to_enable_two_factor_authentication?": "Do you want to enable two-factor authentication?",
     "scan_the_qr_code_below_with_your_authenticator_app": "Scan the QR code below with your authenticator app (e.g., Google Authenticator, Authy).",
     "two_factor_authentication_enabled_success": "Two-Factor Authentication has been enabled successfully!",
-    "enter_6_digit_code_prompt": "Each time you log in, you will be prompted to enter a 6-digit code from your authenticator app to complete the login process.",
     "keep_mobile_device_secure": "Keep your mobile device secure, as it will be required to generate the authentication codes. If you lose access to your authenticator app, you may need to contact support for assistance.",
     mobile_pin_verify_able_message: 'Please open the INAIA App on your mobile phone and confirm the login request with your mobile PIN.',
     two_fa_verify_able_message: "Please open your Authenticator App and confirm the login request with a valid code.",
@@ -433,4 +432,6 @@ export default {
     send_email_verification_code: "Send email verification code",
     send_phone_code: "Send phone code",
     personal_info: 'Personal information',
+    two_fa_confirmation: 'Once you have scanned the QR code, enter the 6-digit code from your authenticator app to confirm setup.',
+    "enter_6_digit_code_prompt": "For future logins, you will be prompted to enter a 6-digit code from your authenticator app to complete the login process.",
 }

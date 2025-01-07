@@ -186,7 +186,7 @@
     :show="showTwoFaConfirmation" 
     @disable="disableTwoFA"
     @cancel="toggleTwoFaConfirmationModal" 
-    @enable="enableTwoFA" />
+    @enable="initTwoFA" />
   </main>
 </template>
 
@@ -317,7 +317,7 @@ const toggleTwoFaConfirmationModal = (data: Account) => {
     account.value = data
   }
 }
-const enableTwoFA = (data: Account) => {
+const initTwoFA = (data: Account) => {
   toggleTwoFaConfirmationModal(data)
 }
 const disableTwoFA = () => {

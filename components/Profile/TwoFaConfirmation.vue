@@ -69,10 +69,12 @@
                 </div>
               </div>
               <figure class="flex justify-center">
-                <Loading v-if="isLoading" />
+                <div v-if="isLoading" class="mb-8">
+                  <Loading />
+                </div>
                 <figcaption
                   v-else-if="!isLoading && svgContent && !hasTwoFaEnabled"
-                  class="flex justify-center items-center flex-col gap-2 px-8"
+                  class="flex justify-center items-center flex-col gap-2 px-8 mb-8"
                 >
                   <p class="text-sm text-gray-500">
                     {{
@@ -86,14 +88,11 @@
 
                   <div class="grid gap-2">
                     <header class="flex items-center justify-center gap-2">
-                      <CheckCircleIcon
-                        class="h-6 w-6 text-green-400"
-                        aria-hidden="true"
-                      />
                       <h2 class="text-sm font-medium text-gray-900">
-                        {{ $t("two_factor_authentication_enabled_success") }}
+                        {{ $t("two_fa_confirmation") }}
                       </h2>
                     </header>
+                    <div class="text-center my-4"><CodeInputs v-if="confirmed" @complete="submit" :length="6" /></div>
                     <p class="text-sm text-gray-500">
                       {{ $t("enter_6_digit_code_prompt") }}
                     </p>
@@ -119,32 +118,8 @@
                   </div>
                 </section>
               </figure>
-              <div v-if="serverErrorMsg" class="flex justify-center">
+              <div v-if="serverErrorMsg" class="flex justify-center mb-8">
                 <p class="text-sm text-red-500">{{ serverErrorMsg }}</p>
-              </div>
-
-              <div
-                class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
-              >
-                <button
-                  v-if="!hasTwoFaEnabled"
-                  type="button"
-                  :disabled="isLoading"
-                  class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto outline-none focus:outline-0"
-                  @click="svgContent ? enable() : confrim()"
-                >
-                  {{ svgContent && !isLoading ? $t("ok") : $t("confirm") }}
-                </button>
-                <button
-                  v-if="!svgContent"
-                  type="button"
-                  :disabled="isLoading"
-                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto outline-none focus:outline-0"
-                  @click="cancel"
-                  ref="cancelButtonRef"
-                >
-                  {{ $t("cancel") }}
-                </button>
               </div>
             </DialogPanel>
           </TransitionChild>
@@ -180,8 +155,7 @@ const props = defineProps({
   hasTwoFaEnabled: {
     type: Boolean,
     default: false,
-  },
-  confirm: {},
+  }
 });
 const emit = defineEmits<{
   cancel: [Account: {}];
@@ -197,7 +171,7 @@ const cancel = () => {
   emit("cancel", account.value);
   svgContent.value = "";
 };
-const enable = () => {
+const enable2FALocally = () => {
   emit("enable", account.value);
   svgContent.value = "";
 };
@@ -207,17 +181,18 @@ const loadAccount = async () => {
       account.value = await AccountService.loadAccount(accountId.value);
       AccountStorage.saveAccount(account.value);
     }
-  } catch (error) {}
+  } catch (error) {
+    serverErrorMsg.value = error.message ?? "";
+  }
 };
-const isLoading = ref(false);
+const isLoading = ref(true);
 const serverErrorMsg = ref("");
-const confrim = async () => {
+const initTwoFA = async () => {
   try {
     isLoading.value = true;
     showCodeInput.value = false;
-    const res = await AccountService.enableTwoFA();
+    const res = await AccountService.initTwoFA();
     svgContent.value = res.qrCode;
-    await loadAccount();
   } catch (error) {
     serverErrorMsg.value = error.message ?? "";
   } finally {
@@ -233,10 +208,29 @@ const confirmDisableTwofa = async (code: string) => {
     emit("disable");
     await loadAccount();
   } catch (error) {
-    console.log(error.status, error);
     serverErrorMsg.value = error.message ?? "";
   } finally {
     isLoading.value = false;
   }
 };
+const confirmed = ref(true);
+const submit = async (code: string) => {
+  try {
+    isLoading.value = true;
+    await AccountService.verifyTwoFA({ pin: code });
+    await loadAccount();
+    confirmed.value = false;
+    enable2FALocally()
+    svgContent.value = "";
+  } catch (error) {
+    serverErrorMsg.value = error.message ?? "";
+  } finally {
+    isLoading.value = false;
+  }
+}
+onMounted(() => {
+  if (!props.hasTwoFaEnabled)
+  initTwoFA();
+  else isLoading.value = false;
+});
 </script>
