@@ -31,42 +31,35 @@
             <DialogPanel
               class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
             >
-              <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                <div class="sm:flex sm:items-start">
-                  <div
-                    class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-                  >
-                    <ExclamationTriangleIcon
-                      class="h-6 w-6 text-blue-600"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                    <DialogTitle
-                      as="h3"
-                      class="text-base font-semibold leading-6 text-gray-900"
-                      >{{
+              <div class="flex justify-between mb-3 mt-6 mx-6">
+                <div class="flex items-center gap-2">
+                  <ExclamationTriangleIcon
+                    class="h-6 w-6 text-blue-600 mr-2"
+                    aria-hidden="true"
+                  />
+                  <header>
+                    <h3>
+                      {{
                         hasTwoFaEnabled
                           ? $t("confirm_disable_two_factor_authentication")
                           : $t("confirm_enable_two_factor_authentication")
-                      }}</DialogTitle
-                    >
-                    <div class="mt-2">
-                      <p class="text-sm text-gray-500" v-if="hasTwoFaEnabled">
-                        {{
-                          $t(
-                            "do_you_want_to_disable_two_factor_authentication?"
-                          )
-                        }}
-                      </p>
-                      <p class="text-sm text-gray-500" v-else>
-                        {{
-                          $t("do_you_want_to_enable_two_factor_authentication?")
-                        }}
-                      </p>
-                    </div>
-                  </div>
+                      }}
+                    </h3>
+                    <p class="text-sm text-gray-500" v-if="hasTwoFaEnabled">
+                      {{
+                        $t("do_you_want_to_disable_two_factor_authentication?")
+                      }}
+                    </p>
+                    <p class="text-sm text-gray-500" v-else>
+                      {{
+                        $t("do_you_want_to_enable_two_factor_authentication?")
+                      }}
+                    </p>
+                  </header>
                 </div>
+                <a @click="cancel" class="cursor-pointer">
+                  <XMarkIcon class="w-6 h-6" />
+                </a>
               </div>
               <figure class="flex justify-center">
                 <div v-if="isLoading" class="mb-8">
@@ -92,7 +85,13 @@
                         {{ $t("two_fa_confirmation") }}
                       </h2>
                     </header>
-                    <div class="text-center my-4"><CodeInputs v-if="confirmed" @complete="submit" :length="6" /></div>
+                    <div class="text-center my-4">
+                      <CodeInputs
+                        v-if="confirmed"
+                        @complete="submit"
+                        :length="6"
+                      />
+                    </div>
                     <p class="text-sm text-gray-500 text-center">
                       {{ $t("enter_6_digit_code_prompt") }}
                     </p>
@@ -138,10 +137,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import {
-  ExclamationTriangleIcon,
-  CheckCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { ExclamationTriangleIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { AccountService } from "~/lib/services";
 import Loading from "@/components/common/Loading.vue";
 import { AccountStorage } from "~/storage";
@@ -155,7 +151,7 @@ const props = defineProps({
   hasTwoFaEnabled: {
     type: Boolean,
     default: false,
-  }
+  },
 });
 const emit = defineEmits<{
   cancel: [Account: {}];
@@ -220,17 +216,16 @@ const submit = async (code: string) => {
     await AccountService.verifyTwoFA({ pin: code });
     await loadAccount();
     confirmed.value = false;
-    enable2FALocally()
+    enable2FALocally();
     svgContent.value = "";
   } catch (error) {
     serverErrorMsg.value = error.message ?? "";
   } finally {
     isLoading.value = false;
   }
-}
+};
 onMounted(() => {
-  if (!props.hasTwoFaEnabled)
-  initTwoFA();
+  if (!props.hasTwoFaEnabled) initTwoFA();
   else isLoading.value = false;
 });
 </script>
